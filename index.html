@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oraculum Astrale — Tarot Online</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fundo místico com estrelas -->
+  <div class="stars" aria-hidden="true" data-stars-container>
+    <div class="stars-layer stars-1"></div>
+    <div class="stars-layer stars-2"></div>
+    <div class="stars-layer stars-3"></div>
+  </div>
+
+  <!-- ============================ -->
+  <!-- TELA DE BOAS-VINDAS          -->
+  <!-- ============================ -->
+  <section id="screen-welcome" class="screen screen-active" data-screen="welcome">
+    <div class="welcome-container">
+      <div class="welcome-logo" data-welcome-logo>
+        <span class="logo-icon">🔮</span>
+        <h1 class="site-title">Oraculum Astrale</h1>
+      </div>
+      <p class="site-subtitle">Sua consulta de tarot online</p>
+      <div class="welcome-actions">
+        <button type="button" class="btn btn-primary" data-action="show-login">Entrar</button>
+        <button type="button" class="btn btn-secondary" data-action="show-register">Cadastrar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ -->
+  <!-- TELA DE LOGIN                -->
+  <!-- ============================ -->
+  <section id="screen-login" class="screen" data-screen="login">
+    <div class="auth-card">
+      <h2 class="auth-title">Entrar</h2>
+      <form id="form-login" data-form="login" autocomplete="on">
+        <label class="field">
+          <span class="field-label">E-mail</span>
+          <input type="email" id="login-email" name="email" required placeholder="seu@email.com" autocomplete="email">
+        </label>
+        <label class="field">
+          <span class="field-label">Senha</span>
+          <input type="password" id="login-senha" name="senha" required placeholder="••••••••" autocomplete="current-password">
+        </label>
+        <button type="submit" class="btn btn-primary btn-block" data-action="login">Entrar</button>
+      </form>
+      <p class="auth-link"><a href="#" data-action="show-register">Não tem conta? Cadastre-se</a></p>
+      <button type="button" class="btn btn-ghost btn-block" data-action="show-welcome">Voltar</button>
+    </div>
+  </section>
+
+  <!-- ============================ -->
+  <!-- TELA DE CADASTRO             -->
+  <!-- ============================ -->
+  <section id="screen-register" class="screen" data-screen="register">
+    <div class="auth-card">
+      <h2 class="auth-title">Criar conta</h2>
+      <form id="form-register" data-form="register" autocomplete="on">
+        <label class="field">
+          <span class="field-label">Nome</span>
+          <input type="text" id="register-nome" name="nome" required placeholder="Seu nome" autocomplete="name">
+        </label>
+        <label class="field">
+          <span class="field-label">E-mail</span>
+          <input type="email" id="register-email" name="email" required placeholder="seu@email.com" autocomplete="email">
+        </label>
+        <label class="field">
+          <span class="field-label">Senha</span>
+          <input type="password" id="register-senha" name="senha" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        </label>
+        <label class="field">
+          <span class="field-label">Confirmar senha</span>
+          <input type="password" id="register-confirmar" name="confirmar" required minlength="6" placeholder="Repita a senha" autocomplete="new-password">
+        </label>
+        <button type="submit" class="btn btn-primary btn-block" data-action="register">Cadastrar e ganhar 5 créditos</button>
+      </form>
+      <p class="auth-link"><a href="#" data-action="show-login">Já tem conta? Faça login</a></p>
+      <button type="button" class="btn btn-ghost btn-block" data-action="show-welcome">Voltar</button>
+    </div>
+  </section>
+
+  <!-- ============================ -->
+  <!-- TELA PRINCIPAL               -->
+  <!-- ============================ -->
+  <section id="screen-main" class="screen" data-screen="main">
+
+    <!-- HEADER FIXO -->
+    <header class="main-header" data-main-header>
+      <div class="header-logo">
+        <span class="logo-icon-small">🔮</span>
+        <span class="header-title">Oraculum Astrale</span>
+      </div>
+      <div class="header-stats">
+        <span class="stat stat-credits" data-stat-credits>🔮 <strong data-credits-value>0</strong> créditos</span>
+        <span class="stat stat-streak" data-stat-streak>🔥 <strong data-streak-value>0</strong> dias</span>
+        <button type="button" class="btn btn-ghost btn-sm" data-action="logout">Sair</button>
+      </div>
+    </header>
+
+    <main class="main-content">
+
+      <!-- BOAS-VINDAS -->
+      <section class="welcome-user" data-section="welcome-user">
+        <h2 class="greeting" data-greeting>Bem-vindo(a)!</h2>
+        <p class="daily-phrase" data-daily-phrase>As estrelas sussurram segredos...</p>
+      </section>
+
+      <!-- CRÉDITOS E BÔNUS -->
+      <section class="bonus-grid" data-section="bonus">
+        <div class="card bonus-card" data-card="indicacao">
+          <h3 class="card-title">Indicar Amigo</h3>
+          <p class="card-text">Compartilhe seu link e ganhe créditos quando seu amigo se cadastrar.</p>
+          <div class="indicacao-link">
+            <input type="text" id="indicacao-link" data-indicacao-link readonly>
+            <button type="button" class="btn btn-secondary btn-sm" data-action="copy-indicacao">Copiar link</button>
+          </div>
+        </div>
+
+        <div class="card bonus-card" data-card="roleta">
+          <h3 class="card-title">Roleta de Bônus</h3>
+          <p class="card-text">Gire a roleta e ganhe créditos extras.</p>
+          <button type="button" class="btn btn-primary" data-action="open-roleta">🎡 Girar</button>
+        </div>
+      </section>
+
+      <!-- CONSULTA -->
+      <section class="consulta-section" data-section="consulta">
+        <h2 class="section-title">Faça sua pergunta</h2>
+        <form id="form-consulta" data-form="consulta">
+          <label class="field">
+            <span class="field-label">Sua pergunta</span>
+            <textarea id="consulta-pergunta" name="pergunta" rows="3" required placeholder="Digite sua pergunta..."></textarea>
+          </label>
+          <label class="field">
+            <span class="field-label">Tipo de tiragem</span>
+            <select id="consulta-tipo" name="tipo" required>
+              <option value="1" data-cost="1">1 Carta — 1 crédito</option>
+              <option value="3" data-cost="3" selected>3 Cartas — 3 créditos</option>
+              <option value="5" data-cost="5">Cruz Celta — 5 créditos</option>
+            </select>
+          </label>
+          <p class="consulta-custo" data-consulta-custo>Esta consulta custa <strong data-custo-value>3</strong> créditos</p>
+          <button type="submit" class="btn btn-primary btn-block" data-action="consultar">🔮 Consultar</button>
+        </form>
+      </section>
+
+      <!-- RESULTADO -->
+      <section id="resultado" class="resultado-section" data-section="resultado" hidden>
+        <h2 class="section-title">Resultado da consulta</h2>
+        <p class="resultado-pergunta" data-resultado-pergunta></p>
+        <div class="cartas-grid" data-cartas-grid></div>
+        <button type="button" class="btn btn-secondary" data-action="nova-consulta">Nova Consulta</button>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+      <p>© 2025 Oraculum Astrale — Todos os direitos reservados</p>
+      <p class="footer-quote">As cartas não revelam o futuro — elas iluminam o caminho.</p>
+    </footer>
+  </section>
+
+  <!-- ============================ -->
+  <!-- MODAL DA ROLETA              -->
+  <!-- ============================ -->
+  <div id="modal-roleta" class="modal" data-modal="roleta" hidden>
+    <div class="modal-overlay" data-modal-overlay></div>
+    <div class="modal-content modal-roleta-content">
+      <button type="button" class="modal-close" data-action="close-roleta" aria-label="Fechar">×</button>
+      <h2 class="modal-title">🎡 Roleta de Bônus</h2>
+      <div class="roleta-wrapper">
+        <div class="roleta-pointer" aria-hidden="true">▼</div>
+        <div class="roleta" data-roleta>
+          <div class="roleta-sector sector-1"><span>1</span></div>
+          <div class="roleta-sector sector-2"><span>2</span></div>
+          <div class="roleta-sector sector-3"><span>3</span></div>
+          <div class="roleta-sector sector-4"><span>5</span></div>
+          <div class="roleta-sector sector-5"><span>10</span></div>
+          <div class="roleta-sector sector-6"><span>Tente novamente</span></div>
+        </div>
+      </div>
+      <p class="roleta-resultado" data-roleta-resultado>Gire para descobrir seu prêmio!</p>
+      <button type="button" class="btn btn-primary btn-block" data-action="spin-roleta">Girar</button>
+    </div>
+  </div>
+
+  <!-- ============================ -->
+  <!-- TOAST CONTAINER              -->
+  <!-- ============================ -->
+  <div id="toast-container" class="toast-container" data-toast-container aria-live="polite"></div>
+
+  <!-- ============================ -->
+  <!-- OVERLAY GENÉRICO             -->
+  <!-- ============================ -->
+  <div id="overlay" class="overlay" data-overlay hidden></div>
+
+  <!-- TEMPLATE DE CARTA -->
+  <template id="template-carta" data-template="carta">
+    <article class="carta-card" data-carta-card>
+      <div class="carta-header">
+        <h3 class="carta-nome" data-carta-nome></h3>
+        <p class="carta-arcano" data-carta-arcano></p>
+      </div>
+      <div class="carta-tabs" data-carta-tabs>
+        <button type="button" class="tab tab-active" data-tab="geral">Geral</button>
+        <button type="button" class="tab" data-tab="amor">Amor</button>
+        <button type="button" class="tab" data-tab="carreira">Carreira</button>
+        <button type="button" class="tab" data-tab="invertido">Invertido</button>
+      </div>
+      <div class="carta-content" data-carta-content>
+        <p data-carta-texto></p>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
