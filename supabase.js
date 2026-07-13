@@ -10,8 +10,8 @@
 // 1. CONFIGURAÇÃO
 // -------------------------------------------------------------
 // Substitua pelos valores do seu projeto Supabase
-const SUPABASE_URL = 'https://seu-projeto.supabase.co';
-const SUPABASE_KEY = 'sua-chave-publica';
+const SUPABASE_URL = 'https://ioerqutbiilatfaqwvxh.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvZXJxdXRiaWlsYXRmYXF3dnhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM4ODQ5NzYsImV4cCI6MjA5OTQ2MDk3Nn0.ZdqkLqKbXNMeIAz40NJS8s78_vsFZG74e8rz8VRQQso'
 
 // Flag de ambiente: defina como true apenas em desenvolvimento
 const IS_DEV = false;
