@@ -16,11 +16,12 @@ a{color:var(--gold);text-decoration:none}
 #estrelas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
 .estrela{position:absolute;background:#fff;border-radius:50%;animation:brilhar var(--d) infinite ease-in-out}
 @keyframes brilhar{0%,100%{opacity:0.15;transform:scale(0.8)}50%{opacity:1;transform:scale(1.5)}}
-::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#080212}
 ::-webkit-scrollbar-thumb{background:var(--gd);border-radius:10px}
 .tela{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:var(--tr);z-index:1}
 .tela.ativa{opacity:1;pointer-events:all;z-index:2}
+/* Welcome com imagem de fundo */
 #tela-welcome{background:url('mystical_purple_crystal_1.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1}
 #tela-welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.6);z-index:0}
 #tela-welcome>*{position:relative;z-index:2}
@@ -40,24 +41,24 @@ input,select,textarea{width:100%;padding:12px;margin:8px 0;background:rgba(0,0,0
 input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(212,168,83,0.3)}
 input[type="date"]{color-scheme:dark}
 select option{background:#1a0030;color:#e8e0f0}
-header{width:100%;padding:10px 4%;display:none;justify-content:space-between;align-items:center;background:rgba(10,0,21,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--gd);flex-wrap:wrap}
-.hdr-titulo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);white-space:nowrap}
-.hdr-stats{display:flex;gap:10px;align-items:center;font-size:0.8rem;flex-wrap:wrap}
-.stats-item{cursor:pointer;color:var(--tx);transition:0.2s;white-space:nowrap}
-.stats-item:hover{color:var(--gold)}
-.stats-sair:hover{color:#ff4757!important}
-.hdr-menu{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
-.hdr-menu a{color:var(--td);font-size:0.75rem;padding:4px 8px;border-radius:6px;cursor:pointer;transition:0.2s}
-.hdr-menu a:hover{color:var(--gold);background:var(--gd)}
-.conteudo{width:100%;max-width:1200px;padding:15px 15px 50px;margin-top:15px}
+/* LAYOUT COM MENU LATERAL */
+.app-layout{display:flex;width:100%;min-height:100vh}
+.sidebar{width:200px;min-width:200px;background:rgba(10,0,21,0.95);backdrop-filter:blur(12px);border-right:1px solid var(--gd);padding:15px 0;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sidebar-titulo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);text-align:center;padding:10px 15px 15px;border-bottom:1px solid var(--gd);margin-bottom:8px}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 18px;cursor:pointer;transition:0.2s;color:var(--td);font-size:0.85rem;border-left:3px solid transparent}
+.sidebar-item:hover{color:var(--gold);background:var(--gd);border-left-color:var(--gold)}
+.sidebar-item.ativo{color:var(--gold);background:rgba(212,168,83,0.1);border-left-color:var(--gold)}
+.sidebar-rodape{margin-top:auto;border-top:1px solid var(--gd);padding:15px 18px;font-size:0.75rem;color:var(--td)}
+.sidebar-stats{padding:10px 18px;font-size:0.75rem;color:var(--td);border-top:1px solid var(--gd);margin-top:5px}
+.conteudo-principal{flex:1;padding:25px 30px 50px;overflow-y:auto}
 .saudacao{margin-bottom:8px;font-size:1.8rem}
-.frase{color:var(--td);font-style:italic;margin-bottom:20px;min-height:28px;border-left:3px solid var(--gd);padding:6px 12px;font-size:0.9rem}
-.grid-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.sec-card{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:18px 12px;text-align:center;cursor:pointer;transition:all 0.3s}
+.frase{color:var(--td);font-style:italic;margin-bottom:25px;min-height:28px;border-left:3px solid var(--gd);padding:6px 15px;font-size:0.9rem}
+.grid-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.sec-card{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:22px 15px;text-align:center;cursor:pointer;transition:all 0.3s}
 .sec-card:hover{border-color:var(--gold);background:rgba(212,168,83,0.08);transform:translateY(-3px)}
-.sec-card .ico{font-size:2rem;display:block;margin-bottom:6px}
-.sec-card h3{font-size:0.95rem;margin-bottom:3px}
-.sec-card p{font-size:0.7rem;color:var(--td)}
+.sec-card .ico{font-size:2.2rem;display:block;margin-bottom:8px}
+.sec-card h3{font-size:1rem;margin-bottom:4px}
+.sec-card p{font-size:0.75rem;color:var(--td)}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:2000;padding:15px;overflow-y:auto}
 .modal-conteudo{background:linear-gradient(135deg,#1a0030,#0a0015);border:1px solid var(--gd);border-radius:18px;padding:25px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:entrar 0.3s ease}
 @keyframes entrar{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -102,19 +103,15 @@ header{width:100%;padding:10px 4%;display:none;justify-content:space-between;ali
 .mb20{margin-bottom:20px}
 .gold{color:var(--gold)}
 .dim{color:var(--td)}
-.rodape{width:100%;text-align:center;padding:15px;color:var(--td);font-size:0.75rem;margin-top:30px;border-top:1px solid var(--gd)}
+.rodape{width:100%;text-align:center;padding:20px;color:var(--td);font-size:0.75rem;margin-top:40px;border-top:1px solid var(--gd)}
 .iching-simb{font-size:3.5rem;display:block;margin:12px 0;text-align:center}
 @media(max-width:768px){
 .grid-signos{grid-template-columns:repeat(3,1fr)}
-.grid-secoes{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
-header{flex-direction:column;gap:5px;padding:8px 12px}
-.hdr-stats{gap:5px;font-size:0.7rem;justify-content:center}
+.grid-secoes{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
 .titulo-site{font-size:2.2rem}
 .grid-packs{grid-template-columns:repeat(2,1fr)}
 .linha{flex-direction:column}
 .modal-conteudo{padding:18px}
-.hdr-menu{justify-content:center}
-.hdr-menu a{font-size:0.7rem;padding:3px 6px}
 }
 @media(max-width:480px){
 .grid-signos{grid-template-columns:repeat(2,1fr)}
@@ -125,28 +122,7 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
 <body>
 <div id="estrelas"></div>
 <div id="toasts"></div>
-<header id="cabecalho">
-  <div style="display:flex;flex-direction:column;gap:3px">
-    <div class="hdr-titulo">🔮 Oraculum Astrale</div>
-    <nav class="hdr-menu" id="menu-topo">
-      <a onclick="abrirModal('modal-carta-dia')">🃏 Carta</a>
-      <a onclick="abrirModal('modal-horoscopo')">☀️ Horóscopo</a>
-      <a onclick="abrirModal('modal-tarot')">🔮 Tarot</a>
-      <a onclick="abrirModal('modal-numerologia')">🔢 Numerologia</a>
-      <a onclick="abrirModal('modal-iching')">☯️ I Ching</a>
-      <a onclick="abrirModal('modal-simnao')">⚡ Sim/Não</a>
-      <a onclick="abrirModal('modal-sonhos')">📖 Sonhos</a>
-      <a onclick="abrirModal('modal-compatibilidade')">💘 Compat.</a>
-    </nav>
-  </div>
-  <div class="hdr-stats">
-    <div class="stats-item" onclick="abrirModal('modal-comprar')">🔮 <span id="creditos-user">0</span></div>
-    <div class="stats-item">🔥 <span id="streak-user">0</span></div>
-    <div class="stats-item" onclick="abrirModal('modal-indicar')">👥</div>
-    <div class="stats-item" onclick="abrirModal('modal-comprar')">💳</div>
-    <div class="stats-item stats-sair" onclick="sair()">Sair</div>
-  </div>
-</header>
+<!-- WELCOME -->
 <div id="tela-welcome" class="tela ativa">
   <div class="welcome-badge">✦ Portal Místico ✦</div>
   <div class="logo">🔮</div>
@@ -157,6 +133,7 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <button class="btn btn2" onclick="irPara('tela-cadastro')">Cadastrar</button>
   </div>
 </div>
+<!-- LOGIN -->
 <div id="tela-login" class="tela">
   <div class="card">
     <h2 class="centro mb20">Entrar</h2>
@@ -167,6 +144,7 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <button class="btn btn2 mt20" onclick="irPara('tela-welcome')">Voltar</button>
   </div>
 </div>
+<!-- CADASTRO -->
 <div id="tela-cadastro" class="tela">
   <div class="card">
     <h2 class="centro mb10">Criar Conta</h2>
@@ -181,23 +159,52 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <button class="btn btn2 mt20" onclick="irPara('tela-welcome')">Voltar</button>
   </div>
 </div>
-<div id="tela-main" class="tela" style="justify-content:flex-start;padding-top:5px;">
-  <div class="conteudo">
-    <h2 id="saudacao-txt" class="saudacao">Bem-vindo(a), Viajante</h2>
-    <div class="frase" id="frase-dia"></div>
-    <div class="grid-secoes">
-      <div class="sec-card" onclick="abrirModal('modal-carta-dia')"><span class="ico">🃏</span><h3>Carta do Dia</h3><p>Grátis diária</p></div>
-      <div class="sec-card" onclick="abrirModal('modal-horoscopo')"><span class="ico">☀️</span><h3>Horóscopo</h3><p>Previsões</p></div>
-      <div class="sec-card" onclick="abrirModal('modal-tarot')"><span class="ico">🔮</span><h3>Tarot</h3><p>Respostas</p></div>
-      <div class="sec-card" onclick="abrirModal('modal-numerologia')"><span class="ico">🔢</span><h3>Numerologia</h3><p>Caminho de vida</p></div>
-      <div class="sec-card" onclick="abrirModal('modal-iching')"><span class="ico">☯️</span><h3>I Ching</h3><p>Sabedoria</p></div>
-      <div class="sec-card" onclick="abrirModal('modal-simnao')"><span class="ico">⚡</span><h3>Sim/Não</h3><p>Rápido</p></div>
-      <div class="sec-card" onclick="abrirModal('modal-sonhos')"><span class="ico">📖</span><h3>Sonhos</h3><p>Interpretação</p></div>
-      <div class="sec-card" onclick="abrirModal('modal-compatibilidade')"><span class="ico">💘</span><h3>Compatibilidade</h3><p>Amor</p></div>
+<!-- TELA PRINCIPAL COM MENU LATERAL -->
+<div id="tela-main" class="tela" style="padding:0;">
+  <div class="app-layout">
+    <!-- SIDEBAR VERTICAL ESQUERDA -->
+    <div class="sidebar">
+      <div class="sidebar-titulo">🔮 Oraculum</div>
+      <div class="sidebar-stats">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span>🔮 <span id="creditos-user2">0</span></span>
+          <span>🔥 <span id="streak-user2">0</span></span>
+        </div>
+      </div>
+      <div class="sidebar-item ativo" onclick="irParaSecao('dashboard')" id="m-dashboard"><span style="font-size:1.1rem">🏠</span> Dashboard</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-carta-dia')" id="m-carta"><span style="font-size:1.1rem">🃏</span> Carta do Dia</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-horoscopo')" id="m-horo"><span style="font-size:1.1rem">☀️</span> Horóscopo</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-tarot')" id="m-tarot"><span style="font-size:1.1rem">🔮</span> Tarot</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-numerologia')" id="m-num"><span style="font-size:1.1rem">🔢</span> Numerologia</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-iching')" id="m-iching"><span style="font-size:1.1rem">☯️</span> I Ching</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-simnao')" id="m-sn"><span style="font-size:1.1rem">⚡</span> Sim/Não</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-sonhos')" id="m-sonhos"><span style="font-size:1.1rem">📖</span> Sonhos</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-compatibilidade')" id="m-comp"><span style="font-size:1.1rem">💘</span> Compatibilidade</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-comprar')" id="m-creditos"><span style="font-size:1.1rem">💳</span> Créditos</div>
+      <div class="sidebar-item" onclick="abrirModal('modal-indicar')" id="m-indicar"><span style="font-size:1.1rem">👥</span> Indicar</div>
+      <div class="sidebar-rodape">
+        <div class="sidebar-item" onclick="sair()" style="color:#ff4757"><span style="font-size:1.1rem">🚪</span> Sair</div>
+      </div>
     </div>
-    <div class="rodape"><p>© 2026 Oraculum Astrale — Todos os direitos reservados</p></div>
+    <!-- CONTEÚDO -->
+    <div class="conteudo-principal">
+      <h2 id="saudacao-txt" class="saudacao">Bem-vindo(a), Viajante</h2>
+      <div class="frase" id="frase-dia"></div>
+      <div class="grid-secoes">
+        <div class="sec-card" onclick="abrirModal('modal-carta-dia')"><span class="ico">🃏</span><h3>Carta do Dia</h3><p>Grátis diária</p></div>
+        <div class="sec-card" onclick="abrirModal('modal-horoscopo')"><span class="ico">☀️</span><h3>Horóscopo</h3><p>Previsões</p></div>
+        <div class="sec-card" onclick="abrirModal('modal-tarot')"><span class="ico">🔮</span><h3>Tarot</h3><p>Respostas</p></div>
+        <div class="sec-card" onclick="abrirModal('modal-numerologia')"><span class="ico">🔢</span><h3>Numerologia</h3><p>Caminho de vida</p></div>
+        <div class="sec-card" onclick="abrirModal('modal-iching')"><span class="ico">☯️</span><h3>I Ching</h3><p>Sabedoria</p></div>
+        <div class="sec-card" onclick="abrirModal('modal-simnao')"><span class="ico">⚡</span><h3>Sim/Não</h3><p>Rápido</p></div>
+        <div class="sec-card" onclick="abrirModal('modal-sonhos')"><span class="ico">📖</span><h3>Sonhos</h3><p>Interpretação</p></div>
+        <div class="sec-card" onclick="abrirModal('modal-compatibilidade')"><span class="ico">💘</span><h3>Compatibilidade</h3><p>Amor</p></div>
+      </div>
+      <div class="rodape"><p>© 2026 Oraculum Astrale — Todos os direitos reservados</p></div>
+    </div>
   </div>
 </div>
+<!-- MODAIS -->
 <div id="modal-carta-dia" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fecharModal('modal-carta-dia')">&times;</button><h2>Sua Carta do Dia</h2><div id="carta-dia-result" class="centro mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="revelarCarta()">Revelar</button></div></div></div>
 <div id="modal-horoscopo" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fecharModal('modal-horoscopo')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim" style="font-size:0.85rem;">Selecione seu signo:</p><div class="grid-signos" id="grid-signos"></div><div id="horo-result" class="horo-result" style="display:none;"><h3 id="h-signo-nome">Signo</h3><p><strong>❤️ Amor:</strong> <span id="h-amor"></span></p><p><strong>💼 Carreira:</strong> <span id="h-carreira"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="h-saude"></span></p></div></div></div>
 <div id="modal-tarot" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fecharModal('modal-tarot')">&times;</button><h2>Tarot</h2><input type="text" id="tarot-pergunta" placeholder="Sua pergunta?"><select id="tarot-tipo" onchange="atualizarCustoTarot()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option></select><p class="dim mt10">Custa <strong class="gold" id="tarot-custo">3</strong> créditos</p><button class="btn" id="btn-tarot" onclick="consultarTarot()">Consultar</button><div id="tarot-result" class="mt15"></div></div></div>
@@ -243,6 +250,7 @@ const FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas
 let user=null,toastF=[],mostT=false;
 function initE(){const c=document.getElementById("estrelas");for(let i=0;i<100;i++){const s=document.createElement("div");s.className="estrela";const sz=(Math.random()*3+1).toFixed(1);s.style.width=sz+"px";s.style.height=sz+"px";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.setProperty("--d",(Math.random()*3+2).toFixed(1)+"s");s.style.animationDelay=(Math.random()*5).toFixed(1)+"s";c.appendChild(s)}}
 function irP(id){document.querySelectorAll(".tela").forEach(function(t){t.classList.remove("ativa")});const e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
+function irParaSecao(s){document.querySelectorAll(".sidebar-item").forEach(function(i){i.classList.remove("ativo")});var el=document.getElementById("m-"+s);if(el)el.classList.add("ativo")}
 function to(m){toastF.push(m);if(!mostT)procT()}
 function procT(){if(toastF.length===0){mostT=false;return}mostT=true;const m=toastF.shift(),c=document.getElementById("toasts"),e=document.createElement("div");e.className="toast-item";e.innerText=m;c.appendChild(e);setTimeout(function(){e.classList.add("saindo");setTimeout(function(){e.remove();procT()},400)},3000)}
 function aM(i){const m=document.getElementById(i);if(m){m.style.display="flex";document.body.classList.add("no-scroll")}}
@@ -251,24 +259,34 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.qu
 document.addEventListener("click",function(e){if(e.target.classList.contains("modal")){e.target.style.display="none";document.body.classList.remove("no-scroll")}});
 function setL(i,v){const b=document.getElementById(i);if(!b)return;if(v){b.dataset.o=b.innerText;b.innerText="Aguarde...";b.disabled=true}else{b.innerText=b.dataset.o||b.innerText;b.disabled=false}}
 function cad(){const n=document.getElementById("cad-nome").value.trim(),c=document.getElementById("cad-cpf").value.replace(/\D/g,""),e=document.getElementById("cad-email").value.trim(),p=document.getElementById("cad-senha").value,x=document.getElementById("cad-conf").value;if(!n||c.length!==11||!e||p.length<6)return to("Preencha tudo.");if(p!==x)return to("Senhas diferentes.");const u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("Email existe.");const o={nome:n,cpf:c,email:e,senha:p,creditos:5,streak:1,ult:new Date().toISOString().split("T")[0],ind:0};u.push(o);localStorage.setItem("oa_u",JSON.stringify(u));const r=localStorage.getItem("oa_r");if(r){const i=u.find(function(v){return btoa(v.email)===r});if(i){i.creditos+=5;i.ind=(i.ind||0)+1;localStorage.setItem("oa_u",JSON.stringify(u));localStorage.removeItem("oa_r")}}to("Conta criada! +5 créditos.");irP("tela-login")}
-function login(){const e=document.getElementById("login-email").value.trim(),p=document.getElementById("login-senha").value,u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return to("Email/senha errados.");user=s;atS();carD();irP("tela-main");document.getElementById("cabecalho").style.display="flex";to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
-function sair(){user=null;document.getElementById("cabecalho").style.display="none";irP("tela-welcome")}
-function sU(){if(!user)return;const u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("creditos-user").innerText=user.creditos;document.getElementById("streak-user").innerText=user.streak}
+function login(){const e=document.getElementById("login-email").value.trim(),p=document.getElementById("login-senha").value,u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return to("Email/senha errados.");user=s;atS();carD();irP("tela-main");to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
+function fazerLogin(){login()}
+function fazerCadastro(){cad()}
+function sair(){user=null;irP("tela-welcome")}
+function sU(){if(!user)return;const u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("creditos-user2").innerText=user.creditos;document.getElementById("streak-user2").innerText=user.streak}
 function gas(q){if(!user){to("Faça login.");return 0}if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Créditos insuficientes.");aM("modal-comprar");return 0}
 function atS(){const h=new Date().toISOString().split("T")[0],o=new Date(Date.now()-86400000).toISOString().split("T")[0];if(user.ult===o){user.streak+=1;bonS()}else if(user.ult!==h){user.streak=1}user.ult=h;sU()}
 function bonS(){if(user.streak===7){user.creditos+=2;setTimeout(function(){to("Bônus 7 dias! +2 créditos.")},600)}if(user.streak===15){user.creditos+=5;setTimeout(function(){to("Bônus 15 dias! +5 créditos.")},600)}if(user.streak===30){user.creditos+=10;setTimeout(function(){to("Bônus 30 dias! +10 créditos.")},600)}}
-function carD(){document.getElementById("creditos-user").innerText=user.creditos;document.getElementById("streak-user").innerText=user.streak;const n=user.nome.split(" ")[0],h=new Date().getHours();let s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("saudacao-txt").innerText=s+", "+n+"!";document.getElementById("frase-dia").innerText=FR[Math.floor(Math.random()*FR.length)];document.getElementById("link-indicacao").value="https://oraculumastrale.com?ref="+btoa(user.email);const g=document.getElementById("grid-signos");g.innerHTML="";S.forEach(function(s){const b=document.createElement("div");b.className="sig-btn";b.innerHTML='<span class="si">'+s.ic+'</span><span class="sn">'+s.nome+'</span>';b.onclick=function(){mH(s.id)};g.appendChild(b)});const a=document.getElementById("comp-s1"),b=document.getElementById("comp-s2");a.innerHTML='<option value="">Seu Signo</option>';b.innerHTML='<option value="">Outro Signo</option>';S.forEach(function(s){a.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.ic+"</option>";b.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.ic+"</option>"})}
+function carD(){const n=user.nome.split(" ")[0],h=new Date().getHours();let s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("saudacao-txt").innerText=s+", "+n+"!";document.getElementById("frase-dia").innerText=FR[Math.floor(Math.random()*FR.length)];document.getElementById("link-indicacao").value="https://oraculumastrale.com?ref="+btoa(user.email);sU();const g=document.getElementById("grid-signos");g.innerHTML="";S.forEach(function(s){const b=document.createElement("div");b.className="sig-btn";b.innerHTML='<span class="si">'+s.ic+'</span><span class="sn">'+s.nome+'</span>';b.onclick=function(){mH(s.id)};g.appendChild(b)});const a=document.getElementById("comp-s1"),b=document.getElementById("comp-s2");a.innerHTML='<option value="">Seu Signo</option>';b.innerHTML='<option value="">Outro Signo</option>';S.forEach(function(s){a.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.ic+"</option>";b.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.ic+"</option>"})}
 function revelarCarta(){const h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("carta-dia-result").innerHTML='<p class="dim mt20">Já consultou hoje. Volte amanhã 🌙</p>';return}const c=DECK[Math.floor(Math.random()*DECK.length)];localStorage.setItem(k,h);document.getElementById("carta-dia-result").innerHTML='<div class="fade"><h3 style="margin:12px 0">'+c.nome+'</h3><p style="font-style:italic;margin-bottom:12px">"'+c.sig+'"</p><div style="text-align:left;background:rgba(0,0,0,0.2);padding:12px;border-radius:8px"><p><strong>❤️ Amor:</strong> '+c.amor+'</p><p><strong>💼 Carreira:</strong> '+c.car+'</p><p><strong>⚠️ Conselho:</strong> '+c.inv+'</p></div></div>';to("Carta revelada!")}
 function mH(id){const s=S.find(function(x){return x.id===id});if(!s)return;document.getElementById("h-signo-nome").innerHTML=s.ic+" "+s.nome;document.getElementById("h-amor").innerText=s.am;document.getElementById("h-carreira").innerText=s.ca;document.getElementById("h-saude").innerText=s.sa;document.getElementById("horo-result").style.display="block"}
 function atC(){const e=document.getElementById("tarot-custo");if(e)e.innerText=document.getElementById("tarot-tipo").value}
 function cT(){const t=parseInt(document.getElementById("tarot-tipo").value),p=document.getElementById("tarot-pergunta").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(t))return;setL("btn-tarot",1);setTimeout(function(){const d=[...DECK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);let h='<p class="dim" style="font-size:0.85rem">"'+p+'"</p><div class="grid-tarot">';s.forEach(function(c){h+='<div class="tarot-item"><span class="tarot-nome">'+c.nome+'</span><span class="tarot-txt">'+c.sig+'</span></div>'});h+="</div>";document.getElementById("tarot-result").innerHTML=h;setL("btn-tarot",0);to("Cartas lançadas!")},800)}
+function consultarTarot(){cT()}
 function cN(){const d=document.getElementById("num-data").value;if(!d)return to("Selecione a data.");if(!gas(2))return;setL("btn-num",1);setTimeout(function(){const n=d.replace(/-/g,"").split("").map(Number);let s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}const de={1:"O Líder",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sábio",8:"O Executivo",9:"O Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("num-result").innerHTML='<div class="fade"><div class="numero-vida">'+s+'</div><h3 class="centro">Caminho de Vida</h3><p class="centro mt10">'+(de[s]||"Número especial")+"</p></div>";setL("btn-num",0);to("Número revelado!")},600)}
+function calcularNumero(){cN()}
 function cI(){const p=document.getElementById("iching-pergunta").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(2))return;setL("btn-iching",1);setTimeout(function(){const h=HX[Math.floor(Math.random()*HX.length)];document.getElementById("iching-result").innerHTML='<div class="fade"><span class="iching-simb">'+h.s+"</span><h3>Hexagrama "+h.n+": "+h.nome+"</h3><p class='mt10'>"+h.d+"</p></div>";setL("btn-iching",0);to("I Ching respondeu!")},700)}
+function consultarIChing(){cI()}
 function cS(){const p=document.getElementById("sn-pergunta").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(1))return;setL("btn-sn",1);setTimeout(function(){const r=["Sim","Não","Talvez","Com certeza","Improvável","Não é momento","Estrelas dizem sim","Melhor não saber"];document.getElementById("sn-result").innerHTML='<span class="fade" style="font-size:1.8rem;">'+r[Math.floor(Math.random()*r.length)]+"</span>";setL("btn-sn",0)},500)}
+function consultarSimNao(){cS()}
 function bS(){const b=document.getElementById("sonho-busca").value.toLowerCase().trim(),l=document.getElementById("sonhos-lista");l.innerHTML="";if(b.length<2)return;let e=0;for(let p in SON){if(p.includes(b)){l.innerHTML+='<div class="sonho-item"><span class="sonho-palavra">'+p+':</span><div class="sonho-sig">'+SON[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim">Nada para "'+b+'".</p>'}
+function buscarSonho(){bS()}
 function vC(){const a=document.getElementById("comp-s1").value,b=document.getElementById("comp-s2").value;if(!a||!b)return to("Selecione os dois.");if(a===b)return to("Signos diferentes.");const p=Math.floor(Math.random()*60)+35;let m="";if(p>=85)m="Almas gêmeas!";else if(p>=70)m="Grande afinidade!";else if(p>=50)m="Atração de opostos.";else m="Energias distintas.";document.getElementById("comp-result").innerHTML='<div class="fade"><div class="comp-pct">'+p+"%</div><p>"+m+"</p></div>"}
+function verificarComp(){vC()}
 function cL(){navigator.clipboard.writeText(document.getElementById("link-indicacao").value).then(function(){to("Link copiado!")})["catch"](function(){document.getElementById("link-indicacao").select();document.execCommand("copy");to("Link copiado!")})}
+function copiarLink(){cL()}
 function comp(q){user.creditos+=q;sU();fM("modal-comprar");to("+"+q+" créditos!")}
+function comprar(q){comp(q)}
 window.onload=function(){initE();const p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
 </script>
 </body>
