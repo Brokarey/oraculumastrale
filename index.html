@@ -13,40 +13,23 @@ body{font-family:'Inter',sans-serif;color:var(--tx);min-height:100vh;overflow-x:
 body.no-scroll{overflow:hidden}
 h1,h2,h3{font-family:'Playfair Display',serif;color:var(--gold)}
 a{color:var(--gold);text-decoration:none}
-
 #estrelas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
 .estrela{position:absolute;background:#fff;border-radius:50%;animation:brilhar var(--d) infinite ease-in-out}
 @keyframes brilhar{0%,100%{opacity:0.15;transform:scale(0.8)}50%{opacity:1;transform:scale(1.5)}}
-
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:#080212}
 ::-webkit-scrollbar-thumb{background:var(--gd);border-radius:10px}
-
 .tela{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:var(--tr);z-index:1}
 .tela.ativa{opacity:1;pointer-events:all;z-index:2}
-
-/* WELCOME: imagem cobre TUDO, sem corte, sem faixa branca */
-#tela-welcome{
-  background:url('mystical_purple_crystal_1.jpg') center/cover no-repeat;
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  z-index:1
-}
-#tela-welcome::before{
-  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-  background:rgba(8,2,18,0.6);
-  z-index:0
-}
+#tela-welcome{background:url('mystical_purple_crystal_1.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1}
+#tela-welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.6);z-index:0}
 #tela-welcome>*{position:relative;z-index:2}
-
 .welcome-badge{background:rgba(212,168,83,0.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--gd);border-radius:30px;padding:7px 22px;font-size:0.8rem;color:var(--gold);margin-bottom:8px;text-shadow:0 0 10px rgba(0,0,0,0.5)}
 .logo{font-size:4.5rem;margin-bottom:12px;text-align:center;filter:drop-shadow(0 0 25px rgba(212,168,83,0.4))}
 .titulo-site{font-size:3.2rem;margin-bottom:10px;text-align:center;text-shadow:0 0 40px rgba(0,0,0,0.9),0 0 20px rgba(212,168,83,0.3)}
 .sub-site{color:#d0c8e0;margin-bottom:35px;font-style:italic;font-size:1.1rem;text-align:center;text-shadow:0 0 15px rgba(0,0,0,0.7)}
 .acoes-welcome{width:100%;max-width:300px;display:flex;flex-direction:column;gap:12px}
-
 .tela:not(#tela-welcome){background:linear-gradient(135deg,#0a0015,#1a0030);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
-
 .card{background:var(--gl);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--gb);border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .btn{background:var(--gold);color:#000;border:none;padding:13px 26px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;width:100%;margin-top:10px;font-family:'Inter',sans-serif;font-size:0.9rem}
 .btn:hover:not(:disabled){background:#f1c40f;transform:translateY(-2px);box-shadow:0 5px 15px rgba(212,168,83,0.3)}
@@ -57,7 +40,6 @@ input,select,textarea{width:100%;padding:12px;margin:8px 0;background:rgba(0,0,0
 input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(212,168,83,0.3)}
 input[type="date"]{color-scheme:dark}
 select option{background:#1a0030;color:#e8e0f0}
-
 header{width:100%;padding:10px 4%;display:none;justify-content:space-between;align-items:center;background:rgba(10,0,21,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--gd);flex-wrap:wrap}
 .hdr-titulo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);white-space:nowrap}
 .hdr-stats{display:flex;gap:10px;align-items:center;font-size:0.8rem;flex-wrap:wrap}
@@ -67,9 +49,8 @@ header{width:100%;padding:10px 4%;display:none;justify-content:space-between;ali
 .hdr-menu{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
 .hdr-menu a{color:var(--td);font-size:0.75rem;padding:4px 8px;border-radius:6px;cursor:pointer;transition:0.2s}
 .hdr-menu a:hover{color:var(--gold);background:var(--gd)}
-
 .conteudo{width:100%;max-width:1200px;padding:15px 15px 50px;margin-top:15px}
-.saudacao{margin-bottom:8px}
+.saudacao{margin-bottom:8px;font-size:1.8rem}
 .frase{color:var(--td);font-style:italic;margin-bottom:20px;min-height:28px;border-left:3px solid var(--gd);padding:6px 12px;font-size:0.9rem}
 .grid-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .sec-card{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:18px 12px;text-align:center;cursor:pointer;transition:all 0.3s}
@@ -77,20 +58,17 @@ header{width:100%;padding:10px 4%;display:none;justify-content:space-between;ali
 .sec-card .ico{font-size:2rem;display:block;margin-bottom:6px}
 .sec-card h3{font-size:0.95rem;margin-bottom:3px}
 .sec-card p{font-size:0.7rem;color:var(--td)}
-
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:2000;padding:15px;overflow-y:auto}
 .modal-conteudo{background:linear-gradient(135deg,#1a0030,#0a0015);border:1px solid var(--gd);border-radius:18px;padding:25px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:entrar 0.3s ease}
 @keyframes entrar{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes aparecer{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 .fade{animation:aparecer 0.5s ease}
 .fechar-modal{position:absolute;top:10px;right:14px;font-size:1.6rem;cursor:pointer;color:var(--gold);background:none;border:none;line-height:1;z-index:10}
-
 #toasts{position:fixed;top:15px;right:15px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
 .toast-item{background:var(--gold);color:#000;padding:12px 22px;border-radius:10px;font-weight:600;max-width:330px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transform:translateX(120%);animation:entraToast 0.4s ease forwards;pointer-events:auto}
 @keyframes entraToast{to{transform:translateX(0)}}
 @keyframes saiToast{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
 .toast-item.saindo{animation:saiToast 0.4s ease forwards}
-
 .grid-signos{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
 .sig-btn{background:rgba(255,255,255,0.05);border:1px solid var(--gb);padding:8px 4px;border-radius:8px;cursor:pointer;transition:0.2s;text-align:center}
 .sig-btn:hover{border-color:var(--gold);background:rgba(212,168,83,0.1)}
@@ -126,7 +104,6 @@ header{width:100%;padding:10px 4%;display:none;justify-content:space-between;ali
 .dim{color:var(--td)}
 .rodape{width:100%;text-align:center;padding:15px;color:var(--td);font-size:0.75rem;margin-top:30px;border-top:1px solid var(--gd)}
 .iching-simb{font-size:3.5rem;display:block;margin:12px 0;text-align:center}
-
 @media(max-width:768px){
 .grid-signos{grid-template-columns:repeat(3,1fr)}
 .grid-secoes{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
@@ -170,7 +147,6 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <div class="stats-item stats-sair" onclick="sair()">Sair</div>
   </div>
 </header>
-
 <div id="tela-welcome" class="tela ativa">
   <div class="welcome-badge">✦ Portal Místico ✦</div>
   <div class="logo">🔮</div>
@@ -181,7 +157,6 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <button class="btn btn2" onclick="irPara('tela-cadastro')">Cadastrar</button>
   </div>
 </div>
-
 <div id="tela-login" class="tela">
   <div class="card">
     <h2 class="centro mb20">Entrar</h2>
@@ -192,7 +167,6 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <button class="btn btn2 mt20" onclick="irPara('tela-welcome')">Voltar</button>
   </div>
 </div>
-
 <div id="tela-cadastro" class="tela">
   <div class="card">
     <h2 class="centro mb10">Criar Conta</h2>
@@ -207,7 +181,6 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <button class="btn btn2 mt20" onclick="irPara('tela-welcome')">Voltar</button>
   </div>
 </div>
-
 <div id="tela-main" class="tela" style="justify-content:flex-start;padding-top:5px;">
   <div class="conteudo">
     <h2 id="saudacao-txt" class="saudacao">Bem-vindo(a), Viajante</h2>
@@ -225,7 +198,6 @@ header{flex-direction:column;gap:5px;padding:8px 12px}
     <div class="rodape"><p>© 2026 Oraculum Astrale — Todos os direitos reservados</p></div>
   </div>
 </div>
-
 <div id="modal-carta-dia" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fecharModal('modal-carta-dia')">&times;</button><h2>Sua Carta do Dia</h2><div id="carta-dia-result" class="centro mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="revelarCarta()">Revelar</button></div></div></div>
 <div id="modal-horoscopo" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fecharModal('modal-horoscopo')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim" style="font-size:0.85rem;">Selecione seu signo:</p><div class="grid-signos" id="grid-signos"></div><div id="horo-result" class="horo-result" style="display:none;"><h3 id="h-signo-nome">Signo</h3><p><strong>❤️ Amor:</strong> <span id="h-amor"></span></p><p><strong>💼 Carreira:</strong> <span id="h-carreira"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="h-saude"></span></p></div></div></div>
 <div id="modal-tarot" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fecharModal('modal-tarot')">&times;</button><h2>Tarot</h2><input type="text" id="tarot-pergunta" placeholder="Sua pergunta?"><select id="tarot-tipo" onchange="atualizarCustoTarot()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option></select><p class="dim mt10">Custa <strong class="gold" id="tarot-custo">3</strong> créditos</p><button class="btn" id="btn-tarot" onclick="consultarTarot()">Consultar</button><div id="tarot-result" class="mt15"></div></div></div>
@@ -271,7 +243,7 @@ const FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas
 let user=null,toastF=[],mostT=false;
 function initE(){const c=document.getElementById("estrelas");for(let i=0;i<100;i++){const s=document.createElement("div");s.className="estrela";const sz=(Math.random()*3+1).toFixed(1);s.style.width=sz+"px";s.style.height=sz+"px";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.setProperty("--d",(Math.random()*3+2).toFixed(1)+"s");s.style.animationDelay=(Math.random()*5).toFixed(1)+"s";c.appendChild(s)}}
 function irP(id){document.querySelectorAll(".tela").forEach(function(t){t.classList.remove("ativa")});const e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
-function to(t){toastF.push(t);if(!mostT)procT()}
+function to(m){toastF.push(m);if(!mostT)procT()}
 function procT(){if(toastF.length===0){mostT=false;return}mostT=true;const m=toastF.shift(),c=document.getElementById("toasts"),e=document.createElement("div");e.className="toast-item";e.innerText=m;c.appendChild(e);setTimeout(function(){e.classList.add("saindo");setTimeout(function(){e.remove();procT()},400)},3000)}
 function aM(i){const m=document.getElementById(i);if(m){m.style.display="flex";document.body.classList.add("no-scroll")}}
 function fM(i){const m=document.getElementById(i);if(m){m.style.display="none";document.body.classList.remove("no-scroll")}}
