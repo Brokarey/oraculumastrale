@@ -1,228 +1,413 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oraculum Astrale — Tarot Online</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oraculum Astrale | Portal Místico</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#0a0015;--bg-glow:#1a0030;--gold:#d4a853;--gold-dim:rgba(212,168,83,0.2);--text-main:#e8e0f0;--text-dim:#a090b0;--glass:rgba(255,255,255,0.05);--glass-border:rgba(255,255,255,0.1);--transition:0.4s cubic-bezier(0.4,0,0.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,var(--bg-deep),var(--bg-glow));color:var(--text-main);min-height:100vh;overflow-x:hidden;line-height:1.6}
+body.modal-open{overflow:hidden}
+h1,h2,h3{font-family:'Playfair Display',serif;color:var(--gold)}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+
+#stars-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--dur) infinite ease-in-out}
+@keyframes twinkle{0%,100%{opacity:0.15;transform:scale(0.8)}50%{opacity:1;transform:scale(1.5)}}
+
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--bg-deep)}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:10px}
+
+.screen{position:fixed;top:0;left:0;width:100%;min-height:100vh;padding:20px;opacity:0;pointer-events:none;transition:var(--transition);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1}
+.screen-active{opacity:1;pointer-events:all;position:relative;z-index:2}
+
+.card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 8px 32px rgba(0,0,0,0.4);transition:transform 0.3s ease}
+
+.btn{background:var(--gold);color:#000;border:none;padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;width:100%;margin-top:10px;font-family:'Inter',sans-serif;font-size:0.9rem}
+.btn:hover:not(:disabled){background:#f1c40f;transform:translateY(-2px);box-shadow:0 5px 15px rgba(212,168,83,0.3)}
+.btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.btn-outline{background:transparent;border:1px solid var(--gold);color:var(--gold)}
+.btn-outline:hover:not(:disabled){background:rgba(212,168,83,0.1)}
+.btn-sm{padding:8px 16px;font-size:0.8rem;width:auto}
+
+input,select,textarea{width:100%;padding:12px;margin:8px 0;background:rgba(0,0,0,0.3);border:1px solid var(--glass-border);border-radius:8px;color:var(--text-main);outline:none;font-family:'Inter',sans-serif;font-size:0.95rem;transition:border 0.3s}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(212,168,83,0.3)}
+textarea{min-height:80px;resize:vertical}
+input[type="date"]{color-scheme:dark}
+select option{background:#1a0030;color:#e8e0f0}
+
+header{width:100%;padding:12px 5%;display:none;justify-content:space-between;align-items:center;background:rgba(10,0,21,0.85);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--gold-dim)}
+.header-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold)}
+.stats-bar{display:flex;gap:15px;align-items:center;font-size:0.85rem;flex-wrap:wrap}
+.stat-item{cursor:pointer;color:var(--text-main);transition:0.2s;white-space:nowrap}
+.stat-item:hover{color:var(--gold)}
+.stat-sair:hover{color:#ff4757!important}
+
+.welcome-logo{font-size:5rem;margin-bottom:10px;text-align:center}
+.welcome-title{font-size:3rem;margin-bottom:10px;text-align:center}
+.welcome-sub{color:var(--text-dim);margin-bottom:30px;font-style:italic;font-size:1.1rem;text-align:center}
+.welcome-actions{width:100%;max-width:300px;display:flex;flex-direction:column;gap:12px}
+
+.main-content{width:100%;max-width:1200px;padding:30px 20px 60px}
+.saudacao{margin-bottom:10px}
+.frase-mistica{color:var(--text-dim);font-style:italic;margin-bottom:30px;min-height:30px;border-left:3px solid var(--gold-dim);padding:8px 15px;font-size:0.95rem}
+.main-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.section-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:15px;padding:25px 18px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+.section-card:hover{border-color:var(--gold);background:rgba(212,168,83,0.08);transform:translateY(-3px)}
+.section-card .icon{font-size:2.5rem;display:block;margin-bottom:10px}
+.section-card h3{font-size:1.1rem;margin-bottom:5px}
+.section-card p{font-size:0.8rem;color:var(--text-dim)}
+
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px;overflow-y:auto}
+.modal-content{background:linear-gradient(135deg,#1a0030,#0a0015);border:1px solid var(--gold-dim);border-radius:20px;padding:30px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInResult{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+.fade-result{animation:fadeInResult 0.5s ease}
+.close-modal{position:absolute;top:12px;right:18px;font-size:1.8rem;cursor:pointer;color:var(--gold);background:none;border:none;line-height:1;z-index:10}
+
+#toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast-item{background:var(--gold);color:#000;padding:14px 25px;border-radius:10px;font-weight:600;max-width:350px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transform:translateX(120%);animation:toastIn 0.4s ease forwards;pointer-events:auto}
+@keyframes toastIn{to{transform:translateX(0)}}
+@keyframes toastOut{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
+.toast-item.out{animation:toastOut 0.4s ease forwards}
+
+.signos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:15px 0}
+.signo-btn{background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);padding:10px 5px;border-radius:8px;cursor:pointer;transition:0.2s;text-align:center}
+.signo-btn:hover{border-color:var(--gold);background:rgba(212,168,83,0.1)}
+.signo-btn .s-icon{font-size:1.3rem;display:block;margin-bottom:3px}
+.signo-btn .s-name{font-size:0.75rem}
+
+.tarot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:20px}
+.tarot-card-item{background:rgba(255,255,255,0.05);padding:18px;border-radius:12px;border:1px solid var(--gold-dim);text-align:center;animation:fadeInResult 0.5s ease}
+.tarot-card-name{font-weight:bold;color:var(--gold);display:block;margin-bottom:8px;font-size:1.1rem}
+.tarot-card-text{font-size:0.85rem;line-height:1.5}
+.num-number{font-size:4rem;font-weight:bold;color:var(--gold);text-align:center;margin:15px 0}
+.horoscope-result{margin-top:20px;border-top:1px solid var(--gold-dim);padding-top:20px}
+.horoscope-result p{margin:8px 0;font-size:0.9rem}
+.comp-percent{font-size:3rem;font-weight:bold;color:var(--gold);text-align:center;margin:15px 0}
+.pack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+.pack-card{background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);border-radius:12px;padding:18px 12px;text-align:center;cursor:pointer;transition:0.3s}
+.pack-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.pack-card .price{font-size:1.5rem;color:var(--gold);font-weight:bold;margin:8px 0}
+.pack-card .economy{font-size:0.75rem;color:#4caf50}
+.pack-card .tag{font-size:0.7rem;background:var(--gold-dim);padding:2px 8px;border-radius:4px;display:inline-block;margin-top:5px}
+.dream-item{margin-bottom:12px;border-bottom:1px solid var(--gold-dim);padding-bottom:10px}
+.dream-word{color:var(--gold);font-weight:600;text-transform:capitalize}
+.dream-meaning{font-size:0.85rem;margin-top:3px}
+
+.flex-row{display:flex;gap:10px}
+.flex-row>*{flex:1}
+.text-center{text-align:center}
+.mt-5{margin-top:5px}
+.mt-10{margin-top:10px}
+.mt-15{margin-top:15px}
+.mt-20{margin-top:20px}
+.mb-10{margin-bottom:10px}
+.mb-20{margin-bottom:20px}
+.gold{color:var(--gold)}
+.dim{color:var(--text-dim)}
+.main-footer{width:100%;text-align:center;padding:20px;color:var(--text-dim);font-size:0.8rem;margin-top:40px;border-top:1px solid var(--gold-dim)}
+
+@media(max-width:768px){
+.signos-grid{grid-template-columns:repeat(3,1fr)}
+.main-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+header{flex-direction:column;gap:8px;padding:10px 15px}
+.stats-bar{gap:8px;font-size:0.75rem;justify-content:center}
+.welcome-title{font-size:2rem}
+.pack-grid{grid-template-columns:repeat(2,1fr)}
+.flex-row{flex-direction:column}
+.modal-content{padding:20px}
+}
+@media(max-width:480px){
+.signos-grid{grid-template-columns:repeat(2,1fr)}
+.main-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-  <!-- Fundo místico com estrelas -->
-  <div class="stars" aria-hidden="true" data-stars-container>
-    <div class="stars-layer stars-1"></div>
-    <div class="stars-layer stars-2"></div>
-    <div class="stars-layer stars-3"></div>
+<div id="stars-container"></div>
+<div id="toast-container"></div>
+
+<header id="main-header">
+  <div class="header-title">🔮 Oraculum Astrale</div>
+  <div class="stats-bar">
+    <div class="stat-item" onclick="abrirModal('modal-comprar')">🔮 <span id="user-credits">0</span> creditos</div>
+    <div class="stat-item">🔥 <span id="user-streak">0</span> dias</div>
+    <div class="stat-item" onclick="abrirModal('modal-indicar')">👥 Indicar</div>
+    <div class="stat-item" onclick="abrirModal('modal-comprar')">💳 Comprar</div>
+    <div class="stat-item stat-sair" onclick="logout()">Sair</div>
   </div>
+</header>
 
-  <!-- ============================ -->
-  <!-- TELA DE BOAS-VINDAS          -->
-  <!-- ============================ -->
-  <section id="screen-welcome" class="screen screen-active" data-screen="welcome">
-    <div class="welcome-container">
-      <div class="welcome-logo" data-welcome-logo>
-        <span class="logo-icon">🔮</span>
-        <h1 class="site-title">Oraculum Astrale</h1>
-      </div>
-      <p class="site-subtitle">Sua consulta de tarot online</p>
-      <div class="welcome-actions">
-        <button type="button" class="btn btn-primary" data-action="show-login">Entrar</button>
-        <button type="button" class="btn btn-secondary" data-action="show-register">Cadastrar</button>
-      </div>
+<div id="screen-welcome" class="screen screen-active">
+  <div class="welcome-logo">🔮</div>
+  <h1 class="welcome-title">Oraculum Astrale</h1>
+  <p class="welcome-sub">Sua jornada de autoconhecimento comeca aqui</p>
+  <div class="welcome-actions">
+    <button class="btn" onclick="navegar('screen-login')">Entrar</button>
+    <button class="btn btn-outline" onclick="navegar('screen-register')">Cadastrar</button>
+  </div>
+</div>
+
+<div id="screen-login" class="screen">
+  <div class="card">
+    <h2 class="text-center mb-20">Entrar</h2>
+    <input type="email" id="login-email" placeholder="Seu e-mail" autocomplete="email">
+    <input type="password" id="login-pass" placeholder="Sua senha" autocomplete="current-password">
+    <button class="btn" onclick="executarLogin()">Acessar Portal</button>
+    <p class="text-center mt-20 dim" style="font-size:0.9rem;">Nao tem conta? <a href="#" onclick="navegar('screen-register')">Cadastre-se</a></p>
+    <button class="btn btn-outline mt-20" onclick="navegar('screen-welcome')">Voltar</button>
+  </div>
+</div>
+
+<div id="screen-register" class="screen">
+  <div class="card">
+    <h2 class="text-center mb-10">Criar Conta</h2>
+    <p class="text-center gold" style="font-size:0.8rem;margin-bottom:15px;">Ganhe 5 creditos gratis ao se cadastrar!</p>
+    <input type="text" id="reg-nome" placeholder="Nome Completo">
+    <input type="text" id="reg-cpf" placeholder="CPF (somente numeros)" maxlength="11">
+    <input type="email" id="reg-email" placeholder="E-mail">
+    <input type="password" id="reg-pass" placeholder="Senha (min. 6 caracteres)">
+    <input type="password" id="reg-pass-conf" placeholder="Confirmar Senha">
+    <button class="btn" onclick="executarCadastro()">Cadastrar e Ganhar Creditos</button>
+    <p class="text-center mt-20 dim" style="font-size:0.9rem;">Ja tem conta? <a href="#" onclick="navegar('screen-login')">Faça login</a></p>
+    <button class="btn btn-outline mt-20" onclick="navegar('screen-welcome')">Voltar</button>
+  </div>
+</div>
+
+<div id="screen-main" class="screen" style="justify-content:flex-start;padding-top:30px;">
+  <div class="main-content">
+    <h2 id="saudacao-txt" class="saudacao">Bem-vindo(a), Viajante</h2>
+    <div class="frase-mistica" id="frase-dia"></div>
+    <div class="main-grid">
+      <div class="section-card" onclick="abrirModal('modal-carta-dia')"><span class="icon">🃏</span><h3>Carta do Dia</h3><p>Consulta gratuita diaria</p></div>
+      <div class="section-card" onclick="abrirModal('modal-horoscopo')"><span class="icon">☀️</span><h3>Horoscopo</h3><p>Previsoes dos astros</p></div>
+      <div class="section-card" onclick="abrirModal('modal-tarot')"><span class="icon">🔮</span><h3>Tarot Profissional</h3><p>Respostas profundas</p></div>
+      <div class="section-card" onclick="abrirModal('modal-numerologia')"><span class="icon">🔢</span><h3>Numerologia</h3><p>Seu caminho de vida</p></div>
+      <div class="section-card" onclick="abrirModal('modal-iching')"><span class="icon">☯️</span><h3>I Ching</h3><p>Sabedoria milenar</p></div>
+      <div class="section-card" onclick="abrirModal('modal-simnao')"><span class="icon">⚡</span><h3>Oraculo Sim/Nao</h3><p>Respostas rapidas</p></div>
+      <div class="section-card" onclick="abrirModal('modal-sonhos')"><span class="icon">📖</span><h3>Livro dos Sonhos</h3><p>Interprete seu subconsciente</p></div>
+      <div class="section-card" onclick="abrirModal('modal-compatibilidade')"><span class="icon">💘</span><h3>Compatibilidade</h3><p>Sinergia dos signos</p></div>
     </div>
-  </section>
+    <div class="main-footer"><p>© 2026 Oraculum Astrale - Todos os direitos reservados</p></div>
+  </div>
+</div>
 
-  <!-- ============================ -->
-  <!-- TELA DE LOGIN                -->
-  <!-- ============================ -->
-  <section id="screen-login" class="screen" data-screen="login">
-    <div class="auth-card">
-      <h2 class="auth-title">Entrar</h2>
-      <form id="form-login" data-form="login" autocomplete="on">
-        <label class="field">
-          <span class="field-label">E-mail</span>
-          <input type="email" id="login-email" name="email" required placeholder="seu@email.com" autocomplete="email">
-        </label>
-        <label class="field">
-          <span class="field-label">Senha</span>
-          <input type="password" id="login-senha" name="senha" required placeholder="••••••••" autocomplete="current-password">
-        </label>
-        <button type="submit" class="btn btn-primary btn-block" data-action="login">Entrar</button>
-      </form>
-      <p class="auth-link"><a href="#" data-action="show-register">Não tem conta? Cadastre-se</a></p>
-      <button type="button" class="btn btn-ghost btn-block" data-action="show-welcome">Voltar</button>
-    </div>
-  </section>
-
-  <!-- ============================ -->
-  <!-- TELA DE CADASTRO             -->
-  <!-- ============================ -->
-  <section id="screen-register" class="screen" data-screen="register">
-    <div class="auth-card">
-      <h2 class="auth-title">Criar conta</h2>
-      <form id="form-register" data-form="register" autocomplete="on">
-        <label class="field">
-          <span class="field-label">Nome</span>
-          <input type="text" id="register-nome" name="nome" required placeholder="Seu nome" autocomplete="name">
-        </label>
-        <label class="field">
-          <span class="field-label">E-mail</span>
-          <input type="email" id="register-email" name="email" required placeholder="seu@email.com" autocomplete="email">
-        </label>
-        <label class="field">
-          <span class="field-label">Senha</span>
-          <input type="password" id="register-senha" name="senha" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
-        </label>
-        <label class="field">
-          <span class="field-label">Confirmar senha</span>
-          <input type="password" id="register-confirmar" name="confirmar" required minlength="6" placeholder="Repita a senha" autocomplete="new-password">
-        </label>
-        <button type="submit" class="btn btn-primary btn-block" data-action="register">Cadastrar e ganhar 5 créditos</button>
-      </form>
-      <p class="auth-link"><a href="#" data-action="show-login">Já tem conta? Faça login</a></p>
-      <button type="button" class="btn btn-ghost btn-block" data-action="show-welcome">Voltar</button>
-    </div>
-  </section>
-
-  <!-- ============================ -->
-  <!-- TELA PRINCIPAL               -->
-  <!-- ============================ -->
-  <section id="screen-main" class="screen" data-screen="main">
-
-    <!-- HEADER FIXO -->
-    <header class="main-header" data-main-header>
-      <div class="header-logo">
-        <span class="logo-icon-small">🔮</span>
-        <span class="header-title">Oraculum Astrale</span>
-      </div>
-      <div class="header-stats">
-        <span class="stat stat-credits" data-stat-credits>🔮 <strong data-credits-value>0</strong> créditos</span>
-        <span class="stat stat-streak" data-stat-streak>🔥 <strong data-streak-value>0</strong> dias</span>
-        <button type="button" class="btn btn-ghost btn-sm" data-action="logout">Sair</button>
-      </div>
-    </header>
-
-    <main class="main-content">
-
-      <!-- BOAS-VINDAS -->
-      <section class="welcome-user" data-section="welcome-user">
-        <h2 class="greeting" data-greeting>Bem-vindo(a)!</h2>
-        <p class="daily-phrase" data-daily-phrase>As estrelas sussurram segredos...</p>
-      </section>
-
-      <!-- CRÉDITOS E BÔNUS -->
-      <section class="bonus-grid" data-section="bonus">
-        <div class="card bonus-card" data-card="indicacao">
-          <h3 class="card-title">Indicar Amigo</h3>
-          <p class="card-text">Compartilhe seu link e ganhe créditos quando seu amigo se cadastrar.</p>
-          <div class="indicacao-link">
-            <input type="text" id="indicacao-link" data-indicacao-link readonly>
-            <button type="button" class="btn btn-secondary btn-sm" data-action="copy-indicacao">Copiar link</button>
-          </div>
-        </div>
-
-        <div class="card bonus-card" data-card="roleta">
-          <h3 class="card-title">Roleta de Bônus</h3>
-          <p class="card-text">Gire a roleta e ganhe créditos extras.</p>
-          <button type="button" class="btn btn-primary" data-action="open-roleta">🎡 Girar</button>
-        </div>
-      </section>
-
-      <!-- CONSULTA -->
-      <section class="consulta-section" data-section="consulta">
-        <h2 class="section-title">Faça sua pergunta</h2>
-        <form id="form-consulta" data-form="consulta">
-          <label class="field">
-            <span class="field-label">Sua pergunta</span>
-            <textarea id="consulta-pergunta" name="pergunta" rows="3" required placeholder="Digite sua pergunta..."></textarea>
-          </label>
-          <label class="field">
-            <span class="field-label">Tipo de tiragem</span>
-            <select id="consulta-tipo" name="tipo" required>
-              <option value="1" data-cost="1">1 Carta — 1 crédito</option>
-              <option value="3" data-cost="3" selected>3 Cartas — 3 créditos</option>
-              <option value="5" data-cost="5">Cruz Celta — 5 créditos</option>
-            </select>
-          </label>
-          <p class="consulta-custo" data-consulta-custo>Esta consulta custa <strong data-custo-value>3</strong> créditos</p>
-          <button type="submit" class="btn btn-primary btn-block" data-action="consultar">🔮 Consultar</button>
-        </form>
-      </section>
-
-      <!-- RESULTADO -->
-      <section id="resultado" class="resultado-section" data-section="resultado" hidden>
-        <h2 class="section-title">Resultado da consulta</h2>
-        <p class="resultado-pergunta" data-resultado-pergunta></p>
-        <div class="cartas-grid" data-cartas-grid></div>
-        <button type="button" class="btn btn-secondary" data-action="nova-consulta">Nova Consulta</button>
-      </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="main-footer">
-      <p>© 2025 Oraculum Astrale — Todos os direitos reservados</p>
-      <p class="footer-quote">As cartas não revelam o futuro — elas iluminam o caminho.</p>
-    </footer>
-  </section>
-
-  <!-- ============================ -->
-  <!-- MODAL DA ROLETA              -->
-  <!-- ============================ -->
-  <div id="modal-roleta" class="modal" data-modal="roleta" hidden>
-    <div class="modal-overlay" data-modal-overlay></div>
-    <div class="modal-content modal-roleta-content">
-      <button type="button" class="modal-close" data-action="close-roleta" aria-label="Fechar">×</button>
-      <h2 class="modal-title">🎡 Roleta de Bônus</h2>
-      <div class="roleta-wrapper">
-        <div class="roleta-pointer" aria-hidden="true">▼</div>
-        <div class="roleta" data-roleta>
-          <div class="roleta-sector sector-1"><span>1</span></div>
-          <div class="roleta-sector sector-2"><span>2</span></div>
-          <div class="roleta-sector sector-3"><span>3</span></div>
-          <div class="roleta-sector sector-4"><span>5</span></div>
-          <div class="roleta-sector sector-5"><span>10</span></div>
-          <div class="roleta-sector sector-6"><span>Tente novamente</span></div>
-        </div>
-      </div>
-      <p class="roleta-resultado" data-roleta-resultado>Gire para descobrir seu prêmio!</p>
-      <button type="button" class="btn btn-primary btn-block" data-action="spin-roleta">Girar</button>
+<div id="modal-carta-dia" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-carta-dia')">&times;</button>
+    <h2>Sua Carta do Dia</h2>
+    <div id="carta-dia-result" class="text-center mt-20">
+      <p class="dim">Conecte-se com sua energia e peca uma orientacao para hoje.</p>
+      <button class="btn" onclick="revelarCartaDia()">Revelar Orientacao</button>
     </div>
   </div>
+</div>
 
-  <!-- ============================ -->
-  <!-- TOAST CONTAINER              -->
-  <!-- ============================ -->
-  <div id="toast-container" class="toast-container" data-toast-container aria-live="polite"></div>
+<div id="modal-horoscopo" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-horoscopo')">&times;</button>
+    <h2>Horoscopo do Dia</h2>
+    <p class="dim" style="font-size:0.9rem;">Selecione seu signo:</p>
+    <div class="signos-grid" id="signos-container"></div>
+    <div id="horoscopo-result" class="horoscope-result" style="display:none;">
+      <h3 id="h-signo-nome">Signo</h3>
+      <p><strong>❤️ Amor:</strong> <span id="h-amor"></span></p>
+      <p><strong>💼 Carreira:</strong> <span id="h-carreira"></span></p>
+      <p><strong>🌿 Bem-estar:</strong> <span id="h-saude"></span></p>
+    </div>
+  </div>
+</div>
 
-  <!-- ============================ -->
-  <!-- OVERLAY GENÉRICO             -->
-  <!-- ============================ -->
-  <div id="overlay" class="overlay" data-overlay hidden></div>
+<div id="modal-tarot" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-tarot')">&times;</button>
+    <h2>Consulta de Tarot</h2>
+    <input type="text" id="tarot-pergunta" placeholder="Qual sua pergunta para as cartas?">
+    <select id="tarot-tipo" onchange="atualizarCustoTarot()">
+      <option value="1">1 Carta (Orientacao Rapida) - 1 credito</option>
+      <option value="3" selected>3 Cartas (Passado/Presente/Futuro) - 3 creditos</option>
+      <option value="5">5 Cartas (Cruz Celta) - 5 creditos</option>
+    </select>
+    <p class="dim mt-10">Esta consulta custa <strong class="gold" id="tarot-custo-valor">3</strong> creditos</p>
+    <button class="btn" id="btn-tarot" onclick="realizarConsultaTarot()">Embaralhar e Consultar</button>
+    <div id="tarot-result" class="mt-20"></div>
+  </div>
+</div>
 
-  <!-- TEMPLATE DE CARTA -->
-  <template id="template-carta" data-template="carta">
-    <article class="carta-card" data-carta-card>
-      <div class="carta-header">
-        <h3 class="carta-nome" data-carta-nome></h3>
-        <p class="carta-arcano" data-carta-arcano></p>
-      </div>
-      <div class="carta-tabs" data-carta-tabs>
-        <button type="button" class="tab tab-active" data-tab="geral">Geral</button>
-        <button type="button" class="tab" data-tab="amor">Amor</button>
-        <button type="button" class="tab" data-tab="carreira">Carreira</button>
-        <button type="button" class="tab" data-tab="invertido">Invertido</button>
-      </div>
-      <div class="carta-content" data-carta-content>
-        <p data-carta-texto></p>
-      </div>
-    </article>
-  </template>
+<div id="modal-numerologia" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-numerologia')">&times;</button>
+    <h2>Caminho da Vida</h2>
+    <p class="dim" style="font-size:0.9rem;">Descubra sua missao (2 creditos).</p>
+    <input type="date" id="num-data">
+    <button class="btn" id="btn-num" onclick="calcularNumerologia()">Calcular Destino</button>
+    <div id="num-result" class="mt-20"></div>
+  </div>
+</div>
 
-  <script src="script.js"></script>
+<div id="modal-iching" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-iching')">&times;</button>
+    <h2>I Ching</h2>
+    <input type="text" id="iching-pergunta" placeholder="Sua pergunta para o Livro das Mutacoes">
+    <button class="btn" id="btn-iching" onclick="consultarIChing()">Lancar Moedas (2 creditos)</button>
+    <div id="iching-result" class="mt-20 text-center"></div>
+  </div>
+</div>
+
+<div id="modal-simnao" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-simnao')">&times;</button>
+    <h2>Oraculo Sim ou Nao</h2>
+    <input type="text" id="sn-pergunta" placeholder="Faca uma pergunta objetiva">
+    <button class="btn" id="btn-sn" onclick="consultarSimNao()">Obter Resposta (1 credito)</button>
+    <div id="sn-result" class="mt-20 text-center gold" style="font-size:1.8rem;font-weight:bold;"></div>
+  </div>
+</div>
+
+<div id="modal-sonhos" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-sonhos')">&times;</button>
+    <h2>Dicionario dos Sonhos</h2>
+    <p class="dim" style="font-size:0.9rem;">Digite uma palavra para ver seu significado.</p>
+    <input type="text" id="sonho-busca" placeholder="Ex: cobra, agua, dente..." onkeyup="buscarSonho()">
+    <div id="sonhos-lista" class="mt-15" style="max-height:300px;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<div id="modal-compatibilidade" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-compatibilidade')">&times;</button>
+    <h2>Sinergia Astral</h2>
+    <div class="flex-row">
+      <select id="comp-s1"><option value="">Seu Signo</option></select>
+      <select id="comp-s2"><option value="">Signo dele(a)</option></select>
+    </div>
+    <button class="btn" onclick="verificarCompatibilidade()">Verificar Afinidade</button>
+    <div id="comp-result" class="mt-20 text-center"></div>
+  </div>
+</div>
+
+<div id="modal-indicar" class="modal" data-modal="true">
+  <div class="modal-content">
+    <button class="close-modal" onclick="fecharModal('modal-indicar')">&times;</button>
+    <h2>Indique e Ganhe</h2>
+    <p class="dim">Para cada amigo que se cadastrar pelo seu link, voce ganha <strong class="gold">+5 creditos</strong>.</p>
+    <input type="text" id="link-indicacao" readonly>
+    <button class="btn" onclick="copiarLink()">Copiar Link</button>
+  </div>
+</div>
+
+<div id="modal-comprar" class="modal" data-modal="true">
+  <div class="modal-content" style="max-width:700px;">
+    <button class="close-modal" onclick="fecharModal('modal-comprar')">&times;</button>
+    <h2>Adquirir Creditos</h2>
+    <div class="pack-grid">
+      <div class="pack-card" onclick="comprarSimulado(10,9.90)"><h3>Inicial</h3><div class="price">R$ 9,90</div><p><strong>10</strong> creditos</p></div>
+      <div class="pack-card" onclick="comprarSimulado(25,19.90)"><h3>Essencial</h3><div class="price">R$ 19,90</div><p><strong>25</strong> creditos</p><p class="economy">Economia de 20%</p></div>
+      <div class="pack-card" onclick="comprarSimulado(60,39.90)"><h3>Avançado</h3><div class="price">R$ 39,90</div><p><strong>60</strong> creditos</p><p class="tag">Mais Popular</p></div>
+      <div class="pack-card" onclick="comprarSimulado(120,59.90)"><h3>Supremo</h3><div class="price">R$ 59,90</div><p><strong>120</strong> creditos</p><p class="economy">Melhor Valor</p></div>
+    </div>
+  </div>
+</div>
+<script>
+const ARCANOS_MAIORES=[
+{nome:"O Louco",arcano:"maior",significado:"Novos começos, inocência, aventura, espontaneidade.",amor:"Anuncia novo relacionamento ou fase de redescoberta.",carreira:"Novo projeto, mudança de área. Momento de arriscar.",invertido:"Imprudência, riscos desnecessários, decisões precipitadas."},
+{nome:"O Mago",arcano:"maior",significado:"Manifestação, habilidade, poder, concentração.",amor:"Poder de atração e iniciativa na vida afetiva.",carreira:"Transformar ideias em realidade. Competência reconhecida.",invertido:"Manipulação, talentos desperdiçados, falta de direção."},
+{nome:"A Sacerdotisa",arcano:"maior",significado:"Intuição, mistério, subconsciente, sabedoria interior.",amor:"Conexão profunda e silenciosa. Segredos revelados.",carreira:"Confie no instinto antes de decisões importantes.",invertido:"Intuição bloqueada, segredos prejudiciais, superficialidade."},
+{nome:"A Imperatriz",arcano:"maior",significado:"Feminilidade, beleza, abundância, fertilidade.",amor:"Relacionamento nutritivo, carinhoso e estável.",carreira:"Crescimento criativo e colheita de frutos financeiros.",invertido:"Dependência, bloqueio criativo, excesso de controle."},
+{nome:"O Imperador",arcano:"maior",significado:"Autoridade, estrutura, fundação, controle.",amor:"Busca por estabilidade e proteção no romance.",carreira:"Liderança firme e metas de longo prazo.",invertido:"Tirania, rigidez excessiva, falta de disciplina."},
+{nome:"O Hierofante",arcano:"maior",significado:"Tradição, conformidade, moralidade, mentoria.",amor:"Compromisso sério, casamento, valores compartilhados.",carreira:"Instituições sólidas ou busca por mentor.",invertido:"Rebeldia contra normas, dogmatismo."},
+{nome:"Os Enamorados",arcano:"maior",significado:"Amor, harmonia, relacionamentos, escolhas.",amor:"União profunda e decisão importante de coração.",carreira:"Parcerias de sucesso baseadas em valores.",invertido:"Desarmonia, desequilíbrio, dificuldade de escolher."},
+{nome:"O Carro",arcano:"maior",significado:"Vontade, vitória, determinação, controle.",amor:"Superação de obstáculos para conquistar quem ama.",carreira:"Progresso acelerado e domínio sobre concorrência.",invertido:"Falta de direção, perda de controle, agressividade."},
+{nome:"A Força",arcano:"maior",significado:"Coragem, persuasão, influência, compaixão.",amor:"Domar impulsos para fortalecer o vínculo afetivo.",carreira:"Resiliência para enfrentar pressões profissionais.",invertido:"Fraqueza, insegurança, autocontrole fragilizado."},
+{nome:"O Eremita",arcano:"maior",significado:"Introspecção, busca interior, solitude, sabedoria.",amor:"Tempo sozinho para entender reais sentimentos.",carreira:"Análise cuidadosa antes de agir. Busque conhecimento.",invertido:"Isolamento excessivo, imprudência, timidez."},
+{nome:"A Roda da Fortuna",arcano:"maior",significado:"Ciclos, mudança, destino, sorte.",amor:"Mudanças inesperadas na vida afetiva.",carreira:"Reviravolta profissional. Oportunidades inesperadas.",invertido:"Má sorte, resistência à mudança, ciclos negativos."},
+{nome:"A Justiça",arcano:"maior",significado:"Equidade, verdade, causa e efeito, leis.",amor:"Equilíbrio e honestidade necessários na relação.",carreira:"Contratos justos, mérito reconhecido.",invertido:"Injustiça, desonestidade, complicações jurídicas."},
+{nome:"O Pendurado",arcano:"maior",significado:"Pausa, rendição, sacrifício, nova perspectiva.",amor:"Momento de espera e sacrifício pelo bem da relação.",carreira:"Projetos estagnados pedem nova abordagem.",invertido:"Estagnação inútil, resistência, falta de visão."},
+{nome:"A Morte",arcano:"maior",significado:"Transformação, fim, transição, desapego.",amor:"Encerramento de ciclo para dar lugar ao novo.",carreira:"Mudança radical de carreira ou fim de projeto.",invertido:"Resistência à mudança, medo do novo, estagnação."},
+{nome:"A Temperança",arcano:"maior",significado:"Equilíbrio, moderação, paciência, harmonia.",amor:"Paciência e compreensão para curar feridas.",carreira:"Trabalho em equipe equilibrado, progresso constante.",invertido:"Desequilíbrio, excessos, falta de moderação."},
+{nome:"O Diabo",arcano:"maior",significado:"Sombra, vício, obsessão, materialismo.",amor:"Paixão intensa que pode se tornar obsessão.",carreira:"Ambição excessiva ou sensação de estar preso.",invertido:"Libertação de vícios e padrões tóxicos."},
+{nome:"A Torre",arcano:"maior",significado:"Queda, destruição, revelação abrupta, despertar.",amor:"Ruptura brusca que traz revelações necessárias.",carreira:"Crise profissional que força reconstrução total.",invertido:"Evitar o inevitável, crise adiada."},
+{nome:"A Estrela",arcano:"maior",significado:"Esperança, fé, renovação, inspiração.",amor:"Cura emocional e otimismo renovado no amor.",carreira:"Inspiração, reconhecimento e propósito.",invertido:"Desânimo, falta de fé, pessimismo."},
+{nome:"A Lua",arcano:"maior",significado:"Ilusão, medo, ansiedade, incerteza.",amor:"Incertezas e confusão emocional. Cuidado com enganos.",carreira:"Falta de clareza no trabalho. Ambiente instável.",invertido:"Clareza surgindo, medos sendo superados."},
+{nome:"O Sol",arcano:"maior",significado:"Alegria, sucesso, vitalidade, clareza.",amor:"Felicidade plena, amor verdadeiro e transparência.",carreira:"Sucesso, reconhecimento e energia para liderar.",invertido:"Sucesso temporário, ego inflado."},
+{nome:"O Julgamento",arcano:"maior",significado:"Renascimento, chamado interior, perdão.",amor:"Reavaliação do passado e chance de recomeço.",carreira:"Chamado importante para nova direção profissional.",invertido:"Negação do chamado, autocrítica excessiva."},
+{nome:"O Mundo",arcano:"maior",significado:"Conclusão, integração, realização, plenitude.",amor:"Realização afetiva, união, plenitude a dois.",carreira:"Sucesso internacional, conclusão de grande projeto.",invertido:"Incompletude, falta de fechamento, atrasos."}
+];
+
+function gerarMenores(){const n=["Copas","Espadas","Ouros","Paus"],v=["As","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"],t={Copas:{f:"sentimentos, amor, intuicao",e:"emocao",a:" emocional."},Espadas:{f:"pensamento, verdade, conflitos",e:"mente",a:" mental."},Ouros:{f:"financas, trabalho, abundancia",e:"materia",a:" pratico."},Paus:{f:"energia, criatividade, paixao",e:"acao",a:" dinamico."}};const s={As:["Novos comecos","Oportunidade","Potencial puro"],"2":["Equilibrio","Parceria","Escolha"],"3":["Crescimento","Expansao","Colaboracao"],"4":["Estabilidade","Fundacao","Descanso"],"5":["Desafio","Conflito","Mudanca"],"6":["Harmonia","Progresso","Generosidade"],"7":["Avaliacao","Estrategia","Reflexao"],"8":["Movimento","Velocidade","Acao"],"9":["Realizacao","Sabedoria","Independencia"],"10":["Completude","Culminancia","Legado"],"Valete":["Mensagem","Curiosidade","Novidade"],"Cavaleiro":["Acao urgente","Perseguicao","Movimento"],"Rainha":["Intuicao","Cuidado","Poder interior"],"Rei":["Dominio","Autoridade","Maturidade"]};const c=[];for(let o of n){const r=t[o];for(let n of v){const l=s[n]||["Energia","Potencial","Manifestacao"];c.push({nome:n+" de "+o,arcano:"menor",naipe:o,significado:l[0]+" no campo "+r.f+". "+l[1]+" atraves "+r.e+".",amor:"No amor: "+l[0]+r.a+" "+l[1]+" no coracao.",carreira:"Na carreira: "+l[0]+" profissional. "+l[2]+".",invertido:"Bloqueio na energia "+r.e+". "+l[1]+" em desequilibrio."})}}return c}
+const ARCANOS_MENORES=gerarMenores(),DECK_COMPLETO=[...ARCANOS_MAIORES,...ARCANOS_MENORES];
+
+const SIGNOS=[{id:"aries",nome:"Aries",data:"21/03-19/04",icon:"♈",amor:"Dia de tomar iniciativa no amor. Se esta solteiro, um encontro inesperado pode aquecer seu coracao.",carreira:"Sua lideranca natural esta em alta. Apresente novos projetos com confianca.",saude:"Cuidado com dores de cabeca por estresse. Hidrate-se e respire fundo."},{id:"touro",nome:"Touro",data:"20/04-20/05",icon:"♉",amor:"Busque estabilidade. Pequenos gestos de carinho fortalecerao os lacos afetivos.",carreira:"Momento de revisar financas. Evite gastos impulsivos e planeje com calma.",saude:"Conectar-se com a natureza trara equilibrio e paz interior."},{id:"gemeos",nome:"Gemeos",data:"21/05-20/06",icon:"♊",amor:"A comunicacao e sua grande aliada. Uma conversa sincera pode resolver mal-entendidos.",carreira:"Mente agil e criativa. Otimo dia para aprender algo novo ou fazer networking.",saude:"Evite excesso de telas antes de dormir para garantir um sono reparador."},{id:"cancer",nome:"Cancer",data:"21/06-22/07",icon:"♋",amor:"Sensibilidade a flor da pele. Proteja seu coracao de energias negativas.",carreira:"Sua empatia sera fundamental para mediar conflitos no trabalho.",saude:"Atencao ao sistema digestivo. Prefira refeicoes leves e caseiras."},{id:"leao",nome:"Leao",data:"23/07-22/08",icon:"♌",amor:"Seu brilho natural atrai olhares. Aproveite para seduzir e se divertir.",carreira:"Reconhecimento profissional a vista. Nao tenha medo de brilhar.",saude:"Atividades fisicas que tragam prazer aumentarao sua vitalidade."},{id:"virgem",nome:"Virgem",data:"23/08-22/09",icon:"♍",amor:"Analise menos e sinta mais. Deixe a espontaneidade guiar seus passos.",carreira:"Organizacao e a chave do sucesso hoje. Coloque as pendencias em dia.",saude:"Momento ideal para iniciar uma nova rotina de autocuidado."},{id:"libra",nome:"Libra",data:"23/09-22/10",icon:"♎",amor:"Busque o equilibrio nas relacoes. Um pequeno gesto de compreensao fara diferenca.",carreira:"Parcerias e acordos serao favorecidos. Busque o consenso.",saude:"Cuide da postura e faca alongamentos para evitar tensoes."},{id:"escorpiao",nome:"Escorpiao",data:"23/10-21/11",icon:"♏",amor:"Intensidade total nos sentimentos. Mergulhe fundo, mas evite o ciume.",carreira:"Intuicao agucada para negocios. Siga seus instintos nas decisoes dificeis.",saude:"Processo de desintoxicacao energetica. Beba muita agua."},{id:"sagitario",nome:"Sagitario",data:"22/11-21/12",icon:"♐",amor:"Aventura e otimismo. Surpreenda seu parceiro com algo fora da rotina.",carreira:"Expansao e a palavra do dia. Olhe para o futuro com ambicao.",saude:"Atividades ao ar livre trarao disposicao e bom humor."},{id:"capricornio",nome:"Capricornio",data:"22/12-19/01",icon:"♑",amor:"Compromisso e lealdade serao testados. Mostre seu valor com acoes.",carreira:"Dedicacao e persistencia serao notadas pelos superiores.",saude:"Atencao aos joelhos e articulacoes. Nao ignore sinais de cansaco."},{id:"aquario",nome:"Aquario",data:"20/01-18/02",icon:"♒",amor:"Valorize sua liberdade. O respeito ao espaco do outro e fundamental.",carreira:"Inovacao e a chave. Pense fora da caixa para resolver problemas antigos.",saude:"Meditacao ajudara a acalmar a mente acelerada."},{id:"peixes",nome:"Peixes",data:"19/02-20/03",icon:"♓",amor:"Romantismo no ar. Deixe a imaginacao criar momentos magicos a dois.",carreira:"Siga sua intuicao vocacional. Atividades criativas trarao satisfacao.",saude:"Escute seu corpo. O descanso e tao importante quanto a acao."}];
+
+const SONHOS={agua:"Representa suas emocoes. Agua limpa indica clareza; suja ou turva indicam confusao emocional.",cobra:"Transformacao e cura. Medos ocultos que precisam ser enfrentados.",dente:"Ansiedade ou medo de perder o controle.",bebe:"Novos comecos, projetos que precisam de cuidado.",morte:"Raramente literal. Indica fim de ciclo e inicio de algo novo.",voar:"Desejo de liberdade e libertacao de problemas.",casa:"Seu mundo interior. Cada comodo simboliza um aspecto da psique.",cachorro:"Lealdade, amizade e protecao.",gato:"Independencia, misterio e intuicao.",ponte:"Transicao e conexao entre fases.",chuva:"Renovacao e limpeza emocional.",dinheiro:"Autoestima e valor proprio.",fogo:"Paixao, raiva ou destruicao criativa.",mar:"O vasto subconsciente. Calmo=paz; revolto=turbulencia.",escada:"Progresso espiritual ou material.",casamento:"Uniao de aspectos internos ou compromisso importante.",gravidez:"Ideia ou projeto sendo gestado.",sangue:"Energia vital ou feridas emocionais.",escola:"Aprendizados necessarios ou ansiedade.",hospital:"Necessidade de cura fisica ou emocional.",luz:"Clareza, verdade e guia espiritual.",escuro:"Medo do desconhecido. Enfrente para encontrar sua forca.",arvore:"Crescimento, raizes e conexao com a terra.",fuga:"Evitando enfrentar uma situacao.",comida:"Nutricao espiritual. O que voce esta alimentando?",crianca:"Sua crianca interior pedindo atencao.",lua:"Feminino, intuicao e ciclos.",sol:"Sucesso, vitalidade e clareza.",estrela:"Esperanca e protecao espiritual.",floresta:"Exploracao do subconsciente.",montanha:"Desafio a ser superado. A vista do topo valera a pena.",rio:"Fluxo da vida. Siga a correnteza.",perseguicao:"Voce esta fugindo de algo em si mesmo.",tempestade:"Conflito interno iminente."};
+
+const ICHING_HEX=[{n:1,nome:"O Criativo (Qian)",simbol:"☰",desc:"Forca criativa e poder vital. O sucesso vem atraves da acao correta e persistente."},{n:2,nome:"O Receptivo (Kun)",simbol:"☷",desc:"Poder da terra, devocao e receptividade. A docilidade e a paciencia trazem abundancia."},{n:3,nome:"Dificuldade Inicial (Zhun)",simbol:"䷂",desc:"Como um broto rompendo o solo. Os primeiros passos sao dificeis, mas o crescimento e certo."},{n:4,nome:"Insensatez Juvenil (Meng)",simbol:"䷃",desc:"Busca de aprendizado e maturidade. Seja humilde para receber a sabedoria."},{n:5,nome:"A Espera (Xu)",simbol:"䷄",desc:"Paciencia necessaria. O tempo certo ainda nao chegou; prepare-se e confie."},{n:6,nome:"O Conflito (Song)",simbol:"䷅",desc:"Disputa e tensao. Evite o confronto direto; busque mediacao e equilibrio."},{n:7,nome:"O Exercito (Shi)",simbol:"䷆",desc:"Disciplina e lideranca estrategica. Organize suas forcas antes de agir."},{n:8,nome:"A Uniao (Bi)",simbol:"䷇",desc:"Solidariedade e cooperacao. Juntos somos mais fortes. Busque aliancas sinceras."}];
+
+const FRASES=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio do seu coracao.","Sua intuicao e a voz da sua alma.","Cada carta revela um caminho, mas voce e quem caminha.","A luz que ve nos outros e o reflexo da sua propria luz.","Confie no tempo do universo; tudo floresce na estacao certa.","Sua energia cria sua realidade. Vibre alto.","O passado e licao, o futuro e misterio, o presente e dadiva.","Nao ha coincidencias, apenas sincronicidades divinas.","Abra sua mente para o invisivel e vera o impossivel.","Voce e um universo inteiro contido em um sopro.","As sombras existem para que possamos ver a luz.","Onde ha fe, ha caminho.","Sua jornada e unica; nao se compare com as estrelas alheias.","O oraculo nao preve o futuro, ele ilumina o presente.","Seja a mudanca que deseja ver no seu destino.","A magia esta em quem voce se torna durante a jornada.","Cada amanhecer traz uma nova pagina no seu livro sagrado."];
+
+let currentUser=null,toastQueue=[],showingToast=false;
+
+function initStars(){const c=document.getElementById("stars-container");for(let i=0;i<100;i++){const s=document.createElement("div");s.className="star";const sz=(Math.random()*3+1).toFixed(1);s.style.width=sz+"px";s.style.height=sz+"px";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.setProperty("--dur",(Math.random()*3+2).toFixed(1)+"s");s.style.animationDelay=(Math.random()*5).toFixed(1)+"s";c.appendChild(s)}}
+
+function navegar(id){document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("screen-active")});const a=document.getElementById(id);if(a)a.classList.add("screen-active");window.scrollTo(0,0)}
+
+function showToast(msg){toastQueue.push(msg);if(!showingToast)processToastQueue()}
+function processToastQueue(){if(toastQueue.length===0){showingToast=false;return}showingToast=true;const msg=toastQueue.shift(),c=document.getElementById("toast-container"),e=document.createElement("div");e.className="toast-item";e.innerText=msg;c.appendChild(e);setTimeout(function(){e.classList.add("out");setTimeout(function(){e.remove();processToastQueue()},400)},3000)}
+
+function abrirModal(id){const m=document.getElementById(id);if(m){m.style.display="flex";document.body.classList.add("modal-open")}}
+function fecharModal(id){const m=document.getElementById(id);if(m){m.style.display="none";document.body.classList.remove("modal-open")}}
+
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.querySelectorAll(".modal").forEach(function(m){if(m.style.display==="flex"){m.style.display="none";document.body.classList.remove("modal-open")}})}});
+document.addEventListener("click",function(e){if(e.target.classList.contains("modal")){e.target.style.display="none";document.body.classList.remove("modal-open")}});
+
+function setLoading(id,l){const b=document.getElementById(id);if(!b)return;if(l){b.dataset.original=b.innerText;b.innerText="Aguarde...";b.disabled=true}else{b.innerText=b.dataset.original||b.innerText;b.disabled=false}}
+
+function executarCadastro(){const nome=document.getElementById("reg-nome").value.trim(),cpf=document.getElementById("reg-cpf").value.replace(/\D/g,""),email=document.getElementById("reg-email").value.trim(),pass=document.getElementById("reg-pass").value,conf=document.getElementById("reg-pass-conf").value;if(!nome||cpf.length!==11||!email||pass.length<6)return showToast("Preencha todos os campos corretamente.");if(pass!==conf)return showToast("As senhas nao coincidem.");const users=JSON.parse(localStorage.getItem("oa_users")||"[]");if(users.find(function(u){return u.email===email}))return showToast("E-mail ja cadastrado.");const novo={nome:nome,cpf:cpf,email:email,pass:pass,credits:5,streak:1,lastLogin:new Date().toISOString().split("T")[0],indicacoes:0};users.push(novo);localStorage.setItem("oa_users",JSON.stringify(users));const ref=localStorage.getItem("oa_ref");if(ref){const ind=users.find(function(u){return btoa(u.email)===ref});if(ind){ind.credits+=5;ind.indicacoes=(ind.indicacoes||0)+1;localStorage.setItem("oa_users",JSON.stringify(users));localStorage.removeItem("oa_ref")}}showToast("Conta criada! Voce ganhou 5 creditos.");navegar("screen-login")}
+
+function executarLogin(){const email=document.getElementById("login-email").value.trim(),pass=document.getElementById("login-pass").value,users=JSON.parse(localStorage.getItem("oa_users")||"[]"),user=users.find(function(u){return u.email===email&&u.pass===pass});if(!user)return showToast("E-mail ou senha incorretos.");currentUser=user;atualizarStreak();carregarDashboard();navegar("screen-main");document.getElementById("main-header").style.display="flex";showToast("Bem-vindo(a) de volta, "+user.nome.split(" ")[0]+"!")}
+
+function logout(){currentUser=null;document.getElementById("main-header").style.display="none";navegar("screen-welcome")}
+
+function salvarUsuario(){if(!currentUser)return;const users=JSON.parse(localStorage.getItem("oa_users")||"[]"),idx=users.findIndex(function(u){return u.email===currentUser.email});if(idx>=0){users[idx]=currentUser;localStorage.setItem("oa_users",JSON.stringify(users))}document.getElementById("user-credits").innerText=currentUser.credits;document.getElementById("user-streak").innerText=currentUser.streak}
+
+function gastarCreditos(qtd){if(!currentUser){showToast("Faca login primeiro.");return false}if(currentUser.credits>=qtd){currentUser.credits-=qtd;salvarUsuario();return true}showToast("Creditos insuficientes! Adquira mais.");abrirModal("modal-comprar");return false}
+
+function atualizarStreak(){const hoje=new Date().toISOString().split("T")[0],ontem=new Date(Date.now()-86400000).toISOString().split("T")[0];if(currentUser.lastLogin===ontem){currentUser.streak+=1;verificarBonusStreak()}else if(currentUser.lastLogin!==hoje){currentUser.streak=1}currentUser.lastLogin=hoje;salvarUsuario()}
+function verificarBonusStreak(){if(currentUser.streak===7){currentUser.credits+=2;setTimeout(function(){showToast("Bonus de 7 dias! +2 creditos.")},600)}if(currentUser.streak===15){currentUser.credits+=5;setTimeout(function(){showToast("Bonus de 15 dias! +5 creditos.")},600)}if(currentUser.streak===30){currentUser.credits+=10;setTimeout(function(){showToast("Bonus de 30 dias! +10 creditos.")},600)}}
+
+function carregarDashboard(){document.getElementById("user-credits").innerText=currentUser.credits;document.getElementById("user-streak").innerText=currentUser.streak;const nome=currentUser.nome.split(" ")[0],h=new Date().getHours();let s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("saudacao-txt").innerText=s+", "+nome+"!";document.getElementById("frase-dia").innerText=FRASES[Math.floor(Math.random()*FRASES.length)];document.getElementById("link-indicacao").value="https://oraculumastrale.com?ref="+btoa(currentUser.email);const sc=document.getElementById("signos-container");sc.innerHTML="";SIGNOS.forEach(function(s){const b=document.createElement("div");b.className="signo-btn";b.innerHTML='<span class="s-icon">'+s.icon+'</span><span class="s-name">'+s.nome+'</span>';b.onclick=function(){mostrarHoroscopo(s.id)};sc.appendChild(b)});const s1=document.getElementById("comp-s1"),s2=document.getElementById("comp-s2");s1.innerHTML='<option value="">Seu Signo</option>';s2.innerHTML='<option value="">Signo dele(a)</option>';SIGNOS.forEach(function(s){s1.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.icon+"</option>";s2.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.icon+"</option>"})}
+
+function revelarCartaDia(){const hoje=new Date().toISOString().split("T")[0],key="carta_dia_"+currentUser.email,ja=localStorage.getItem(key);if(ja===hoje){document.getElementById("carta-dia-result").innerHTML='<p class="dim mt-20">Voce ja consultou sua carta hoje. Volte amanha 🌙</p>';return}const c=DECK_COMPLETO[Math.floor(Math.random()*DECK_COMPLETO.length)];localStorage.setItem(key,hoje);document.getElementById("carta-dia-result").innerHTML='<div class="fade-result"><h3 style="margin:15px 0">'+c.nome+'</h3><p style="font-style:italic;margin-bottom:15px">"'+c.significado+'"</p><div style="text-align:left;background:rgba(0,0,0,0.2);padding:15px;border-radius:10px"><p><strong>❤️ Amor:</strong> '+c.amor+'</p><p><strong>💼 Carreira:</strong> '+c.carreira+'</p><p><strong>⚠️ Conselho:</strong> '+c.invertido+'</p></div></div>';showToast("Sua carta do dia foi revelada!")}
+
+function mostrarHoroscopo(id){const s=SIGNOS.find(function(x){return x.id===id});if(!s)return;document.getElementById("h-signo-nome").innerHTML=s.icon+" "+s.nome+" ("+s.data+")";document.getElementById("h-amor").innerText=s.amor;document.getElementById("h-carreira").innerText=s.carreira;document.getElementById("h-saude").innerText=s.saude;document.getElementById("horoscopo-result").style.display="block"}
+
+function atualizarCustoTarot(){const e=document.getElementById("tarot-custo-valor");if(e)e.innerText=document.getElementById("tarot-tipo").value}
+function realizarConsultaTarot(){const t=parseInt(document.getElementById("tarot-tipo").value),p=document.getElementById("tarot-pergunta").value.trim();if(!p)return showToast("Faca uma pergunta para as cartas.");if(!gastarCreditos(t))return;setLoading("btn-tarot",true);setTimeout(function(){const d=[...DECK_COMPLETO].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);let h='<p class="dim" style="font-size:0.85rem">Sua pergunta: <strong>"'+p+'"</strong></p><div class="tarot-grid">';s.forEach(function(c){h+='<div class="tarot-card-item"><span class="tarot-card-name">'+c.nome+'</span><span class="tarot-card-text">'+c.significado+'</span></div>'});h+="</div>";document.getElementById("tarot-result").innerHTML=h;setLoading("btn-tarot",false);showToast("As cartas foram lancadas! O oraculo falou.")},800)}
+
+function calcularNumerologia(){const d=document.getElementById("num-data").value;if(!d)return showToast("Selecione sua data de nascimento.");if(!gastarCreditos(2))return;setLoading("btn-num",true);setTimeout(function(){const n=d.replace(/-/g,"").split("").map(Number);let s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}const desc={1:"O Lider - Independencia, originalidade e coragem para iniciar novos caminhos.",2:"O Diplomata - Cooperacao, sensibilidade e busca pela harmonia nas relacoes.",3:"O Comunicador - Criatividade, expressao e alegria de viver contagiante.",4:"O Construtor - Trabalho duro, organizacao e seguranca material.",5:"O Viajante - Liberdade, mudanca e curiosidade por novas experiencias.",6:"O Protetor - Responsabilidade, amor a familia e servico ao proximo.",7:"O Sabio - Introspeccao, espiritualidade e busca pelo conhecimento profundo.",8:"O Executivo - Poder, ambicao e capacidade de realizacao material.",9:"O Humanitario - Compaixao, desapego e servico a humanidade.",11:"Mestre Intuitivo - Percepcao espiritual elevada e inspiracao divina.",22:"Mestre Construtor - Capacidade de realizar grandes sonhos coletivos.",33:"Mestre Guia - Amor incondicional e cura atraves da compaixao."};document.getElementById("num-result").innerHTML='<div class="fade-result"><div class="num-number">'+s+'</div><h3 class="text-center">Seu Caminho de Vida</h3><p class="text-center mt-10">'+(desc[s]||"Numero especial de grande potencial.")+"</p></div>";setLoading("btn-num",false);showToast("Seu numero do destino foi revelado!")},600)}
+
+function consultarIChing(){const p=document.getElementById("iching-pergunta").value.trim();if(!p)return showToast("Qual sua pergunta para o I Ching?");if(!gastarCreditos(2))return;setLoading("btn-iching",true);setTimeout(function(){const h=ICHING_HEX[Math.floor(Math.random()*ICHING_HEX.length)];document.getElementById("iching-result").innerHTML='<div class="fade-result"><span style="font-size:4rem;display:block;margin:15px 0">'+h.simbol+"</span><h3>Hexagrama "+h.n+": "+h.nome+"</h3><p class="mt-10">"+h.desc+"</p></div>";setLoading("btn-iching",false);showToast("O I Ching revelou sua orientacao.")},700)}
+
+function consultarSimNao(){const p=document.getElementById("sn-pergunta").value.trim();if(!p)return showToast("Faca uma pergunta objetiva.");if(!gastarCreditos(1))return;setLoading("btn-sn",true);setTimeout(function(){const r=["Sim","Nao","Talvez","Com certeza","Improvael","O momento nao e propicio","As estrelas dizem que sim","Melhor nao saber agora"];document.getElementById("sn-result").innerHTML='<span class="fade-result" style="font-size:2rem;">'+r[Math.floor(Math.random()*r.length)]+"</span>";setLoading("btn-sn",false)},500)}
+
+function buscarSonho(){const b=document.getElementById("sonho-busca").value.toLowerCase().trim(),l=document.getElementById("sonhos-lista");l.innerHTML="";if(b.length<2)return;let e=false;for(let p in SONHOS){if(p.includes(b)){l.innerHTML+='<div class="dream-item"><span class="dream-word">'+p+':</span><div class="dream-meaning">'+SONHOS[p]+"</div></div>";e=true}}if(!e)l.innerHTML='<p class="dim">Nenhum resultado para "'+b+'". Tente outra palavra.</p>'}
+
+function verificarCompatibilidade(){const s1=document.getElementById("comp-s1").value,s2=document.getElementById("comp-s2").value;if(!s1||!s2)return showToast("Selecione os dois signos.");if(s1===s2)return showToast("Selecione signos diferentes.");const p=Math.floor(Math.random()*60)+35;let m="";if(p>=85)m="Conexao de almas gemeas! Ha uma sintonia rara e especial entre voces.";else if(p>=70)m="Grande afinidade! Com dialogo, podem construir algo solido e lindo.";else if(p>=50)m="Atracao de opostos. As diferencas serao o maior desafio e aprendizado.";else m="Energias distintas. Exigira esforco e paciencia de ambos para fluir.";document.getElementById("comp-result").innerHTML='<div class="fade-result"><div class="comp-percent">'+p+"%</div><p>"+m+"</p></div>"}
+
+function copiarLink(){navigator.clipboard.writeText(document.getElementById("link-indicacao").value).then(function(){showToast("Link copiado! Compartilhe e ganhe creditos.")})["catch"](function(){document.getElementById("link-indicacao").select();document.execCommand("copy");showToast("Link copiado! Compartilhe e ganhe creditos.")})}
+
+function comprarSimulado(q){currentUser.credits+=q;salvarUsuario();fecharModal("modal-comprar");showToast("Pagamento confirmado! +"+q+" creditos.")}
+
+window.onload=function(){initStars();const p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_ref",p.get("ref"))};
+</script>
 </body>
 </html>
