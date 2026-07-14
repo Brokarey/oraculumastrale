@@ -21,7 +21,11 @@ a{color:var(--gold);text-decoration:none}
 ::-webkit-scrollbar-thumb{background:var(--gd);border-radius:10px}
 .tela{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:var(--tr);z-index:1}
 .tela.ativa{opacity:1;pointer-events:all;z-index:2}
-#tela-welcome{background:url('image_3-1.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
+#tela-welcome{background:url('mystical_crystal_portal.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
+#tela-welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.35);z-index:0}
+#tela-welcome>*{position:relative;z-index:1}
+.btn-entrar{position:absolute;left:38%;right:38%;top:62%;height:7%;z-index:5;cursor:pointer;border:none;background:transparent}
+.btn-cadastrar{position:absolute;left:38%;right:38%;top:70%;height:7%;z-index:5;cursor:pointer;border:none;background:transparent}
 .tela:not(#tela-welcome){background:linear-gradient(135deg,#0a0015,#1a0030);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 .card{background:var(--gl);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--gb);border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .btn{background:var(--gold);color:#000;border:none;padding:13px 26px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;width:100%;margin-top:10px;font-family:'Inter',sans-serif;font-size:0.9rem}
@@ -34,20 +38,20 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
 input[type="date"]{color-scheme:dark}
 select option{background:#1a0030;color:#e8e0f0}
 .app-layout{display:flex;width:100%;min-height:100vh}
-.sidebar{width:200px;min-width:200px;background:rgba(10,0,21,0.95);backdrop-filter:blur(12px);border-right:1px solid var(--gd);padding:15px 0;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
-.sidebar-titulo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);text-align:center;padding:10px 15px 15px;border-bottom:1px solid var(--gd);margin-bottom:6px}
-.sidebar-stats{padding:8px 18px 12px;font-size:0.75rem;color:var(--td);border-bottom:1px solid var(--gd);margin-bottom:4px}
-.sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 18px;cursor:pointer;transition:0.2s;color:var(--td);font-size:0.82rem;border-left:3px solid transparent}
+.sidebar{width:210px;min-width:210px;background:rgba(10,0,21,0.96);backdrop-filter:blur(12px);border-right:1px solid var(--gd);padding:18px 0;display:flex;flex-direction:column;gap:3px;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sidebar-titulo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);text-align:center;padding:12px 15px 16px;border-bottom:1px solid var(--gd);margin-bottom:8px}
+.sidebar-stats{padding:8px 18px 12px;font-size:0.8rem;color:var(--td);border-bottom:1px solid var(--gd);margin-bottom:6px;display:flex;justify-content:space-between}
+.sidebar-item{display:flex;align-items:center;gap:12px;padding:10px 20px;cursor:pointer;transition:0.2s;color:var(--td);font-size:0.85rem;border-left:3px solid transparent}
 .sidebar-item:hover{color:var(--gold);background:var(--gd);border-left-color:var(--gold)}
 .sidebar-item.ativo{color:var(--gold);background:rgba(212,168,83,0.1);border-left-color:var(--gold)}
 .sidebar-rodape{margin-top:auto;border-top:1px solid var(--gd);padding:10px 0}
-.conteudo-principal{flex:1;padding:25px 30px 50px;overflow-y:auto}
-.saudacao{margin-bottom:8px;font-size:1.8rem}
-.frase{color:var(--td);font-style:italic;margin-bottom:25px;min-height:28px;border-left:3px solid var(--gd);padding:6px 15px;font-size:0.9rem}
-.grid-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.sec-card{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:22px 15px;text-align:center;cursor:pointer;transition:all 0.3s}
+.conteudo-principal{flex:1;padding:30px 35px 60px;overflow-y:auto}
+.saudacao{margin-bottom:10px;font-size:1.8rem}
+.frase{color:var(--td);font-style:italic;margin-bottom:30px;min-height:28px;border-left:3px solid var(--gd);padding:8px 18px;font-size:0.95rem}
+.grid-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.sec-card{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:24px 15px;text-align:center;cursor:pointer;transition:all 0.3s}
 .sec-card:hover{border-color:var(--gold);background:rgba(212,168,83,0.08);transform:translateY(-3px)}
-.sec-card .ico{font-size:2.2rem;display:block;margin-bottom:8px}
+.sec-card .ico{font-size:2.3rem;display:block;margin-bottom:8px}
 .sec-card h3{font-size:1rem;margin-bottom:4px}
 .sec-card p{font-size:0.75rem;color:var(--td)}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:2000;padding:15px;overflow-y:auto}
@@ -67,7 +71,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .sig-btn .si{font-size:1.2rem;display:block;margin-bottom:2px}
 .sig-btn .sn{font-size:0.7rem}
 .grid-tarot{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:15px}
-.tarot-item{background:rgba(255,255,255,0.05);padding:14px;border-radius:10px;border:1px solid var(--gd);text-align:center;animation:aparecer 0.5s ease}
+.tarot-item{background:rgba(255,255,255,0.05);padding:14px;border-radius:10px;border:1px solid var(--gd);text-align:center}
 .tarot-nome{font-weight:bold;color:var(--gold);display:block;margin-bottom:6px;font-size:1rem}
 .tarot-txt{font-size:0.8rem;line-height:1.4}
 .numero-vida{font-size:3.5rem;font-weight:bold;color:var(--gold);text-align:center;margin:12px 0}
@@ -102,6 +106,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .grid-packs{grid-template-columns:repeat(2,1fr)}
 .linha{flex-direction:column}
 .modal-conteudo{padding:18px}
+.btn-entrar,.btn-cadastrar{left:30%;right:30%}
 }
 @media(max-width:480px){
 .sidebar{width:100%;min-width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:5px}
@@ -117,8 +122,8 @@ select option{background:#1a0030;color:#e8e0f0}
 <div id="estrelas"></div>
 <div id="toasts"></div>
 <div id="tela-welcome" class="tela ativa">
-  <div onclick="irP('tela-login')" style="position:absolute;left:22%;right:22%;top:56%;height:8%;z-index:5;cursor:pointer;"></div>
-  <div onclick="irP('tela-cadastro')" style="position:absolute;left:22%;right:22%;top:66%;height:8%;z-index:5;cursor:pointer;"></div>
+  <button class="btn-entrar" onclick="irP('tela-login')" aria-label="Entrar"></button>
+  <button class="btn-cadastrar" onclick="irP('tela-cadastro')" aria-label="Cadastrar"></button>
 </div>
 <div id="tela-login" class="tela">
   <div class="card">
@@ -148,7 +153,7 @@ select option{background:#1a0030;color:#e8e0f0}
   <div class="app-layout">
     <div class="sidebar">
       <div class="sidebar-titulo">🔮 Oraculum</div>
-      <div class="sidebar-stats" style="display:flex;justify-content:space-between"><span>🔮 <span id="creditos-user2">0</span></span><span>🔥 <span id="streak-user2">0</span></span></div>
+      <div class="sidebar-stats"><span>🔮 <span id="creditos-user2">0</span></span><span>🔥 <span id="streak-user2">0</span></span></div>
       <div class="sidebar-item ativo" onclick="irS()"><span>🏠</span> Dashboard</div>
       <div class="sidebar-item" onclick="aM('modal-carta-dia')"><span>🃏</span> Carta do Dia</div>
       <div class="sidebar-item" onclick="aM('modal-horoscopo')"><span>☀️</span> Horóscopo</div>
