@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oraculum Astrale | Portal Místico</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Allura&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#d4a853;--gdd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0;--gl:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -19,7 +19,7 @@ a{color:var(--gold);text-decoration:none}
 .scr{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:0.4s;z-index:1}
 .scr.ativa{opacity:1;pointer-events:all;z-index:2}
 #welcome{background:url('mystical_crystal_portal2.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.wb{margin-top:50vh;width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
+.wb{width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
 .bw{background:var(--gold);color:#000;border:none;padding:15px 30px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1.1rem;box-shadow:0 4px 25px rgba(212,168,83,0.5);text-align:center}
 .bw:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,168,83,0.7)}
 .bwo{background:transparent;border:2px solid var(--gold);color:var(--gold)}
@@ -30,7 +30,7 @@ a{color:var(--gold);text-decoration:none}
 .btn:hover{background:#f1c40f;transform:translateY(-2px);box-shadow:0 5px 15px rgba(212,168,83,0.3)}
 .btn2{background:transparent;border:1px solid var(--gold);color:var(--gold)}
 .btn2:hover{background:rgba(212,168,83,0.1)}
-input,select,textarea{width:100%;padding:12px;margin:8px 0;background:rgba(0,0,0,0.5);border:1px solid var(--gb);border-radius:8px;color:var(--tx);outline:none;font-family:'Inter',sans-serif;font-size:0.95rem}
+input,select,textarea{width:100%;padding:12px;margin:8px 0;background:rgba(0,0,0,0.5);border:1px solid var(--gb);border-radius:8px;color:var(--tx);outline:none;font-family:'Open Sans',sans-serif;font-size:0.95rem}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(212,168,83,0.3)}
 select option{background:#1a0030;color:#e8e0f0}
 .ly{display:flex;width:100%;min-height:100vh}
@@ -51,7 +51,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .sc:hover{border-color:var(--gold);background:rgba(212,168,83,0.15);transform:translateY(-3px)}
 .sc .ico{font-size:2.3rem;display:block;margin-bottom:8px}
 .sc h3{font-family:'Allura',cursive;font-size:1.4rem;margin-bottom:4px;color:var(--gold);font-weight:400}
-.sc p{font-size:0.75rem;color:var(--td);font-family:'Inter',sans-serif}
+.sc p{font-size:0.75rem;color:var(--td);font-family:'Open Sans',sans-serif}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:2000;padding:15px;overflow-y:auto}
 .modal-c{background:linear-gradient(135deg,#1a0030,#0a0015);border:1px solid var(--gdd);border-radius:18px;padding:25px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:entrar 0.3s ease}
 .modal-l{max-width:800px}
@@ -60,7 +60,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .fade{animation:aparecer 0.5s ease}
 .fm{position:absolute;top:10px;right:14px;font-size:1.6rem;cursor:pointer;color:var(--gold);background:none;border:none;line-height:1;z-index:10}
 #t{position:fixed;top:15px;right:15px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.ti{background:var(--gold);color:#000;padding:12px 22px;border-radius:10px;font-weight:600;max-width:330px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transform:translateX(120%);animation:ent 0.4s ease forwards;pointer-events:auto;font-family:'Inter',sans-serif}
+.ti{background:var(--gold);color:#000;padding:12px 22px;border-radius:10px;font-weight:600;max-width:330px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transform:translateX(120%);animation:ent 0.4s ease forwards;pointer-events:auto;font-family:'Open Sans',sans-serif}
 @keyframes ent{to{transform:translateX(0)}}
 @keyframes sai{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
 .ti.saindo{animation:sai 0.4s ease forwards}
@@ -68,37 +68,38 @@ select option{background:#1a0030;color:#e8e0f0}
 .sb2{background:rgba(255,255,255,0.05);border:1px solid var(--gb);padding:8px 4px;border-radius:8px;cursor:pointer;transition:0.2s;text-align:center}
 .sb2:hover{border-color:var(--gold);background:rgba(212,168,83,0.1)}
 .sb2 .si{font-size:1.2rem;display:block;margin-bottom:2px}
-.sb2 .sn{font-size:0.7rem}
+.sb2 .sn{font-size:0.7rem;font-family:'Open Sans',sans-serif}
 .gt{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:15px}
 .ti2{background:rgba(255,255,255,0.05);padding:14px;border-radius:10px;border:1px solid var(--gdd);text-align:center;animation:aparecer 0.5s ease}
-.tn{font-weight:600;color:var(--gold);display:block;margin-bottom:6px;font-size:1rem}
-.tt{font-size:0.8rem;line-height:1.4}
+.tn{font-weight:600;color:var(--gold);display:block;margin-bottom:6px;font-size:1rem;font-family:'Allura',cursive}
+.tt{font-size:0.8rem;line-height:1.4;font-family:'Open Sans',sans-serif}
 .cf{background:linear-gradient(135deg,#2a1040,#1a0030);border:2px solid var(--gdd);border-radius:10px;padding:12px 6px;text-align:center;cursor:pointer;transition:0.3s;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:0.7rem}
 .cf:hover{border-color:var(--gold);transform:scale(1.05);box-shadow:0 0 15px rgba(212,168,83,0.25)}
 .cf.sel{border-color:var(--gold);background:rgba(212,168,83,0.12);box-shadow:0 0 20px rgba(212,168,83,0.4);opacity:1!important}
-.cf .cn{color:var(--gold);font-weight:600;font-size:0.75rem;display:block}
-.cf .cs{font-size:0.6rem;color:var(--td);display:block;margin-top:3px}
+.cf .cn{color:var(--gold);font-weight:600;font-size:0.75rem;display:block;font-family:'Allura',cursive}
+.cf .cs{font-size:0.6rem;color:var(--td);display:block;margin-top:3px;font-family:'Open Sans',sans-serif}
 .gm{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0}
 .gmm{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px;margin:12px 0}
 .lc{margin-top:20px;border-top:2px solid var(--gold);padding-top:20px}
-.lc p{font-size:0.9rem;line-height:1.7;margin-bottom:10px}
+.lc p{font-size:0.9rem;line-height:1.7;margin-bottom:10px;font-family:'Open Sans',sans-serif}
 .li{background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0}
-.li h4{color:var(--gold);margin-bottom:5px}
-.li p{font-size:0.85rem;margin:4px 0}
-.pl{font-size:0.85rem;color:var(--td);margin-bottom:8px;font-style:italic}
-.nv{font-size:3.5rem;font-weight:600;color:var(--gold);text-align:center;margin:12px 0}
+.li h4{color:var(--gold);margin-bottom:5px;font-family:'Allura',cursive;font-size:1.2rem}
+.li p{font-size:0.85rem;margin:4px 0;font-family:'Open Sans',sans-serif}
+.pl{font-size:0.85rem;color:var(--td);margin-bottom:8px;font-style:italic;font-family:'Open Sans',sans-serif}
+.nv{font-size:3.5rem;font-weight:600;color:var(--gold);text-align:center;margin:12px 0;font-family:'Allura',cursive}
 .hr{margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px}
-.hr p{margin:6px 0;font-size:0.85rem}
-.cpct{font-size:2.8rem;font-weight:bold;color:var(--gold);text-align:center;margin:12px 0}
+.hr p{margin:6px 0;font-size:0.85rem;font-family:'Open Sans',sans-serif}
+.cpct{font-size:2.8rem;font-weight:bold;color:var(--gold);text-align:center;margin:12px 0;font-family:'Allura',cursive}
 .gp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:15px}
 .pc{background:rgba(0,0,0,0.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--gb);border-radius:12px;padding:15px 10px;text-align:center;cursor:pointer;transition:0.3s}
 .pc:hover{border-color:var(--gold);transform:translateY(-2px)}
-.pp{font-size:1.3rem;color:var(--gold);font-weight:bold;margin:6px 0}
-.pe{font-size:0.7rem;color:#4caf50}
-.ptg{font-size:0.65rem;background:var(--gdd);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:4px}
+.pc h3{font-family:'Allura',cursive;font-size:1.2rem}
+.pp{font-size:1.3rem;color:var(--gold);font-weight:bold;margin:6px 0;font-family:'Open Sans',sans-serif}
+.pe{font-size:0.7rem;color:#4caf50;font-family:'Open Sans',sans-serif}
+.ptg{font-size:0.65rem;background:var(--gdd);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:4px;font-family:'Open Sans',sans-serif}
 .sni{margin-bottom:10px;border-bottom:1px solid var(--gdd);padding-bottom:8px}
-.snp{color:var(--gold);font-weight:600;text-transform:capitalize}
-.sns{font-size:0.85rem;margin-top:2px;color:var(--td)}
+.snp{color:var(--gold);font-weight:600;text-transform:capitalize;font-family:'Allura',cursive;font-size:1.2rem}
+.sns{font-size:0.85rem;margin-top:2px;color:var(--td);font-family:'Open Sans',sans-serif}
 .ln{display:flex;gap:8px}
 .ln>*{flex:1}
 .ct{text-align:center}
@@ -251,7 +252,7 @@ function gas(q){if(!user){to("Faça login.");return 0}if(user.creditos>=q){user.
 function atS(){var h=new Date().toISOString().split("T")[0],o=new Date(Date.now()-86400000).toISOString().split("T")[0];if(user.ult===o){user.streak+=1;bonS()}else if(user.ult!==h){user.streak=1}user.ult=h;sU()}
 function bonS(){if(user.streak===7){user.creditos+=2;setTimeout(function(){to("Bônus 7 dias! +2 créditos.")},600)}if(user.streak===15){user.creditos+=5;setTimeout(function(){to("Bônus 15 dias! +5 créditos.")},600)}if(user.streak===30){user.creditos+=10;setTimeout(function(){to("Bônus 30 dias! +10 créditos.")},600)}}
 function cD(){var n=user.nome.split(" ")[0],h=new Date().getHours();var s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("st").innerText=s+", "+n+"!";document.getElementById("fd").innerText=FR[Math.floor(Math.random()*FR.length)];document.getElementById("li").value="https://oraculumastrale.com?ref="+btoa(user.email);sU();var g=document.getElementById("gs2");g.innerHTML="";SN.forEach(function(s){var b=document.createElement("div");b.className="sb2";b.innerHTML='<span class="si">'+s.ic+'</span><span class="sn">'+s.nm+'</span>';b.onclick=function(){mH(s.id)};g.appendChild(b)});var a=document.getElementById("cs1"),b=document.getElementById("cs2");a.innerHTML='<option value="">Seu Signo</option>';b.innerHTML='<option value="">Outro Signo</option>';SN.forEach(function(s){a.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>";b.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>"})}
-function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p class="dim mt20">Já consultou hoje. Volte amanhã 🌙</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3 style="margin:12px 0">'+c.nm+'</h3><p style="font-style:italic;margin-bottom:12px">"'+c.sg+'"</p><div style="text-align:left;background:rgba(0,0,0,0.2);padding:12px;border-radius:8px"><p><strong>❤️ Amor:</strong> '+c.am+'</p><p><strong>💼 Carreira:</strong> '+c.ca+'</p><p><strong>⚠️ Conselho:</strong> '+c.in+'</p></div></div>';to("Carta revelada!")}
+function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p class="dim mt20">Já consultou hoje. Volte amanhã 🌙</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3 style="margin:12px 0;font-family:Allura,cursive">'+c.nm+'</h3><p style="font-style:italic;margin-bottom:12px;font-family:Open Sans,sans-serif">"'+c.sg+'"</p><div style="text-align:left;background:rgba(0,0,0,0.2);padding:12px;border-radius:8px"><p style="font-family:Open Sans,sans-serif"><strong>❤️ Amor:</strong> '+c.am+'</p><p style="font-family:Open Sans,sans-serif"><strong>💼 Carreira:</strong> '+c.ca+'</p><p style="font-family:Open Sans,sans-serif"><strong>⚠️ Conselho:</strong> '+c.in+'</p></div></div>';to("Carta revelada!")}
 function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
 function atCT(){var e=document.getElementById("tt"),c=document.getElementById("tc");document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e.value==="lc"?"2":e.value)+'</strong> créditos'}
 function iniciarT(){var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;if(t==="lc"){if(!p)return to("Digite sua pergunta.");if(!gas(2))return;document.getElementById("tr").innerHTML="";document.getElementById("lca").style.display="block";lM=null;lm=null;la=false;var e=[...M].sort(function(){return Math.random()-0.5}),g=document.getElementById("lgm");g.innerHTML="";e.forEach(function(c){var d=document.createElement("div");d.className="cf";d.id="lm-"+c.n;d.innerHTML='<span class="cn">'+c.nm+'</span><span class="cs">'+c.sg.substring(0,50)+'...</span>';d.onclick=function(){selM(c.n)};g.appendChild(d)});document.getElementById("lc2").style.display="none";document.getElementById("lcr").style.display="none";setTimeout(function(){document.getElementById("lc1").scrollIntoView({behavior:"smooth",block:"center"})},100);to("Escolha um Arcano Maior.")}else{conT()}}
@@ -260,22 +261,22 @@ function selm(id){if(lm!==null||la)return;lm=MN.find(function(c){return c.id===i
 function gerLC(){la=true;var p=document.getElementById("tp").value.trim(),ma=lM,mi=lm;if(!ma||!mi)return;var c1=["revela que","indica que","sugere que","aponta que","mostra que"],c2=["por outro lado","em paralelo","complementarmente","em termos práticos","no dia a dia"],c3=["a interação entre essas energias sugere","a combinação revela","unindo estes significados","a síntese destas cartas indica"],cf=["Confie no processo.","Permita-se sentir e agir com sabedoria.","Equilíbrio entre razão e emoção.","Busque integração entre o que sente e o que precisa fazer."];
 var r1=c1[Math.floor(Math.random()*c1.length)],r2=c2[Math.floor(Math.random()*c2.length)],r3=c3[Math.floor(Math.random()*c3.length)],f=cf[Math.floor(Math.random()*cf.length)];
 var h='<div class="fade">';
-h+='<p class="dim" style="font-size:0.85rem;font-style:italic;">"'+p+'"</p>';
+h+='<p class="dim" style="font-size:0.85rem;font-style:italic;font-family:Open Sans,sans-serif">"'+p+'"</p>';
 h+='<div class="li"><h4>🔮 Arcano Maior: '+ma.nm+'</h4><p><strong>Tema central:</strong> '+ma.sg+'</p><p><strong>Amor:</strong> '+ma.am+'</p><p><strong>Carreira:</strong> '+ma.ca+'</p><p><strong>⚠️ Atenção:</strong> '+ma.in+'</p></div>';
 h+='<div class="li"><h4>📜 Arcano Menor: '+mi.nm+'</h4><p><strong>Detalhe prático:</strong> '+mi.sg+'</p><p><strong>Amor:</strong> '+mi.am+'</p><p><strong>Carreira:</strong> '+mi.ca+'</p><p><strong>⚠️ Atenção:</strong> '+mi.in+'</p></div>';
 h+='<h3 class="ct">✨ Interação</h3>';
 h+='<p>O arcano maior <strong>'+ma.nm+'</strong> '+r1+' o arquétipo espiritual da situação. '+ma.sg+'</p>';
 h+='<p>'+r2+', o arcano menor <strong>'+mi.nm+'</strong> ('+mi.nf+' — '+mi.nc+') reflete os aspectos práticos: '+mi.sg+'</p>';
 h+='<p><strong>'+r3+'</strong> que a energia de <strong>'+ma.nm+'</strong> se manifesta através das qualidades de <strong>'+mi.nm+'</strong>.</p>';
-h+='<p style="margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px;font-style:italic;">'+f+'</p></div>';
+h+='<p style="margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px;font-style:italic;font-family:Open Sans,sans-serif">'+f+'</p></div>';
 document.getElementById("lcr").innerHTML=h;document.getElementById("lcr").style.display="block";setTimeout(function(){document.getElementById("lcr").scrollIntoView({behavior:"smooth",block:"center"})},100);to("Leitura Combinada concluída!")}
 function resLC(){document.getElementById("lca").style.display="none";document.getElementById("lcr").style.display="none";document.getElementById("lcr").innerHTML="";lM=null;lm=null;la=false}
-function conT(){var t=parseInt(document.getElementById("tt").value),p=document.getElementById("tp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(t))return;sl("btn-t",1);setTimeout(function(){var d=[...DK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);var h='<p class="dim" style="font-size:0.85rem">"'+p+'"</p><div class="gt">';s.forEach(function(c){h+='<div class="ti2"><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!")},800)}
-function calN(){var d=document.getElementById("nd").value;if(!d)return to("Selecione a data.");if(!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"O Líder",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sábio",8:"O Executivo",9:"O Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3 class="ct">Caminho de Vida</h3><p class="ct mt10">'+(de[s]||"Número especial")+"</p></div>";sl("btn-n",0);to("Número revelado!")},600)}
+function conT(){var t=parseInt(document.getElementById("tt").value),p=document.getElementById("tp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(t))return;sl("btn-t",1);setTimeout(function(){var d=[...DK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);var h='<p class="dim" style="font-size:0.85rem;font-family:Open Sans,sans-serif">"'+p+'"</p><div class="gt">';s.forEach(function(c){h+='<div class="ti2"><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!")},800)}
+function calN(){var d=document.getElementById("nd").value;if(!d)return to("Selecione a data.");if(!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"O Líder",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sábio",8:"O Executivo",9:"O Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3 class="ct">Caminho de Vida</h3><p class="ct mt10" style="font-family:Open Sans,sans-serif">'+(de[s]||"Número especial")+"</p></div>";sl("btn-n",0);to("Número revelado!")},600)}
 function conI(){var p=document.getElementById("ip").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(2))return;sl("btn-i",1);setTimeout(function(){var h=HX[Math.floor(Math.random()*HX.length)];document.getElementById("ir").innerHTML='<div class="fade"><span class="ich">'+h.s+"</span><h3>Hexagrama "+h.n+": "+h.nm+"</h3><p class='mt10'>"+h.d+"</p></div>";sl("btn-i",0);to("I Ching respondeu!")},700)}
-function conSN(){var p=document.getElementById("snp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Não","Talvez","Com certeza","Improvável","Não é momento","As estrelas dizem sim","Melhor não saber"];document.getElementById("snr").innerHTML='<span class="fade" style="font-size:1.8rem;">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
-function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;var e=0;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim">Nada para "'+b+'".</p>'}
-function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b)return to("Selecione os dois.");if(a===b)return to("Signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m="";if(p>=85)m="Almas gêmeas!";else if(p>=70)m="Grande afinidade!";else if(p>=50)m="Atração de opostos.";else m="Energias distintas.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
+function conSN(){var p=document.getElementById("snp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Não","Talvez","Com certeza","Improvável","Não é momento","As estrelas dizem sim","Melhor não saber"];document.getElementById("snr").innerHTML='<span class="fade" style="font-size:1.8rem;font-family:Open Sans,sans-serif">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
+function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;var e=0;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim" style="font-family:Open Sans,sans-serif">Nada para "'+b+'".</p>'}
+function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b)return to("Selecione os dois.");if(a===b)return to("Signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m="";if(p>=85)m="Almas gêmeas!";else if(p>=70)m="Grande afinidade!";else if(p>=50)m="Atração de opostos.";else m="Energias distintas.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p style=\"font-family:Open Sans,sans-serif\">"+m+"</p></div>"}
 function copL(){navigator.clipboard.writeText(document.getElementById("li").value).then(function(){to("Link copiado!")})["catch"](function(){document.getElementById("li").select();document.execCommand("copy");to("Link copiado!")})}
 function comp(q){user.creditos+=q;sU();fM("mcr");to("+"+q+" créditos!")}
 window.onload=function(){var p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
