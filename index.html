@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oraculum Astrale | Portal Místico</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#d4a853;--gdd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0;--gl:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;color:var(--tx);min-height:100vh;overflow-x:hidden;line-height:1.6;background:#080212}
+body{font-family:'Playfair Display','Inter',serif;color:var(--tx);min-height:100vh;overflow-x:hidden;line-height:1.6;background:#080212}
 body.no-scroll{overflow:hidden}
-h1,h2,h3{font-family:'Playfair Display',serif;color:var(--gold)}
+h1,h2,h3,.ff{font-family:'Playfair Display',serif;color:var(--gold)}
 a{color:var(--gold);text-decoration:none}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#080212}
@@ -37,7 +37,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
 select option{background:#1a0030;color:#e8e0f0}
 .ly{display:flex;width:100%;min-height:100vh}
 .sb{width:220px;min-width:220px;background:rgba(13,5,21,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-right:1px solid var(--gdd);padding:18px 0;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;z-index:3}
-.sb-t{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);text-align:center;padding:10px 15px 14px;border-bottom:1px solid var(--gdd);letter-spacing:1px}
+.sb-t{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);text-align:center;padding:10px 15px 14px;border-bottom:1px solid var(--gdd);letter-spacing:1px;cursor:pointer;transition:0.2s}
+.sb-t:hover{color:#f1c40f;text-shadow:0 0 15px rgba(212,168,83,0.4)}
 .sb-s{padding:8px 20px 10px;font-size:0.85rem;color:var(--td);border-bottom:1px solid var(--gdd);display:flex;justify-content:space-between}
 .sb-i{display:flex;align-items:center;gap:12px;padding:10px 20px;cursor:pointer;transition:all 0.2s;color:var(--td);font-size:0.85rem;border-left:3px solid transparent}
 .sb-i:hover{color:var(--tx);background:rgba(212,168,83,0.08);border-left-color:var(--gold)}
@@ -45,13 +46,13 @@ select option{background:#1a0030;color:#e8e0f0}
 .sb-r{margin-top:auto;border-top:1px solid var(--gdd);padding:8px 0}
 .sb-ic{font-size:1.2rem;width:24px;text-align:center;flex-shrink:0}
 .cp{flex:1;padding:30px 35px 60px;overflow-y:auto;max-height:100vh}
-.saud{margin-bottom:10px;font-size:1.8rem}
-.frase{color:var(--td);font-style:italic;margin-bottom:30px;border-left:3px solid var(--gdd);padding:8px 18px;font-size:0.95rem}
+.saud{margin-bottom:10px;font-size:1.8rem;font-family:'Playfair Display',serif;color:var(--gold)}
+.frase{color:var(--td);font-style:italic;margin-bottom:30px;border-left:3px solid var(--gdd);padding:8px 18px;font-size:0.95rem;font-family:'Playfair Display',serif}
 .gs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 .sc{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:22px 15px;text-align:center;cursor:pointer;transition:all 0.3s}
 .sc:hover{border-color:var(--gold);background:rgba(212,168,83,0.08);transform:translateY(-3px)}
 .sc .ico{font-size:2.3rem;display:block;margin-bottom:8px}
-.sc h3{font-size:1rem;margin-bottom:4px;color:var(--gold)}
+.sc h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:4px;color:var(--gold)}
 .sc p{font-size:0.75rem;color:var(--td)}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:2000;padding:15px;overflow-y:auto}
 .modal-c{background:linear-gradient(135deg,#1a0030,#0a0015);border:1px solid var(--gdd);border-radius:18px;padding:25px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:entrar 0.3s ease}
@@ -138,7 +139,7 @@ select option{background:#1a0030;color:#e8e0f0}
 </div>
 <div id="login" class="scr">
   <div class="card">
-    <h2 class="ct mb10">Entrar</h2>
+    <h2>Entrar</h2>
     <input type="email" id="le" placeholder="Seu e-mail">
     <input type="password" id="ls" placeholder="Sua senha">
     <button class="btn" onclick="logar()">Acessar Portal</button>
@@ -148,7 +149,7 @@ select option{background:#1a0030;color:#e8e0f0}
 </div>
 <div id="cadastro" class="scr">
   <div class="card">
-    <h2 class="ct mb10">Criar Conta</h2>
+    <h2>Criar Conta</h2>
     <p class="ct gold" style="font-size:0.8rem;margin-bottom:12px;">Ganhe 5 créditos grátis!</p>
     <input type="text" id="cn" placeholder="Nome Completo">
     <input type="text" id="cc" placeholder="CPF (11 dígitos)" maxlength="11">
@@ -160,11 +161,10 @@ select option{background:#1a0030;color:#e8e0f0}
     <button class="btn btn2 mt15" onclick="ir('welcome')">Voltar</button>
   </div>
 </div>
-<!-- MAIN -->
 <div id="main" class="scr" style="padding:0;">
   <div class="ly">
     <div class="sb">
-      <div class="sb-t">🔮 Oraculum</div>
+      <div class="sb-t" onclick="ir('welcome')" title="Ir para tela inicial">🔮 Oraculum</div>
       <div class="sb-s"><span>🔮 <span id="cu2">0</span></span><span>🔥 <span id="su2">0</span></span></div>
       <div class="sb-i ativo" onclick="ds()"><span class="sb-ic">🏠</span> Dashboard</div>
       <div class="sb-i" onclick="abM('mc')"><span class="sb-ic">🃏</span> Carta do Dia</div>
@@ -196,7 +196,6 @@ select option{background:#1a0030;color:#e8e0f0}
     </div>
   </div>
 </div>
-<!-- MODAIS -->
 <div id="mc" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mc')">&times;</button><h2>Sua Carta do Dia</h2><div id="cdr" class="ct mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="rc()">Revelar</button></div></div></div>
 <div id="mh" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mh')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim" style="font-size:0.85rem;">Selecione seu signo:</p><div class="gs2" id="gs2"></div><div id="hr" class="hr" style="display:none;"><h3 id="hsn">Signo</h3><p><strong>❤️ Amor:</strong> <span id="ham"></span></p><p><strong>💼 Carreira:</strong> <span id="hca"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="hsa"></span></p></div></div></div>
 <div id="mt" class="modal"><div class="modal-c modal-l"><button class="fm" onclick="fM('mt');resLC()">&times;</button><h2>🔮 Tarot</h2><input type="text" id="tp" placeholder="Sua pergunta?"><select id="tt" onchange="atCT()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option><option value="lc">🔄 Leitura Combinada — 2 créditos</option></select><p class="dim mt10" id="tcl">Custa <strong class="gold" id="tc">3</strong> créditos</p><button class="btn" id="btn-t" onclick="iniciarT()">Consultar</button><div id="tr" class="mt15"></div><div id="lca" style="display:none;" class="mt15"><div id="lc1"><p class="pl">🔮 Passo 1 — Clique em 1 dos 22 Arcanos Maiores:</p><div class="gm" id="lgm"></div></div><div id="lc2" style="display:none;"><p class="pl">📜 Passo 2 — Clique em 1 dos 56 Arcanos Menores:</p><div class="gmm" id="lgmm"></div></div><div id="lcr" style="display:none;" class="lc"></div></div></div></div>
@@ -269,20 +268,4 @@ h+='<div class="li"><h4>📜 Arcano Menor: '+mi.nm+'</h4><p><strong>Detalhe prá
 h+='<h3 class="ct">✨ Interação</h3>';
 h+='<p>O arcano maior <strong>'+ma.nm+'</strong> '+r1+' o arquétipo espiritual da situação. '+ma.sg+'</p>';
 h+='<p>'+r2+', o arcano menor <strong>'+mi.nm+'</strong> ('+mi.nf+' — '+mi.nc+') reflete os aspectos práticos: '+mi.sg+'</p>';
-h+='<p><strong>'+r3+'</strong> que a energia de <strong>'+ma.nm+'</strong> se manifesta através das qualidades de <strong>'+mi.nm+'</strong>. O arcano maior aponta a direção espiritual, o menor mostra como se desenrola no cotidiano, especialmente no campo do(a) '+mi.nf+'.</p>';
-h+='<p style="margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px;font-style:italic;">'+f+'</p>';
-h+='</div>';
-document.getElementById("lcr").innerHTML=h;document.getElementById("lcr").style.display="block";setTimeout(function(){document.getElementById("lcr").scrollIntoView({behavior:"smooth",block:"center"})},100);to("Leitura Combinada concluída!")}
-function resLC(){document.getElementById("lca").style.display="none";document.getElementById("lcr").style.display="none";document.getElementById("lcr").innerHTML="";lM=null;lm=null;la=false}
-function conT(){var t=parseInt(document.getElementById("tt").value),p=document.getElementById("tp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(t))return;sl("btn-t",1);setTimeout(function(){var d=[...DK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);var h='<p class="dim" style="font-size:0.85rem">"'+p+'"</p><div class="gt">';s.forEach(function(c){h+='<div class="ti2"><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!")},800)}
-function calN(){var d=document.getElementById("nd").value;if(!d)return to("Selecione a data.");if(!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"O Líder",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sábio",8:"O Executivo",9:"O Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3 class="ct">Caminho de Vida</h3><p class="ct mt10">'+(de[s]||"Número especial")+"</p></div>";sl("btn-n",0);to("Número revelado!")},600)}
-function conI(){var p=document.getElementById("ip").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(2))return;sl("btn-i",1);setTimeout(function(){var h=HX[Math.floor(Math.random()*HX.length)];document.getElementById("ir").innerHTML='<div class="fade"><span class="ich">'+h.s+"</span><h3>Hexagrama "+h.n+": "+h.nm+"</h3><p class='mt10'>"+h.d+"</p></div>";sl("btn-i",0);to("I Ching respondeu!")},700)}
-function conSN(){var p=document.getElementById("snp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Não","Talvez","Com certeza","Improvável","Não é momento","As estrelas dizem sim","Melhor não saber"];document.getElementById("snr").innerHTML='<span class="fade" style="font-size:1.8rem;">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
-function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;var e=0;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim">Nada para "'+b+'".</p>'}
-function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b)return to("Selecione os dois.");if(a===b)return to("Signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m="";if(p>=85)m="Almas gêmeas!";else if(p>=70)m="Grande afinidade!";else if(p>=50)m="Atração de opostos.";else m="Energias distintas.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
-function copL(){navigator.clipboard.writeText(document.getElementById("li").value).then(function(){to("Link copiado!")})["catch"](function(){document.getElementById("li").select();document.execCommand("copy");to("Link copiado!")})}
-function comp(q){user.creditos+=q;sU();fM("mcr");to("+"+q+" créditos!")}
-window.onload=function(){var p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
-</script>
-</body>
-</html>
+h+='<p><strong>'+r3+'</strong> que a energia de <strong>'+ma.nm+'</strong> se manifesta através das qualidades de <strong>'+mi.nm+'</strong>. O arcano maior aponta a direção espiritual, o menor mostra como se desenrola no
