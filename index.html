@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#d4a853;--gd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0;--gl:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1);--tr:0.4s cubic-bezier(0.4,0,0.2,1)}
+:root{--gold:#d4a853;--gdd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0;--gl:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;color:var(--tx);min-height:100vh;overflow-x:hidden;line-height:1.6;background:#080212}
 body.no-scroll{overflow:hidden}
@@ -15,277 +15,274 @@ h1,h2,h3{font-family:'Playfair Display',serif;color:var(--gold)}
 a{color:var(--gold);text-decoration:none}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#080212}
-::-webkit-scrollbar-thumb{background:var(--gd);border-radius:10px}
-.tela{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:var(--tr);z-index:1}
-.tela.ativa{opacity:1;pointer-events:all;z-index:2}
-#tela-welcome{background:url('mystical_crystal_portal.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
-#tela-welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.45);z-index:0}
-#tela-welcome>*{position:relative;z-index:1}
-.welcome-botoes{margin-top:55vh;width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
-.btn-welcome{background:var(--gold);color:#000;border:none;padding:15px 30px;border-radius:10px;font-weight:700;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1.1rem;box-shadow:0 4px 25px rgba(212,168,83,0.5);text-align:center}
-.btn-welcome:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,168,83,0.7)}
-.btn-welcome-outline{background:transparent;border:2px solid var(--gold);color:var(--gold)}
-.btn-welcome-outline:hover{background:rgba(212,168,83,0.15);color:#fff}
-.tela:not(#tela-welcome){background:linear-gradient(135deg,#0a0015,#1a0030);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+::-webkit-scrollbar-thumb{background:var(--gdd);border-radius:10px}
+.scr{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:0.4s;z-index:1}
+.scr.ativa{opacity:1;pointer-events:all;z-index:2}
+#welcome{background:url('mystical_crystal_portal.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.45);z-index:0}
+#welcome>*{position:relative;z-index:1}
+.wb{margin-top:55vh;width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
+.bw{background:var(--gold);color:#000;border:none;padding:15px 30px;border-radius:10px;font-weight:700;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1.1rem;box-shadow:0 4px 25px rgba(212,168,83,0.5);text-align:center}
+.bw:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,168,83,0.7)}
+.bwo{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.bwo:hover{background:rgba(212,168,83,0.15);color:#fff}
+.scr:not(#welcome){background:linear-gradient(135deg,#0a0015,#1a0030);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 .card{background:var(--gl);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--gb);border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .btn{background:var(--gold);color:#000;border:none;padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;width:100%;margin-top:10px;font-family:'Inter',sans-serif;font-size:0.9rem}
-.btn:hover:not(:disabled){background:#f1c40f;transform:translateY(-2px);box-shadow:0 5px 15px rgba(212,168,83,0.3)}
-.btn:disabled{opacity:0.6;cursor:not-allowed}
+.btn:hover{background:#f1c40f;transform:translateY(-2px);box-shadow:0 5px 15px rgba(212,168,83,0.3)}
 .btn2{background:transparent;border:1px solid var(--gold);color:var(--gold)}
-.btn2:hover:not(:disabled){background:rgba(212,168,83,0.1)}
-input,select,textarea{width:100%;padding:12px;margin:8px 0;background:rgba(0,0,0,0.3);border:1px solid var(--gb);border-radius:8px;color:var(--tx);outline:none;font-family:'Inter',sans-serif;font-size:0.95rem;transition:0.2s}
+.btn2:hover{background:rgba(212,168,83,0.1)}
+input,select,textarea{width:100%;padding:12px;margin:8px 0;background:rgba(0,0,0,0.3);border:1px solid var(--gb);border-radius:8px;color:var(--tx);outline:none;font-family:'Inter',sans-serif;font-size:0.95rem}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(212,168,83,0.3)}
-input[type="date"]{color-scheme:dark}
 select option{background:#1a0030;color:#e8e0f0}
-.app-layout{display:flex;width:100%;min-height:100vh}
-.sidebar{width:220px;min-width:220px;background:rgba(13,5,21,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-right:1px solid var(--gd);padding:18px 0;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
-.sidebar-titulo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);text-align:center;padding:10px 15px 14px;border-bottom:1px solid var(--gd);margin-bottom:6px;letter-spacing:1px}
-.sidebar-stats{padding:8px 20px 10px;font-size:0.85rem;color:var(--td);border-bottom:1px solid var(--gd);margin-bottom:4px;display:flex;justify-content:space-between}
-.sidebar-item{display:flex;align-items:center;gap:12px;padding:10px 20px;cursor:pointer;transition:all 0.2s;color:var(--td);font-size:0.85rem;border-left:3px solid transparent;font-weight:400}
-.sidebar-item:hover{color:var(--tx);background:rgba(212,168,83,0.08);border-left-color:var(--gold)}
-.sidebar-item.ativo{color:var(--gold);background:rgba(212,168,83,0.12);border-left-color:var(--gold);font-weight:600}
-.sidebar-rodape{margin-top:auto;border-top:1px solid var(--gd);padding:8px 0}
-.sidebar-item-icone{font-size:1.2rem;width:24px;text-align:center;flex-shrink:0}
-.conteudo-principal{flex:1;padding:30px 35px 60px;overflow-y:auto;max-height:100vh}
-.saudacao{margin-bottom:10px;font-size:1.8rem}
-.frase{color:var(--td);font-style:italic;margin-bottom:30px;min-height:28px;border-left:3px solid var(--gd);padding:8px 18px;font-size:0.95rem}
-.grid-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.sec-card{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:22px 15px;text-align:center;cursor:pointer;transition:all 0.3s}
-.sec-card:hover{border-color:var(--gold);background:rgba(212,168,83,0.08);transform:translateY(-3px)}
-.sec-card .ico{font-size:2.3rem;display:block;margin-bottom:8px}
-.sec-card h3{font-size:1rem;margin-bottom:4px;color:var(--gold)}
-.sec-card p{font-size:0.75rem;color:var(--td)}
+.ly{display:flex;width:100%;min-height:100vh}
+.sb{width:220px;min-width:220px;background:rgba(13,5,21,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-right:1px solid var(--gdd);padding:18px 0;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;z-index:3}
+.sb-t{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);text-align:center;padding:10px 15px 14px;border-bottom:1px solid var(--gdd);letter-spacing:1px}
+.sb-s{padding:8px 20px 10px;font-size:0.85rem;color:var(--td);border-bottom:1px solid var(--gdd);display:flex;justify-content:space-between}
+.sb-i{display:flex;align-items:center;gap:12px;padding:10px 20px;cursor:pointer;transition:all 0.2s;color:var(--td);font-size:0.85rem;border-left:3px solid transparent}
+.sb-i:hover{color:var(--tx);background:rgba(212,168,83,0.08);border-left-color:var(--gold)}
+.sb-i.ativo{color:var(--gold);background:rgba(212,168,83,0.12);border-left-color:var(--gold);font-weight:600}
+.sb-r{margin-top:auto;border-top:1px solid var(--gdd);padding:8px 0}
+.sb-ic{font-size:1.2rem;width:24px;text-align:center;flex-shrink:0}
+.cp{flex:1;padding:30px 35px 60px;overflow-y:auto;max-height:100vh}
+.saud{margin-bottom:10px;font-size:1.8rem}
+.frase{color:var(--td);font-style:italic;margin-bottom:30px;border-left:3px solid var(--gdd);padding:8px 18px;font-size:0.95rem}
+.gs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.sc{background:var(--gl);border:1px solid var(--gb);border-radius:14px;padding:22px 15px;text-align:center;cursor:pointer;transition:all 0.3s}
+.sc:hover{border-color:var(--gold);background:rgba(212,168,83,0.08);transform:translateY(-3px)}
+.sc .ico{font-size:2.3rem;display:block;margin-bottom:8px}
+.sc h3{font-size:1rem;margin-bottom:4px;color:var(--gold)}
+.sc p{font-size:0.75rem;color:var(--td)}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:2000;padding:15px;overflow-y:auto}
-.modal-conteudo{background:linear-gradient(135deg,#1a0030,#0a0015);border:1px solid var(--gd);border-radius:18px;padding:25px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:entrar 0.3s ease}
-.modal-conteudo-largo{max-width:800px}
+.modal-c{background:linear-gradient(135deg,#1a0030,#0a0015);border:1px solid var(--gdd);border-radius:18px;padding:25px;max-width:620px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:entrar 0.3s ease}
+.modal-l{max-width:800px}
 @keyframes entrar{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes aparecer{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 .fade{animation:aparecer 0.5s ease}
-.fechar-modal{position:absolute;top:10px;right:14px;font-size:1.6rem;cursor:pointer;color:var(--gold);background:none;border:none;line-height:1;z-index:10}
-#toasts{position:fixed;top:15px;right:15px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
-.toast-item{background:var(--gold);color:#000;padding:12px 22px;border-radius:10px;font-weight:600;max-width:330px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transform:translateX(120%);animation:entraToast 0.4s ease forwards;pointer-events:auto}
-@keyframes entraToast{to{transform:translateX(0)}}
-@keyframes saiToast{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
-.toast-item.saindo{animation:saiToast 0.4s ease forwards}
-.grid-signos{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
-.sig-btn{background:rgba(255,255,255,0.05);border:1px solid var(--gb);padding:8px 4px;border-radius:8px;cursor:pointer;transition:0.2s;text-align:center}
-.sig-btn:hover{border-color:var(--gold);background:rgba(212,168,83,0.1)}
-.sig-btn .si{font-size:1.2rem;display:block;margin-bottom:2px}
-.sig-btn .sn{font-size:0.7rem}
-.grid-tarot{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:15px}
-.tarot-item{background:rgba(255,255,255,0.05);padding:14px;border-radius:10px;border:1px solid var(--gd);text-align:center;animation:aparecer 0.5s ease}
-.tarot-nome{font-weight:bold;color:var(--gold);display:block;margin-bottom:6px;font-size:1rem}
-.tarot-txt{font-size:0.8rem;line-height:1.4}
-.carta-face{background:linear-gradient(135deg,#2a1040,#1a0030);border:2px solid var(--gd);border-radius:10px;padding:12px 6px;text-align:center;cursor:pointer;transition:0.3s;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:0.7rem}
-.carta-face:hover{border-color:var(--gold);transform:scale(1.05);box-shadow:0 0 15px rgba(212,168,83,0.25)}
-.carta-face.selecionada{border-color:var(--gold);background:rgba(212,168,83,0.12);box-shadow:0 0 20px rgba(212,168,83,0.4);opacity:1!important}
-.carta-face .cf-nome{color:var(--gold);font-weight:600;font-size:0.75rem;display:block}
-.carta-face .cf-sig{font-size:0.6rem;color:var(--td);display:block;margin-top:3px}
-.grid-lc-maiores{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0}
-.grid-lc-menores{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px;margin:12px 0}
-.leitura-combinada{margin-top:20px;border-top:2px solid var(--gold);padding-top:20px}
-.leitura-combinada p{font-size:0.9rem;line-height:1.7;margin-bottom:10px}
-.leitura-individual{background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0}
-.leitura-individual h4{color:var(--gold);margin-bottom:5px}
-.leitura-individual p{font-size:0.85rem;margin:4px 0}
-.passo-label{font-size:0.85rem;color:var(--td);margin-bottom:8px;font-style:italic}
-.numero-vida{font-size:3.5rem;font-weight:bold;color:var(--gold);text-align:center;margin:12px 0}
-.horo-result{margin-top:15px;border-top:1px solid var(--gd);padding-top:15px}
-.horo-result p{margin:6px 0;font-size:0.85rem}
-.comp-pct{font-size:2.8rem;font-weight:bold;color:var(--gold);text-align:center;margin:12px 0}
-.grid-packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:15px}
-.pack-card{background:rgba(255,255,255,0.05);border:1px solid var(--gb);border-radius:12px;padding:15px 10px;text-align:center;cursor:pointer;transition:0.3s}
-.pack-card:hover{border-color:var(--gold);transform:translateY(-2px)}
-.pack-preco{font-size:1.3rem;color:var(--gold);font-weight:bold;margin:6px 0}
-.pack-eco{font-size:0.7rem;color:#4caf50}
-.pack-tag{font-size:0.65rem;background:var(--gd);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:4px}
-.sonho-item{margin-bottom:10px;border-bottom:1px solid var(--gd);padding-bottom:8px}
-.sonho-palavra{color:var(--gold);font-weight:600;text-transform:capitalize}
-.sonho-sig{font-size:0.85rem;margin-top:2px;color:var(--td)}
-.linha{display:flex;gap:8px}
-.linha>*{flex:1}
-.centro{text-align:center}
+.fm{position:absolute;top:10px;right:14px;font-size:1.6rem;cursor:pointer;color:var(--gold);background:none;border:none;line-height:1;z-index:10}
+#t{position:fixed;top:15px;right:15px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.ti{background:var(--gold);color:#000;padding:12px 22px;border-radius:10px;font-weight:600;max-width:330px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transform:translateX(120%);animation:ent 0.4s ease forwards;pointer-events:auto}
+@keyframes ent{to{transform:translateX(0)}}
+@keyframes sai{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
+.ti.saindo{animation:sai 0.4s ease forwards}
+.gs2{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
+.sb2{background:rgba(255,255,255,0.05);border:1px solid var(--gb);padding:8px 4px;border-radius:8px;cursor:pointer;transition:0.2s;text-align:center}
+.sb2:hover{border-color:var(--gold);background:rgba(212,168,83,0.1)}
+.sb2 .si{font-size:1.2rem;display:block;margin-bottom:2px}
+.sb2 .sn{font-size:0.7rem}
+.gt{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:15px}
+.ti2{background:rgba(255,255,255,0.05);padding:14px;border-radius:10px;border:1px solid var(--gdd);text-align:center;animation:aparecer 0.5s ease}
+.tn{font-weight:bold;color:var(--gold);display:block;margin-bottom:6px;font-size:1rem}
+.tt{font-size:0.8rem;line-height:1.4}
+.cf{background:linear-gradient(135deg,#2a1040,#1a0030);border:2px solid var(--gdd);border-radius:10px;padding:12px 6px;text-align:center;cursor:pointer;transition:0.3s;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:0.7rem}
+.cf:hover{border-color:var(--gold);transform:scale(1.05);box-shadow:0 0 15px rgba(212,168,83,0.25)}
+.cf.sel{border-color:var(--gold);background:rgba(212,168,83,0.12);box-shadow:0 0 20px rgba(212,168,83,0.4);opacity:1!important}
+.cf .cn{color:var(--gold);font-weight:600;font-size:0.75rem;display:block}
+.cf .cs{font-size:0.6rem;color:var(--td);display:block;margin-top:3px}
+.gm{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0}
+.gmm{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px;margin:12px 0}
+.lc{margin-top:20px;border-top:2px solid var(--gold);padding-top:20px}
+.lc p{font-size:0.9rem;line-height:1.7;margin-bottom:10px}
+.li{background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0}
+.li h4{color:var(--gold);margin-bottom:5px}
+.li p{font-size:0.85rem;margin:4px 0}
+.pl{font-size:0.85rem;color:var(--td);margin-bottom:8px;font-style:italic}
+.nv{font-size:3.5rem;font-weight:bold;color:var(--gold);text-align:center;margin:12px 0}
+.hr{margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px}
+.hr p{margin:6px 0;font-size:0.85rem}
+.cpct{font-size:2.8rem;font-weight:bold;color:var(--gold);text-align:center;margin:12px 0}
+.gp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:15px}
+.pc{background:rgba(255,255,255,0.05);border:1px solid var(--gb);border-radius:12px;padding:15px 10px;text-align:center;cursor:pointer;transition:0.3s}
+.pc:hover{border-color:var(--gold);transform:translateY(-2px)}
+.pp{font-size:1.3rem;color:var(--gold);font-weight:bold;margin:6px 0}
+.pe{font-size:0.7rem;color:#4caf50}
+.ptg{font-size:0.65rem;background:var(--gdd);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:4px}
+.sni{margin-bottom:10px;border-bottom:1px solid var(--gdd);padding-bottom:8px}
+.snp{color:var(--gold);font-weight:600;text-transform:capitalize}
+.sns{font-size:0.85rem;margin-top:2px;color:var(--td)}
+.ln{display:flex;gap:8px}
+.ln>*{flex:1}
+.ct{text-align:center}
 .mt5{margin-top:5px}.mt10{margin-top:10px}.mt15{margin-top:15px}.mt20{margin-top:20px}.mb10{margin-bottom:10px}
 .gold{color:var(--gold)}.dim{color:var(--td)}
-.rodape{width:100%;text-align:center;padding:20px;color:var(--td);font-size:0.75rem;margin-top:40px;border-top:1px solid var(--gd)}
-.iching-simb{font-size:3.5rem;display:block;margin:12px 0;text-align:center}
+.rd{width:100%;text-align:center;padding:20px;color:var(--td);font-size:0.75rem;margin-top:40px;border-top:1px solid var(--gdd)}
+.ich{font-size:3.5rem;display:block;margin:12px 0;text-align:center}
 @media(max-width:768px){
-.sidebar{width:180px;min-width:180px}
-.grid-signos{grid-template-columns:repeat(3,1fr)}
-.grid-secoes{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-.grid-packs{grid-template-columns:repeat(2,1fr)}
-.grid-lc-maiores{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
-.grid-lc-menores{grid-template-columns:repeat(auto-fit,minmax(80px,1fr))}
-.linha{flex-direction:column}
-.modal-conteudo{padding:18px}
+.sb{width:180px;min-width:180px}
+.gs2{grid-template-columns:repeat(3,1fr)}
+.gs{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.gp{grid-template-columns:repeat(2,1fr)}
+.gm{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+.gmm{grid-template-columns:repeat(auto-fit,minmax(80px,1fr))}
+.ln{flex-direction:column}
+.modal-c{padding:18px}
 }
 @media(max-width:480px){
-.sidebar{width:100%;min-width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:5px}
-.sidebar-titulo,.sidebar-stats{display:none}
-.sidebar-item{padding:6px 10px;font-size:0.7rem}
-.grid-signos{grid-template-columns:repeat(2,1fr)}
-.grid-secoes{grid-template-columns:1fr}
-.grid-lc-maiores{grid-template-columns:repeat(auto-fit,minmax(75px,1fr))}
-.grid-lc-menores{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}
+.sb{width:100%;min-width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:5px}
+.sb-t,.sb-s{display:none}
+.sb-i{padding:6px 10px;font-size:0.7rem}
+.gs2{grid-template-columns:repeat(2,1fr)}
+.gs{grid-template-columns:1fr}
+.gm{grid-template-columns:repeat(auto-fit,minmax(75px,1fr))}
+.gmm{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}
 }
 </style>
 </head>
 <body>
-<div id="toasts"></div>
-<div id="tela-welcome" class="tela ativa">
-  <div class="welcome-botoes">
-    <button class="btn-welcome" onclick="irP('tela-login')">ENTRAR</button>
-    <button class="btn-welcome btn-welcome-outline" onclick="irP('tela-cadastro')">CADASTRAR</button>
+<div id="t"></div>
+<div id="welcome" class="scr ativa">
+  <div class="wb">
+    <button class="bw" onclick="ir('login')">ENTRAR</button>
+    <button class="bw bwo" onclick="ir('cadastro')">CADASTRAR</button>
   </div>
 </div>
-<div id="tela-login" class="tela">
+<div id="login" class="scr">
   <div class="card">
-    <h2 class="centro mb10">Entrar</h2>
-    <input type="email" id="login-email" placeholder="Seu e-mail">
-    <input type="password" id="login-senha" placeholder="Sua senha">
-    <button class="btn" onclick="login()">Acessar Portal</button>
-    <p class="centro mt15 dim" style="font-size:0.9rem;">Não tem conta? <a href="#" onclick="irP('tela-cadastro')">Cadastre-se</a></p>
-    <button class="btn btn2 mt15" onclick="irP('tela-welcome')">Voltar</button>
+    <h2 class="ct mb10">Entrar</h2>
+    <input type="email" id="le" placeholder="Seu e-mail">
+    <input type="password" id="ls" placeholder="Sua senha">
+    <button class="btn" onclick="logar()">Acessar Portal</button>
+    <p class="ct mt15 dim" style="font-size:0.9rem;">Não tem conta? <a href="#" onclick="ir('cadastro')">Cadastre-se</a></p>
+    <button class="btn btn2 mt15" onclick="ir('welcome')">Voltar</button>
   </div>
 </div>
-<div id="tela-cadastro" class="tela">
+<div id="cadastro" class="scr">
   <div class="card">
-    <h2 class="centro mb10">Criar Conta</h2>
-    <p class="centro gold" style="font-size:0.8rem;margin-bottom:12px;">Ganhe 5 créditos grátis!</p>
-    <input type="text" id="cad-nome" placeholder="Nome Completo">
-    <input type="text" id="cad-cpf" placeholder="CPF (11 dígitos)" maxlength="11">
-    <input type="email" id="cad-email" placeholder="E-mail">
-    <input type="password" id="cad-senha" placeholder="Senha (mín. 6)">
-    <input type="password" id="cad-conf" placeholder="Confirmar Senha">
+    <h2 class="ct mb10">Criar Conta</h2>
+    <p class="ct gold" style="font-size:0.8rem;margin-bottom:12px;">Ganhe 5 créditos grátis!</p>
+    <input type="text" id="cn" placeholder="Nome Completo">
+    <input type="text" id="cc" placeholder="CPF (11 dígitos)" maxlength="11">
+    <input type="email" id="ce" placeholder="E-mail">
+    <input type="password" id="cs" placeholder="Senha (mín. 6)">
+    <input type="password" id="csc" placeholder="Confirmar Senha">
     <button class="btn" onclick="cadastrar()">Cadastrar</button>
-    <p class="centro mt15 dim" style="font-size:0.9rem;">Já tem conta? <a href="#" onclick="irP('tela-login')">Faça login</a></p>
-    <button class="btn btn2 mt15" onclick="irP('tela-welcome')">Voltar</button>
+    <p class="ct mt15 dim" style="font-size:0.9rem;">Já tem conta? <a href="#" onclick="ir('login')">Faça login</a></p>
+    <button class="btn btn2 mt15" onclick="ir('welcome')">Voltar</button>
   </div>
 </div>
-<div id="tela-main" class="tela" style="padding:0;">
-  <div class="app-layout">
-    <div class="sidebar">
-      <div class="sidebar-titulo">🔮 Oraculum</div>
-      <div class="sidebar-stats"><span>🔮 <span id="creditos-user2">0</span></span><span>🔥 <span id="streak-user2">0</span></span></div>
-      <div class="sidebar-item ativo" onclick="irS()"><span class="sidebar-item-icone">🏠</span> Dashboard</div>
-      <div class="sidebar-item" onclick="aM('modal-carta-dia')"><span class="sidebar-item-icone">🃏</span> Carta do Dia</div>
-      <div class="sidebar-item" onclick="aM('modal-horoscopo')"><span class="sidebar-item-icone">☀️</span> Horóscopo</div>
-      <div class="sidebar-item" onclick="aM('modal-tarot')"><span class="sidebar-item-icone">🔮</span> Tarot</div>
-      <div class="sidebar-item" onclick="aM('modal-numerologia')"><span class="sidebar-item-icone">🔢</span> Numerologia</div>
-      <div class="sidebar-item" onclick="aM('modal-iching')"><span class="sidebar-item-icone">☯️</span> I Ching</div>
-      <div class="sidebar-item" onclick="aM('modal-simnao')"><span class="sidebar-item-icone">⚡</span> Sim/Não</div>
-      <div class="sidebar-item" onclick="aM('modal-sonhos')"><span class="sidebar-item-icone">📖</span> Sonhos</div>
-      <div class="sidebar-item" onclick="aM('modal-compatibilidade')"><span class="sidebar-item-icone">💘</span> Compatibilidade</div>
-      <div class="sidebar-item" onclick="aM('modal-comprar')"><span class="sidebar-item-icone">💳</span> Créditos</div>
-      <div class="sidebar-item" onclick="aM('modal-indicar')"><span class="sidebar-item-icone">👥</span> Indicar</div>
-      <div class="sidebar-rodape"><div class="sidebar-item" onclick="sair()" style="color:#ff4757"><span class="sidebar-item-icone">🚪</span> Sair</div></div>
+<!-- MAIN -->
+<div id="main" class="scr" style="padding:0;">
+  <div class="ly">
+    <div class="sb">
+      <div class="sb-t">🔮 Oraculum</div>
+      <div class="sb-s"><span>🔮 <span id="cu2">0</span></span><span>🔥 <span id="su2">0</span></span></div>
+      <div class="sb-i ativo" onclick="ds()"><span class="sb-ic">🏠</span> Dashboard</div>
+      <div class="sb-i" onclick="abM('mc')"><span class="sb-ic">🃏</span> Carta do Dia</div>
+      <div class="sb-i" onclick="abM('mh')"><span class="sb-ic">☀️</span> Horóscopo</div>
+      <div class="sb-i" onclick="abM('mt')"><span class="sb-ic">🔮</span> Tarot</div>
+      <div class="sb-i" onclick="abM('mn')"><span class="sb-ic">🔢</span> Numerologia</div>
+      <div class="sb-i" onclick="abM('mi')"><span class="sb-ic">☯️</span> I Ching</div>
+      <div class="sb-i" onclick="abM('msn')"><span class="sb-ic">⚡</span> Sim/Não</div>
+      <div class="sb-i" onclick="abM('mso')"><span class="sb-ic">📖</span> Sonhos</div>
+      <div class="sb-i" onclick="abM('mcp')"><span class="sb-ic">💘</span> Compatibilidade</div>
+      <div class="sb-i" onclick="abM('mcr')"><span class="sb-ic">💳</span> Créditos</div>
+      <div class="sb-i" onclick="abM('mind')"><span class="sb-ic">👥</span> Indicar</div>
+      <div class="sb-r"><div class="sb-i" onclick="sair()" style="color:#ff4757"><span class="sb-ic">🚪</span> Sair</div></div>
     </div>
-    <div class="conteudo-principal">
-      <h2 id="saudacao-txt" class="saudacao">Bem-vindo(a), Viajante</h2>
-      <div class="frase" id="frase-dia"></div>
-      <div class="grid-secoes">
-        <div class="sec-card" onclick="aM('modal-carta-dia')"><span class="ico">🃏</span><h3>Carta do Dia</h3><p>Grátis diária</p></div>
-        <div class="sec-card" onclick="aM('modal-horoscopo')"><span class="ico">☀️</span><h3>Horóscopo</h3><p>Previsões</p></div>
-        <div class="sec-card" onclick="aM('modal-tarot')"><span class="ico">🔮</span><h3>Tarot</h3><p>Respostas + Leitura Combinada</p></div>
-        <div class="sec-card" onclick="aM('modal-numerologia')"><span class="ico">🔢</span><h3>Numerologia</h3><p>Caminho de vida</p></div>
-        <div class="sec-card" onclick="aM('modal-iching')"><span class="ico">☯️</span><h3>I Ching</h3><p>Sabedoria</p></div>
-        <div class="sec-card" onclick="aM('modal-simnao')"><span class="ico">⚡</span><h3>Sim/Não</h3><p>Rápido</p></div>
-        <div class="sec-card" onclick="aM('modal-sonhos')"><span class="ico">📖</span><h3>Sonhos</h3><p>Interpretação</p></div>
-        <div class="sec-card" onclick="aM('modal-compatibilidade')"><span class="ico">💘</span><h3>Compatibilidade</h3><p>Amor</p></div>
+    <div class="cp">
+      <h2 id="st" class="saud">Bem-vindo(a), Viajante</h2>
+      <div id="fd" class="frase"></div>
+      <div class="gs">
+        <div class="sc" onclick="abM('mc')"><span class="ico">🃏</span><h3>Carta do Dia</h3><p>Grátis diária</p></div>
+        <div class="sc" onclick="abM('mh')"><span class="ico">☀️</span><h3>Horóscopo</h3><p>Previsões</p></div>
+        <div class="sc" onclick="abM('mt')"><span class="ico">🔮</span><h3>Tarot</h3><p>Respostas + Leitura</p></div>
+        <div class="sc" onclick="abM('mn')"><span class="ico">🔢</span><h3>Numerologia</h3><p>Caminho de vida</p></div>
+        <div class="sc" onclick="abM('mi')"><span class="ico">☯️</span><h3>I Ching</h3><p>Sabedoria</p></div>
+        <div class="sc" onclick="abM('msn')"><span class="ico">⚡</span><h3>Sim/Não</h3><p>Rápido</p></div>
+        <div class="sc" onclick="abM('mso')"><span class="ico">📖</span><h3>Sonhos</h3><p>Interpretação</p></div>
+        <div class="sc" onclick="abM('mcp')"><span class="ico">💘</span><h3>Compatibilidade</h3><p>Amor</p></div>
       </div>
-      <div class="rodape"><p>© 2026 Oraculum Astrale — www.oraculumastrale.com</p></div>
+      <div class="rd"><p>© 2026 Oraculum Astrale — www.oraculumastrale.com</p></div>
     </div>
   </div>
 </div>
-<div id="modal-carta-dia" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-carta-dia')">&times;</button><h2>Sua Carta do Dia</h2><div id="carta-dia-result" class="centro mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="revelarCarta()">Revelar</button></div></div></div>
-<div id="modal-horoscopo" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-horoscopo')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim" style="font-size:0.85rem;">Selecione seu signo:</p><div class="grid-signos" id="grid-signos"></div><div id="horo-result" class="horo-result" style="display:none;"><h3 id="h-signo-nome">Signo</h3><p><strong>❤️ Amor:</strong> <span id="h-amor"></span></p><p><strong>💼 Carreira:</strong> <span id="h-carreira"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="h-saude"></span></p></div></div></div>
-<div id="modal-tarot" class="modal"><div class="modal-conteudo modal-conteudo-largo"><button class="fechar-modal" onclick="fM('modal-tarot'); resetarLC()">&times;</button><h2>🔮 Tarot</h2><input type="text" id="tarot-pergunta" placeholder="Sua pergunta?"><select id="tarot-tipo" onchange="atualizarCustoTarot()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option><option value="lc">🔄 Leitura Combinada (Maior + Menor) — 2 créditos</option></select><p class="dim mt10" id="tarot-custo-label">Custa <strong class="gold" id="tarot-custo">3</strong> créditos</p><button class="btn" id="btn-tarot" onclick="iniciarTarot()">Consultar</button><div id="tarot-result" class="mt15"></div><div id="lc-area" style="display:none;" class="mt15"><div id="lc-passo1"><p class="passo-label">🔮 Passo 1 — Clique em 1 dos 22 Arcanos Maiores:</p><div class="grid-lc-maiores" id="lc-grid-maiores"></div></div><div id="lc-passo2" style="display:none;"><p class="passo-label">📜 Passo 2 — Clique em 1 dos 56 Arcanos Menores:</p><div class="grid-lc-menores" id="lc-grid-menores"></div></div><div id="lc-resultado" style="display:none;" class="leitura-combinada"></div></div></div></div>
-<div id="modal-numerologia" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-numerologia')">&times;</button><h2>Numerologia</h2><p class="dim" style="font-size:0.85rem;">Caminho da Vida (2 créditos).</p><input type="date" id="num-data"><button class="btn" id="btn-num" onclick="calcularNumero()">Calcular</button><div id="num-result" class="mt15"></div></div></div>
-<div id="modal-iching" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-iching')">&times;</button><h2>I Ching</h2><input type="text" id="iching-pergunta" placeholder="Sua pergunta?"><button class="btn" id="btn-iching" onclick="consultarIChing()">Consultar (2 créditos)</button><div id="iching-result" class="mt15 centro"></div></div></div>
-<div id="modal-simnao" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-simnao')">&times;</button><h2>Sim ou Não</h2><input type="text" id="sn-pergunta" placeholder="Pergunta objetiva"><button class="btn" id="btn-sn" onclick="consultarSimNao()">Perguntar (1 crédito)</button><div id="sn-result" class="mt15 centro gold" style="font-size:1.8rem;font-weight:bold;"></div></div></div>
-<div id="modal-sonhos" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-sonhos')">&times;</button><h2>Dicionário dos Sonhos</h2><input type="text" id="sonho-busca" placeholder="Ex: cobra, água..." onkeyup="buscarSonho()"><div id="sonhos-lista" class="mt15" style="max-height:260px;overflow-y:auto;"></div></div></div>
-<div id="modal-compatibilidade" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-compatibilidade')">&times;</button><h2>Sinergia Astral</h2><div class="linha"><select id="comp-s1"><option value="">Seu Signo</option></select><select id="comp-s2"><option value="">Outro Signo</option></select></div><button class="btn" onclick="verificarComp()">Verificar</button><div id="comp-result" class="mt15 centro"></div></div></div>
-<div id="modal-indicar" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-indicar')">&times;</button><h2>Indique e Ganhe</h2><p class="dim">Cada amigo = <strong class="gold">+5 créditos</strong>.</p><input type="text" id="link-indicacao" readonly><button class="btn" onclick="copiarLink()">Copiar Link</button></div></div>
-<div id="modal-comprar" class="modal"><div class="modal-conteudo" style="max-width:650px;"><button class="fechar-modal" onclick="fM('modal-comprar')">&times;</button><h2>Créditos</h2><div class="grid-packs"><div class="pack-card" onclick="comprar(10)"><h3>💫 Inicial</h3><div class="pack-preco">R$ 9,90</div><p><strong>10</strong> créditos</p></div><div class="pack-card" onclick="comprar(25)"><h3>🌙 Essencial</h3><div class="pack-preco">R$ 19,90</div><p><strong>25</strong> créditos</p><p class="pack-eco">-20%</p></div><div class="pack-card" onclick="comprar(60)"><h3>⭐ Avançado</h3><div class="pack-preco">R$ 39,90</div><p><strong>60</strong> créditos</p><p class="pack-tag">Popular</p></div><div class="pack-card" onclick="comprar(120)"><h3>🔮 Supremo</h3><div class="pack-preco">R$ 59,90</div><p><strong>120</strong> créditos</p><p class="pack-eco">Melhor valor</p></div></div></div></div>
+<!-- MODAIS -->
+<div id="mc" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mc')">&times;</button><h2>Sua Carta do Dia</h2><div id="cdr" class="ct mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="rc()">Revelar</button></div></div></div>
+<div id="mh" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mh')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim" style="font-size:0.85rem;">Selecione seu signo:</p><div class="gs2" id="gs2"></div><div id="hr" class="hr" style="display:none;"><h3 id="hsn">Signo</h3><p><strong>❤️ Amor:</strong> <span id="ham"></span></p><p><strong>💼 Carreira:</strong> <span id="hca"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="hsa"></span></p></div></div></div>
+<div id="mt" class="modal"><div class="modal-c modal-l"><button class="fm" onclick="fM('mt');resLC()">&times;</button><h2>🔮 Tarot</h2><input type="text" id="tp" placeholder="Sua pergunta?"><select id="tt" onchange="atCT()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option><option value="lc">🔄 Leitura Combinada — 2 créditos</option></select><p class="dim mt10" id="tcl">Custa <strong class="gold" id="tc">3</strong> créditos</p><button class="btn" id="btn-t" onclick="iniciarT()">Consultar</button><div id="tr" class="mt15"></div><div id="lca" style="display:none;" class="mt15"><div id="lc1"><p class="pl">🔮 Passo 1 — Clique em 1 dos 22 Arcanos Maiores:</p><div class="gm" id="lgm"></div></div><div id="lc2" style="display:none;"><p class="pl">📜 Passo 2 — Clique em 1 dos 56 Arcanos Menores:</p><div class="gmm" id="lgmm"></div></div><div id="lcr" style="display:none;" class="lc"></div></div></div></div>
+<div id="mn" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mn')">&times;</button><h2>Numerologia</h2><p class="dim" style="font-size:0.85rem;">Caminho da Vida (2 créditos).</p><input type="date" id="nd"><button class="btn" id="btn-n" onclick="calN()">Calcular</button><div id="nr" class="mt15"></div></div></div>
+<div id="mi" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mi')">&times;</button><h2>I Ching</h2><input type="text" id="ip" placeholder="Sua pergunta?"><button class="btn" id="btn-i" onclick="conI()">Consultar (2 créditos)</button><div id="ir" class="mt15 ct"></div></div></div>
+<div id="msn" class="modal"><div class="modal-c"><button class="fm" onclick="fM('msn')">&times;</button><h2>Sim ou Não</h2><input type="text" id="snp" placeholder="Pergunta objetiva"><button class="btn" id="btn-sn" onclick="conSN()">Perguntar (1 crédito)</button><div id="snr" class="mt15 ct gold" style="font-size:1.8rem;font-weight:bold;"></div></div></div>
+<div id="mso" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mso')">&times;</button><h2>Dicionário dos Sonhos</h2><input type="text" id="sob" placeholder="Ex: cobra, água..." onkeyup="bS()"><div id="sol" class="mt15" style="max-height:260px;overflow-y:auto;"></div></div></div>
+<div id="mcp" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mcp')">&times;</button><h2>Sinergia Astral</h2><div class="ln"><select id="cs1"><option value="">Seu Signo</option></select><select id="cs2"><option value="">Outro Signo</option></select></div><button class="btn" onclick="verC()">Verificar</button><div id="cpr" class="mt15 ct"></div></div></div>
+<div id="mind" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mind')">&times;</button><h2>Indique e Ganhe</h2><p class="dim">Cada amigo = <strong class="gold">+5 créditos</strong>.</p><input type="text" id="li" readonly><button class="btn" onclick="copL()">Copiar Link</button></div></div>
+<div id="mcr" class="modal"><div class="modal-c" style="max-width:650px;"><button class="fm" onclick="fM('mcr')">&times;</button><h2>Créditos</h2><div class="gp"><div class="pc" onclick="comp(10)"><h3>💫 Inicial</h3><div class="pp">R$ 9,90</div><p><strong>10</strong> créditos</p></div><div class="pc" onclick="comp(25)"><h3>🌙 Essencial</h3><div class="pp">R$ 19,90</div><p><strong>25</strong> créditos</p><p class="pe">-20%</p></div><div class="pc" onclick="comp(60)"><h3>⭐ Avançado</h3><div class="pp">R$ 39,90</div><p><strong>60</strong> créditos</p><p class="ptg">Popular</p></div><div class="pc" onclick="comp(120)"><h3>🔮 Supremo</h3><div class="pp">R$ 59,90</div><p><strong>120</strong> créditos</p><p class="pe">Melhor valor</p></div></div></div></div>
 <script>
-const MAIORES=[
-{n:0,nome:"O Louco",sig:"Novos começos, inocência, aventura, espontaneidade.",amor:"Anuncia novo relacionamento ou redescoberta.",car:"Novo projeto, mudança. Hora de arriscar.",inv:"Imprudência, riscos, decisões precipitadas."},
-{n:1,nome:"O Mago",sig:"Manifestação, habilidade, poder, concentração.",amor:"Poder de atração e iniciativa.",car:"Transformar ideias em realidade.",inv:"Manipulação, talentos desperdiçados."},
-{n:2,nome:"A Sacerdotisa",sig:"Intuição, mistério, subconsciente, sabedoria interior.",amor:"Conexão profunda e silenciosa.",car:"Confie no instinto antes de decisões.",inv:"Intuição bloqueada, superficialidade."},
-{n:3,nome:"A Imperatriz",sig:"Feminilidade, beleza, abundância, fertilidade.",amor:"Relacionamento nutritivo e estável.",car:"Crescimento criativo e frutos financeiros.",inv:"Dependência, bloqueio criativo."},
-{n:4,nome:"O Imperador",sig:"Autoridade, estrutura, fundação, controle.",amor:"Busca por estabilidade e proteção.",car:"Liderança firme e metas de longo prazo.",inv:"Tirania, rigidez, falta de disciplina."},
-{n:5,nome:"O Hierofante",sig:"Tradição, conformidade, mentoria, ensinamento.",amor:"Compromisso sério, valores compartilhados.",car:"Instituições sólidas ou mentor importante.",inv:"Rebeldia contra normas, dogmatismo."},
-{n:6,nome:"Os Enamorados",sig:"Amor, harmonia, relacionamentos, escolhas.",amor:"União profunda e decisão importante no afeto.",car:"Parcerias de sucesso baseadas em valores.",inv:"Desarmonia, dificuldade de escolher."},
-{n:7,nome:"O Carro",sig:"Vontade, vitória, determinação, controle.",amor:"Superar obstáculos para conquistar.",car:"Progresso acelerado e domínio profissional.",inv:"Falta de direção, perda de controle."},
-{n:8,nome:"A Força",sig:"Coragem, persuasão, influência, compaixão.",amor:"Domar impulsos para fortalecer o vínculo.",car:"Resiliência para enfrentar pressões.",inv:"Fraqueza, insegurança, autocontrole frágil."},
-{n:9,nome:"O Eremita",sig:"Introspecção, busca interior, sabedoria, solitude.",amor:"Tempo sozinho para entender sentimentos.",car:"Análise cuidadosa. Busque conhecimento.",inv:"Isolamento excessivo, timidez, solidão."},
-{n:10,nome:"A Roda da Fortuna",sig:"Ciclos, mudança, destino, sorte, oportunidade.",amor:"Mudanças inesperadas na vida afetiva.",car:"Reviravolta profissional. Oportunidades surgem.",inv:"Má sorte, resistência à mudança."},
-{n:11,nome:"A Justiça",sig:"Equidade, verdade, causa e efeito, leis.",amor:"Equilíbrio e honestidade na relação.",car:"Contratos justos, mérito reconhecido.",inv:"Injustiça, desonestidade, desequilíbrio."},
-{n:12,nome:"O Pendurado",sig:"Pausa, rendição, sacrifício, nova perspectiva.",amor:"Espera e sacrifício pelo bem da relação.",car:"Projetos estagnados. Nova abordagem necessária.",inv:"Estagnação, resistência, imobilidade."},
-{n:13,nome:"A Morte",sig:"Transformação, fim, transição, desapego, renovação.",amor:"Encerramento de ciclo para o novo.",car:"Mudança radical de carreira ou direção.",inv:"Resistência à mudança, estagnação."},
-{n:14,nome:"A Temperança",sig:"Equilíbrio, moderação, paciência, harmonia.",amor:"Paciência e compreensão para curar.",car:"Trabalho em equipe, progresso constante.",inv:"Desequilíbrio, excessos, impulsividade."},
-{n:15,nome:"O Diabo",sig:"Sombra, vício, obsessão, materialismo.",amor:"Paixão intensa que pode ser tóxica.",car:"Ambição excessiva. Cuidado com excessos.",inv:"Libertação de vícios e amarras."},
-{n:16,nome:"A Torre",sig:"Queda, destruição, revelação, despertar.",amor:"Ruptura que traz revelações necessárias.",car:"Crise que força reconstrução total.",inv:"Evitar o inevitável, resistir à mudança."},
-{n:17,nome:"A Estrela",sig:"Esperança, fé, renovação, inspiração, cura.",amor:"Cura emocional e otimismo renovado.",car:"Inspiração e propósito encontrados.",inv:"Desânimo, falta de fé, desesperança."},
-{n:18,nome:"A Lua",sig:"Ilusão, medo, ansiedade, incerteza, mistério.",amor:"Incertezas. Cuidado com enganos.",car:"Falta de clareza. Evite decisões agora.",inv:"Clareza surgindo, medos sendo superados."},
-{n:19,nome:"O Sol",sig:"Alegria, sucesso, vitalidade, clareza, triunfo.",amor:"Felicidade plena e transparência total.",car:"Sucesso, reconhecimento e realizações.",inv:"Sucesso temporário, ego inflado."},
-{n:20,nome:"O Julgamento",sig:"Renascimento, chamado, perdão, renovação.",amor:"Reavaliação e chance de recomeço.",car:"Chamado para nova direção profissional.",inv:"Negação do chamado, recusa em evoluir."},
-{n:21,nome:"O Mundo",sig:"Conclusão, integração, realização, plenitude.",amor:"Realização afetiva, união completa.",car:"Sucesso internacional, grande projeto concluído.",inv:"Incompletude, atrasos, conclusão adiada."}
-];
-function gerarMenores(){const n=["Copas","Espadas","Ouros","Paus"],v=["Ás","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"],t={Copas:{f:"sentimentos",e:"emoção",a:" emocional",cor:"Coração"},Espadas:{f:"pensamento",e:"mente",a:" mental",cor:"Raciocínio"},Ouros:{f:"finanças",e:"matéria",a:" prático",cor:"Corpo"},Paus:{f:"ação",e:"energia",a:" dinâmico",cor:"Vontade"}};const s={"Ás":["Novos começos","Oportunidade","Potencial"],"2":["Equilíbrio","Parceria","Escolha"],"3":["Crescimento","Expansão","Colaboração"],"4":["Estabilidade","Fundação","Descanso"],"5":["Desafio","Conflito","Mudança"],"6":["Harmonia","Progresso","Generosidade"],"7":["Avaliação","Estratégia","Reflexão"],"8":["Movimento","Velocidade","Ação"],"9":["Realização","Sabedoria","Independência"],"10":["Completude","Culminância","Legado"],"Valete":["Mensagem","Curiosidade","Novidade"],"Cavaleiro":["Ação","Perseguição","Movimento"],"Rainha":["Intuição","Cuidado","Poder"],"Rei":["Domínio","Autoridade","Maturidade"]};const r=[];let idC=22;for(let o of n){const u=t[o];for(let n of v){const l=s[n]||["Energia","Potencial","Manifestação"];r.push({id:idC++,nome:n+" de "+o,arcano:"menor",naipe:o,naipeF:u.f,naipeE:u.e,naipeA:u.a,naipeCor:u.cor,sig:l[0]+" em "+u.f+". "+l[1]+" pela via do(a) "+u.e+".",amor:"No amor: "+l[0]+u.a+". "+l[1]+" no campo afetivo.",car:"Na carreira: "+l[0]+". "+l[2]+" com foco em "+u.f+".",inv:"Bloqueio no campo do(a) "+u.e+". "+l[1]+" desalinhado(a).")}}return r}
-const MENORES=gerarMenores(),DECK=[...MAIORES,...MENORES];
-const SIGNOS=[{id:"aries",nome:"Áries",ic:"♈",am:"Dia de iniciativa. Se solteiro, encontro inesperado.",ca:"Liderança em alta. Apresente projetos.",sa:"Hidrate-se e respire."},{id:"touro",nome:"Touro",ic:"♉",am:"Busque estabilidade com pequenos gestos.",ca:"Revise finanças. Evite gastos.",sa:"Natureza traz equilíbrio."},{id:"gemeos",nome:"Gêmeos",ic:"♊",am:"Comunicação resolve mal-entendidos.",ca:"Mente ágil. Networking.",sa:"Menos telas antes de dormir."},{id:"cancer",nome:"Câncer",ic:"♋",am:"Proteja o coração de energias negativas.",ca:"Empatia para mediar conflitos.",sa:"Alimentos leves."},{id:"leao",nome:"Leão",ic:"♌",am:"Brilho atrai olhares. Divirta-se.",ca:"Reconhecimento profissional.",sa:"Exercícios que dão prazer."},{id:"virgem",nome:"Virgem",ic:"♍",am:"Analise menos, sinta mais.",ca:"Organização é a chave.",sa:"Rotina de autocuidado."},{id:"libra",nome:"Libra",ic:"♎",am:"Equilíbrio nas relações.",ca:"Parcerias favorecidas.",sa:"Alongamentos."},{id:"escorpiao",nome:"Escorpião",ic:"♏",am:"Intensidade. Evite ciúme.",ca:"Intuição aguçada para negócios.",sa:"Beba muita água."},{id:"sagitario",nome:"Sagitário",ic:"♐",am:"Aventura. Saia da rotina.",ca:"Expansão. Metas ambiciosas.",sa:"Atividades ao ar livre."},{id:"capricornio",nome:"Capricórnio",ic:"♑",am:"Compromisso e lealdade.",ca:"Dedicação notada.",sa:"Cuidado com joelhos."},{id:"aquario",nome:"Aquário",ic:"♒",am:"Liberdade e respeito.",ca:"Inove. Pense fora da caixa.",sa:"Meditação."},{id:"peixes",nome:"Peixes",ic:"♓",am:"Romantismo e magia.",ca:"Siga sua intuição vocacional.",sa:"Descanse."}];
-const SONHOS={agua:"Suas emoções. Limpa=clareza, suja=confusão.",cobra:"Transformação. Medos ocultos.",dente:"Ansiedade. Medo de perder controle.",bebe:"Novos começos. Projetos.",morte:"Fim de ciclo. Novo início.",voar:"Liberdade. Visão elevada.",casa:"Seu mundo interior.",cachorro:"Lealdade. Amizade.",gato:"Independência. Intuição.",ponte:"Transição entre fases.",chuva:"Renovação emocional.",dinheiro:"Autoestima. Valor próprio.",fogo:"Paixão. Energia intensa.",mar:"Subconsciente. Calmo=paz.",escada:"Progresso. Evolução.",casamento:"União. Compromisso.",gravidez:"Projeto sendo gestado.",sangue:"Energia vital. Feridas.",escola:"Aprendizados. Ansiedade.",hospital:"Cura. Hora de se cuidar.",luz:"Clareza. Verdade.",escuro:"Medo do desconhecido.",arvore:"Crescimento. Raízes.",fuga:"Evitando uma situação.",comida:"Nutrição espiritual.",crianca:"Criança interior.",lua:"Feminino. Intuição.",sol:"Sucesso. Vitalidade.",estrela:"Esperança.",floresta:"Subconsciente. Exploração.",montanha:"Desafio. Superação.",rio:"Fluxo da vida.",perseguicao:"Fugindo de algo.",tempestade:"Conflito interno."};
-const HEXAGRAMAS=[{n:1,nome:"O Criativo (Qian)",s:"☰",d:"Força criativa e poder vital."},{n:2,nome:"O Receptivo (Kun)",s:"☷",d:"Poder da terra, devoção."},{n:3,nome:"Dificuldade Inicial (Zhun)",s:"䷂",d:"Brotando do solo. Crescimento."},{n:4,nome:"Insensatez Juvenil (Meng)",s:"䷃",d:"Aprendizado e humildade."},{n:5,nome:"A Espera (Xu)",s:"䷄",d:"Paciência. O tempo certo."},{n:6,nome:"O Conflito (Song)",s:"䷅",d:"Disputa. Busque mediação."},{n:7,nome:"O Exército (Shi)",s:"䷆",d:"Disciplina. Organização."},{n:8,nome:"A União (Bi)",s:"䷇",d:"Solidariedade. Cooperação."}];
-const FRASES=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio do seu coração.","Sua intuição é a voz da sua alma.","Cada carta revela um caminho, mas você é quem caminha.","A luz que vê nos outros é o reflexo da sua própria luz.","Confie no tempo do universo.","Sua energia cria sua realidade.","O passado é lição, o futuro é mistério, o presente é dádiva.","Não há coincidências, apenas sincronicidades.","Abra sua mente para o invisível.","Você é um universo em um sopro.","Onde há fé, há caminho.","Sua jornada é única.","O oráculo ilumina o presente.","Seja a mudança no seu destino.","A magia está em quem você se torna.","Cada amanhecer é uma nova página."];
-let user=null,toastFila=[],mostrandoToast=false,lcMajorSelecionada=null,lcMinorSelecionada=null,lcAtras=false;
-function irP(id){document.querySelectorAll(".tela").forEach(function(t){t.classList.remove("ativa")});const e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
-function irS(){document.querySelectorAll(".sidebar-item").forEach(function(i){i.classList.remove("ativo")});var e=document.querySelector(".sidebar-item");if(e)e.classList.add("ativo")}
-function toast(m){toastFila.push(m);if(!mostrandoToast)procT()}
-function procT(){if(toastFila.length===0){mostrandoToast=false;return}mostrandoToast=true;const m=toastFila.shift(),c=document.getElementById("toasts"),e=document.createElement("div");e.className="toast-item";e.innerText=m;c.appendChild(e);setTimeout(function(){e.classList.add("saindo");setTimeout(function(){e.remove();procT()},400)},3000)}
-function aM(i){const m=document.getElementById(i);if(m){m.style.display="flex";document.body.classList.add("no-scroll")}}
-function fM(i){const m=document.getElementById(i);if(m){m.style.display="none";document.body.classList.remove("no-scroll")}}
+const M=[{n:0,nm:"O Louco",sg:"Novos começos, inocência, aventura.",am:"Anuncia novo relacionamento ou redescoberta.",ca:"Novo projeto, mudança. Hora de arriscar.",in:"Imprudência, riscos, decisões precipitadas."},
+{n:1,nm:"O Mago",sg:"Manifestação, habilidade, poder.",am:"Poder de atração e iniciativa.",ca:"Transformar ideias em realidade.",in:"Manipulação, talentos desperdiçados."},
+{n:2,nm:"A Sacerdotisa",sg:"Intuição, mistério, sabedoria interior.",am:"Conexão profunda e silenciosa.",ca:"Confie no instinto antes de decisões.",in:"Intuição bloqueada."},
+{n:3,nm:"A Imperatriz",sg:"Feminilidade, beleza, abundância.",am:"Relacionamento nutritivo e estável.",ca:"Crescimento criativo.",in:"Dependência, bloqueio criativo."},
+{n:4,nm:"O Imperador",sg:"Autoridade, estrutura, controle.",am:"Busca por estabilidade.",ca:"Liderança firme.",in:"Tirania, rigidez."},
+{n:5,nm:"O Hierofante",sg:"Tradição, mentoria, ensinamento.",am:"Compromisso sério.",ca:"Instituições sólidas.",in:"Rebeldia, dogmatismo."},
+{n:6,nm:"Os Enamorados",sg:"Amor, harmonia, escolhas.",am:"União profunda.",ca:"Parcerias de sucesso.",in:"Desarmonia."},
+{n:7,nm:"O Carro",sg:"Vontade, vitória, determinação.",am:"Superar obstáculos.",ca:"Progresso acelerado.",in:"Falta de direção."},
+{n:8,nm:"A Força",sg:"Coragem, persuasão.",am:"Domar impulsos.",ca:"Resiliência.",in:"Fraqueza."},
+{n:9,nm:"O Eremita",sg:"Introspecção, sabedoria.",am:"Tempo sozinho.",ca:"Análise cuidadosa.",in:"Isolamento."},
+{n:10,nm:"A Roda da Fortuna",sg:"Ciclos, mudança, sorte.",am:"Mudanças inesperadas.",ca:"Reviravolta profissional.",in:"Má sorte."},
+{n:11,nm:"A Justiça",sg:"Equidade, verdade.",am:"Equilíbrio.",ca:"Contratos justos.",in:"Injustiça."},
+{n:12,nm:"O Pendurado",sg:"Pausa, sacrifício.",am:"Espera.",ca:"Nova abordagem.",in:"Estagnação."},
+{n:13,nm:"A Morte",sg:"Transformação, desapego.",am:"Encerramento de ciclo.",ca:"Mudança radical.",in:"Resistência."},
+{n:14,nm:"A Temperança",sg:"Equilíbrio, moderação.",am:"Paciência.",ca:"Progresso constante.",in:"Excessos."},
+{n:15,nm:"O Diabo",sg:"Sombra, vício.",am:"Paixão intensa.",ca:"Ambição.",in:"Libertação."},
+{n:16,nm:"A Torre",sg:"Queda, revelação.",am:"Ruptura necessária.",ca:"Crise reconstrutiva.",in:"Evitar o inevitável."},
+{n:17,nm:"A Estrela",sg:"Esperança, renovação.",am:"Cura emocional.",ca:"Inspiração.",in:"Desânimo."},
+{n:18,nm:"A Lua",sg:"Ilusão, medo.",am:"Incertezas.",ca:"Falta de clareza.",in:"Clareza surgindo."},
+{n:19,nm:"O Sol",sg:"Alegria, sucesso.",am:"Felicidade plena.",ca:"Sucesso.",in:"Ego inflado."},
+{n:20,nm:"O Julgamento",sg:"Renascimento, perdão.",am:"Reavaliação.",ca:"Nova direção.",in:"Negação."},
+{n:21,nm:"O Mundo",sg:"Conclusão, realização.",am:"União completa.",ca:"Sucesso internacional.",in:"Atrasos."}];
+function gMn(){const n=["Copas","Espadas","Ouros","Paus"],v=["Ás","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"],t={Copas:{f:"sentimentos",e:"emoção",a:" emocional",c:"Coração"},Espadas:{f:"pensamento",e:"mente",a:" mental",c:"Raciocínio"},Ouros:{f:"finanças",e:"matéria",a:" prático",c:"Corpo"},Paus:{f:"ação",e:"energia",a:" dinâmico",c:"Vontade"}};const s={"Ás":["Novos começos","Oportunidade","Potencial"],"2":["Equilíbrio","Parceria","Escolha"],"3":["Crescimento","Expansão","Colaboração"],"4":["Estabilidade","Fundação","Descanso"],"5":["Desafio","Conflito","Mudança"],"6":["Harmonia","Progresso","Generosidade"],"7":["Avaliação","Estratégia","Reflexão"],"8":["Movimento","Velocidade","Ação"],"9":["Realização","Sabedoria","Independência"],"10":["Completude","Culminância","Legado"],"Valete":["Mensagem","Curiosidade","Novidade"],"Cavaleiro":["Ação","Perseguição","Movimento"],"Rainha":["Intuição","Cuidado","Poder"],"Rei":["Domínio","Autoridade","Maturidade"]};const r=[];let id=22;for(let o of n){const u=t[o];for(let n of v){const l=s[n]||["Energia","Potencial","Manifestação"];r.push({id:id++,nm:n+" de "+o,naipe:o,nf:u.f,ne:u.e,na:u.a,nc:u.c,sg:l[0]+" em "+u.f+". "+l[1]+" pela via do(a) "+u.e+".",am:"No amor: "+l[0]+u.a+".",ca:"Na carreira: "+l[0]+". "+l[2]+".",in:"Bloqueio no campo do(a) "+u.e+"."})}}return r}
+const MN=gMn(),DK=[...M,...MN];
+const SN=[{id:"aries",nm:"Áries",ic:"♈",am:"Iniciativa. Se solteiro, encontro.",ca:"Liderança em alta.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"♉",am:"Estabilidade.",ca:"Revise finanças.",sa:"Natureza."},{id:"gemeos",nm:"Gêmeos",ic:"♊",am:"Comunicação.",ca:"Networking.",sa:"Menos telas."},{id:"cancer",nm:"Câncer",ic:"♋",am:"Proteção.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leao",nm:"Leão",ic:"♌",am:"Brilho atrai.",ca:"Reconhecimento.",sa:"Exercícios."},{id:"virgem",nm:"Virgem",ic:"♍",am:"Sinta mais.",ca:"Organização.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"♎",am:"Equilíbrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpiao",nm:"Escorpião",ic:"♏",am:"Intensidade.",ca:"Intuição.",sa:"Hidratação."},{id:"sagitario",nm:"Sagitário",ic:"♐",am:"Aventura.",ca:"Expansão.",sa:"Ar livre."},{id:"capricornio",nm:"Capricórnio",ic:"♑",am:"Lealdade.",ca:"Dedicação.",sa:"Cuidado com joelhos."},{id:"aquario",nm:"Aquário",ic:"♒",am:"Liberdade.",ca:"Inovação.",sa:"Meditação."},{id:"peixes",nm:"Peixes",ic:"♓",am:"Romantismo.",ca:"Intuição.",sa:"Descanso."}];
+const SO={agua:"Suas emoções. Limpa=clareza.",cobra:"Transformação.",dente:"Ansiedade.",bebe:"Novos começos.",morte:"Fim de ciclo.",voar:"Liberdade.",casa:"Mundo interior.",cachorro:"Lealdade.",gato:"Independência.",ponte:"Transição.",chuva:"Renovação.",dinheiro:"Autoestima.",fogo:"Paixão.",mar:"Subconsciente.",escada:"Progresso.",casamento:"União.",gravidez:"Projeto.",sangue:"Vitalidade.",escola:"Aprendizado.",hospital:"Cura.",luz:"Clareza.",escuro:"Medo.",arvore:"Crescimento.",fuga:"Evitando.",comida:"Nutrição.",crianca:"Criança interior.",lua:"Intuição.",sol:"Sucesso.",estrela:"Esperança.",floresta:"Exploração.",montanha:"Superação.",rio:"Fluxo."};
+const HX=[{n:1,nm:"O Criativo",s:"☰",d:"Força criativa."},{n:2,nm:"O Receptivo",s:"☷",d:"Poder da terra."},{n:3,nm:"Dificuldade Inicial",s:"䷂",d:"Crescimento."},{n:4,nm:"Insensatez Juvenil",s:"䷃",d:"Aprendizado."},{n:5,nm:"A Espera",s:"䷄",d:"Paciência."},{n:6,nm:"O Conflito",s:"䷅",d:"Mediação."},{n:7,nm:"O Exército",s:"䷆",d:"Disciplina."},{n:8,nm:"A União",s:"䷇",d:"Cooperação."}];
+const FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio.","Sua intuição é a voz da sua alma.","Confie no tempo do universo.","Sua energia cria sua realidade.","O passado é lição, o presente é dádiva.","Não há coincidências, apenas sincronicidades.","Onde há fé, há caminho."];
+let user=null,tf=[],mt=false,lM=null,lm=null,la=false;
+function ir(id){document.querySelectorAll(".scr").forEach(function(t){t.classList.remove("ativa")});var e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
+function ds(){document.querySelectorAll(".sb-i").forEach(function(i){i.classList.remove("ativo")});var e=document.querySelector(".sb-i");if(e)e.classList.add("ativo")}
+function to(m){tf.push(m);if(!mt)pt()}
+function pt(){if(tf.length===0){mt=false;return}mt=true;var m=tf.shift(),c=document.getElementById("t"),e=document.createElement("div");e.className="ti";e.innerText=m;c.appendChild(e);setTimeout(function(){e.classList.add("saindo");setTimeout(function(){e.remove();pt()},400)},3000)}
+function abM(i){var m=document.getElementById(i);if(m){m.style.display="flex";document.body.classList.add("no-scroll")}}
+function fM(i){var m=document.getElementById(i);if(m){m.style.display="none";document.body.classList.remove("no-scroll")}}
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.querySelectorAll(".modal").forEach(function(m){if(m.style.display==="flex"){m.style.display="none";document.body.classList.remove("no-scroll")}})}});
 document.addEventListener("click",function(e){if(e.target.classList.contains("modal")){e.target.style.display="none";document.body.classList.remove("no-scroll")}});
-function setLoad(id,ativo){const b=document.getElementById(id);if(!b)return;if(ativo){b.dataset.o=b.innerText;b.innerText="Aguarde...";b.disabled=true}else{b.innerText=b.dataset.o||b.innerText;b.disabled=false}}
-function cadastrar(){const n=document.getElementById("cad-nome").value.trim(),c=document.getElementById("cad-cpf").value.replace(/\D/g,""),e=document.getElementById("cad-email").value.trim(),p=document.getElementById("cad-senha").value,x=document.getElementById("cad-conf").value;if(!n||c.length!==11||!e||p.length<6)return toast("Preencha todos os campos.");if(p!==x)return toast("Senhas não coincidem.");const u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return toast("E-mail já existe.");const o={nome:n,cpf:c,email:e,senha:p,creditos:5,streak:1,ult:new Date().toISOString().split("T")[0],ind:0};u.push(o);localStorage.setItem("oa_u",JSON.stringify(u));const r=localStorage.getItem("oa_r");if(r){const i=u.find(function(v){return btoa(v.email)===r});if(i){i.creditos+=5;i.ind=(i.ind||0)+1;localStorage.setItem("oa_u",JSON.stringify(u));localStorage.removeItem("oa_r")}}toast("Conta criada! +5 créditos.");irP("tela-login")}
-function login(){const e=document.getElementById("login-email").value.trim(),p=document.getElementById("login-senha").value,u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return toast("Email ou senha incorretos.");user=s;atualizarStreak();carregarDashboard();irP("tela-main");toast("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
-function sair(){user=null;irP("tela-welcome")}
-function salvarUser(){if(!user)return;const u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("creditos-user2").innerText=user.creditos;document.getElementById("streak-user2").innerText=user.streak}
-function gastar(qtd){if(!user){toast("Faça login.");return 0}if(user.creditos>=qtd){user.creditos-=qtd;salvarUser();return 1}toast("Créditos insuficientes.");aM("modal-comprar");return 0}
-function atualizarStreak(){const h=new Date().toISOString().split("T")[0],o=new Date(Date.now()-86400000).toISOString().split("T")[0];if(user.ult===o){user.streak+=1;bonusStreak()}else if(user.ult!==h){user.streak=1}user.ult=h;salvarUser()}
-function bonusStreak(){if(user.streak===7){user.creditos+=2;setTimeout(function(){toast("Bônus 7 dias! +2 créditos.")},600)}if(user.streak===15){user.creditos+=5;setTimeout(function(){toast("Bônus 15 dias! +5 créditos.")},600)}if(user.streak===30){user.creditos+=10;setTimeout(function(){toast("Bônus 30 dias! +10 créditos.")},600)}}
-function carregarDashboard(){const n=user.nome.split(" ")[0],h=new Date().getHours();let s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("saudacao-txt").innerText=s+", "+n+"!";document.getElementById("frase-dia").innerText=FRASES[Math.floor(Math.random()*FRASES.length)];document.getElementById("link-indicacao").value="https://www.oraculumastrale.com?ref="+btoa(user.email);salvarUser();const g=document.getElementById("grid-signos");g.innerHTML="";SIGNOS.forEach(function(s){const b=document.createElement("div");b.className="sig-btn";b.innerHTML='<span class="si">'+s.ic+'</span><span class="sn">'+s.nome+'</span>';b.onclick=function(){mostrarHoroscopo(s.id)};g.appendChild(b)});const a=document.getElementById("comp-s1"),b=document.getElementById("comp-s2");a.innerHTML='<option value="">Seu Signo</option>';b.innerHTML='<option value="">Outro Signo</option>';SIGNOS.forEach(function(s){a.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.ic+"</option>";b.innerHTML+='<option value="'+s.id+'">'+s.nome+" "+s.ic+"</option>"})}
-function revelarCarta(){const h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("carta-dia-result").innerHTML='<p class="dim mt20">Já consultou hoje. Volte amanhã 🌙</p>';return}const c=DECK[Math.floor(Math.random()*DECK.length)];localStorage.setItem(k,h);document.getElementById("carta-dia-result").innerHTML='<div class="fade"><h3 style="margin:12px 0">'+c.nome+'</h3><p style="font-style:italic;margin-bottom:12px">"'+c.sig+'"</p><div style="text-align:left;background:rgba(0,0,0,0.2);padding:12px;border-radius:8px"><p><strong>❤️ Amor:</strong> '+c.amor+'</p><p><strong>💼 Carreira:</strong> '+c.car+'</p><p><strong>⚠️ Conselho:</strong> '+c.inv+'</p></div></div>';toast("Carta revelada!")}
-function mostrarHoroscopo(id){const s=SIGNOS.find(function(x){return x.id===id});if(!s)return;document.getElementById("h-signo-nome").innerHTML=s.ic+" "+s.nome;document.getElementById("h-amor").innerText=s.am;document.getElementById("h-carreira").innerText=s.ca;document.getElementById("h-saude").innerText=s.sa;document.getElementById("horo-result").style.display="block"}
-<script>
-function atualizarCustoTarot(){const e=document.getElementById("tarot-tipo");const c=document.getElementById("tarot-custo");const l=document.getElementById("tarot-custo-label");if(e.value==="lc"){c.innerText="2";l.innerHTML='Custa <strong class="gold">2</strong> créditos'}else{c.innerText=e.value;l.innerHTML='Custa <strong class="gold">'+e.value+'</strong> créditos'}}
-function iniciarTarot(){const p=document.getElementById("tarot-pergunta").value.trim();const tipo=document.getElementById("tarot-tipo").value;if(tipo==="lc"){if(!p)return toast("Digite sua pergunta primeiro.");if(!gastar(2))return;document.getElementById("tarot-result").innerHTML="";document.getElementById("lc-area").style.display="block";lcMajorSelecionada=null;lcMinorSelecionada=null;lcAtras=false;const embaralhado=[...MAIORES].sort(function(){return Math.random()-0.5});const grid=document.getElementById("lc-grid-maiores");grid.innerHTML="";embaralhado.forEach(function(c){const d=document.createElement("div");d.className="carta-face";d.id="lc-major-"+c.n;d.innerHTML='<span class="cf-nome">'+c.nome+'</span><span class="cf-sig">'+c.sig.substring(0,55)+'...</span>';d.onclick=function(){selecionarLC_Maior(c.n)};grid.appendChild(d)});document.getElementById("lc-passo2").style.display="none";document.getElementById("lc-resultado").style.display="none";document.getElementById("lc-passo1").scrollIntoView({behavior:"smooth",block:"center"});toast("Escolha um Arcano Maior.")}else{consultarTarot()}}
-function selecionarLC_Maior(n){if(lcMajorSelecionada!==null||lcAtras)return;lcMajorSelecionada=MAIORES.find(function(c){return c.n===n});document.querySelectorAll("#lc-grid-maiores .carta-face").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});const el=document.getElementById("lc-major-"+n);if(el){el.style.opacity="1";el.classList.add("selecionada")}document.getElementById("lc-passo2").style.display="block";const embaralhado=[...MENORES].sort(function(){return Math.random()-0.5});const grid=document.getElementById("lc-grid-menores");grid.innerHTML="";embaralhado.forEach(function(c){const d=document.createElement("div");d.className="carta-face";d.id="lc-minor-"+c.id;d.innerHTML='<span class="cf-nome">'+c.nome+'</span><span class="cf-sig">'+c.sig.substring(0,45)+'...</span>';d.onclick=function(){selecionarLC_Menor(c.id)};grid.appendChild(d)});document.getElementById("lc-passo2").scrollIntoView({behavior:"smooth",block:"center"});toast("Agora escolha um Arcano Menor.")}
-function selecionarLC_Menor(id){if(lcMinorSelecionada!==null||lcAtras)return;lcMinorSelecionada=MENORES.find(function(c){return c.id===id});document.querySelectorAll("#lc-grid-menores .carta-face").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});const el=document.getElementById("lc-minor-"+id);if(el){el.style.opacity="1";el.classList.add("selecionada")}gerarLeituraCombinada()}
-function gerarLeituraCombinada(){lcAtras=true;const p=document.getElementById("tarot-pergunta").value.trim(),ma=lcMajorSelecionada,mi=lcMinorSelecionada;if(!ma||!mi)return;const ctx=["sua vida","seu momento atual","a situação que você descreveu","sua jornada","o caminho à sua frente"];const t1=["revela que","indica que","sugere que","aponta que","mostra que","anuncia que"];const t2=["por outro lado","em paralelo","complementarmente","em termos práticos","no dia a dia","no plano concreto"];const t3=["a interação entre essas energias sugere","a combinação revela","unindo estes significados, vemos que","a síntese destas cartas indica","juntas, estas cartas apontam para"];const fecha=["O conselho dos arcanos é: confie no processo.","Permita-se sentir e agir com sabedoria.","O baralho sugere equilíbrio entre razão e emoção.","Busque a integração entre o que você sente e o que precisa fazer.","O momento pede coragem e paciência ao mesmo tempo."];
-const r1=t1[Math.floor(Math.random()*t1.length)],r2=t2[Math.floor(Math.random()*t2.length)],r3=t3[Math.floor(Math.random()*t3.length)],con=ctx[Math.floor(Math.random()*ctx.length)],f=fecha[Math.floor(Math.random()*fecha.length)];
-let html='<div class="fade">';
-html+='<p class="dim" style="font-size:0.85rem;font-style:italic;">"'+p+'"</p>';
-html+='<div class="leitura-individual"><h4>🔮 Arcano Maior: '+ma.nome+'</h4><p><strong>Tema central:</strong> '+ma.sig+'</p><p><strong>No amor:</strong> '+ma.amor+'</p><p><strong>Na carreira:</strong> '+ma.car+'</p><p><strong>⚠️ Atenção:</strong> '+ma.inv+'</p></div>';
-html+='<div class="leitura-individual"><h4>📜 Arcano Menor: '+mi.nome+'</h4><p><strong>Detalhe prático:</strong> '+mi.sig+'</p><p><strong>No amor:</strong> '+mi.amor+'</p><p><strong>Na carreira:</strong> '+mi.car+'</p><p><strong>⚠️ Atenção:</strong> '+mi.inv+'</p></div>';
-html+='<h3 class="centro">✨ Interação entre os Arcanos</h3>';
-html+='<p>O arcano maior <strong>'+ma.nome+'</strong> '+r1+' o arquétipo espiritual que rege '+con+'. '+ma.sig+'</p>';
-html+='<p>'+r2+', o arcano menor <strong>'+mi.nome+'</strong> ('+mi.naipeF+' — '+mi.naipeCor+') reflete os aspectos práticos: '+mi.sig+'</p>';
-html+='<p><strong>'+r3+'</strong> que a energia de <strong>'+ma.nome+'</strong> se manifesta em '+con+' através das qualidades de <strong>'+mi.nome+'</strong>. Enquanto o arcano maior aponta a direção espiritual, o arcano menor mostra como isso se desenrola no cotidiano, especialmente no campo do(a) '+mi.naipeF+'.</p>';
-html+='<p style="margin-top:15px;border-top:1px solid var(--gd);padding-top:15px;font-style:italic;">'+f+'</p>';
-html+='</div>';
-document.getElementById("lc-resultado").innerHTML=html;document.getElementById("lc-resultado").style.display="block";document.getElementById("lc-resultado").scrollIntoView({behavior:"smooth",block:"center"});toast("Leitura Combinada concluída!")}
-function resetarLC(){document.getElementById("lc-area").style.display="none";document.getElementById("lc-resultado").style.display="none";document.getElementById("lc-resultado").innerHTML="";lcMajorSelecionada=null;lcMinorSelecionada=null;lcAtras=false}
-function consultarTarot(){const t=parseInt(document.getElementById("tarot-tipo").value),p=document.getElementById("tarot-pergunta").value.trim();if(!p)return toast("Faça uma pergunta.");if(!gastar(t))return;setLoad("btn-tarot",1);setTimeout(function(){const d=[...DECK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);let h='<p class="dim" style="font-size:0.85rem">"'+p+'"</p><div class="grid-tarot">';s.forEach(function(c){h+='<div class="tarot-item"><span class="tarot-nome">'+c.nome+'</span><span class="tarot-txt">'+c.sig+'</span></div>'});h+="</div>";document.getElementById("tarot-result").innerHTML=h;setLoad("btn-tarot",0);toast("Cartas lançadas!")},800)}
-function calcularNumero(){const d=document.getElementById("num-data").value;if(!d)return toast("Selecione a data.");if(!gastar(2))return;setLoad("btn-num",1);setTimeout(function(){const n=d.replace(/-/g,"").split("").map(Number);let s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}const de={1:"O Líder",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sábio",8:"O Executivo",9:"O Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("num-result").innerHTML='<div class="fade"><div class="numero-vida">'+s+'</div><h3 class="centro">Caminho de Vida</h3><p class="centro mt10">'+(de[s]||"Número especial")+"</p></div>";setLoad("btn-num",0);toast("Número revelado!")},600)}
-function consultarIChing(){const p=document.getElementById("iching-pergunta").value.trim();if(!p)return toast("Faça uma pergunta.");if(!gastar(2))return;setLoad("btn-iching",1);setTimeout(function(){const h=HEXAGRAMAS[Math.floor(Math.random()*HEXAGRAMAS.length)];document.getElementById("iching-result").innerHTML='<div class="fade"><span class="iching-simb">'+h.s+"</span><h3>Hexagrama "+h.n+": "+h.nome+"</h3><p class='mt10'>"+h.d+"</p></div>";setLoad("btn-iching",0);toast("I Ching respondeu!")},700)}
-function consultarSimNao(){const p=document.getElementById("sn-pergunta").value.trim();if(!p)return toast("Faça uma pergunta.");if(!gastar(1))return;setLoad("btn-sn",1);setTimeout(function(){const r=["Sim","Não","Talvez","Com certeza","Improvável","Não é momento","As estrelas dizem sim","Melhor não saber"];document.getElementById("sn-result").innerHTML='<span class="fade" style="font-size:1.8rem;">'+r[Math.floor(Math.random()*r.length)]+"</span>";setLoad("btn-sn",0)},500)}
-function buscarSonho(){const b=document.getElementById("sonho-busca").value.toLowerCase().trim(),l=document.getElementById("sonhos-lista");l.innerHTML="";if(b.length<2)return;let e=0;for(let p in SONHOS){if(p.includes(b)){l.innerHTML+='<div class="sonho-item"><span class="sonho-palavra">'+p+':</span><div class="sonho-sig">'+SONHOS[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim">Nada para "'+b+'".</p>'}
-function verificarComp(){const a=document.getElementById("comp-s1").value,b=document.getElementById("comp-s2").value;if(!a||!b)return toast("Selecione os dois signos.");if(a===b)return toast("Signos diferentes, por favor.");const p=Math.floor(Math.random()*60)+35;let m="";if(p>=85)m="Almas gêmeas! Sintonia rara.";else if(p>=70)m="Grande afinidade!";else if(p>=50)m="Atração de opostos.";else m="Energias distintas.";document.getElementById("comp-result").innerHTML='<div class="fade"><div class="comp-pct">'+p+"%</div><p>"+m+"</p></div>"}
-function copiarLink(){navigator.clipboard.writeText(document.getElementById("link-indicacao").value).then(function(){toast("Link copiado!")})["catch"](function(){document.getElementById("link-indicacao").select();document.execCommand("copy");toast("Link copiado!")})}
-function comprar(qtd){user.creditos+=qtd;salvarUser();fM("modal-comprar");toast("+"+qtd+" créditos!")}
-window.onload=function(){const p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
+function sl(i,v){var b=document.getElementById(i);if(!b)return;if(v){b.dataset.o=b.innerText;b.innerText="Aguarde...";b.disabled=true}else{b.innerText=b.dataset.o||b.innerText;b.disabled=false}}
+function cadastrar(){var n=document.getElementById("cn").value.trim(),c=document.getElementById("cc").value.replace(/\D/g,""),e=document.getElementById("ce").value.trim(),p=document.getElementById("cs").value,x=document.getElementById("csc").value;if(!n||c.length!==11||!e||p.length<6)return to("Preencha todos os campos.");if(p!==x)return to("Senhas não coincidem.");var u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("E-mail já existe.");var o={nome:n,cpf:c,email:e,senha:p,creditos:5,streak:1,ult:"",ind:0};o.ult=new Date().toISOString().split("T")[0];u.push(o);localStorage.setItem("oa_u",JSON.stringify(u));var r=localStorage.getItem("oa_r");if(r){var i=u.find(function(v){return btoa(v.email)===r});if(i){i.creditos+=5;i.ind=(i.ind||0)+1;localStorage.setItem("oa_u",JSON.stringify(u));localStorage.removeItem("oa_r")}}to("Conta criada! +5 créditos.");ir("login")}
+function logar(){var e=document.getElementById("le").value.trim(),p=document.getElementById("ls").value,u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return to("Email ou senha incorretos.");user=s;atS();cD();ir("main");to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
+function sair(){user=null;ir("welcome")}
+function sU(){if(!user)return;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("cu2").innerText=user.creditos;document.getElementById("su2").innerText=user.streak}
+function gas(q){if(!user){to("Faça login.");return 0}if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Créditos insuficientes.");abM("mcr");return 0}
+function atS(){var h=new Date().toISOString().split("T")[0],o=new Date(Date.now()-86400000).toISOString().split("T")[0];if(user.ult===o){user.streak+=1;bonS()}else if(user.ult!==h){user.streak=1}user.ult=h;sU()}
+function bonS(){if(user.streak===7){user.creditos+=2;setTimeout(function(){to("Bônus 7 dias! +2 créditos.")},600)}if(user.streak===15){user.creditos+=5;setTimeout(function(){to("Bônus 15 dias! +5 créditos.")},600)}if(user.streak===30){user.creditos+=10;setTimeout(function(){to("Bônus 30 dias! +10 créditos.")},600)}}
+function cD(){var n=user.nome.split(" ")[0],h=new Date().getHours();var s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("st").innerText=s+", "+n+"!";document.getElementById("fd").innerText=FR[Math.floor(Math.random()*FR.length)];document.getElementById("li").value="https://oraculumastrale.com?ref="+btoa(user.email);sU();var g=document.getElementById("gs2");g.innerHTML="";SN.forEach(function(s){var b=document.createElement("div");b.className="sb2";b.innerHTML='<span class="si">'+s.ic+'</span><span class="sn">'+s.nm+'</span>';b.onclick=function(){mH(s.id)};g.appendChild(b)});var a=document.getElementById("cs1"),b=document.getElementById("cs2");a.innerHTML='<option value="">Seu Signo</option>';b.innerHTML='<option value="">Outro Signo</option>';SN.forEach(function(s){a.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>";b.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>"})}
+function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p class="dim mt20">Já consultou hoje. Volte amanhã 🌙</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3 style="margin:12px 0">'+c.nm+'</h3><p style="font-style:italic;margin-bottom:12px">"'+c.sg+'"</p><div style="text-align:left;background:rgba(0,0,0,0.2);padding:12px;border-radius:8px"><p><strong>❤️ Amor:</strong> '+c.am+'</p><p><strong>💼 Carreira:</strong> '+c.ca+'</p><p><strong>⚠️ Conselho:</strong> '+c.in+'</p></div></div>';to("Carta revelada!")}
+function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
+function atCT(){var e=document.getElementById("tt"),c=document.getElementById("tc"),l=document.getElementById("tcl");if(e.value==="lc"){c.innerText="2";l.innerHTML='Custa <strong class="gold">2</strong> créditos'}else{c.innerText=e.value;l.innerHTML='Custa <strong class="gold">'+e.value+'</strong> créditos'}}
+function iniciarT(){var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;if(t==="lc"){if(!p)return to("Digite sua pergunta.");if(!gas(2))return;document.getElementById("tr").innerHTML="";document.getElementById("lca").style.display="block";lM=null;lm=null;la=false;var e=[...M].sort(function(){return Math.random()-0.5}),g=document.getElementById("lgm");g.innerHTML="";e.forEach(function(c){var d=document.createElement("div");d.className="cf";d.id="lm-"+c.n;d.innerHTML='<span class="cn">'+c.nm+'</span><span class="cs">'+c.sg.substring(0,50)+'...</span>';d.onclick=function(){selM(c.n)};g.appendChild(d)});document.getElementById("lc2").style.display="none";document.getElementById("lcr").style.display="none";setTimeout(function(){document.getElementById("lc1").scrollIntoView({behavior:"smooth",block:"center"})},100);to("Escolha um Arcano Maior.")}else{conT()}}
+function selM(n){if(lM!==null||la)return;lM=M.find(function(c){return c.n===n});document.querySelectorAll("#lgm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lm-"+n);if(el){el.style.opacity="1";el.classList.add("sel")}document.getElementById("lc2").style.display="block";var e=[...MN].sort(function(){return Math.random()-0.5}),g=document.getElementById("lgmm");g.innerHTML="";e.forEach(function(c){var d=document.createElement("div");d.className="cf";d.id="lmm-"+c.id;d.innerHTML='<span class="cn">'+c.nm+'</span><span class="cs">'+c.sg.substring(0,40)+'...</span>';d.onclick=function(){selm(c.id)};g.appendChild(d)});setTimeout(function(){document.getElementById("lc2").scrollIntoView({behavior:"smooth",block:"center"})},100);to("Agora escolha um Arcano Menor.")}
+function selm(id){if(lm!==null||la)return;lm=MN.find(function(c){return c.id===id});document.querySelectorAll("#lgmm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lmm-"+id);if(el){el.style.opacity="1";el.classList.add("sel")}gerLC()}
+function gerLC(){la=true;var p=document.getElementById("tp").value.trim(),ma=lM,mi=lm;if(!ma||!mi)return;var c1=["revela que","indica que","sugere que","aponta que","mostra que"],c2=["por outro lado","em paralelo","complementarmente","em termos práticos","no dia a dia"],c3=["a interação entre essas energias sugere","a combinação revela","unindo estes significados","a síntese destas cartas indica"],cf=["Confie no processo.","Permita-se sentir e agir com sabedoria.","Equilíbrio entre razão e emoção.","Busque integração entre o que sente e o que precisa fazer."];
+var r1=c1[Math.floor(Math.random()*c1.length)],r2=c2[Math.floor(Math.random()*c2.length)],r3=c3[Math.floor(Math.random()*c3.length)],f=cf[Math.floor(Math.random()*cf.length)];
+var h='<div class="fade">';
+h+='<p class="dim" style="font-size:0.85rem;font-style:italic;">"'+p+'"</p>';
+h+='<div class="li"><h4>🔮 Arcano Maior: '+ma.nm+'</h4><p><strong>Tema central:</strong> '+ma.sg+'</p><p><strong>Amor:</strong> '+ma.am+'</p><p><strong>Carreira:</strong> '+ma.ca+'</p><p><strong>⚠️ Atenção:</strong> '+ma.in+'</p></div>';
+h+='<div class="li"><h4>📜 Arcano Menor: '+mi.nm+'</h4><p><strong>Detalhe prático:</strong> '+mi.sg+'</p><p><strong>Amor:</strong> '+mi.am+'</p><p><strong>Carreira:</strong> '+mi.ca+'</p><p><strong>⚠️ Atenção:</strong> '+mi.in+'</p></div>';
+h+='<h3 class="ct">✨ Interação</h3>';
+h+='<p>O arcano maior <strong>'+ma.nm+'</strong> '+r1+' o arquétipo espiritual da situação. '+ma.sg+'</p>';
+h+='<p>'+r2+', o arcano menor <strong>'+mi.nm+'</strong> ('+mi.nf+' — '+mi.nc+') reflete os aspectos práticos: '+mi.sg+'</p>';
+h+='<p><strong>'+r3+'</strong> que a energia de <strong>'+ma.nm+'</strong> se manifesta através das qualidades de <strong>'+mi.nm+'</strong>. O arcano maior aponta a direção espiritual, o menor mostra como se desenrola no cotidiano, especialmente no campo do(a) '+mi.nf+'.</p>';
+h+='<p style="margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px;font-style:italic;">'+f+'</p>';
+h+='</div>';
+document.getElementById("lcr").innerHTML=h;document.getElementById("lcr").style.display="block";setTimeout(function(){document.getElementById("lcr").scrollIntoView({behavior:"smooth",block:"center"})},100);to("Leitura Combinada concluída!")}
+function resLC(){document.getElementById("lca").style.display="none";document.getElementById("lcr").style.display="none";document.getElementById("lcr").innerHTML="";lM=null;lm=null;la=false}
+function conT(){var t=parseInt(document.getElementById("tt").value),p=document.getElementById("tp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(t))return;sl("btn-t",1);setTimeout(function(){var d=[...DK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);var h='<p class="dim" style="font-size:0.85rem">"'+p+'"</p><div class="gt">';s.forEach(function(c){h+='<div class="ti2"><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!")},800)}
+function calN(){var d=document.getElementById("nd").value;if(!d)return to("Selecione a data.");if(!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"O Líder",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sábio",8:"O Executivo",9:"O Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3 class="ct">Caminho de Vida</h3><p class="ct mt10">'+(de[s]||"Número especial")+"</p></div>";sl("btn-n",0);to("Número revelado!")},600)}
+function conI(){var p=document.getElementById("ip").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(2))return;sl("btn-i",1);setTimeout(function(){var h=HX[Math.floor(Math.random()*HX.length)];document.getElementById("ir").innerHTML='<div class="fade"><span class="ich">'+h.s+"</span><h3>Hexagrama "+h.n+": "+h.nm+"</h3><p class='mt10'>"+h.d+"</p></div>";sl("btn-i",0);to("I Ching respondeu!")},700)}
+function conSN(){var p=document.getElementById("snp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Não","Talvez","Com certeza","Improvável","Não é momento","As estrelas dizem sim","Melhor não saber"];document.getElementById("snr").innerHTML='<span class="fade" style="font-size:1.8rem;">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
+function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;var e=0;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim">Nada para "'+b+'".</p>'}
+function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b)return to("Selecione os dois.");if(a===b)return to("Signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m="";if(p>=85)m="Almas gêmeas!";else if(p>=70)m="Grande afinidade!";else if(p>=50)m="Atração de opostos.";else m="Energias distintas.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
+function copL(){navigator.clipboard.writeText(document.getElementById("li").value).then(function(){to("Link copiado!")})["catch"](function(){document.getElementById("li").select();document.execCommand("copy");to("Link copiado!")})}
+function comp(q){user.creditos+=q;sU();fM("mcr");to("+"+q+" créditos!")}
+window.onload=function(){var p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
 </script>
 </body>
 </html>
