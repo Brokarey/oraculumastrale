@@ -8,22 +8,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#d4a853;--gd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0;--gl:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1);--tr:0.4s cubic-bezier(0.4,0,0.2,1)}
-*{margin:0;padding:0;box-sizing:border-box;user-select:none}
+*{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;color:var(--tx);min-height:100vh;overflow-x:hidden;line-height:1.6;background:#080212}
 body.no-scroll{overflow:hidden}
 h1,h2,h3{font-family:'Playfair Display',serif;color:var(--gold)}
 a{color:var(--gold);text-decoration:none}
-#estrelas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
-.estrela{position:absolute;background:#fff;border-radius:50%;animation:brilhar var(--d) infinite ease-in-out}
-@keyframes brilhar{0%,100%{opacity:0.15;transform:scale(0.8)}50%{opacity:1;transform:scale(1.5)}}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#080212}
 ::-webkit-scrollbar-thumb{background:var(--gd);border-radius:10px}
 .tela{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:var(--tr);z-index:1}
 .tela.ativa{opacity:1;pointer-events:all;z-index:2}
-#tela-welcome{background:url('mystical_crystal_portal.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
-.btn-entrar{position:absolute;left:35%;right:35%;top:61%;height:7%;z-index:5;cursor:pointer;border:none;background:transparent}
-.btn-cadastrar{position:absolute;left:35%;right:35%;top:69%;height:7%;z-index:5;cursor:pointer;border:none;background:transparent}
+#tela-welcome{background:url('mystical_crystal_portal.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#tela-welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.4);z-index:0}
+#tela-welcome>*{position:relative;z-index:1}
+.welcome-botoes{margin-top:60vh;width:100%;max-width:280px;display:flex;flex-direction:column;gap:14px;z-index:2}
+.btn-welcome{background:var(--gold);color:#000;border:none;padding:14px 28px;border-radius:10px;font-weight:700;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1rem;box-shadow:0 4px 20px rgba(212,168,83,0.4)}
+.btn-welcome:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 30px rgba(212,168,83,0.6)}
+.btn-welcome-outline{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.btn-welcome-outline:hover{background:rgba(212,168,83,0.15);color:#fff}
 .tela:not(#tela-welcome){background:linear-gradient(135deg,#0a0015,#1a0030);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 .card{background:var(--gl);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--gb);border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .btn{background:var(--gold);color:#000;border:none;padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;width:100%;margin-top:10px;font-family:'Inter',sans-serif;font-size:0.9rem}
@@ -76,13 +78,12 @@ select option{background:#1a0030;color:#e8e0f0}
 .tarot-txt{font-size:0.8rem;line-height:1.4}
 .carta-face{background:linear-gradient(135deg,#2a1040,#1a0030);border:2px solid var(--gd);border-radius:10px;padding:12px 6px;text-align:center;cursor:pointer;transition:0.3s;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:0.7rem}
 .carta-face:hover{border-color:var(--gold);transform:scale(1.05);box-shadow:0 0 15px rgba(212,168,83,0.25)}
-.carta-face.selecionada{border-color:var(--gold);background:rgba(212,168,83,0.12);box-shadow:0 0 20px rgba(212,168,83,0.4)}
+.carta-face.selecionada{border-color:var(--gold);background:rgba(212,168,83,0.12);box-shadow:0 0 20px rgba(212,168,83,0.4);opacity:1!important}
 .carta-face .cf-nome{color:var(--gold);font-weight:600;font-size:0.75rem;display:block}
 .carta-face .cf-sig{font-size:0.6rem;color:var(--td);display:block;margin-top:3px}
 .grid-lc-maiores{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:12px 0}
 .grid-lc-menores{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:6px;margin:12px 0}
 .leitura-combinada{margin-top:20px;border-top:2px solid var(--gold);padding-top:20px}
-.leitura-combinada h3{color:var(--gold);margin-bottom:10px}
 .leitura-combinada p{font-size:0.9rem;line-height:1.7;margin-bottom:10px}
 .leitura-individual{background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0}
 .leitura-individual h4{color:var(--gold);margin-bottom:5px}
@@ -98,7 +99,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .pack-preco{font-size:1.3rem;color:var(--gold);font-weight:bold;margin:6px 0}
 .pack-eco{font-size:0.7rem;color:#4caf50}
 .pack-tag{font-size:0.65rem;background:var(--gd);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:4px}
-.sonho-item{margin-bottom:10px;border-bottom:1px solid var(--gd);padding-bottom:8px;font-size:0.9rem}
+.sonho-item{margin-bottom:10px;border-bottom:1px solid var(--gd);padding-bottom:8px}
 .sonho-palavra{color:var(--gold);font-weight:600;text-transform:capitalize}
 .sonho-sig{font-size:0.85rem;margin-top:2px;color:var(--td)}
 .linha{display:flex;gap:8px}
@@ -110,7 +111,6 @@ select option{background:#1a0030;color:#e8e0f0}
 .iching-simb{font-size:3.5rem;display:block;margin:12px 0;text-align:center}
 @media(max-width:768px){
 .sidebar{width:180px;min-width:180px}
-.btn-entrar,.btn-cadastrar{left:28%;right:28%}
 .grid-signos{grid-template-columns:repeat(3,1fr)}
 .grid-secoes{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
 .grid-packs{grid-template-columns:repeat(2,1fr)}
@@ -131,11 +131,12 @@ select option{background:#1a0030;color:#e8e0f0}
 </style>
 </head>
 <body>
-<div id="estrelas"></div>
 <div id="toasts"></div>
 <div id="tela-welcome" class="tela ativa">
-  <button class="btn-entrar" onclick="irP('tela-login')" aria-label="Entrar"></button>
-  <button class="btn-cadastrar" onclick="irP('tela-cadastro')" aria-label="Cadastrar"></button>
+  <div class="welcome-botoes">
+    <button class="btn-welcome" onclick="irP('tela-login')">Entrar</button>
+    <button class="btn-welcome btn-welcome-outline" onclick="irP('tela-cadastro')">Cadastrar</button>
+  </div>
 </div>
 <div id="tela-login" class="tela">
   <div class="card">
@@ -198,7 +199,7 @@ select option{background:#1a0030;color:#e8e0f0}
 </div>
 <div id="modal-carta-dia" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-carta-dia')">&times;</button><h2>Sua Carta do Dia</h2><div id="carta-dia-result" class="centro mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="revelarCarta()">Revelar</button></div></div></div>
 <div id="modal-horoscopo" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-horoscopo')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim" style="font-size:0.85rem;">Selecione seu signo:</p><div class="grid-signos" id="grid-signos"></div><div id="horo-result" class="horo-result" style="display:none;"><h3 id="h-signo-nome">Signo</h3><p><strong>❤️ Amor:</strong> <span id="h-amor"></span></p><p><strong>💼 Carreira:</strong> <span id="h-carreira"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="h-saude"></span></p></div></div></div>
-<div id="modal-tarot" class="modal"><div class="modal-conteudo modal-conteudo-largo"><button class="fechar-modal" onclick="fM('modal-tarot'); resetarLC()">&times;</button><h2>🔮 Tarot</h2><input type="text" id="tarot-pergunta" placeholder="Sua pergunta?"><select id="tarot-tipo" onchange="atualizarCustoTarot()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option><option value="lc">🔄 Leitura Combinada (Maior + Menor) — 2 créditos</option></select><p class="dim mt10" id="tarot-custo-label">Custa <strong class="gold" id="tarot-custo">3</strong> créditos</p><button class="btn" id="btn-tarot" onclick="iniciarTarot()">Consultar</button><div id="tarot-result" class="mt15"></div><div id="lc-area" style="display:none;" class="mt15"><div id="lc-passo1"><p class="passo-label">🔮 Passo 1 — Clique em 1 dos 22 Arcanos Maiores (tema espiritual):</p><div class="grid-lc-maiores" id="lc-grid-maiores"></div></div><div id="lc-passo2" style="display:none;"><p class="passo-label">📜 Passo 2 — Clique em 1 dos 56 Arcanos Menores (detalhes práticos):</p><div class="grid-lc-menores" id="lc-grid-menores"></div></div><div id="lc-resultado" style="display:none;" class="leitura-combinada"></div></div></div></div>
+<div id="modal-tarot" class="modal"><div class="modal-conteudo modal-conteudo-largo"><button class="fechar-modal" onclick="fM('modal-tarot'); resetarLC()">&times;</button><h2>🔮 Tarot</h2><input type="text" id="tarot-pergunta" placeholder="Sua pergunta?"><select id="tarot-tipo" onchange="atualizarCustoTarot()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option><option value="lc">🔄 Leitura Combinada (Maior + Menor) — 2 créditos</option></select><p class="dim mt10" id="tarot-custo-label">Custa <strong class="gold" id="tarot-custo">3</strong> créditos</p><button class="btn" id="btn-tarot" onclick="iniciarTarot()">Consultar</button><div id="tarot-result" class="mt15"></div><div id="lc-area" style="display:none;" class="mt15"><div id="lc-passo1"><p class="passo-label">🔮 Passo 1 — Clique em 1 dos 22 Arcanos Maiores:</p><div class="grid-lc-maiores" id="lc-grid-maiores"></div></div><div id="lc-passo2" style="display:none;"><p class="passo-label">📜 Passo 2 — Clique em 1 dos 56 Arcanos Menores:</p><div class="grid-lc-menores" id="lc-grid-menores"></div></div><div id="lc-resultado" style="display:none;" class="leitura-combinada"></div></div></div></div>
 <div id="modal-numerologia" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-numerologia')">&times;</button><h2>Numerologia</h2><p class="dim" style="font-size:0.85rem;">Caminho da Vida (2 créditos).</p><input type="date" id="num-data"><button class="btn" id="btn-num" onclick="calcularNumero()">Calcular</button><div id="num-result" class="mt15"></div></div></div>
 <div id="modal-iching" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-iching')">&times;</button><h2>I Ching</h2><input type="text" id="iching-pergunta" placeholder="Sua pergunta?"><button class="btn" id="btn-iching" onclick="consultarIChing()">Consultar (2 créditos)</button><div id="iching-result" class="mt15 centro"></div></div></div>
 <div id="modal-simnao" class="modal"><div class="modal-conteudo"><button class="fechar-modal" onclick="fM('modal-simnao')">&times;</button><h2>Sim ou Não</h2><input type="text" id="sn-pergunta" placeholder="Pergunta objetiva"><button class="btn" id="btn-sn" onclick="consultarSimNao()">Perguntar (1 crédito)</button><div id="sn-result" class="mt15 centro gold" style="font-size:1.8rem;font-weight:bold;"></div></div></div>
@@ -238,11 +239,10 @@ const SONHOS={agua:"Suas emoções. Limpa=clareza, suja=confusão.",cobra:"Trans
 const HEXAGRAMAS=[{n:1,nome:"O Criativo (Qian)",s:"☰",d:"Força criativa e poder vital."},{n:2,nome:"O Receptivo (Kun)",s:"☷",d:"Poder da terra, devoção."},{n:3,nome:"Dificuldade Inicial (Zhun)",s:"䷂",d:"Brotando do solo. Crescimento."},{n:4,nome:"Insensatez Juvenil (Meng)",s:"䷃",d:"Aprendizado e humildade."},{n:5,nome:"A Espera (Xu)",s:"䷄",d:"Paciência. O tempo certo."},{n:6,nome:"O Conflito (Song)",s:"䷅",d:"Disputa. Busque mediação."},{n:7,nome:"O Exército (Shi)",s:"䷆",d:"Disciplina. Organização."},{n:8,nome:"A União (Bi)",s:"䷇",d:"Solidariedade. Cooperação."}];
 const FRASES=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio do seu coração.","Sua intuição é a voz da sua alma.","Cada carta revela um caminho, mas você é quem caminha.","A luz que vê nos outros é o reflexo da sua própria luz.","Confie no tempo do universo.","Sua energia cria sua realidade.","O passado é lição, o futuro é mistério, o presente é dádiva.","Não há coincidências, apenas sincronicidades.","Abra sua mente para o invisível.","Você é um universo em um sopro.","Onde há fé, há caminho.","Sua jornada é única.","O oráculo ilumina o presente.","Seja a mudança no seu destino.","A magia está em quem você se torna.","Cada amanhecer é uma nova página."];
 let user=null,toastFila=[],mostrandoToast=false,lcMajorSelecionada=null,lcMinorSelecionada=null,lcAtras=false;
-function initEstrelas(){const c=document.getElementById("estrelas");for(let i=0;i<100;i++){const s=document.createElement("div");s.className="estrela";const sz=(Math.random()*3+1).toFixed(1);s.style.width=sz+"px";s.style.height=sz+"px";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.setProperty("--d",(Math.random()*3+2).toFixed(1)+"s");s.style.animationDelay=(Math.random()*5).toFixed(1)+"s";c.appendChild(s)}}
 function irP(id){document.querySelectorAll(".tela").forEach(function(t){t.classList.remove("ativa")});const e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
 function irS(){document.querySelectorAll(".sidebar-item").forEach(function(i){i.classList.remove("ativo")});var e=document.querySelector(".sidebar-item");if(e)e.classList.add("ativo")}
-function toast(m){toastFila.push(m);if(!mostrandoToast)processarToast()}
-function processarToast(){if(toastFila.length===0){mostrandoToast=false;return}mostrandoToast=true;const m=toastFila.shift(),c=document.getElementById("toasts"),e=document.createElement("div");e.className="toast-item";e.innerText=m;c.appendChild(e);setTimeout(function(){e.classList.add("saindo");setTimeout(function(){e.remove();processarToast()},400)},3000)}
+function toast(m){toastFila.push(m);if(!mostrandoToast)procT()}
+function procT(){if(toastFila.length===0){mostrandoToast=false;return}mostrandoToast=true;const m=toastFila.shift(),c=document.getElementById("toasts"),e=document.createElement("div");e.className="toast-item";e.innerText=m;c.appendChild(e);setTimeout(function(){e.classList.add("saindo");setTimeout(function(){e.remove();procT()},400)},3000)}
 function aM(i){const m=document.getElementById(i);if(m){m.style.display="flex";document.body.classList.add("no-scroll")}}
 function fM(i){const m=document.getElementById(i);if(m){m.style.display="none";document.body.classList.remove("no-scroll")}}
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.querySelectorAll(".modal").forEach(function(m){if(m.style.display==="flex"){m.style.display="none";document.body.classList.remove("no-scroll")}})}});
@@ -260,9 +260,9 @@ function revelarCarta(){const h=new Date().toISOString().split("T")[0],k="c_"+us
 function mostrarHoroscopo(id){const s=SIGNOS.find(function(x){return x.id===id});if(!s)return;document.getElementById("h-signo-nome").innerHTML=s.ic+" "+s.nome;document.getElementById("h-amor").innerText=s.am;document.getElementById("h-carreira").innerText=s.ca;document.getElementById("h-saude").innerText=s.sa;document.getElementById("horo-result").style.display="block"}
 <script>
 function atualizarCustoTarot(){const e=document.getElementById("tarot-tipo");const c=document.getElementById("tarot-custo");const l=document.getElementById("tarot-custo-label");if(e.value==="lc"){c.innerText="2";l.innerHTML='Custa <strong class="gold">2</strong> créditos'}else{c.innerText=e.value;l.innerHTML='Custa <strong class="gold">'+e.value+'</strong> créditos'}}
-function iniciarTarot(){const p=document.getElementById("tarot-pergunta").value.trim();const tipo=document.getElementById("tarot-tipo").value;if(tipo==="lc"){if(!p)return toast("Digite sua pergunta primeiro.");if(!gastar(2))return;document.getElementById("tarot-result").innerHTML="";document.getElementById("lc-area").style.display="block";lcMajorSelecionada=null;lcMinorSelecionada=null;lcAtras=false;const embaralhado=[...MAIORES].sort(function(){return Math.random()-0.5});const grid=document.getElementById("lc-grid-maiores");grid.innerHTML="";embaralhado.forEach(function(c){const d=document.createElement("div");d.className="carta-face";d.id="lc-major-"+c.n;d.innerHTML='<span class="cf-nome">'+c.nome+'</span><span class="cf-sig">'+c.sig.substring(0,55)+'...</span>';d.onclick=function(){selecionarLC_Maior(c.n)};grid.appendChild(d)});document.getElementById("lc-passo2").style.display="none";document.getElementById("lc-resultado").style.display="none";document.getElementById("lc-passo1").scrollIntoView({behavior:"smooth",block:"center"});toast("Escolha um Arcano Maior (tema espiritual).")}else{consultarTarot()}}
-function selecionarLC_Maior(n){if(lcMajorSelecionada!==null||lcAtras)return;lcMajorSelecionada=MAIORES.find(function(c){return c.n===n});document.querySelectorAll("#lc-grid-maiores .carta-face").forEach(function(c){c.style.opacity="0.5";c.style.pointerEvents="none"});const el=document.getElementById("lc-major-"+n);if(el){el.style.opacity="1";el.classList.add("selecionada")}document.getElementById("lc-passo2").style.display="block";const embaralhado=[...MENORES].sort(function(){return Math.random()-0.5});const grid=document.getElementById("lc-grid-menores");grid.innerHTML="";embaralhado.forEach(function(c){const d=document.createElement("div");d.className="carta-face";d.id="lc-minor-"+c.id;d.innerHTML='<span class="cf-nome">'+c.nome+'</span><span class="cf-sig">'+c.sig.substring(0,45)+'...</span>';d.onclick=function(){selecionarLC_Menor(c.id)};grid.appendChild(d)});document.getElementById("lc-passo2").scrollIntoView({behavior:"smooth",block:"center"});toast("Agora escolha um Arcano Menor (detalhes práticos).")}
-function selecionarLC_Menor(id){if(lcMinorSelecionada!==null||lcAtras)return;lcMinorSelecionada=MENORES.find(function(c){return c.id===id});document.querySelectorAll("#lc-grid-menores .carta-face").forEach(function(c){c.style.opacity="0.5";c.style.pointerEvents="none"});const el=document.getElementById("lc-minor-"+id);if(el){el.style.opacity="1";el.classList.add("selecionada")}gerarLeituraCombinada()}
+function iniciarTarot(){const p=document.getElementById("tarot-pergunta").value.trim();const tipo=document.getElementById("tarot-tipo").value;if(tipo==="lc"){if(!p)return toast("Digite sua pergunta primeiro.");if(!gastar(2))return;document.getElementById("tarot-result").innerHTML="";document.getElementById("lc-area").style.display="block";lcMajorSelecionada=null;lcMinorSelecionada=null;lcAtras=false;const embaralhado=[...MAIORES].sort(function(){return Math.random()-0.5});const grid=document.getElementById("lc-grid-maiores");grid.innerHTML="";embaralhado.forEach(function(c){const d=document.createElement("div");d.className="carta-face";d.id="lc-major-"+c.n;d.innerHTML='<span class="cf-nome">'+c.nome+'</span><span class="cf-sig">'+c.sig.substring(0,55)+'...</span>';d.onclick=function(){selecionarLC_Maior(c.n)};grid.appendChild(d)});document.getElementById("lc-passo2").style.display="none";document.getElementById("lc-resultado").style.display="none";document.getElementById("lc-passo1").scrollIntoView({behavior:"smooth",block:"center"});toast("Escolha um Arcano Maior.")}else{consultarTarot()}}
+function selecionarLC_Maior(n){if(lcMajorSelecionada!==null||lcAtras)return;lcMajorSelecionada=MAIORES.find(function(c){return c.n===n});document.querySelectorAll("#lc-grid-maiores .carta-face").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});const el=document.getElementById("lc-major-"+n);if(el){el.style.opacity="1";el.classList.add("selecionada")}document.getElementById("lc-passo2").style.display="block";const embaralhado=[...MENORES].sort(function(){return Math.random()-0.5});const grid=document.getElementById("lc-grid-menores");grid.innerHTML="";embaralhado.forEach(function(c){const d=document.createElement("div");d.className="carta-face";d.id="lc-minor-"+c.id;d.innerHTML='<span class="cf-nome">'+c.nome+'</span><span class="cf-sig">'+c.sig.substring(0,45)+'...</span>';d.onclick=function(){selecionarLC_Menor(c.id)};grid.appendChild(d)});document.getElementById("lc-passo2").scrollIntoView({behavior:"smooth",block:"center"});toast("Agora escolha um Arcano Menor.")}
+function selecionarLC_Menor(id){if(lcMinorSelecionada!==null||lcAtras)return;lcMinorSelecionada=MENORES.find(function(c){return c.id===id});document.querySelectorAll("#lc-grid-menores .carta-face").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});const el=document.getElementById("lc-minor-"+id);if(el){el.style.opacity="1";el.classList.add("selecionada")}gerarLeituraCombinada()}
 function gerarLeituraCombinada(){lcAtras=true;const p=document.getElementById("tarot-pergunta").value.trim(),ma=lcMajorSelecionada,mi=lcMinorSelecionada;if(!ma||!mi)return;const ctx=["sua vida","seu momento atual","a situação que você descreveu","sua jornada","o caminho à sua frente"];const t1=["revela que","indica que","sugere que","aponta que","mostra que","anuncia que"];const t2=["por outro lado","em paralelo","complementarmente","em termos práticos","no dia a dia","no plano concreto"];const t3=["a interação entre essas energias sugere","a combinação revela","unindo estes significados, vemos que","a síntese destas cartas indica","juntas, estas cartas apontam para"];const fecha=["O conselho dos arcanos é: confie no processo.","Permita-se sentir e agir com sabedoria.","O baralho sugere equilíbrio entre razão e emoção.","Busque a integração entre o que você sente e o que precisa fazer.","O momento pede coragem e paciência ao mesmo tempo."];
 const r1=t1[Math.floor(Math.random()*t1.length)],r2=t2[Math.floor(Math.random()*t2.length)],r3=t3[Math.floor(Math.random()*t3.length)],con=ctx[Math.floor(Math.random()*ctx.length)],f=fecha[Math.floor(Math.random()*fecha.length)];
 let html='<div class="fade">';
@@ -271,8 +271,8 @@ html+='<div class="leitura-individual"><h4>🔮 Arcano Maior: '+ma.nome+'</h4><p
 html+='<div class="leitura-individual"><h4>📜 Arcano Menor: '+mi.nome+'</h4><p><strong>Detalhe prático:</strong> '+mi.sig+'</p><p><strong>No amor:</strong> '+mi.amor+'</p><p><strong>Na carreira:</strong> '+mi.car+'</p><p><strong>⚠️ Atenção:</strong> '+mi.inv+'</p></div>';
 html+='<h3 class="centro">✨ Interação entre os Arcanos</h3>';
 html+='<p>O arcano maior <strong>'+ma.nome+'</strong> '+r1+' o arquétipo espiritual que rege '+con+'. '+ma.sig+'</p>';
-html+='<p>'+r2+', o arcano menor <strong>'+mi.nome+'</strong> ('+mi.naipeF+' — '+mi.naipeCor+') '+r2+' os aspectos práticos: '+mi.sig+'</p>';
-html+='<p><strong>'+r3+'</strong> que a energia do(a) <strong>'+ma.nome+'</strong> se manifesta em '+con+' através das qualidades do(a) <strong>'+mi.nome+'</strong>. Enquanto o arcano maior aponta a direção e o propósito, o arcano menor mostra como isso se desenrola no cotidiano, especialmente no campo do(a) '+mi.naipeF+'.</p>';
+html+='<p>'+r2+', o arcano menor <strong>'+mi.nome+'</strong> ('+mi.naipeF+' — '+mi.naipeCor+') reflete os aspectos práticos: '+mi.sig+'</p>';
+html+='<p><strong>'+r3+'</strong> que a energia de <strong>'+ma.nome+'</strong> se manifesta em '+con+' através das qualidades de <strong>'+mi.nome+'</strong>. Enquanto o arcano maior aponta a direção espiritual, o arcano menor mostra como isso se desenrola no cotidiano, especialmente no campo do(a) '+mi.naipeF+'.</p>';
 html+='<p style="margin-top:15px;border-top:1px solid var(--gd);padding-top:15px;font-style:italic;">'+f+'</p>';
 html+='</div>';
 document.getElementById("lc-resultado").innerHTML=html;document.getElementById("lc-resultado").style.display="block";document.getElementById("lc-resultado").scrollIntoView({behavior:"smooth",block:"center"});toast("Leitura Combinada concluída!")}
@@ -285,7 +285,7 @@ function buscarSonho(){const b=document.getElementById("sonho-busca").value.toLo
 function verificarComp(){const a=document.getElementById("comp-s1").value,b=document.getElementById("comp-s2").value;if(!a||!b)return toast("Selecione os dois signos.");if(a===b)return toast("Signos diferentes, por favor.");const p=Math.floor(Math.random()*60)+35;let m="";if(p>=85)m="Almas gêmeas! Sintonia rara.";else if(p>=70)m="Grande afinidade!";else if(p>=50)m="Atração de opostos.";else m="Energias distintas.";document.getElementById("comp-result").innerHTML='<div class="fade"><div class="comp-pct">'+p+"%</div><p>"+m+"</p></div>"}
 function copiarLink(){navigator.clipboard.writeText(document.getElementById("link-indicacao").value).then(function(){toast("Link copiado!")})["catch"](function(){document.getElementById("link-indicacao").select();document.execCommand("copy");toast("Link copiado!")})}
 function comprar(qtd){user.creditos+=qtd;salvarUser();fM("modal-comprar");toast("+"+qtd+" créditos!")}
-window.onload=function(){initEstrelas();const p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
+window.onload=function(){const p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
 </script>
 </body>
 </html>
