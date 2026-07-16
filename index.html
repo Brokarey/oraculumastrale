@@ -174,7 +174,7 @@ select option{background:#1a0030;color:#e8e0f0}
       <div class="sb-i ativo" onclick="ds()"><span class="sb-ic">🏠</span> Dashboard</div>
       <div class="sb-i" onclick="abM('mc')"><span class="sb-ic">🃏</span> Carta do Dia</div>
       <div class="sb-i" onclick="abM('mh')"><span class="sb-ic">☀️</span> Horóscopo</div>
-      <div class="sb-i" onclick="abM('mt')"><span class="sb-ic">🔮</span> Tarot</div>
+      <div class="sb-i" onclick="abM('mt')"><span class="sb-ic">🔮</span> Tarô</div>
       <div class="sb-i" onclick="abM('mn')"><span class="sb-ic">🔢</span> Numerologia</div>
       <div class="sb-i" onclick="abM('mi')"><span class="sb-ic">☯️</span> I Ching</div>
       <div class="sb-i" onclick="abM('msn')"><span class="sb-ic">⚡</span> Sim/Não</div>
@@ -190,7 +190,7 @@ select option{background:#1a0030;color:#e8e0f0}
       <div class="gs">
         <div class="sc" onclick="abM('mc')"><span class="ico">🃏</span><h3>Carta do Dia</h3><p>Grátis diária</p></div>
         <div class="sc" onclick="abM('mh')"><span class="ico">☀️</span><h3>Horóscopo</h3><p>Previsões</p></div>
-        <div class="sc" onclick="abM('mt')"><span class="ico">🔮</span><h3>Tarot</h3><p>Respostas + Leitura</p></div>
+        <div class="sc" onclick="abM('mt')"><span class="ico">🔮</span><h3>Tarô</h3><p>Respostas + Leitura</p></div>
         <div class="sc" onclick="abM('mn')"><span class="ico">🔢</span><h3>Numerologia</h3><p>Caminho de vida</p></div>
         <div class="sc" onclick="abM('mi')"><span class="ico">☯️</span><h3>I Ching</h3><p>Sabedoria</p></div>
         <div class="sc" onclick="abM('msn')"><span class="ico">⚡</span><h3>Sim/Não</h3><p>Rápido</p></div>
@@ -203,7 +203,33 @@ select option{background:#1a0030;color:#e8e0f0}
 </div>
 <div id="mc" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mc')">&times;</button><h2>Sua Carta do Dia</h2><div id="cdr" class="ct mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="rc()">Revelar</button></div></div></div>
 <div id="mh" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mh')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim" style="font-size:0.85rem;">Selecione seu signo:</p><div class="gs2" id="gs2"></div><div id="hr" class="hr" style="display:none;"><h3 id="hsn">Signo</h3><p><strong>❤️ Amor:</strong> <span id="ham"></span></p><p><strong>💼 Carreira:</strong> <span id="hca"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="hsa"></span></p></div></div></div>
-<div id="mt" class="modal"><div class="modal-c modal-l"><button class="fm" onclick="fM('mt');resLC()">&times;</button><h2>🔮 Tarot</h2><input type="text" id="tp" placeholder="Sua pergunta?"><select id="tt" onchange="atCT()"><option value="1">1 Carta — 1 crédito</option><option value="3" selected>3 Cartas — 3 créditos</option><option value="5">5 Cartas — 5 créditos</option><option value="lc">🔄 Leitura Combinada — 2 créditos</option></select><p class="dim mt10" id="tcl">Custa <strong class="gold" id="tc">3</strong> créditos</p><button class="btn" id="btn-t" onclick="iniciarT()">Consultar</button><div id="tr" class="mt15"></div><div id="lca" style="display:none;" class="mt15"><div id="lc1"><p class="pl">🔮 Passo 1 — Escolha 1 Arcano Maior (clique para revelar):</p><div class="gm" id="lgm"></div></div><div id="lc2" style="display:none;"><p class="pl">📜 Passo 2 — Escolha 1 Arcano Menor (clique para revelar):</p><div class="gmm" id="lgmm"></div></div><div id="lcr" style="display:none;" class="lc"></div></div></div></div>
+<div id="mt" class="modal"><div class="modal-c modal-l">
+  <button class="fm" onclick="fM('mt');resLC()">&times;</button>
+  <h2>🔮 Tarô</h2>
+  <p style="font-size:0.85rem;color:var(--td);margin-bottom:10px;font-family:'Open Sans',sans-serif;">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais para oferecer orientação, autoconhecimento e clareza.</p>
+  <div id="desc-1carta" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);">
+    <p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Sobre a tiragem de 1 Carta</p>
+    <p>O tarô de 1 carta é um método rápido de leitura focado em autoconhecimento e direcionamento diário. Você retira apenas um arcano do baralho para servir como bússola para o momento. Ele foca em uma pergunta específica, revelando o conselho central, a energia do dia ou a resposta direta que você precisa. Faça uma pergunta objetiva.</p>
+    <p style="margin-top:8px;">Essa tiragem é ideal para quem tem pressa ou para iniciantes que estão começando a compreender a simbologia e os significados dos arquétipos. Funciona de forma muito simples:</p>
+    <p style="margin-top:6px;">1. Escreva um objetivo claro ou uma pergunta que você queira responder.<br>2. Selecione uma das cartas do baralho embaralhado, concentrando-se nessa energia. Observe os sentimentos, cores e a mensagem que ela transmite.</p>
+    <p style="margin-top:8px;">Esse formato é excelente para meditações diárias e para focar no momento presente, evitando misturar múltiplos significados de leituras com muitas cartas.</p>
+  </div>
+  <input type="text" id="tp" placeholder="Sua pergunta?">
+  <select id="tt" onchange="atCT()">
+    <option value="1">1 Carta — 1 crédito</option>
+    <option value="3" selected>3 Cartas — 3 créditos</option>
+    <option value="5">5 Cartas — 5 créditos</option>
+    <option value="lc">🔄 Leitura Combinada — 2 créditos</option>
+  </select>
+  <p class="dim mt10" id="tcl">Custa <strong class="gold" id="tc">3</strong> créditos</p>
+  <button class="btn" id="btn-t" onclick="iniciarT()">Consultar</button>
+  <div id="tr" class="mt15"></div>
+  <div id="lca" style="display:none;" class="mt15">
+    <div id="lc1"><p class="pl">🔮 Passo 1 — Escolha 1 Arcano Maior (clique para revelar):</p><div class="gm" id="lgm"></div></div>
+    <div id="lc2" style="display:none;"><p class="pl">📜 Passo 2 — Escolha 1 Arcano Menor (clique para revelar):</p><div class="gmm" id="lgmm"></div></div>
+    <div id="lcr" style="display:none;" class="lc"></div>
+  </div>
+</div></div>
 <div id="mn" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mn')">&times;</button><h2>Numerologia</h2><p class="dim" style="font-size:0.85rem;">Caminho da Vida (2 créditos).</p><input type="date" id="nd"><button class="btn" id="btn-n" onclick="calN()">Calcular</button><div id="nr" class="mt15"></div></div></div>
 <div id="mi" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mi')">&times;</button><h2>I Ching</h2><input type="text" id="ip" placeholder="Sua pergunta?"><button class="btn" id="btn-i" onclick="conI()">Consultar (2 créditos)</button><div id="ir" class="mt15 ct"></div></div></div>
 <div id="msn" class="modal"><div class="modal-c"><button class="fm" onclick="fM('msn')">&times;</button><h2>Sim ou Não</h2><input type="text" id="snp" placeholder="Pergunta objetiva"><button class="btn" id="btn-sn" onclick="conSN()">Perguntar (1 crédito)</button><div id="snr" class="mt15 ct gold" style="font-size:1.8rem;font-weight:bold;"></div></div></div>
@@ -212,105 +238,13 @@ select option{background:#1a0030;color:#e8e0f0}
 <div id="mind" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mind')">&times;</button><h2>Indique e Ganhe</h2><p class="dim">Cada amigo = <strong class="gold">+5 créditos</strong>.</p><input type="text" id="li" readonly><button class="btn" onclick="copL()">Copiar Link</button></div></div>
 <div id="mcr" class="modal"><div class="modal-c" style="max-width:650px;"><button class="fm" onclick="fM('mcr')">&times;</button><h2>Créditos</h2><div class="gp"><div class="pc" onclick="comp(10)"><h3>💫 Inicial</h3><div class="pp">R$ 9,90</div><p><strong>10</strong> créditos</p></div><div class="pc" onclick="comp(25)"><h3>🌙 Essencial</h3><div class="pp">R$ 19,90</div><p><strong>25</strong> créditos</p><p class="pe">-20%</p></div><div class="pc" onclick="comp(60)"><h3>⭐ Avançado</h3><div class="pp">R$ 39,90</div><p><strong>60</strong> créditos</p><p class="ptg">Popular</p></div><div class="pc" onclick="comp(120)"><h3>🔮 Supremo</h3><div class="pp">R$ 59,90</div><p><strong>120</strong> créditos</p><p class="pe">Melhor valor</p></div></div></div></div>
 <script>
-// ========== ARQUÉTIPOS DOS ARCANOS MAIORES ==========
-const MAIORES_LC = [
-  {n:0,nm:"O Louco",arq:"Aventura e espontaneidade",luz:"Novos começos, coragem para dar o salto, espírito livre, confiança no universo",sombra:"Imprudência, irresponsabilidade, riscos desnecessários, ingenuidade",amor:"Uma nova paixão ou encontro inesperado. O imprevisível age a favor.",carreira:"Iniciar um projeto do zero, empreender, arriscar em área nova",financas:"Ganhos e perdas imprevisíveis. Evite grandes apostas.",saude:"Momento de cuidar da saúde mental e evitar excessos"},
-  {n:1,nm:"O Mago",arq:"Poder e habilidade",luz:"Manifestação, talento, concentração, poder de transformar ideias em realidade",sombra:"Manipulação, ego inflado, talentos desperdiçados, ilusão de controle",amor:"Poder de atração e sedução. Você tem o que é preciso para conquistar.",carreira:"Momento de agir. Use suas habilidades para criar resultados",financas:"Capacidade de gerar riqueza com seus talentos",saude:"Seu poder de cura está ativo. Use pensamento positivo"},
-  {n:2,nm:"A Sacerdotisa",arq:"Intuição e mistério",luz:"Sabedoria interior, intuição aguçada, mistério, conhecimento oculto",sombra:"Segredos, superficialidade, intuição bloqueada, informações escondidas",amor:"Conexão silenciosa e profunda. Confie no que sente, não no que ouve.",carreira:"Use sua intuição para tomar decisões. As respostas estão dentro de você",financas:"Evite investimentos sem pesquisa completa",saude:"Ouça os sinais do seu corpo"},
-  {n:3,nm:"A Imperatriz",arq:"Fertilidade e abundância",luz:"Beleza, conforto, natureza, abundância, criatividade, maternidade",sombra:"Dependência, bloqueio criativo, apego ao material, estagnação",amor:"Relacionamento afetuoso e estável. Fase de cuidado e carinho.",carreira:"Crescimento e prosperidade. Seus projetos florescem",financas:"Colheita abundante. Momento de prosperidade",saude:"Fertilidade em alta. Cuide do corpo com amor"},
-  {n:4,nm:"O Imperador",arq:"Autoridade e estrutura",luz:"Poder, estabilidade, liderança, proteção, disciplina, ordem",sombra:"Tirania, rigidez, abuso de poder, arrogância, controle excessivo",amor:"Busca por segurança e compromisso. Parceiro confiável e protetor.",carreira:"Liderança reconhecida. Momento de estruturar e organizar",financas:"Solidez financeira. Evite riscos",saude:"Disciplina é a chave. Rotina de exercícios"},
-  {n:5,nm:"O Hierofante",arq:"Sabedoria e tradição",luz:"Ensinamento, mentoria, tradição, conhecimento espiritual, conformidade",sombra:"Dogmatismo, rigidez moral, rebeldia sem causa, hipocrisia",amor:"Compromisso sério, casamento, união formal baseada em valores",carreira:"Mentoria importante. Busque um guia ou se torne um",financas:"Invista em educação e conhecimento",saude:"Medicina tradicional traz resultados"},
-  {n:6,nm:"Os Enamorados",arq:"Escolhas e amor",luz:"Amor, harmonia, escolhas alinhadas com o coração, valores, união",sombra:"Indecisão, conflito de valores, desarmonia, relacionamento tóxico",amor:"Uma escolha importante. Siga seu coração com consciência.",carreira:"Parceria de negócios baseada em confiança e valores comuns",financas:"Decisão financeira importante. Consulte quem ama",saude:"O coração pede atenção. Cuide das emoções"},
-  {n:7,nm:"O Carro",arq:"Vontade e vitória",luz:"Determinação, controle, vitória, força de vontade, superação",sombra:"Falta de direção, arrogância, agressividade, perda de controle",amor:"Conquista. Você pode vencer obstáculos no amor com determinação.",carreira:"Progresso acelerado. Sucesso garantido com esforço",financas:"Lucros vindos de movimento e ação",saude:"Disposição física em alta"},
-  {n:8,nm:"A Força",arq:"Coragem interior",luz:"Coragem, compaixão, força interior, paciência, domínio dos instintos",sombra:"Insegurança, fraqueza, medo, autocontrole frágil, dominação",amor:"Paciência e compreensão. Domine seus impulsos com amor.",carreira:"Resiliência para enfrentar desafios. Persista",financas:"Força para superar dificuldades financeiras",saude:"Recuperação lenta mas segura. Persista"},
-  {n:9,nm:"O Eremita",arq:"Solidão e sabedoria",luz:"Introspecção, busca interior, sabedoria, solitude, orientação",sombra:"Isolamento excessivo, solidão, medo de conexão, fuga social",amor:"Momento de solidão que clareia sentimentos. Use este tempo.",carreira:"Hora de estudar, pesquisar e se preparar sozinho",financas:"Reavalie seus gastos. Hora de cortar excessos",saude:"Cuidado com isolamento. Busque equilíbrio"},
-  {n:10,nm:"A Roda da Fortuna",arq:"Ciclos e destino",luz:"Mudança, sorte, destino, ciclos, renovação, oportunidade",sombra:"Má sorte, resistência à mudança, falta de controle, estagnação",amor:"Mudanças inesperadas. O destino está agindo a seu favor.",carreira:"Reviravolta positiva. Oportunidade inesperada surge",financas:"Altos e baixos naturais. A sorte está chegando",saude:"Ciclo de cura em andamento"},
-  {n:11,nm:"A Justiça",arq:"Equilíbrio e verdade",luz:"Equidade, verdade, causa e efeito, leis, honestidade, equilíbrio",sombra:"Injustiça, desonestidade, desequilíbrio, falsas acusações",amor:"Relação baseada em honestidade. Cada um colhe o que planta.",carreira:"Decisões justas e contratos favoráveis. Mérito reconhecido",financas:"Resultado justo para seus esforços",saude:"Equilíbrio entre corpo e mente"},
-  {n:12,nm:"O Pendurado",arq:"Sacrifício e visão",luz:"Pausa, sacrifício, nova perspectiva, rendição, entrega",sombra:"Estagnação, resistência, imobilidade, martírio desnecessário",amor:"Espera necessária. Nem toda ação traz resultado no amor.",carreira:"Momento de pausa estratégica. Olhe de outro ângulo",financas:"Evite movimentos financeiros agora. Espere",saude:"Descanso é necessário. Não force"},
-  {n:13,nm:"A Morte",arq:"Transformação profunda",luz:"Fim de ciclo, transformação, renovação, desapego, recomeço",sombra:"Resistência à mudança, estagnação, medo do novo, apego ao passado",amor:"Um ciclo precisa terminar para o novo amor chegar. Desapegue.",carreira:"Mudança radical necessária. Fim de um ciclo profissional",financas:"Corte perdas. Recomece financeiramente",saude:"Transformação na saúde. Novo estilo de vida"},
-  {n:14,nm:"A Temperança",arq:"Equilíbrio e moderação",luz:"Paciência, equilíbrio, moderação, harmonia, serenidade, integração",sombra:"Excesso, desequilíbrio, impulsividade, extremos, falta de moderação",amor:"Paciência e compreensão. O equilíbrio cura o amor.",carreira:"Progresso constante e equilibrado. Evite extremos",financas:"Equilíbrio financeiro. Nem gastar demais, nem poupar demais",saude:"Busque o meio-termo. Equilíbrio é saúde"},
-  {n:15,nm:"O Diabo",arq:"Sombra e desejo",luz:"Paixão intensa, desejo, materialismo, ambição, prazer",sombra:"Vício, obsessão, toxidade, apego material, padrões destrutivos",amor:"Paixão intensa e magnética. Cuidado para não se tornar obsessão.",carreira:"Ambição pode trazer sucesso material. Evite excessos",financas:"Ganhos materiais mas cuidado com ganância",saude:"Vícios precisam ser enfrentados"},
-  {n:16,nm:"A Torre",arq:"Ruptura e revelação",luz:"Queda necessária, revelação, despertar, verdade libertadora",sombra:"Crise destrutiva, trauma, colapso, perda repentina",amor:"Ruptura dolorosa mas necessária para reconstruir algo verdadeiro.",carreira:"Crise que força reconstrução total. Renove-se",financas:"Perda inesperada que traz lição",saude:"Crise de saúde que alerta para mudanças"},
-  {n:17,nm:"A Estrela",arq:"Esperança e cura",luz:"Esperança, fé, renovação, inspiração, cura, serenidade, propósito",sombra:"Desânimo, falta de fé, desesperança, bloqueio criativo",amor:"Cura emocional profunda. O coração se abre novamente.",carreira:"Inspiração e propósito encontrados. Momento de criar",financas:"Tempo de semear. Resultados virão",saude:"Cura espiritual e emocional"},
-  {n:18,nm:"A Lua",arq:"Ilusão e medo",luz:"Intuição, sonhos, mistério, imaginação, sensibilidade",sombra:"Medo, ansiedade, ilusão, engano, confusão, paranoia",amor:"Incertezas e segredos. Confie na sua intuição, não nas aparências.",carreira:"Falta de clareza. Evite decisões impulsivas agora",financas:"Cuidado com golpes e ilusões financeiras",saude:"Ansiedade precisa ser tratada"},
-  {n:19,nm:"O Sol",arq:"Alegria e sucesso",luz:"Alegria, sucesso, vitalidade, clareza, calor, realização, verdade",sombra:"Ego inflado, arrogância, sucesso vazio, brilho superficial",amor:"Felicidade plena. Transparência total. O amor brilha.",carreira:"Sucesso, reconhecimento e realizações. Momento de brilhar",financas:"Prosperidade e abundância",saude:"Vitalidade e energia em alta"},
-  {n:20,nm:"O Julgamento",arq:"Renascimento e chamado",luz:"Chamado interior, renascimento, perdão, renovação, absolvição",sombra:"Negação do chamado, recusa em evoluir, culpa, julgamento",amor:"Chance de recomeçar. Perdoe e se abra para um novo ciclo.",carreira:"Chamado profissional importante. Siga sua vocação",financas:"Acerto de contas. Hora de pagar e receber",saude:"Renovação total. Novo ciclo de saúde"},
-  {n:21,nm:"O Mundo",arq:"Completude e realização",luz:"Conclusão, integração, realização, plenitude, viagem, sucesso global",sombra:"Incompletude, atrasos, conclusão adiada, falta de visão",amor:"União completa. Ciclo de amor realizado.",carreira:"Sucesso internacional, projeto concluído, meta alcançada",financas:"Ciclo financeiro encerrado com sucesso",saude:"Plenitude e bem-estar total"}
-];
-
-// ========== ARCANOS MENORES ==========
-function gerarMenoresDetalhados(){
-  const nipes=["Copas","Espadas","Ouros","Paus"];
-  const valores=["Ás","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"];
-  const temas={
-    Copas:{f:"sentimentos",e:"emoção",a:"emocional",c:"Coração",energia:"Água",foco:"Relacionamentos e emoções"},
-    Espadas:{f:"pensamentos",e:"mente",a:"mental",c:"Raciocínio",energia:"Ar",foco:"Desafios e decisões"},
-    Ouros:{f:"finanças",e:"matéria",a:"prático",c:"Corpo",energia:"Terra",foco:"Trabalho e prosperidade"},
-    Paus:{f:"ação",e:"energia",a:"dinâmico",c:"Vontade",energia:"Fogo",foco:"Criatividade e paixão"}
-  };
-  const sigValores={
-    "Ás":["Novo começo","Potencial puro","Oportunidade única","Um presente do universo"],
-    "2":["Equilíbrio","Parceria","Escolha","Duas forças em jogo"],
-    "3":["Crescimento","Expansão","Colaboração","Primeiros resultados"],
-    "4":["Estabilidade","Fundação","Descanso","Consolidação"],
-    "5":["Conflito","Perda","Desafio","Crise de valores"],
-    "6":["Harmonia","Generosidade","Progresso","Tempo de colher"],
-    "7":["Avaliação","Estratégia","Reflexão","Desafio interno"],
-    "8":["Movimento","Velocidade","Ação","Aceleração"],
-    "9":["Realização","Sabedoria","Independência","Quase lá"],
-    "10":["Completude","Culminância","Legado","Ciclo encerrado"],
-    "Valete":["Mensagem","Notícia","Curiosidade","Jovem energia"],
-    "Cavaleiro":["Ação","Movimento","Perseguição","Chegada urgente"],
-    "Rainha":["Intuição","Maturidade","Cuidado","Sabedoria interior"],
-    "Rei":["Domínio","Autoridade","Liderança","Maturidade plena"]
-  };
-  const conselhos={
-    "Ás":["Aproveite o novo ciclo que se inicia","Esteja aberto(a) a novas oportunidades"],
-    "2":["Busque o equilíbrio antes de avançar","A parceria certa fará diferença"],
-    "3":["Cultive o que está crescendo","Colabore com pessoas de confiança"],
-    "4":["Consolide o que já conquistou","Não tenha pressa de avançar"],
-    "5":["Encare a crise como aprendizado","O que parece perda pode ser libertação"],
-    "6":["Compartilhe suas conquistas","A generosidade atrai mais abundância"],
-    "7":["Reflita antes de agir","Avalie se vale a pena o esforço"],
-    "8":["Mova-se com determinação","A velocidade é sua aliada agora"],
-    "9":["Quase lá. Não desista agora","Sua independência está próxima"],
-    "10":["Ciclo encerrado com sucesso","Celebre e prepare-se para o próximo"],
-    "Valete":["Fique atento(a) a mensagens e sinais","Uma novidade está chegando"],
-    "Cavaleiro":["Aja com determinação","O momento pede movimento e coragem"],
-    "Rainha":["Use sua sabedoria interior","O cuidado com os outros também é cuidado com você"],
-    "Rei":["Assuma sua autoridade","Sua maturidade é seu maior trunfo"]
-  };
-  const cartas=[];
-  let id=22;
-  for(let n of nipes){
-    const t=temas[n];
-    for(let v of valores){
-      const s=sigValores[v]||["Energia","Movimento","Transformação","Força"];
-      const c=conselhos[v]||["Confie no processo","O universo está agindo"];
-      cartas.push({
-        id:id++,nm:v+" de "+n,
-        naipe:n,nf:t.f,ne:t.e,na:t.a,nc:t.c,
-        energia:t.energia,foco:t.foco,
-        sig:s[0]+" no campo "+t.energia+". "+s[1]+" pela via "+t.e+".",
-        luz:"A energia de "+t.energia+" atua no campo "+t.f+". "+s[0]+". "+s[1]+" traz "+t.a+" progresso.",
-        sombra:"Bloqueio no elemento "+t.energia+". "+s[2]+" desalinhado(a). Reveja sua abordagem "+t.a+".",
-        conselho:c[0]+". "+c[1]+".",
-        contextoAmor:s[0]+" na vida afetiva. "+s[2]+" no campo do coração. "+s[3]+" que mexe com seus sentimentos.",
-        contextoCarreira:s[0]+" no trabalho. "+s[1]+" na carreira. "+s[3]+" no aspecto profissional."
-      });
-    }
-  }
-  return cartas;
-}
-
-const M=MAIORES_LC;
-const MN=gerarMenoresDetalhados();
-const DK=[...M,...MN];
-
-const SN=[{id:"aries",nm:"Áries",ic:"♈",am:"Iniciativa. Se solteiro, encontro.",ca:"Liderança em alta.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"♉",am:"Estabilidade.",ca:"Revise finanças.",sa:"Natureza."},{id:"gemeos",nm:"Gêmeos",ic:"♊",am:"Comunicação.",ca:"Networking.",sa:"Menos telas."},{id:"cancer",nm:"Câncer",ic:"♋",am:"Proteção.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leao",nm:"Leão",ic:"♌",am:"Brilho atrai.",ca:"Reconhecimento.",sa:"Exercícios."},{id:"virgem",nm:"Virgem",ic:"♍",am:"Sinta mais.",ca:"Organização.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"♎",am:"Equilíbrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpiao",nm:"Escorpião",ic:"♏",am:"Intensidade.",ca:"Intuição.",sa:"Hidratação."},{id:"sagitario",nm:"Sagitário",ic:"♐",am:"Aventura.",ca:"Expansão.",sa:"Ar livre."},{id:"capricornio",nm:"Capricórnio",ic:"♑",am:"Lealdade.",ca:"Dedicação.",sa:"Cuidado com joelhos."},{id:"aquario",nm:"Aquário",ic:"♒",am:"Liberdade.",ca:"Inovação.",sa:"Meditação."},{id:"peixes",nm:"Peixes",ic:"♓",am:"Romantismo.",ca:"Intuição.",sa:"Descanso."}];
-const SO={agua:"Suas emoções. Limpa=clareza.",cobra:"Transformação.",dente:"Ansiedade.",bebe:"Novos começos.",morte:"Fim de ciclo.",voar:"Liberdade.",casa:"Mundo interior.",cachorro:"Lealdade.",gato:"Independência.",ponte:"Transição.",chuva:"Renovação.",dinheiro:"Autoestima.",fogo:"Paixão.",mar:"Subconsciente.",escada:"Progresso.",casamento:"União.",gravidez:"Projeto.",sangue:"Vitalidade.",escola:"Aprendizado.",hospital:"Cura.",luz:"Clareza.",escuro:"Medo.",arvore:"Crescimento.",fuga:"Evitando.",comida:"Nutrição.",crianca:"Criança interior.",lua:"Intuição.",sol:"Sucesso.",estrela:"Esperança.",floresta:"Exploração.",montanha:"Superação.",rio:"Fluxo."};
-const HX=[{n:1,nm:"O Criativo",s:"☰",d:"Força criativa."},{n:2,nm:"O Receptivo",s:"☷",d:"Poder da terra."},{n:3,nm:"Dificuldade Inicial",s:"䷂",d:"Crescimento."},{n:4,nm:"Insensatez Juvenil",s:"䷃",d:"Aprendizado."},{n:5,nm:"A Espera",s:"䷄",d:"Paciência."},{n:6,nm:"O Conflito",s:"䷅",d:"Mediação."},{n:7,nm:"O Exército",s:"䷆",d:"Disciplina."},{n:8,nm:"A União",s:"䷇",d:"Cooperação."}];
-const FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio.","Sua intuição é a voz da sua alma.","Confie no tempo do universo.","Sua energia cria sua realidade.","O passado é lição, o presente é dádiva.","Não há coincidências, apenas sincronicidades.","Onde há fé, há caminho."];
+const M=[{n:0,nm:"O Louco",sg:"Novos começos, inocência, aventura.",am:"Anuncia novo relacionamento ou redescoberta.",ca:"Novo projeto, mudança. Hora de arriscar.",in:"Imprudência, riscos, decisões precipitadas."},{n:1,nm:"O Mago",sg:"Manifestação, habilidade, poder.",am:"Poder de atração e iniciativa.",ca:"Transformar ideias em realidade.",in:"Manipulação, talentos desperdiçados."},{n:2,nm:"A Sacerdotisa",sg:"Intuição, mistério, sabedoria interior.",am:"Conexão profunda e silenciosa.",ca:"Confie no instinto antes de decisões.",in:"Intuição bloqueada."},{n:3,nm:"A Imperatriz",sg:"Feminilidade, beleza, abundância.",am:"Relacionamento nutritivo e estável.",ca:"Crescimento criativo.",in:"Dependência, bloqueio criativo."},{n:4,nm:"O Imperador",sg:"Autoridade, estrutura, controle.",am:"Busca por estabilidade.",ca:"Liderança firme.",in:"Tirania, rigidez."},{n:5,nm:"O Hierofante",sg:"Tradição, mentoria, ensinamento.",am:"Compromisso sério.",ca:"Instituições sólidas.",in:"Rebeldia, dogmatismo."},{n:6,nm:"Os Enamorados",sg:"Amor, harmonia, escolhas.",am:"União profunda.",ca:"Parcerias de sucesso.",in:"Desarmonia."},{n:7,nm:"O Carro",sg:"Vontade, vitória, determinação.",am:"Superar obstáculos.",ca:"Progresso acelerado.",in:"Falta de direção."},{n:8,nm:"A Força",sg:"Coragem, persuasão.",am:"Domar impulsos.",ca:"Resiliência.",in:"Fraqueza."},{n:9,nm:"O Eremita",sg:"Introspecção, sabedoria.",am:"Tempo sozinho.",ca:"Análise cuidadosa.",in:"Isolamento."},{n:10,nm:"A Roda da Fortuna",sg:"Ciclos, mudança, sorte.",am:"Mudanças inesperadas.",ca:"Reviravolta profissional.",in:"Má sorte."},{n:11,nm:"A Justiça",sg:"Equidade, verdade.",am:"Equilíbrio.",ca:"Contratos justos.",in:"Injustiça."},{n:12,nm:"O Pendurado",sg:"Pausa, sacrifício.",am:"Espera.",ca:"Nova abordagem.",in:"Estagnação."},{n:13,nm:"A Morte",sg:"Transformação, desapego.",am:"Encerramento de ciclo.",ca:"Mudança radical.",in:"Resistência."},{n:14,nm:"A Temperança",sg:"Equilíbrio, moderação.",am:"Paciência.",ca:"Progresso constante.",in:"Excessos."},{n:15,nm:"O Diabo",sg:"Sombra, vício.",am:"Paixão intensa.",ca:"Ambição.",in:"Libertação."},{n:16,nm:"A Torre",sg:"Queda, revelação.",am:"Ruptura necessária.",ca:"Crise reconstrutiva.",in:"Evitar o inevitável."},{n:17,nm:"A Estrela",sg:"Esperança, renovação.",am:"Cura emocional.",ca:"Inspiração.",in:"Desânimo."},{n:18,nm:"A Lua",sg:"Ilusão, medo.",am:"Incertezas.",ca:"Falta de clareza.",in:"Clareza surgindo."},{n:19,nm:"O Sol",sg:"Alegria, sucesso.",am:"Felicidade plena.",ca:"Sucesso.",in:"Ego inflado."},{n:20,nm:"O Julgamento",sg:"Renascimento, perdão.",am:"Reavaliação.",ca:"Nova direção.",in:"Negação."},{n:21,nm:"O Mundo",sg:"Conclusão, realização.",am:"União completa.",ca:"Sucesso internacional.",in:"Atrasos."}];
+function gMn(){const n=["Copas","Espadas","Ouros","Paus"],v=["As","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"],t={Copas:{f:"sentimentos",e:"emocao",a:" emocional",c:"Coracao"},Espadas:{f:"pensamento",e:"mente",a:" mental",c:"Raciocinio"},Ouros:{f:"financas",e:"materia",a:" pratico",c:"Corpo"},Paus:{f:"acao",e:"energia",a:"dinamico",c:"Vontade"}};const s={"As":["Novos comecos","Oportunidade","Potencial"],"2":["Equilibrio","Parceria","Escolha"],"3":["Crescimento","Expansao","Colaboracao"],"4":["Estabilidade","Fundacao","Descanso"],"5":["Desafio","Conflito","Mudanca"],"6":["Harmonia","Progresso","Generosidade"],"7":["Avaliacao","Estrategia","Reflexao"],"8":["Movimento","Velocidade","Acao"],"9":["Realizacao","Sabedoria","Independencia"],"10":["Completude","Culminancia","Legado"],"Valete":["Mensagem","Curiosidade","Novidade"],"Cavaleiro":["Acao","Perseguicao","Movimento"],"Rainha":["Intuicao","Cuidado","Poder"],"Rei":["Dominio","Autoridade","Maturidade"]};const r=[];let id=22;for(let o of n){const u=t[o];for(let n of v){const l=s[n]||["Energia","Potencial","Manifestacao"];r.push({id:id++,nm:n+" de "+o,naipe:o,nf:u.f,ne:u.e,na:u.a,nc:u.c,sg:l[0]+" em "+u.f+". "+l[1]+" pela via do(a) "+u.e+".",am:"No amor: "+l[0]+u.a+".",ca:"Na carreira: "+l[0]+". "+l[2]+".",in:"Bloqueio no campo do(a) "+u.e+"."})}}return r}
+const MN=gMn(),DK=[...M,...MN];
+const SN=[{id:"aries",nm:"Aries",ic:"Aries",am:"Iniciativa. Se solteiro, encontro.",ca:"Lideranca em alta.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"Touro",am:"Estabilidade.",ca:"Revise financas.",sa:"Natureza."},{id:"gemeos",nm:"Gemeos",ic:"Gemeos",am:"Comunicacao.",ca:"Networking.",sa:"Menos telas."},{id:"cancer",nm:"Cancer",ic:"Cancer",am:"Protecao.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leao",nm:"Leao",ic:"Leao",am:"Brilho atrai.",ca:"Reconhecimento.",sa:"Exercicios."},{id:"virgem",nm:"Virgem",ic:"Virgem",am:"Sinta mais.",ca:"Organizacao.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"Libra",am:"Equilibrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpiao",nm:"Escorpiao",ic:"Escorpiao",am:"Intensidade.",ca:"Intuicao.",sa:"Hidratacao."},{id:"sagitario",nm:"Sagitario",ic:"Sagitario",am:"Aventura.",ca:"Expansao.",sa:"Ar livre."},{id:"capricornio",nm:"Capricornio",ic:"Capricornio",am:"Lealdade.",ca:"Dedicacao.",sa:"Cuidado com joelhos."},{id:"aquario",nm:"Aquario",ic:"Aquario",am:"Liberdade.",ca:"Inovacao.",sa:"Meditacao."},{id:"peixes",nm:"Peixes",ic:"Peixes",am:"Romantismo.",ca:"Intuicao.",sa:"Descanso."}];
+const SO={agua:"Suas emocoes. Limpa=clareza.",cobra:"Transformacao.",dente:"Ansiedade.",bebe:"Novos comecos.",morte:"Fim de ciclo.",voar:"Liberdade.",casa:"Mundo interior.",cachorro:"Lealdade.",gato:"Independencia.",ponte:"Transicao.",chuva:"Renovacao.",dinheiro:"Autoestima.",fogo:"Paixao.",mar:"Subconsciente.",escada:"Progresso.",casamento:"Uniao.",gravidez:"Projeto.",sangue:"Vitalidade.",escola:"Aprendizado.",hospital:"Cura.",luz:"Clareza.",escuro:"Medo.",arvore:"Crescimento.",fuga:"Evitando.",comida:"Nutricao.",crianca:"Crianca interior.",lua:"Intuicao.",sol:"Sucesso.",estrela:"Esperanca.",floresta:"Exploracao.",montanha:"Superacao.",rio:"Fluxo."};
+const HX=[{n:1,nm:"O Criativo",s:"Qian",d:"Forca criativa."},{n:2,nm:"O Receptivo",s:"Kun",d:"Poder da terra."},{n:3,nm:"Dificuldade Inicial",s:"Zhun",d:"Crescimento."},{n:4,nm:"Insensatez Juvenil",s:"Meng",d:"Aprendizado."},{n:5,nm:"A Espera",s:"Xu",d:"Paciencia."},{n:6,nm:"O Conflito",s:"Song",d:"Mediacao."},{n:7,nm:"O Exercito",s:"Shi",d:"Disciplina."},{n:8,nm:"A Uniao",s:"Bi",d:"Cooperacao."}];
+const FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio.","Sua intuicao e a voz da sua alma.","Confie no tempo do universo.","Sua energia cria sua realidade.","O passado e licao, o presente e dadiva.","Nao ha coincidencias, apenas sincronicidades.","Onde ha fe, ha caminho."];
 let user=null,tf=[],mt=false;
 function ir(id){document.querySelectorAll(".scr").forEach(function(t){t.classList.remove("ativa")});var e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
 function ds(){document.querySelectorAll(".sb-i").forEach(function(i){i.classList.remove("ativo")});var e=document.querySelector(".sb-i");if(e)e.classList.add("ativo")}
@@ -321,36 +255,170 @@ function fM(i){var m=document.getElementById(i);if(m){m.style.display="none";doc
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.querySelectorAll(".modal").forEach(function(m){if(m.style.display==="flex"){m.style.display="none";document.body.classList.remove("no-scroll")}})}});
 document.addEventListener("click",function(e){if(e.target.classList.contains("modal")){e.target.style.display="none";document.body.classList.remove("no-scroll")}});
 function sl(i,v){var b=document.getElementById(i);if(!b)return;if(v){b.dataset.o=b.innerText;b.innerText="Aguarde...";b.disabled=true}else{b.innerText=b.dataset.o||b.innerText;b.disabled=false}}
-function cadastrar(){var n=document.getElementById("cn").value.trim(),c=document.getElementById("cc").value.replace(/\D/g,""),e=document.getElementById("ce").value.trim(),p=document.getElementById("cs").value,x=document.getElementById("csc").value;if(!n||c.length!==11||!e||p.length<6)return to("Preencha todos os campos.");if(p!==x)return to("Senhas não coincidem.");var u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("E-mail já existe.");var o={nome:n,cpf:c,email:e,senha:p,creditos:5,streak:1,ult:"",ind:0};o.ult=new Date().toISOString().split("T")[0];u.push(o);localStorage.setItem("oa_u",JSON.stringify(u));var r=localStorage.getItem("oa_r");if(r){var i=u.find(function(v){return btoa(v.email)===r});if(i){i.creditos+=5;i.ind=(i.ind||0)+1;localStorage.setItem("oa_u",JSON.stringify(u));localStorage.removeItem("oa_r")}}to("Conta criada! +5 créditos.");ir("login")}
+function cadastrar(){var n=document.getElementById("cn").value.trim(),c=document.getElementById("cc").value.replace(/\D/g,""),e=document.getElementById("ce").value.trim(),p=document.getElementById("cs").value,x=document.getElementById("csc").value;if(!n||c.length!==11||!e||p.length&lt;6)return to("Preencha todos os campos.");if(p!==x)return to("Senhas nao coincidem.");var u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("E-mail ja existe.");var o={nome:n,cpf:c,email:e,senha:p,creditos:5,streak:1,ult:"",ind:0};o.ult=new Date().toISOString().split("T")[0];u.push(o);localStorage.setItem("oa_u",JSON.stringify(u));var r=localStorage.getItem("oa_r");if(r){var i=u.find(function(v){return btoa(v.email)===r});if(i){i.creditos+=5;i.ind=(i.ind||0)+1;localStorage.setItem("oa_u",JSON.stringify(u));localStorage.removeItem("oa_r")}}to("Conta criada! +5 creditos.");ir("login")}
 function logar(){var e=document.getElementById("le").value.trim(),p=document.getElementById("ls").value,u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return to("Email ou senha incorretos.");user=s;atS();cD();ir("main");to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
 function sair(){user=null;ir("welcome")}
 function sU(){if(!user)return;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("cu2").innerText=user.creditos;document.getElementById("su2").innerText=user.streak}
-function gas(q){if(!user){to("Faça login.");return 0}if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Créditos insuficientes.");abM("mcr");return 0}
+function gas(q){if(!user){to("Faca login.");return 0}if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Creditos insuficientes.");abM("mcr");return 0}
 function atS(){var h=new Date().toISOString().split("T")[0],o=new Date(Date.now()-86400000).toISOString().split("T")[0];if(user.ult===o){user.streak+=1;bonS()}else if(user.ult!==h){user.streak=1}user.ult=h;sU()}
-function bonS(){if(user.streak===7){user.creditos+=2;setTimeout(function(){to("Bônus 7 dias! +2 créditos.")},600)}if(user.streak===15){user.creditos+=5;setTimeout(function(){to("Bônus 15 dias! +5 créditos.")},600)}if(user.streak===30){user.creditos+=10;setTimeout(function(){to("Bônus 30 dias! +10 créditos.")},600)}}
-function cD(){var n=user.nome.split(" ")[0],h=new Date().getHours();var s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("st").innerText=s+", "+n+"!";document.getElementById("fd").innerText=FR[Math.floor(Math.random()*FR.length)];document.getElementById("li").value="https://oraculumastrale.com?ref="+btoa(user.email);sU();var g=document.getElementById("gs2");g.innerHTML="";SN.forEach(function(s){var b=document.createElement("div");b.className="sb2";b.innerHTML='<span class="si">'+s.ic+'</span><span class="sn">'+s.nm+'</span>';b.onclick=function(){mH(s.id)};g.appendChild(b)});var a=document.getElementById("cs1"),b=document.getElementById("cs2");a.innerHTML='<option value="">Seu Signo</option>';b.innerHTML='<option value="">Outro Signo</option>';SN.forEach(function(s){a.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>";b.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>"})}
-function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p class="dim mt20">Já consultou hoje. Volte amanhã 🌙</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3 style="margin:12px 0;font-family:Allura,cursive">'+c.nm+'</h3><p style="font-style:italic;margin-bottom:12px;font-family:Open Sans,sans-serif">"'+c.sg+'"</p></div>';to("Carta revelada!")}
+function bonS(){if(user.streak===7){user.creditos+=2;setTimeout(function(){to("Bonus 7 dias! +2 creditos.")},600)}if(user.streak===15){user.creditos+=5;setTimeout(function(){to("Bonus 15 dias! +5 creditos.")},600)}if(user.streak===30){user.creditos+=10;setTimeout(function(){to("Bonus 30 dias! +10 creditos.")},600)}}
+function cD(){var n=user.nome.split(" ")[0],h=new Date().getHours();var s="Boa noite";if(h&lt;12)s="Bom dia";else if(h&lt;18)s="Boa tarde";document.getElementById("st").innerText=s+", "+n+"!";document.getElementById("fd").innerText=FR[Math.floor(Math.random()*FR.length)];document.getElementById("li").value="https://oraculumastrale.com?ref="+btoa(user.email);sU();var g=document.getElementById("gs2");g.innerHTML="";SN.forEach(function(s){var b=document.createElement("div");b.className="sb2";b.innerHTML='<span class="si">'+s.ic+'</span><span class="sn">'+s.nm+'</span>';b.onclick=function(){mH(s.id)};g.appendChild(b)});var a=document.getElementById("cs1"),b=document.getElementById("cs2");a.innerHTML='<option value="">Seu Signo</option>';b.innerHTML='<option value="">Outro Signo</option>';SN.forEach(function(s){a.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>";b.innerHTML+='<option value="'+s.id+'">'+s.nm+" "+s.ic+"</option>"})}
+function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p class="dim mt20">Ja consultou hoje. Volte amanha 🌙</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3 style="margin:12px 0;font-family:Allura,cursive">'+c.nm+'</h3><p style="font-style:italic;margin-bottom:12px;font-family:Open Sans,sans-serif">"'+c.sg+'"</p></div>';to("Carta revelada!")}
 function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
-function atCT(){var e=document.getElementById("tt");document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e.value==="lc"?"2":e.value)+'</strong> créditos'}
-// ========== TAROT - LEITURA COMBINADA MELHORADA ==========
-let lM=null,lm=null,la=false;
-function iniciarT(){var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;if(t==="lc"){if(!p)return to("Digite sua pergunta.");if(!gas(2))return;document.getElementById("tr").innerHTML="";document.getElementById("lca").style.display="block";lM=null;lm=null;la=false;var e=[...M].sort(function(){return Math.random()-0.5}),g=document.getElementById("lgm");g.innerHTML="";e.forEach(function(c){var d=document.createElement("div");d.className="cf";d.id="lm-"+c.n;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🂠</span><span class="vs-label">Arcano Maior</span></div><div class="cf-frente"><span class="cn">'+c.nm+'</span><span class="cs">'+c.arq+'</span></div></div>';d.onclick=function(){selM(c.n)};g.appendChild(d)});document.getElementById("lc2").style.display="none";document.getElementById("lcr").style.display="none";to("Escolha um Arcano Maior.")}else{conT()}}
-function selM(n){if(lM!==null||la)return;lM=M.find(function(c){return c.n===n});document.querySelectorAll("#lgm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lm-"+n);if(el){el.style.opacity="1";el.classList.add("revelada")}document.getElementById("lc2").style.display="block";var e=[...MN].sort(function(){return Math.random()-0.5}),g=document.getElementById("lgmm");g.innerHTML="";e.forEach(function(c){var d=document.createElement("div");d.className="cf";d.id="lmm-"+c.id;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🂠</span><span class="vs-label">Arcano Menor</span></div><div class="cf-frente"><span class="cn">'+c.nm+'</span><span class="cs">'+c.foco+'</span></div></div>';d.onclick=function(){selm(c.id)};g.appendChild(d)});to("Agora escolha um Arcano Menor.")}
-function selm(id){if(lm!==null||la)return;lm=MN.find(function(c){return c.id===id});document.querySelectorAll("#lgmm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lmm-"+id);if(el){el.style.opacity="1";el.classList.add("revelada")}gerarLC()}
+function atCT(){var e=document.getElementById("tt").value,d=document.getElementById("desc-1carta");d.style.display=e==="1"?"block":"none";document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e==="lc"?"2":e)+'</strong> creditos'}
 
-function gerarLC(){la=true;var p=document.getElementById("tp").value.trim(),ma=lM,mi=lm;if(!ma||!mi)return;
-  // Determinar o tema da pergunta
-  var tema=detectarTema(p);
-  // Resposta inicial
-  var respostaFinal=gerarRespostaInicial(ma,mi,p,tema);
-  // Análise individual das cartas
-  var analiseMaior=gerarAnaliseMaior(ma,p,tema);
-  var analiseMenor=gerarAnaliseMenor(mi,p,tema);
-  // Interação entre as cartas
-  var interacao=gerarInteracao(ma,mi,p,tema);
-  // Conselho final
-  var conselhoFinal=gerarConselhoFinal(ma,mi);
-  // Montar HTML
+// ========== TAROT - LEITURA COMBINADA MELHORADA ==========
+const MAIORES_LC = [
+{n:0,nm:"O Louco",arq:"Aventura e espontaneidade",luz:"Novos começos, coragem para dar o salto, espírito livre, confiança no universo",sombra:"Imprudência, irresponsabilidade, riscos desnecessários, ingenuidade",amor:"Uma nova paixão ou encontro inesperado. O imprevisível age a favor.",carreira:"Iniciar um projeto do zero, empreender, arriscar em área nova",financas:"Ganhos e perdas imprevisíveis. Evite grandes apostas.",saude:"Momento de cuidar da saúde mental e evitar excessos"},
+{n:1,nm:"O Mago",arq:"Poder e habilidade",luz:"Manifestação, talento, concentração, poder de transformar ideias em realidade",sombra:"Manipulação, ego inflado, talentos desperdiçados, ilusão de controle",amor:"Poder de atração e sedução. Você tem o que é preciso para conquistar.",carreira:"Momento de agir. Use suas habilidades para criar resultados",financas:"Capacidade de gerar riqueza com seus talentos",saude:"Seu poder de cura está ativo. Use pensamento positivo"},
+{n:2,nm:"A Sacerdotisa",arq:"Intuição e mistério",luz:"Sabedoria interior, intuição aguçada, mistério, conhecimento oculto",sombra:"Segredos, superficialidade, intuição bloqueada, informações escondidas",amor:"Conexão silenciosa e profunda. Confie no que sente, não no que ouve.",carreira:"Use sua intuição para tomar decisões. As respostas estão dentro de você",financas:"Evite investimentos sem pesquisa completa",saude:"Ouça os sinais do seu corpo"},
+{n:3,nm:"A Imperatriz",arq:"Fertilidade e abundância",luz:"Beleza, conforto, natureza, abundância, criatividade, maternidade",sombra:"Dependência, bloqueio criativo, apego ao material, estagnação",amor:"Relacionamento afetuoso e estável. Fase de cuidado e carinho.",carreira:"Crescimento e prosperidade. Seus projetos florescem",financas:"Colheita abundante. Momento de prosperidade",saude:"Fertilidade em alta. Cuide do corpo com amor"},
+{n:4,nm:"O Imperador",arq:"Autoridade e estrutura",luz:"Poder, estabilidade, liderança, proteção, disciplina, ordem",sombra:"Tirania, rigidez, abuso de poder, arrogância, controle excessivo",amor:"Busca por segurança e compromisso. Parceiro confiável e protetor.",carreira:"Liderança reconhecida. Momento de estruturar e organizar",financas:"Solidez financeira. Evite riscos",saude:"Disciplina é a chave. Rotina de exercícios"},
+{n:5,nm:"O Hierofante",arq:"Sabedoria e tradição",luz:"Ensinamento, mentoria, tradição, conhecimento espiritual, conformidade",sombra:"Dogmatismo, rigidez moral, rebeldia sem causa, hipocrisia",amor:"Compromisso sério, casamento, união formal baseada em valores",carreira:"Mentoria importante. Busque um guia ou se torne um",financas:"Invista em educação e conhecimento",saude:"Medicina tradicional traz resultados"},
+{n:6,nm:"Os Enamorados",arq:"Escolhas e amor",luz:"Amor, harmonia, escolhas alinhadas com o coração, valores, união",sombra:"Indecisão, conflito de valores, desarmonia, relacionamento tóxico",amor:"Uma escolha importante. Siga seu coração com consciência.",carreira:"Parceria de negócios baseada em confiança e valores comuns",financas:"Decisão financeira importante. Consulte quem ama",saude:"O coração pede atenção. Cuide das emoções"},
+{n:7,nm:"O Carro",arq:"Vontade e vitória",luz:"Determinação, controle, vitória, força de vontade, superação",sombra:"Falta de direção, arrogância, agressividade, perda de controle",amor:"Conquista. Você pode vencer obstáculos no amor com determinação.",carreira:"Progresso acelerado. Sucesso garantido com esforço",financas:"Lucros vindos de movimento e ação",saude:"Disposição física em alta"},
+{n:8,nm:"A Força",arq:"Coragem interior",luz:"Coragem, compaixão, força interior, paciência, domínio dos instintos",sombra:"Insegurança, fraqueza, medo, autocontrole frágil, dominação",amor:"Paciência e compreensão. Domine seus impulsos com amor.",carreira:"Resiliência para enfrentar desafios. Persista",financas:"Força para superar dificuldades financeiras",saude:"Recuperação lenta mas segura. Persista"},
+{n:9,nm:"O Eremita",arq:"Solidão e sabedoria",luz:"Introspecção, busca interior, sabedoria, solitude, orientação",sombra:"Isolamento excessivo, solidão, medo de conexão, fuga social",amor:"Momento de solidão que clareia sentimentos. Use este tempo.",carreira:"Hora de estudar, pesquisar e se preparar sozinho",financas:"Reavalie seus gastos. Hora de cortar excessos",saude:"Cuidado com isolamento. Busque equilíbrio"},
+{n:10,nm:"A Roda da Fortuna",arq:"Ciclos e destino",luz:"Mudança, sorte, destino, ciclos, renovação, oportunidade",sombra:"Má sorte, resistência à mudança, falta de controle, estagnação",amor:"Mudanças inesperadas. O destino está agindo a seu favor.",carreira:"Reviravolta positiva. Oportunidade inesperada surge",financas:"Altos e baixos naturais. A sorte está chegando",saude:"Ciclo de cura em andamento"},
+{n:11,nm:"A Justiça",arq:"Equilíbrio e verdade",luz:"Equidade, verdade, causa e efeito, leis, honestidade, equilíbrio",sombra:"Injustiça, desonestidade, desequilíbrio, falsas acusações",amor:"Relação baseada em honestidade. Cada um colhe o que planta.",carreira:"Decisões justas e contratos favoráveis. Mérito reconhecido",financas:"Resultado justo para seus esforços",saude:"Equilíbrio entre corpo e mente"},
+{n:12,nm:"O Pendurado",arq:"Sacrifício e visão",luz:"Pausa, sacrifício, nova perspectiva, rendição, entrega",sombra:"Estagnação, resistência, imobilidade, martírio desnecessário",amor:"Espera necessária. Nem toda ação traz resultado no amor.",carreira:"Momento de pausa estratégica. Olhe de outro ângulo",financas:"Evite movimentos financeiros agora. Espere",saude:"Descanso é necessário. Não force"},
+{n:13,nm:"A Morte",arq:"Transformação profunda",luz:"Fim de ciclo, transformação, renovação, desapego, recomeço",sombra:"Resistência à mudança, estagnação, medo do novo, apego ao passado",amor:"Um ciclo precisa terminar para o novo amor chegar. Desapegue.",carreira:"Mudança radical necessária. Fim de um ciclo profissional",financas:"Corte perdas. Recomece financeiramente",saude:"Transformação na saúde. Novo estilo de vida"},
+{n:14,nm:"A Temperança",arq:"Equilíbrio e moderação",luz:"Paciência, equilíbrio, moderação, harmonia, serenidade, integração",sombra:"Excesso, desequilíbrio, impulsividade, extremos, falta de moderação",amor:"Paciência e compreensão. O equilíbrio cura o amor.",carreira:"Progresso constante e equilibrado. Evite extremos",financas:"Equilíbrio financeiro. Nem gastar demais, nem poupar demais",saude:"Busque o meio-termo. Equilíbrio é saúde"},
+{n:15,nm:"O Diabo",arq:"Sombra e desejo",luz:"Paixão intensa, desejo, materialismo, ambição, prazer",sombra:"Vício, obsessão, toxidade, apego material, padrões destrutivos",amor:"Paixão intensa e magnética. Cuidado para não se tornar obsessão.",carreira:"Ambição pode trazer sucesso material. Evite excessos",financas:"Ganhos materiais mas cuidado com ganância",saude:"Vícios precisam ser enfrentados"},
+{n:16,nm:"A Torre",arq:"Ruptura e revelação",luz:"Queda necessária, revelação, despertar, verdade libertadora",sombra:"Crise destrutiva, trauma, colapso, perda repentina",amor:"Ruptura dolorosa mas necessária para reconstruir algo verdadeiro.",carreira:"Crise que força reconstrução total. Renove-se",financas:"Perda inesperada que traz lição",saude:"Crise de saúde que alerta para mudanças"},
+{n:17,nm:"A Estrela",arq:"Esperança e cura",luz:"Esperança, fé, renovação, inspiração, cura, serenidade, propósito",sombra:"Desânimo, falta de fé, desesperança, bloqueio criativo",amor:"Cura emocional profunda. O coração se abre novamente.",carreira:"Inspiração e propósito encontrados. Momento de criar",financas:"Tempo de semear. Resultados virão",saude:"Cura espiritual e emocional"},
+{n:18,nm:"A Lua",arq:"Ilusão e medo",luz:"Intuição, sonhos, mistério, imaginação, sensibilidade",sombra:"Medo, ansiedade, ilusão, engano, confusão, paranoia",amor:"Incertezas e segredos. Confie na sua intuição, não nas aparências.",carreira:"Falta de clareza. Evite decisões impulsivas agora",financas:"Cuidado com golpes e ilusões financeiras",saude:"Ansiedade precisa ser tratada"},
+{n:19,nm:"O Sol",arq:"Alegria e sucesso",luz:"Alegria, sucesso, vitalidade, clareza, calor, realização, verdade",sombra:"Ego inflado, arrogância, sucesso vazio, brilho superficial",amor:"Felicidade plena. Transparência total. O amor brilha.",carreira:"Sucesso, reconhecimento e realizações. Momento de brilhar",financas:"Prosperidade e abundância",saude:"Vitalidade e energia em alta"},
+{n:20,nm:"O Julgamento",arq:"Renascimento e chamado",luz:"Chamado interior, renascimento, perdão, renovação, absolvição",sombra:"Negação do chamado, recusa em evoluir, culpa, julgamento",amor:"Chance de recomeçar. Perdoe e se abra para um novo ciclo.",carreira:"Chamado profissional importante. Siga sua vocação",financas:"Acerto de contas. Hora de pagar e receber",saude:"Renovação total. Novo ciclo de saúde"},
+{n:21,nm:"O Mundo",arq:"Completude e realização",luz:"Conclusão, integração, realização, plenitude, viagem, sucesso global",sombra:"Incompletude, atrasos, conclusão adiada, falta de visão",amor:"União completa. Ciclo de amor realizado.",carreira:"Sucesso internacional, projeto concluído, meta alcançada",financas:"Ciclo financeiro encerrado com sucesso",saude:"Plenitude e bem-estar total"}
+];
+
+function gerarMenoresDetalhados(){
+  const nipes=["Copas","Espadas","Ouros","Paus"];
+  const valores=["Ás","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"];
+  const temas={Copas:{f:"sentimentos",e:"emoção",a:"emocional",c:"Coração",energia:"Água",foco:"Relacionamentos e emoções"},Espadas:{f:"pensamentos",e:"mente",a:"mental",c:"Raciocínio",energia:"Ar",foco:"Desafios e decisões"},Ouros:{f:"finanças",e:"matéria",a:"prático",c:"Corpo",energia:"Terra",foco:"Trabalho e prosperidade"},Paus:{f:"ação",e:"energia",a:"dinâmico",c:"Vontade",energia:"Fogo",foco:"Criatividade e paixão"}};
+  const sigValores={"Ás":["Novo começo","Potencial puro","Oportunidade única","Um presente do universo"],"2":["Equilíbrio","Parceria","Escolha","Duas forças em jogo"],"3":["Crescimento","Expansão","Colaboração","Primeiros resultados"],"4":["Estabilidade","Fundação","Descanso","Consolidação"],"5":["Conflito","Perda","Desafio","Crise de valores"],"6":["Harmonia","Generosidade","Progresso","Tempo de colher"],"7":["Avaliação","Estratégia","Reflexão","Desafio interno"],"8":["Movimento","Velocidade","Ação","Aceleração"],"9":["Realização","Sabedoria","Independência","Quase lá"],"10":["Completude","Culminância","Legado","Ciclo encerrado"],"Valete":["Mensagem","Notícia","Curiosidade","Jovem energia"],"Cavaleiro":["Ação","Movimento","Perseguição","Chegada urgente"],"Rainha":["Intuição","Maturidade","Cuidado","Sabedoria interior"],"Rei":["Domínio","Autoridade","Liderança","Maturidade plena"]};
+  const conselhos={"Ás":["Aproveite o novo ciclo que se inicia","Esteja aberto(a) a novas oportunidades"],"2":["Busque o equilíbrio antes de avançar","A parceria certa fará diferença"],"3":["Cultive o que está crescendo","Colabore com pessoas de confiança"],"4":["Consolide o que já conquistou","Não tenha pressa de avançar"],"5":["Encare a crise como aprendizado","O que parece perda pode ser libertação"],"6":["Compartilhe suas conquistas","A generosidade atrai mais abundância"],"7":["Reflita antes de agir","Avalie se vale a pena o esforço"],"8":["Mova-se com determinação","A velocidade é sua aliada agora"],"9":["Quase lá. Não desista agora","Sua independência está próxima"],"10":["Ciclo encerrado com sucesso","Celebre e prepare-se para o próximo"],"Valete":["Fique atento(a) a mensagens e sinais","Uma novidade está chegando"],"Cavaleiro":["Aja com determinação","O momento pede movimento e coragem"],"Rainha":["Use sua sabedoria interior","O cuidado com os outros também é cuidado com você"],"Rei":["Assuma sua autoridade","Sua maturidade é seu maior trunfo"]};
+  const cartas=[];let id=22;
+  for(let n of nipes){const t=temas[n];for(let v of valores){const s=sigValores[v]||["Energia","Movimento","Transformação","Força"];const c=conselhos[v]||["Confie no processo","O universo está agindo"];cartas.push({id:id++,nm:v+" de "+n,naipe:n,nf:t.f,ne:t.e,na:t.a,nc:t.c,energia:t.energia,foco:t.foco,sig:s[0]+" no campo "+t.energia+". "+s[1]+" pela via "+t.e+".",luz:"A energia de "+t.energia+" atua no campo "+t.f+". "+s[0]+". "+s[1]+" traz "+t.a+" progresso.",sombra:"Bloqueio no elemento "+t.energia+". "+s[2]+" desalinhado(a). Reveja sua abordagem "+t.a+".",conselho:c[0]+". "+c[1]+".",contextoAmor:s[0]+" na vida afetiva. "+s[2]+" no campo do coração. "+s[3]+" que mexe com seus sentimentos.",contextoCarreira:s[0]+" no trabalho. "+s[1]+" na carreira. "+s[3]+" no aspecto profissional."});}}
+  return cartas;
+}
+
+const M2=MAIORES_LC;
+const MN2=gerarMenoresDetalhados();
+const DK2=[...M2,...MN2];
+
+let lM=null,lm=null,la=false;
+
+function iniciarT2(){
+  var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;
+  if(t==="lc"){
+    if(!p)return to("Digite sua pergunta.");
+    if(!gas(2))return;
+    document.getElementById("tr").innerHTML="";
+    document.getElementById("lca").style.display="block";
+    lM=null;lm=null;la=false;
+    var e=[...M2].sort(function(){return Math.random()-0.5}),g=document.getElementById("lgm");
+    g.innerHTML="";
+    e.forEach(function(c){
+      var d=document.createElement("div");d.className="cf";d.id="lm2-"+c.n;
+      d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🂠</span><span class="vs-label">Arcano Maior</span></div><div class="cf-frente"><span class="cn">'+c.nm+'</span><span class="cs">'+c.arq+'</span></div></div>';
+      d.onclick=function(){selM2(c.n)};g.appendChild(d);
+    });
+    document.getElementById("lc2").style.display="none";
+    document.getElementById("lcr").style.display="none";
+    to("Escolha um Arcano Maior.");
+  } else {conT()}
+}
+
+function selM2(n){
+  if(lM!==null||la)return;
+  lM=M2.find(function(c){return c.n===n});
+  document.querySelectorAll("#lgm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});
+  var el=document.getElementById("lm2-"+n);
+  if(el){el.style.opacity="1";el.classList.add("revelada")}
+  document.getElementById("lc2").style.display="block";
+  var e=[...MN2].sort(function(){return Math.random()-0.5}),g=document.getElementById("lgmm");
+  g.innerHTML="";
+  e.forEach(function(c){
+    var d=document.createElement("div");d.className="cf";d.id="lmm2-"+c.id;
+    d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🂠</span><span class="vs-label">Arcano Menor</span></div><div class="cf-frente"><span class="cn">'+c.nm+'</span><span class="cs">'+c.foco+'</span></div></div>';
+    d.onclick=function(){selm2(c.id)};g.appendChild(d);
+  });
+  to("Agora escolha um Arcano Menor.");
+}
+
+function selm2(id){
+  if(lm!==null||la)return;
+  lm=MN2.find(function(c){return c.id===id});
+  document.querySelectorAll("#lgmm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});
+  var el=document.getElementById("lmm2-"+id);
+  if(el){el.style.opacity="1";el.classList.add("revelada")}
+  gerarLC2();
+}
+
+function detectarTema2(p){
+  var P=p.toLowerCase();
+  if(P.match(/amor|relacionamento|casamento|namoro|paixao|solteiro|uniao|separacao|termino/))return "amor";
+  if(P.match(/carreira|trabalho|emprego|profissao|negocio|empresa|promocao|demissao|salario/))return "carreira";
+  if(P.match(/dinheiro|financas|investimento|divida|comprar|vender|economia|gastos|receita|lucro/))return "financas";
+  if(P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|depressao/))return "saude";
+  if(P.match(/familia|filho|pai|mae|irmao|parente/))return "familia";
+  if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso/))return "estudo";
+  return "geral";
+}
+
+function gerarRespostaInicial2(ma,mi,p,tema){
+  var aberturas=["Sim, a resposta para sua pergunta indica que","Analisando as energias do momento, vejo que","As cartas revelam que","A combinação dos arcanos sugere que","O oráculo responde que"];
+  var meio=[];
+  if(tema==="amor")meio=["o caminho do amor terá movimentos importantes","as relações afetivas passarão por transformação","o coração pede atenção e cuidado","os sentimentos estão em evidência"];
+  else if(tema==="carreira")meio=["sua carreira passará por um ciclo de transformação","o trabalho pede novas estratégias","sua vida profissional está em movimento","novas oportunidades profissionais surgirão"];
+  else meio=["o momento traz energias de transformação","você está passando por um ciclo importante","as cartas indicam mudanças significativas","a resposta envolve paciência e observação"];
+  var fecho=["mas será preciso atenção aos detalhes que o Arcano Menor revela.","e a chave está em equilibrar o espiritual com o prático.","desde que você esteja aberto(a) às mensagens do destino.","e o caminho será mais claro quando você integrar razão e emoção."];
+  return aberturas[Math.floor(Math.random()*aberturas.length)]+" "+meio[Math.floor(Math.random()*meio.length)]+", "+fecho[Math.floor(Math.random()*fecho.length)];
+}
+
+function gerarAnaliseMaior2(ma,p,tema){
+  var txt='<p><strong>🌟 A energia predominante:</strong> '+ma.luz+'.</p>';
+  txt+='<p><strong>⚠️ O alerta:</strong> '+ma.sombra+'.</p>';
+  if(tema==="amor")txt+='<p><strong>💞 No amor:</strong> '+ma.amor+'</p>';
+  else if(tema==="carreira")txt+='<p><strong>💼 Na carreira:</strong> '+ma.carreira+'</p>';
+  else if(tema==="financas")txt+='<p><strong>💰 Nas finanças:</strong> '+ma.financas+'</p>';
+  else txt+='<p><strong>💫 Na sua vida:</strong> '+ma.amor+'</p>';
+  txt+='<p><strong>🔍 Conexão com sua pergunta:</strong> O '+ma.nm+' pede que você reflita sobre o aspecto '+tema+' da sua vida com a sabedoria que este arquétipo oferece.</p>';
+  return txt;
+}
+
+function gerarAnaliseMenor2(mi,p,tema){
+  var txt='<p><strong>🌊 O elemento em ação:</strong> '+mi.energia+' | '+mi.foco+'.</p>';
+  txt+='<p><strong>📖 Significado:</strong> '+mi.sig+'</p>';
+  txt+='<p><strong>✨ Como se manifesta:</strong> '+mi.luz+'</p>';
+  txt+='<p><strong>⚠️ Cuidado com:</strong> '+mi.sombra+'</p>';
+  txt+='<p><strong>💡 Conselho prático:</strong> '+mi.conselho+'</p>';
+  return txt;
+}
+
+function gerarInteracao2(ma,mi,p,tema){
+  var txt='<p>A grande pergunta agora é: como essas duas energias se encontram? O(a) '+ma.nm+' mostra o PROPÓSITO maior da sua jornada — a visão espiritual do que está em jogo. Já o(a) '+mi.nm+' revela como isso se DESENROLA no cotidiano, no elemento '+mi.energia+'. Enquanto o arcano maior aponta para onde sua alma quer chegar, o arcano menor mostra os passos práticos que você precisa dar.</p>';
+  txt+='<p><strong>🔮 Para sua pergunta:</strong> A resposta está na integração destas duas forças. O arcano maior mostra o potencial; o arcano menor mostra o caminho.</p>';
+  return txt;
+}
+
+function gerarConselhoFinal2(ma,mi){
+  var conselhos=["Confie no processo. O "+ma.nm+" e o(a) "+mi.nm+" juntos mostram que o universo está trabalhando a seu favor. Mantenha os pés no chão e o coração aberto.","A mensagem dos arcanos é clara: use a sabedoria do(a) "+ma.nm+" para iluminar seu caminho e as qualidades do(a) "+mi.nm+" para agir no mundo material. O equilíbrio é a chave.","O oráculo mostra que você está no caminho certo. O(a) "+ma.nm+" te dá a visão, e o(a) "+mi.nm+" te dá as ferramentas. Agora cabe a você caminhar.","Que a luz do(a) "+ma.nm+" ilumine sua direção e a praticidade do(a) "+mi.nm+" guie seus passos. A resposta está na integração entre espírito e matéria."];
+  return conselhos[Math.floor(Math.random()*conselhos.length)];
+}
+
+function gerarLC2(){
+  la=true;
+  var p=document.getElementById("tp").value.trim(),ma=lM,mi=lm;
+  if(!ma||!mi)return;
+  var tema=detectarTema2(p);
+  var respostaFinal=gerarRespostaInicial2(ma,mi,p,tema);
+  var analiseMaior=gerarAnaliseMaior2(ma,p,tema);
+  var analiseMenor=gerarAnaliseMenor2(mi,p,tema);
+  var interacao=gerarInteracao2(ma,mi,p,tema);
+  var conselhoFinal=gerarConselhoFinal2(ma,mi);
   var h='<div class="fade">';
   h+='<p class="dim" style="font-size:0.85rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:15px;">"'+p+'"</p>';
   h+='<p style="margin-bottom:20px;font-family:Open Sans,sans-serif;font-size:0.95rem;line-height:1.7;">'+respostaFinal+'</p>';
@@ -359,118 +427,20 @@ function gerarLC(){la=true;var p=document.getElementById("tp").value.trim(),ma=l
   h+='<h3 class="ct" style="font-family:Allura,cursive;font-size:1.3rem;margin:15px 0;">🔄 A Interação entre os Arcanos</h3>';
   h+='<div style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;">'+interacao+'</div>';
   h+='<p style="margin-top:20px;border-top:1px solid var(--gdd);padding-top:15px;font-style:italic;font-family:Open Sans,sans-serif;font-size:0.95rem;">💫 '+conselhoFinal+'</p></div>';
-  document.getElementById("lcr").innerHTML=h;document.getElementById("lcr").style.display="block";to("Leitura Combinada concluída!");
-}
-
-function detectarTema(p){var tema="";var P=p.toLowerCase();
-  if(P.match(/amor|relacionamento|casamento|namoro|paixao|ficante|ex|voltar|sozinho|solteiro|uniao|separacao|termino/))tema="amor";
-  else if(P.match(/carreira|trabalho|emprego|profissao|negocio|empresa|carreira|promocao|demissao|salario|cliente|projeto/))tema="carreira";
-  else if(P.match(/dinheiro|financas|investimento|divida|comprar|vender|ganhar|economia|gastos|receita|faturamento|lucro/))tema="financas";
-  else if(P.match(/saude|doenca|tratamento|cura|bem-estar|corpo|energia|cansaco|ansiedade|depressao/))tema="saude";
-  else if(P.match(/familia|filho|pai|mae|irmao|parente|familia/))tema="familia";
-  else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|vestibular|ENEM/))tema="estudo";
-  else if(P.match(/viagem|mudanca|mover|viajar|morar|cidade|pais|exterior/))tema="mudanca";
-  else tema="geral";
-  return tema;
-}
-
-function gerarRespostaInicial(ma,mi,p,tema){
-  var respostas=[];
-  // Array de respostas baseado na combinação das cartas
-  var aberturas=["Sim, a resposta para sua pergunta indica que","Analisando as energias do momento, vejo que","As cartas revelam que","A combinação dos arcanos sugere que","O oráculo responde que"];
-  var meio=[];
-  if(tema==="amor")meio=["o caminho do amor terá movimentos importantes","as relações afetivas passarão por transformação","o coração pede atenção e cuidado","os sentimentos estão em evidência","a vida amorosa será influenciada por mudanças"];
-  else if(tema==="carreira")meio=["sua carreira passará por um ciclo de transformação","o trabalho pede novas estratégias","sua vida profissional está em movimento","novas oportunidades profissionais surgirão","o momento exige foco e determinação na carreira"];
-  else if(tema==="financas")meio=["suas finanças passarão por um ciclo de mudança","a área financeira pede atenção e planejamento","os recursos materiais estão em transformação","questões financeiras exigem equilíbrio agora","sua situação financeira tende a melhorar com o tempo"];
-  else meio=["o momento traz energias de transformação","você está passando por um ciclo importante","as cartas indicam mudanças significativas","a resposta envolve paciência e observação","o universo está alinhando situações para você"];
-
-  var fecho=["mas será preciso atenção aos detalhes que o Arcano Menor revela.","e a chave está em equilibrar o espiritual com o prático.","desde que você esteja aberto(a) às mensagens do destino.","mas exige que você olhe para ambos os lados da situação.","e o caminho será mais claro quando você integrar razão e emoção."];
-
-  return aberturas[Math.floor(Math.random()*aberturas.length)]+" "+meio[Math.floor(Math.random()*meio.length)]+", "+fecho[Math.floor(Math.random()*fecho.length)];
-}
-
-function gerarAnaliseMaior(ma,p,tema){
-  var area=tema;
-  var txt="";
-  // Luz da carta
-  txt+='<p><strong>🌟 A energia predominante:</strong> '+ma.luz+'.</p>';
-  // Sombra / alerta
-  txt+='<p><strong>⚠️ O alerta:</strong> '+ma.sombra+'.</p>';
-  // Contextualizar por tema
-  if(area==="amor")txt+='<p><strong>💞 No amor:</strong> '+ma.amor+'</p>';
-  else if(area==="carreira")txt+='<p><strong>💼 Na carreira:</strong> '+ma.carreira+'</p>';
-  else if(area==="financas")txt+='<p><strong>💰 Nas finanças:</strong> '+ma.financas+'</p>';
-  else if(area==="saude")txt+='<p><strong>🌿 Na saúde:</strong> '+ma.saude+'</p>';
-  else txt+='<p><strong>💫 Na sua vida:</strong> '+ma.amor+'</p>';
-  // Como essa energia se conecta com a pergunta
-  var conexoes=["Esta energia sugere que sua pergunta está sendo respondida pela força maior do destino.","Este arquétipo indica que sua questão toca um ponto profundo da sua alma.","Esta carta revela que o cerne da sua pergunta está ligado a este tema espiritual.","A energia deste arcano mostra qual forças estão atuando na sua situação."];
-  txt+='<p><strong>🔍 Conexão com sua pergunta:</strong> '+conexoes[Math.floor(Math.random()*conexoes.length)]+' O '+ma.nm+' pede que você reflita sobre o aspecto '+area+' da sua vida com a sabedoria que este arquétipo oferece.</p>';
-  return txt;
-}
-
-function gerarAnaliseMenor(mi,p,tema){
-  var txt="";
-  txt+='<p><strong>🌊 O elemento em ação:</strong> '+mi.energia+' | '+mi.foco+'.</p>';
-  txt+='<p><strong>📖 Significado:</strong> '+mi.sig+'</p>';
-  txt+='<p><strong>✨ Como se manifesta:</strong> '+mi.luz+'</p>';
-  txt+='<p><strong>⚠️ Cuidado com:</strong> '+mi.sombra+'</p>';
-  if(tema==="amor")txt+='<p><strong>💞 No contexto do amor:</strong> '+mi.contextoAmor+'</p>';
-  else txt+='<p><strong>💼 No contexto prático:</strong> '+mi.contextoCarreira+'</p>';
-  txt+='<p><strong>💡 Conselho prático:</strong> '+mi.conselho+'</p>';
-  return txt;
-}
-
-function gerarInteracao(ma,mi,p,tema){
-  var txt="";
-  var transicoes=[
-    "A grande pergunta agora é: como essas duas energias se encontram?",
-    "O que acontece quando unimos o arquétipo do Arcano Maior com o elemento do Arcano Menor?",
-    "A verdadeira resposta está na dança entre estas duas cartas.",
-    "A magia acontece quando os dois arcanos se entrelaçam."
-  ];
-  txt+='<p>'+transicoes[Math.floor(Math.random()*transicoes.length)]+'</p>';
-
-  // Criar interação entre as duas cartas específicas
-  var interacoes=[
-    "O(a) "+ma.nm+" mostra o PROPÓSITO maior da sua jornada — a visão espiritual do que está em jogo. Já o(a) "+mi.nm+" revela como isso se DESENROLA no cotidiano, no elemento "+mi.energia+". Enquanto o arcano maior aponta para onde sua alma quer chegar, o arcano menor mostra os passos práticos que você precisa dar. A sabedoria está em honrar a visão do "+ma.nm+" sem ignorar os detalhes que o(a) "+mi.nm+" aponta.",
-    "O(a) "+ma.nm+" representa a força maior agindo nos bastidores — o destino, o chamado, a lição espiritual. O(a) "+mi.nm+" (naipe de "+mi.naipe+", elemento "+mi.energia+") é a manifestação disso no seu dia a dia. A energia do(a) "+ma.nm+" se expressa através das qualidades do(a) "+mi.nm+". Para que sua pergunta tenha a resposta que você busca, você precisa integrar a sabedoria do arcano maior com a ação prática do arcano menor.",
-    "A combinação entre "+ma.nm+" e "+mi.nm+" é poderosa. O primeiro traz a energia de "+ma.arq+", enquanto o segundo atua no campo "+mi.energia+" das "+mi.nf+". Isso significa que sua questão está sendo respondida em duas camadas: a espiritual (o que sua alma precisa aprender) e a prática (o que fazer no dia a dia). O "+ma.nm+" pergunta 'por quê?'. O "+mi.nm+" responde 'como?'.",
-    "O(a) "+ma.nm+" ilumina o céu da sua pergunta — o propósito divino. O(a) "+mi.nm+" aterra essa energia no chão — a ação concreta. A interação entre eles revela que você precisa tanto da visão elevada do arcano maior quanto da atenção aos detalhes do arcano menor. Sem a visão, a ação é cega. Sem a ação, a visão é vazia."
-  ];
-  txt+='<p>'+interacoes[Math.floor(Math.random()*interacoes.length)]+'</p>';
-
-  // Conexão específica com a pergunta
-  var conclusoesPerg=[
-    "Para sua pergunta específica, esta combinação sugere que a resposta está em encontrar o equilíbrio entre o que o destino reservou (Arcano Maior) e o que você pode construir com suas mãos (Arcano Menor).",
-    "Sua pergunta toca exatamente este ponto de intersecção: entre o que está escrito nas estrelas e o que depende das suas escolhas diárias.",
-    "A resposta para sua questão está na integração destas duas forças. O arcano maior mostra o potencial; o arcano menor mostra o caminho.",
-    "Esta é uma combinação que responde sua pergunta com clareza: o destino abre portas (Arcano Maior), mas é você quem decide atravessá-las (Arcano Menor)."
-  ];
-  txt+='<p><strong>🔮 Para sua pergunta:</strong> '+conclusoesPerg[Math.floor(Math.random()*conclusoesPerg.length)]+'</p>';
-
-  return txt;
-}
-
-function gerarConselhoFinal(ma,mi){
-  var conselhos=[
-    "Confie no processo. O "+ma.nm+" e o(a) "+mi.nm+" juntos mostram que o universo está trabalhando a seu favor. Mantenha os pés no chão e o coração aberto.",
-    "A mensagem dos arcanos é clara: use a sabedoria do(a) "+ma.nm+" para iluminar seu caminho e as qualidades do(a) "+mi.nm+" para agir no mundo material. O equilíbrio é a chave.",
-    "O oráculo mostra que você está no caminho certo. O(a) "+ma.nm+" te dá a visão, e o(a) "+mi.nm+" te dá as ferramentas. Agora cabe a você caminhar.",
-    "Que a luz do(a) "+ma.nm+" ilumine sua direção e a praticidade do(a) "+mi.nm+" guie seus passos. A resposta está na integração entre espírito e matéria.",
-    "Lembre-se: o destino inclina, mas não obriga. O(a) "+ma.nm+" mostra o potencial, o(a) "+mi.nm+" mostra o trabalho. Ambos juntos revelam que seu sucesso depende de honrar estas duas forças."
-  ];
-  return conselhos[Math.floor(Math.random()*conselhos.length)];
+  document.getElementById("lcr").innerHTML=h;
+  document.getElementById("lcr").style.display="block";
+  to("Leitura Combinada concluída!");
 }
 
 function resLC(){document.getElementById("lca").style.display="none";document.getElementById("lcr").style.display="none";document.getElementById("lcr").innerHTML="";lM=null;lm=null;la=false}
-function conT(){var t=parseInt(document.getElementById("tt").value),p=document.getElementById("tp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(t))return;sl("btn-t",1);setTimeout(function(){var d=[...DK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);var h='<p class="dim" style="font-size:0.85rem;font-family:Open Sans,sans-serif">"'+p+'"</p><div class="gt">';s.forEach(function(c){h+='<div class="ti2"><span class="tn">'+c.nm+'</span><span class="tt">'+c.luz||c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!")},800)}
-function calN(){var d=document.getElementById("nd").value;if(!d)return to("Selecione a data.");if(!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"O Líder",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sábio",8:"O Executivo",9:"O Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3 class="ct">Caminho de Vida</h3><p class="ct mt10" style="font-family:Open Sans,sans-serif">'+(de[s]||"Número especial")+"</p></div>";sl("btn-n",0);to("Número revelado!")},600)}
-function conI(){var p=document.getElementById("ip").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(2))return;sl("btn-i",1);setTimeout(function(){var h=HX[Math.floor(Math.random()*HX.length)];document.getElementById("ir").innerHTML='<div class="fade"><span class="ich">'+h.s+"</span><h3>Hexagrama "+h.n+": "+h.nm+"</h3><p class='mt10'>"+h.d+"</p></div>";sl("btn-i",0);to("I Ching respondeu!")},700)}
-function conSN(){var p=document.getElementById("snp").value.trim();if(!p)return to("Faça uma pergunta.");if(!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Não","Talvez","Com certeza","Improvável","Não é momento","As estrelas dizem sim","Melhor não saber"];document.getElementById("snr").innerHTML='<span class="fade" style="font-size:1.8rem;font-family:Open Sans,sans-serif">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
-function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;var e=0;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim" style="font-family:Open Sans,sans-serif">Nada para "'+b+'".</p>'}
-function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b)return to("Selecione os dois.");if(a===b)return to("Signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m="";if(p>=85)m="Almas gêmeas! Conexão rara e profunda.";else if(p>=70)m="Grande afinidade! Parceria promissora.";else if(p>=50)m="Atração de opostos. Complementam-se.";else m="Energias distintas. Requerem diálogo.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
+function conT(){var t=parseInt(document.getElementById("tt").value),p=document.getElementById("tp").value.trim();if(!p)return to("Faca uma pergunta.");if(!gas(t))return;sl("btn-t",1);setTimeout(function(){var d=[...DK].sort(function(){return Math.random()-0.5}),s=d.slice(0,t);var h='<p class="dim" style="font-size:0.85rem;font-family:Open Sans,sans-serif">"'+p+'"</p><div class="gt">';s.forEach(function(c){h+='<div class="ti2"><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lancadas!")},800)}
+function calN(){var d=document.getElementById("nd").value;if(!d)return to("Selecione a data.");if(!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"O Lider",2:"O Diplomata",3:"O Comunicador",4:"O Construtor",5:"O Viajante",6:"O Protetor",7:"O Sabio",8:"O Executivo",9:"O Humanitario",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3 class="ct">Caminho de Vida</h3><p class="ct mt10" style="font-family:Open Sans,sans-serif">'+(de[s]||"Numero especial")+"</p></div>";sl("btn-n",0);to("Numero revelado!")},600)}
+function conI(){var p=document.getElementById("ip").value.trim();if(!p)return to("Faca uma pergunta.");if(!gas(2))return;sl("btn-i",1);setTimeout(function(){var h=HX[Math.floor(Math.random()*HX.length)];document.getElementById("ir").innerHTML='<div class="fade"><span class="ich">'+h.s+"</span><h3>Hexagrama "+h.n+": "+h.nm+"</h3><p class='mt10'>"+h.d+"</p></div>";sl("btn-i",0);to("I Ching respondeu!")},700)}
+function conSN(){var p=document.getElementById("snp").value.trim();if(!p)return to("Faca uma pergunta.");if(!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Nao","Talvez","Com certeza","Improva vel","Nao e momento","As estrelas dizem sim","Melhor nao saber"];document.getElementById("snr").innerHTML='<span class="fade" style="font-size:1.8rem;font-family:Open Sans,sans-serif">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
+function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length&lt;2)return;var e=0;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>";e++}}if(!e)l.innerHTML='<p class="dim" style="font-family:Open Sans,sans-serif">Nada para "'+b+'".</p>'}
+function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b)return to("Selecione os dois.");if(a===b)return to("Signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m="";if(p>=85)m="Almas gemeas! Conexao rara e profunda.";else if(p>=70)m="Grande afinidade! Parceria promissora.";else if(p>=50)m="Atracao de opostos. Complementam-se.";else m="Energias distintas. Requerem dialogo.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
 function copL(){navigator.clipboard.writeText(document.getElementById("li").value).then(function(){to("Link copiado!")})["catch"](function(){document.getElementById("li").select();document.execCommand("copy");to("Link copiado!")})}
-function comp(q){user.creditos+=q;sU();fM("mcr");to("+"+q+" créditos!")}
+function comp(q){user.creditos+=q;sU();fM("mcr");to("+"+q+" creditos!")}
 window.onload=function(){var p=new URLSearchParams(window.location.search);if(p.get("ref"))localStorage.setItem("oa_r",p.get("ref"))};
 </script>
 </body>
