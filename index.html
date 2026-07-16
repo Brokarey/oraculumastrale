@@ -19,11 +19,11 @@ a{color:var(--gold);text-decoration:none}
 .tela{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:var(--tr);z-index:1}
 .tela.ativa{opacity:1;pointer-events:all;z-index:2}
 #tela-welcome{background:url('mystical_crystal_portal.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
-#tela-welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.4);z-index:0}
+#tela-welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.45);z-index:0}
 #tela-welcome>*{position:relative;z-index:1}
-.welcome-botoes{margin-top:60vh;width:100%;max-width:280px;display:flex;flex-direction:column;gap:14px;z-index:2}
-.btn-welcome{background:var(--gold);color:#000;border:none;padding:14px 28px;border-radius:10px;font-weight:700;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1rem;box-shadow:0 4px 20px rgba(212,168,83,0.4)}
-.btn-welcome:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 30px rgba(212,168,83,0.6)}
+.welcome-botoes{margin-top:55vh;width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
+.btn-welcome{background:var(--gold);color:#000;border:none;padding:15px 30px;border-radius:10px;font-weight:700;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1.1rem;box-shadow:0 4px 25px rgba(212,168,83,0.5);text-align:center}
+.btn-welcome:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,168,83,0.7)}
 .btn-welcome-outline{background:transparent;border:2px solid var(--gold);color:var(--gold)}
 .btn-welcome-outline:hover{background:rgba(212,168,83,0.15);color:#fff}
 .tela:not(#tela-welcome){background:linear-gradient(135deg,#0a0015,#1a0030);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
@@ -46,7 +46,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .sidebar-item.ativo{color:var(--gold);background:rgba(212,168,83,0.12);border-left-color:var(--gold);font-weight:600}
 .sidebar-rodape{margin-top:auto;border-top:1px solid var(--gd);padding:8px 0}
 .sidebar-item-icone{font-size:1.2rem;width:24px;text-align:center;flex-shrink:0}
-.conteudo-principal{flex:1;padding:30px 35px 60px;overflow-y:auto}
+.conteudo-principal{flex:1;padding:30px 35px 60px;overflow-y:auto;max-height:100vh}
 .saudacao{margin-bottom:10px;font-size:1.8rem}
 .frase{color:var(--td);font-style:italic;margin-bottom:30px;min-height:28px;border-left:3px solid var(--gd);padding:8px 18px;font-size:0.95rem}
 .grid-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
@@ -134,8 +134,8 @@ select option{background:#1a0030;color:#e8e0f0}
 <div id="toasts"></div>
 <div id="tela-welcome" class="tela ativa">
   <div class="welcome-botoes">
-    <button class="btn-welcome" onclick="irP('tela-login')">Entrar</button>
-    <button class="btn-welcome btn-welcome-outline" onclick="irP('tela-cadastro')">Cadastrar</button>
+    <button class="btn-welcome" onclick="irP('tela-login')">ENTRAR</button>
+    <button class="btn-welcome btn-welcome-outline" onclick="irP('tela-cadastro')">CADASTRAR</button>
   </div>
 </div>
 <div id="tela-login" class="tela">
@@ -210,7 +210,7 @@ select option{background:#1a0030;color:#e8e0f0}
 <script>
 const MAIORES=[
 {n:0,nome:"O Louco",sig:"Novos começos, inocência, aventura, espontaneidade.",amor:"Anuncia novo relacionamento ou redescoberta.",car:"Novo projeto, mudança. Hora de arriscar.",inv:"Imprudência, riscos, decisões precipitadas."},
-{n:1,nome:"O Mago",sig:"Manifestação, habilidade, poder, concentração.",amor:"Poder de atração e iniciativa.",car:"Transformar ideias em realidade. Competência reconhecida.",inv:"Manipulação, talentos desperdiçados."},
+{n:1,nome:"O Mago",sig:"Manifestação, habilidade, poder, concentração.",amor:"Poder de atração e iniciativa.",car:"Transformar ideias em realidade.",inv:"Manipulação, talentos desperdiçados."},
 {n:2,nome:"A Sacerdotisa",sig:"Intuição, mistério, subconsciente, sabedoria interior.",amor:"Conexão profunda e silenciosa.",car:"Confie no instinto antes de decisões.",inv:"Intuição bloqueada, superficialidade."},
 {n:3,nome:"A Imperatriz",sig:"Feminilidade, beleza, abundância, fertilidade.",amor:"Relacionamento nutritivo e estável.",car:"Crescimento criativo e frutos financeiros.",inv:"Dependência, bloqueio criativo."},
 {n:4,nome:"O Imperador",sig:"Autoridade, estrutura, fundação, controle.",amor:"Busca por estabilidade e proteção.",car:"Liderança firme e metas de longo prazo.",inv:"Tirania, rigidez, falta de disciplina."},
