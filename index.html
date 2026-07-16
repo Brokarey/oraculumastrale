@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oraculum Astrale | Portal Místico</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#d4a853;--gdd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0;--gl:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Playfair Display','Inter',serif;color:var(--tx);min-height:100vh;overflow-x:hidden;line-height:1.6;background:#080212}
 body.no-scroll{overflow:hidden}
-h1,h2,h3,.ff{font-family:'Playfair Display',serif;color:var(--gold)}
+h1,h2,h3{font-family:'Playfair Display',serif;color:var(--gold)}
 a{color:var(--gold);text-decoration:none}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#080212}
@@ -19,9 +19,13 @@ a{color:var(--gold);text-decoration:none}
 .scr{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:0.4s;z-index:1}
 .scr.ativa{opacity:1;pointer-events:all;z-index:2}
 #welcome{background:url('mystical_crystal_portal.jpg') center/cover no-repeat;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
-#welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.45);z-index:0}
+#welcome::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,2,18,0.25);z-index:0}
 #welcome>*{position:relative;z-index:1}
-.wb{margin-top:55vh;width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
+.title-wrap{position:absolute;top:18%;left:0;width:100%;z-index:2;text-align:center;pointer-events:none}
+.title-glow{font-family:'Playfair Display',serif;font-size:3.5rem;color:var(--gold);text-shadow:0 0 20px rgba(212,168,83,0.9),0 0 40px rgba(212,168,83,0.6),0 0 80px rgba(212,168,83,0.4),0 0 120px rgba(212,168,83,0.2);letter-spacing:4px;animation:pulsaGlow 3s ease-in-out infinite}
+@keyframes pulsaGlow{0%,100%{text-shadow:0 0 20px rgba(212,168,83,0.9),0 0 40px rgba(212,168,83,0.6),0 0 80px rgba(212,168,83,0.4)}50%{text-shadow:0 0 30px rgba(212,168,83,1),0 0 60px rgba(212,168,83,0.8),0 0 100px rgba(212,168,83,0.6),0 0 150px rgba(212,168,83,0.3)}}
+.sub-glow{font-size:1rem;color:#d0c8e0;margin-top:8px;font-style:italic;font-family:'Playfair Display',serif;text-shadow:0 0 15px rgba(212,168,83,0.5);letter-spacing:3px}
+.wb{margin-top:50vh;width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
 .bw{background:var(--gold);color:#000;border:none;padding:15px 30px;border-radius:10px;font-weight:700;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1.1rem;box-shadow:0 4px 25px rgba(212,168,83,0.5);text-align:center}
 .bw:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,168,83,0.7)}
 .bwo{background:transparent;border:2px solid var(--gold);color:var(--gold)}
@@ -117,6 +121,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .gmm{grid-template-columns:repeat(auto-fit,minmax(80px,1fr))}
 .ln{flex-direction:column}
 .modal-c{padding:18px}
+.title-glow{font-size:2.5rem}
 }
 @media(max-width:480px){
 .sb{width:100%;min-width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:5px}
@@ -126,12 +131,17 @@ select option{background:#1a0030;color:#e8e0f0}
 .gs{grid-template-columns:1fr}
 .gm{grid-template-columns:repeat(auto-fit,minmax(75px,1fr))}
 .gmm{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}
+.title-glow{font-size:2rem}
 }
 </style>
 </head>
 <body>
 <div id="t"></div>
 <div id="welcome" class="scr ativa">
+  <div class="title-wrap">
+    <h1 class="title-glow">Oraculum Astrale</h1>
+    <p class="sub-glow">✦ Portal Místico ✦</p>
+  </div>
   <div class="wb">
     <button class="bw" onclick="ir('login')">ENTRAR</button>
     <button class="bw bwo" onclick="ir('cadastro')">CADASTRAR</button>
