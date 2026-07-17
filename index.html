@@ -24,7 +24,8 @@ a{color:var(--gold);text-decoration:none}
 .bw:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,168,83,0.7)}
 .bwo{background:transparent;border:2px solid var(--gold);color:var(--gold)}
 .bwo:hover{background:rgba(212,168,83,0.15);color:#fff}
-.scr:not(#welcome){background:url('Oraculum_Astrale_Marca_Dagua_50pct_MENOS_BRANCA.png') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.scr:not(#welcome){display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.scr:not(#welcome):not(#main){background:url('Oraculum_Astrale_Marca_Dagua_50pct_MENOS_BRANCA.png') center/cover no-repeat}
 .card{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .card h2{font-family:'Allura',cursive;font-size:1.8rem;margin-bottom:10px;color:var(--gold);text-align:center}
 .btn{background:var(--gold);color:#000;border:none;padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;width:100%;margin-top:10px;font-family:'Inter',sans-serif;font-size:0.9rem}
@@ -183,6 +184,7 @@ select option{background:#1a0030;color:#e8e0f0}
 </div>
 <div id="mc" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mc')">&times;</button><h2>Sua Carta do Dia</h2><div id="cdr" class="ct mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="rc()">Revelar</button></div></div></div>
 <div id="mh" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mh')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim">Selecione seu signo:</p><div class="gs2" id="gs2"></div><div id="hr" class="hr" style="display:none;"><h3 id="hsn">Signo</h3><p><strong>❤️ Amor:</strong> <span id="ham"></span></p><p><strong>💼 Carreira:</strong> <span id="hca"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="hsa"></span></p></div></div></div>
+
 <div id="mt" class="modal"><div class="modal-c modal-l">
   <button class="fm" onclick="fM('mt');resLC();fecharGrid78()">&times;</button>
   <h2>🔮 Tarô</h2>
@@ -253,6 +255,7 @@ function gMn(){
 }
 var MN=gMn();
 var DK=[].concat(M,MN);
+
 var SN=[{id:"áries",nm:"Áries",ic:"Áries",am:"Iniciativa.",ca:"Liderança.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"Touro",am:"Estabilidade.",ca:"Finanças.",sa:"Natureza."},{id:"gêmeos",nm:"Gêmeos",ic:"Gêmeos",am:"Comunicação.",ca:"Networking.",sa:"Menos telas."},{id:"câncer",nm:"Câncer",ic:"Câncer",am:"Família.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leão",nm:"Leão",ic:"Leão",am:"Brilho.",ca:"Reconhecimento.",sa:"Exercícios."},{id:"virgem",nm:"Virgem",ic:"Virgem",am:"Sinta.",ca:"Organização.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"Libra",am:"Equilíbrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpião",nm:"Escorpião",ic:"Escorpião",am:"Intensidade.",ca:"Intuição.",sa:"Hidratação."},{id:"sagitário",nm:"Sagitário",ic:"Sagitário",am:"Aventura.",ca:"Expansão.",sa:"Ar livre."},{id:"capricórnio",nm:"Capricórnio",ic:"Capricórnio",am:"Lealdade.",ca:"Dedicação.",sa:"Cuidado."},{id:"aquário",nm:"Aquário",ic:"Aquário",am:"Liberdade.",ca:"Inovação.",sa:"Meditação."},{id:"peixes",nm:"Peixes",ic:"Peixes",am:"Romantismo.",ca:"Intuição.",sa:"Descanso."}];
 var SO={água:"Suas emoções.",cobra:"Transformação.",dente:"Ansiedade.",bebê:"Novos começos.",morte:"Fim de ciclo.",voar:"Liberdade."};
 var FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio.","Sua intuição é a voz da sua alma."];
@@ -289,57 +292,57 @@ function gerarLeitura1Carta(carta, pergunta){
     if(energia=="Água")resposta="Sim, é provável que seja um encontro significativo! "+nome+" é uma carta de energia de "+energia+", indicando que encontrar "+nomePessoa+" hoje será guiado pelas emoções e pela sensibilidade. Pode ser um reencontro profundo, onde olhares e gestos dirão mais que discursos. Confie na sua intuição e permita-se sentir cada instante — a conexão pode ser mais especial do que você imagina.";
     else if(energia=="Ar")resposta="Sim, tende a ser um bom encontro! "+nome+" é uma carta de energia de "+energia+", sinalizando que encontrar "+nomePessoa+" hoje será marcado por boas conversas e trocas de ideias. O Ar favorece a comunicação clara e sincera. É um bom momento para alinhar expectativas e colocar o papo em dia. Vá com a mente aberta e esteja disposto a ouvir.";
     else if(energia=="Terra")resposta="Sim, é um ótimo sinal! "+nome+" é uma carta de energia de "+energia+", e isso indica que encontrar "+nomePessoa+" hoje pode ser algo sólido e significativo. A energia de Terra traz estabilidade e segurança — um encontro para construir ou fortalecer laços importantes. Aproveite cada momento com presença e autenticidade.";
-    else if(energia=="Fogo")resposta="Sim, tem grandes chances de dar certo! "+nome+" é uma carta de energia de "+energia+", e isso é um sinal muito positivo para encontrar "+nomePessoa+" hoje. O Fogo traz paixão, iniciativa e coragem. Vá em frente com o coração aberto e deixe que sua autenticidade brilhe.";
-    else resposta="Talvez. "+nome+" sugere que encontrar "+nomePessoa+" hoje pode trazer surpresas. Confie no momento e permita que o encontro flua naturalmente.";
+    else if(energia=="Fogo")resposta="Sim, tem grandes chances de dar certo! "+nome+" é uma carta de energia de "+energia+", e isso é um sinal muito positivo. O Fogo traz paixão, iniciativa e coragem. Vá em frente com o coração aberto e deixe que sua autenticidade brilhe.";
+    else resposta="Talvez. "+nome+" sugere que encontrar "+nomePessoa+" hoje pode trazer surpresas. Confie no momento.";
   }
-  else if(P.match(/sucesso|suceder|vou conseguir|vai dar certo|resultado|futuro|prosperar|dar certo|crescimento|leilão|site|negócio|loja|projeto/i)){
-    if(energia=="Água")resposta="Sim, mas de forma natural e fluida. "+nome+" é uma carta de energia de "+energia+", sugerindo que o sucesso virá pela sensibilidade e intuição. Nem tudo precisa ser forçado — permita que as coisas fluam. Conectar-se com suas emoções pode abrir portas que a razão não enxerga.";
-    else if(energia=="Ar")resposta="Sim, desde que você se prepare bem. "+nome+" é uma carta de energia de "+energia+", indicando que o sucesso vem através do conhecimento, da estratégia e da comunicação. Planeje cada passo, pesquise, analise as variáveis e converse com pessoas que entendem do assunto.";
-    else if(energia=="Terra")resposta="Sim, é um dos melhores sinais para resultados concretos! "+nome+" é uma carta de energia de "+energia+", e isso é muito positivo para o sucesso. O trabalho dedicado, a paciência e a persistência serão recompensados. Cada esforço de hoje é um alicerce para o futuro.";
-    else if(energia=="Fogo")resposta="Sim, tem boas perspectivas! "+nome+" é uma carta de energia de "+energia+", e isso é positivo para o sucesso. O Fogo indica que você tem força de vontade e determinação para alcançar seus objetivos. Mas atenção: evite queimar etapas.";
-    else resposta="Talvez. "+nome+" indica que o sucesso está ao seu alcance, mas exige atenção e dedicação.";
+  else if(P.match(/sucesso|suceder|vou conseguir|vai dar certo|resultado|futuro|prosperar|dar certo|crescimento|leilão|site|negócio|loja|projeto|empreendimento/i)){
+    if(energia=="Água")resposta="Sim, mas de forma natural e fluida. "+nome+" é uma carta de energia de "+energia+", sugerindo que o sucesso virá pela sensibilidade e intuição. Nem tudo precisa ser forçado — permita que as coisas fluam.";
+    else if(energia=="Ar")resposta="Sim, desde que você se prepare bem. "+nome+" é uma carta de energia de "+energia+", indicando que o sucesso vem através do conhecimento, da estratégia e da comunicação. Planeje cada passo.";
+    else if(energia=="Terra")resposta="Sim, é um dos melhores sinais para resultados concretos! "+nome+" é uma carta de energia de "+energia+", e isso é muito positivo. O trabalho dedicado e a paciência serão recompensados.";
+    else if(energia=="Fogo")resposta="Sim, tem boas perspectivas! "+nome+" é uma carta de energia de "+energia+", indicando força de vontade. Mas atenção: evite queimar etapas.";
+    else resposta="Talvez. "+nome+" indica que o sucesso está ao seu alcance, mas exige dedicação.";
   }
   else if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|ficante|beijar|novo amor/i)){
-    if(energia=="Água")resposta="Sim, tem grandes possibilidades! "+nome+" é uma carta de energia de "+energia+", e no amor isso é emoção e profundidade. A resposta está nos sentimentos, não na razão. Permita-se sentir e confie no que o coração aponta.";
-    else if(energia=="Ar")resposta="Talvez, e depende do diálogo. "+nome+" é uma carta de energia de "+energia+", e no amor isso significa comunicação. Converse abertamente sobre seus sentimentos, expectativas e medos. O amor se fortalece com transparência e honestidade.";
-    else if(energia=="Terra")resposta="Sim, e tende a ser algo sólido! "+nome+" é uma carta de energia de "+energia+", e no amor isso é estabilidade e compromisso. A resposta aponta para algo duradouro e verdadeiro. Construa com paciência, dedicação e presença.";
-    else if(energia=="Fogo")resposta="Sim, é intenso! "+nome+" é uma carta de energia de "+energia+", e no amor isso é paixão pura. Se está esperando um sinal para se declarar, o Fogo diz que o momento é agora. O amor pede coragem — não deixe o medo falar mais alto que o coração.";
+    if(energia=="Água")resposta="Sim, tem grandes possibilidades! "+nome+" é uma carta de energia de "+energia+", e no amor isso é emoção e profundidade. Permita-se sentir e confie no que o coração aponta.";
+    else if(energia=="Ar")resposta="Talvez, depende do diálogo. "+nome+" é uma carta de energia de "+energia+", e no amor isso significa comunicação. Converse abertamente sobre seus sentimentos.";
+    else if(energia=="Terra")resposta="Sim, e tende a ser algo sólido! "+nome+" é uma carta de energia de "+energia+", e no amor isso é estabilidade e compromisso.";
+    else if(energia=="Fogo")resposta="Sim, é intenso! "+nome+" é uma carta de energia de "+energia+", e no amor isso é paixão pura. O momento é agora — o amor pede coragem.";
     else resposta="Talvez. "+nome+" no campo afetivo traz a energia de "+energia+". Confie nos seus sentimentos.";
   }
   else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista|chefe|contratar|demissão/i)){
-    if(energia=="Água")resposta="Sim, mas com sensibilidade. "+nome+" é uma carta de energia de "+energia+", e na carreira isso sugere que a intuição será sua maior aliada. O trabalho em equipe e a empatia farão diferença.";
-    else if(energia=="Ar")resposta="Sim, desde que você planeje bem. "+nome+" é uma carta de energia de "+energia+", e na carreira isso é estratégia e conhecimento. Analise as opções, pesquise o mercado, converse com pessoas da área.";
-    else if(energia=="Terra")resposta="Sim, é um ótimo sinal! "+nome+" é uma carta de energia de "+energia+", e na carreira isso indica crescimento sólido. A resposta é positiva para resultados reais. Continue construindo com paciência, que os frutos virão.";
-    else if(energia=="Fogo")resposta="Sim, é um bom momento para agir! "+nome+" é uma carta de energia de "+energia+", e na carreira isso significa liderança e iniciativa. Mostre seu valor e aja com confiança. O momento pede ousadia.";
-    else resposta="Talvez. "+nome+" na carreira sugere a energia de "+energia+". Confie no seu potencial e siga em frente.";
+    if(energia=="Água")resposta="Sim, mas com sensibilidade. "+nome+" é uma carta de energia de "+energia+", e na carreira isso sugere que a intuição será sua maior aliada.";
+    else if(energia=="Ar")resposta="Sim, desde que você planeje bem. "+nome+" é uma carta de energia de "+energia+", e na carreira isso é estratégia. Analise as opções e pesquise.";
+    else if(energia=="Terra")resposta="Sim, é um ótimo sinal! "+nome+" é uma carta de energia de "+energia+", indicando crescimento sólido. Continue construindo com paciência.";
+    else if(energia=="Fogo")resposta="Sim, é um bom momento para agir! "+nome+" é uma carta de energia de "+energia+", significando liderança e iniciativa. Mostre seu valor.";
+    else resposta="Talvez. "+nome+" na carreira sugere a energia de "+energia+". Confie no seu potencial.";
   }
   else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender|gastar|cartão|crédito/i)){
-    if(energia=="Água")resposta="Cuidado, é melhor evitar decisões impulsivas. "+nome+" é uma carta de energia de "+energia+", e nas finanças isso pede atenção às emoções. O dinheiro pede racionalidade, não coração.";
-    else if(energia=="Ar")resposta="Sim, mas organize-se primeiro. "+nome+" é uma carta de energia de "+energia+", e nas finanças isso favorece o planejamento. Faça planilhas, revise seus gastos, pesquise antes de investir.";
-    else if(energia=="Terra")resposta="Sim, é um dos melhores sinais para as finanças! "+nome+" é uma carta de energia de "+energia+", e isso é muito positivo. A energia de Terra indica prosperidade, crescimento material e solidez.";
-    else if(energia=="Fogo")resposta="Sim, mas com cautela. "+nome+" é uma carta de energia de "+energia+", e nas finanças isso é um sinal de movimento, mas com um alerta. O Fogo traz impulso para buscar novas fontes de renda, mas também pode levar a gastos precipitados.";
+    if(energia=="Água")resposta="Cuidado, evite decisões impulsivas. "+nome+" é uma carta de energia de "+energia+", e nas finanças isso pede atenção às emoções. O dinheiro pede racionalidade.";
+    else if(energia=="Ar")resposta="Sim, mas organize-se primeiro. "+nome+" é uma carta de energia de "+energia+", favorecendo o planejamento. Faça planilhas e revise seus gastos.";
+    else if(energia=="Terra")resposta="Sim, é um dos melhores sinais para as finanças! "+nome+" é uma carta de energia de "+energia+", indicando prosperidade e crescimento material.";
+    else if(energia=="Fogo")resposta="Sim, mas com cautela. "+nome+" é uma carta de energia de "+energia+", indicando movimento. Busque novas fontes de renda, mas evite gastos precipitados.";
     else resposta="Talvez. "+nome+" na área financeira indica a energia de "+energia+". Planeje-se com sabedoria.";
   }
   else if(P.match(/saúde|doença|tratamento|cura|bem-estar|ansiedade|depressão|corpo|físico|mental|dormir|sono|alimentação|exercício/i)){
-    if(energia=="Água")resposta="Sim, cuide mais das suas emoções. "+nome+" é uma carta de energia de "+energia+", e na saúde isso aponta para o cuidado com o emocional. Suas emoções afetam diretamente seu bem-estar físico.";
-    else if(energia=="Ar")resposta="Sim, mas sua mente precisa de paz. "+nome+" é uma carta de energia de "+energia+", e na saúde isso indica que o estresse e a ansiedade podem estar afetando seu corpo. Meditação e respiração são passos importantes.";
-    else if(energia=="Terra")resposta="Sim, é um chamado para cuidar do corpo. "+nome+" é uma carta de energia de "+energia+", e na saúde isso indica que a alimentação, o exercício e a rotina são fundamentais. Cuide da base, que o resto se equilibra.";
-    else if(energia=="Fogo")resposta="Cuidado, precisa de equilíbrio. "+nome+" é uma carta de energia de "+energia+", e na saúde isso indica que você tem energia, mas o excesso sem descanso pode levar ao esgotamento. Encontre um ritmo que alterne ação e repouso.";
-    else resposta="Talvez. "+nome+" na saúde sugere atenção e cuidado com seu bem-estar.";
+    if(energia=="Água")resposta="Sim, cuide mais das suas emoções. "+nome+" é uma carta de energia de "+energia+", e na saúde isso aponta para o cuidado com o emocional.";
+    else if(energia=="Ar")resposta="Sim, mas sua mente precisa de paz. "+nome+" é uma carta de energia de "+energia+", indicando que o estresse pode estar afetando seu corpo. Medite e respire.";
+    else if(energia=="Terra")resposta="Sim, é um chamado para cuidar do corpo. "+nome+" é uma carta de energia de "+energia+". Alimentação e exercício são fundamentais.";
+    else if(energia=="Fogo")resposta="Cuidado, precisa de equilíbrio. "+nome+" é uma carta de energia de "+energia+". Você tem energia, mas o excesso sem descanso leva ao esgotamento.";
+    else resposta="Talvez. "+nome+" na saúde sugere atenção com seu bem-estar.";
   }
   else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|professor|matéria|livro|ler|estudar|nota|enem/i)){
-    if(energia=="Água")resposta="Sim, no seu ritmo. "+nome+" é uma carta de energia de "+energia+", e nos estudos isso sugere um aprendizado mais fluido e intuitivo. Estude sem pressão — a constância é mais importante que a velocidade.";
-    else if(energia=="Ar")resposta="Sim, é muito favorável! "+nome+" é uma carta de energia de "+energia+", e isso é excelente para os estudos. Sua mente está afiada e pronta para aprender. A energia de Ar favorece a concentração e o raciocínio lógico.";
-    else if(energia=="Terra")resposta="Sim, com disciplina e método. "+nome+" é uma carta de energia de "+energia+", e nos estudos isso pede rotina e dedicação. Estude com regularidade, faça resumos e revisões. Os resultados virão.";
-    else if(energia=="Fogo")resposta="Sim, mas com disciplina. "+nome+" é uma carta de energia de "+energia+", e nos estudos isso traz motivação. Você tem energia para aprender, mas cuidado para não se dispersar. Canalize o Fogo para o foco.";
-    else resposta="Talvez. "+nome+" nos estudos canaliza a energia de "+energia+". O momento pode ser favorável, mas exige dedicação.";
+    if(energia=="Água")resposta="Sim, no seu ritmo. "+nome+" é uma carta de energia de "+energia+", sugerindo um aprendizado mais fluido. Estude sem pressão.";
+    else if(energia=="Ar")resposta="Sim, é muito favorável! "+nome+" é uma carta de energia de "+energia+", excelente para os estudos. Sua mente está afiada e pronta para aprender.";
+    else if(energia=="Terra")resposta="Sim, com disciplina e método. "+nome+" é uma carta de energia de "+energia+", pedindo rotina e dedicação. Estude com regularidade.";
+    else if(energia=="Fogo")resposta="Sim, mas com disciplina. "+nome+" é uma carta de energia de "+energia+", trazendo motivação. Cuidado para não se dispersar.";
+    else resposta="Talvez. "+nome+" nos estudos canaliza a energia de "+energia+". Exige dedicação.";
   }
   else {
-    if(energia=="Água")resposta="Talvez, confie na sua intuição. "+nome+" é uma carta de energia de "+energia+", sugerindo que a resposta para sua pergunta vem pela escuta interior. A Água convida a desacelerar e sentir.";
-    else if(energia=="Ar")resposta="Sim, busque conhecimento. "+nome+" é uma carta de energia de "+energia+", apontando que a resposta está no conhecimento e na comunicação. Busque informação e analise as opções.";
-    else if(energia=="Terra")resposta="Sim, com paciência e perseverança. "+nome+" é uma carta de energia de "+energia+", indicando que a resposta envolve construção e solidez. A Terra não apressa suas estações — tudo floresce no tempo certo.";
-    else if(energia=="Fogo")resposta="Sim, é hora de agir! "+nome+" é uma carta de energia de "+energia+", indicando que a resposta para sua pergunta envolve ação e iniciativa. Confie no seu impulso e dê o primeiro passo.";
-    else resposta="Talvez. "+nome+" com energia de "+energia+" sugere que a resposta para sua pergunta está no equilíbrio e na confiança no fluxo natural da vida.";
+    if(energia=="Água")resposta="Talvez, confie na sua intuição. "+nome+" é uma carta de energia de "+energia+", sugerindo que a resposta vem pela escuta interior.";
+    else if(energia=="Ar")resposta="Sim, busque conhecimento. "+nome+" é uma carta de energia de "+energia+", apontando que a resposta está na informação e na comunicação.";
+    else if(energia=="Terra")resposta="Sim, com paciência e perseverança. "+nome+" é uma carta de energia de "+energia+", indicando que a resposta envolve construção e solidez.";
+    else if(energia=="Fogo")resposta="Sim, é hora de agir! "+nome+" é uma carta de energia de "+energia+", indicando que a resposta envolve ação e iniciativa. Confie no seu impulso.";
+    else resposta="Talvez. "+nome+" com energia de "+energia+" sugere que a resposta está no equilíbrio e na confiança no fluxo natural da vida.";
   }
 
   var h='<div class="fade" style="text-align:left;">';
