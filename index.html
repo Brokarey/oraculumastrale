@@ -282,94 +282,96 @@ function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=l
 function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-1carta").style.display=e==="1"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e==="lc"?"2":e)+'</strong> creditos';fecharGrid78()}
 
-// ===== FUNÇÃO CORRIGIDA - PARÁGRAFO ÚNICO, SEM CONSELHO =====
-function gerarLeitura1Carta(carta, pergunta) {
+// ===== FUNÇÃO PRINCIPAL CORRIGIDA - Parágrafo descritivo que RESPONDE a pergunta =====
+function gerarLeitura1Carta(carta, pergunta){
   var nome = carta.nm;
   var energia = carta.energia || "Universal";
   var luz = carta.luz || carta.sg || "";
   var sombra = carta.sombra || carta.in || "Momento de atencao";
   var P = pergunta.toLowerCase();
+
   var resposta = "";
 
-  // Detectar tema da pergunta
-  var encontro = P.match(/encontrar|encontra|visitar|ir ate/);
-  var pessoa = P.match(/talita|maria|joao|ana|carlos|pedro|jose|paulo|ela|ele|alguem/);
-  var sucesso = P.match(/sucesso|suceder|vou conseguir|vai dar certo|resultado|futuro|prosperar|dar certo|crescimento|leilao|site|negocio|loja|projeto/);
-  var carreira = P.match(/carreira|trabalho|emprego|profissao|empresa|promocao|salario|vaga|entrevista/);
-  var amor = P.match(/amor|relacionamento|namoro|paixao|romance|casamento|solteiro/);
-  var dinheiro = P.match(/dinheiro|financa|investimento|divida|economia|receita|lucro|comprar|vender/);
-  var saude = P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|corpo/);
-  var estudo = P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro/);
+  // Extrair nome de pessoa se houver
+  var nomePessoa = "";
+  var matchNome = P.match(/(talita|maria|joao|joão|ana|carlos|pedro|jose|josé|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ana clara|maria eduarda|joão pedro|ela|ele)/i);
+  if (matchNome) nomePessoa = matchNome[0].charAt(0).toUpperCase() + matchNome[0].slice(1).toLowerCase();
 
-  // Montar parágrafo único baseado no tema + energia
-  if (encontro && pessoa) {
-    var nomePessoa = pessoa[0].charAt(0).toUpperCase() + pessoa[0].slice(1);
-    if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", e isso e um sinal positivo para encontrar " + nomePessoa + " hoje. A energia de Fogo traz entusiasmo, paixao e iniciativa — exatamente o que voce precisa para que esse encontro seja vibrante e cheio de novidades. O arquétipo do " + nome + " sugere que sua acao e sua confianca serao bem recebidas, e que ha uma faisca de oportunidade no ar. Va em frente com o coracao aberto e permita que esse momento flua com a intensidade que a carta indica. O universo esta inclinado a favor do seu movimento.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", o que indica que encontrar " + nomePessoa + " hoje sera um encontro guiado pelas emocoes e pela sensibilidade. A energia de Agua flui sutilmente, convidando voce a ouvir seus sentimentos e a confiar na sua intuicao. Pode ser um reencontro profundo, onde palavras nao ditas encontrarao seu espaco. O arquétipo do " + nome + " fala de conexao genuina — permita-se sentir cada momento sem pressa.";
-    else if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", indicando que encontrar " + nomePessoa + " hoje sera marcado por boas conversas e trocas de ideias. A energia de Ar favorece a comunicacão clara e sincera, sendo um momento ideal para alinhar expectativas e colocar o papo em dia. O arquétipo do " + nome + " sugere que a mente estara afiada e que o dialogo sera o ponto alto do encontro. Va com a mente aberta.";
-    else if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", o que e um otimo sinal para encontrar " + nomePessoa + " hoje. A energia de Terra traz estabilidade, seguranca e solidez — um encontro para construir ou fortalecer lacos de forma significativa. O arquétipo do " + nome + " fala de algo concreto e duradouro, sugerindo que esse momento pode ser mais especial do que voce imagina. Aproveite com presenca e autenticidade.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " indica que encontrar " + nomePessoa + " hoje pode trazer surpresas e aprendizados. Confie no momento e permita que o encontro flua naturalmente.";
+  // ----- ENCONTRO COM PESSOA -----
+  if (nomePessoa && P.match(/encontrar|encontra|ver |visitar|ir ate|encontro com/i)) {
+    if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, e isso e um sim vibrante para encontrar " + nomePessoa + " hoje. O Fogo traz paixao, iniciativa e coragem — exatamente o que voce precisa para que esse encontro seja marcante. A carta sugere que sua energia sera percebida e que o momento pede atitude. Va em frente com o coracao aberto e deixe que sua autenticidade brilhe. O universo favorece quem age com confianca, e voce tem o Fogo interior aceso para isso.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, e isso indica que encontrar " + nomePessoa + " hoje sera um encontro de emocoes e sensibilidade. A Agua flui sutilmente, sugerindo que as palavras podem ser secundarias diante do que sera sentido. Pode ser um reencontro profundo, onde olhares e gestos dirão mais que discursos. Confie na sua intuicao e permita-se sentir cada instante — a conexao pode ser mais especial do que voce imagina.";
+    else if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, sinalizando que encontrar " + nomePessoa + " hoje sera marcado por boas conversas e trocas intelectuais. O Ar favorece a comunicacao clara e sincera. Este e um bom momento para alinhar expectativas, colocar o papo em dia e entender melhor o outro. Va com a mente aberta e esteja disposto a ouvir tanto quanto a falar — o dialogo sera o ponto alto desse encontro.";
+    else if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, e isso e um sim para encontrar " + nomePessoa + " hoje. A energia de Terra traz estabilidade, seguranca e solidez. Esse encontro tem o potencial de ser significativo e duradouro, algo que constroi ou fortalece lacos importantes. Aproveite cada momento com presenca e autenticidade — o que for construido agora pode ter bases solidas para o futuro.";
+    else resposta = nome + " sugere que encontrar " + nomePessoa + " hoje pode trazer surpresas. Confie no momento e permita que o encontro flua naturalmente.";
   }
-  else if (sucesso) {
-    if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", e isso e um sinal muito positivo para o sucesso! A energia de Fogo que o " + nome + " carrega indica que voce tem forca de vontade e determinacão para alcancar seus objetivos. O fogo interior esta aceso, e isso impulsiona suas acoes rumo aos resultados que voce busca. O arquétipo desta carta fala de ousadia e confianca — acredite no seu potencial e siga em frente com coragem, pois o momento favorece suas iniciativas.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", sugerindo que o sucesso vem pela sensibilidade e pela intuicao. Nem tudo precisa ser forcado — permita que as coisas fluam no tempo certo. Conectar-se com suas emocoes e confiar nos seus sentimentos pode abrir portas que a razao nao enxerga. O arquétipo do " + nome + " indica que o caminho para o resultado que voce busca passa pelo acolhimento e pela escuta interior.";
-    else if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", mostrando que o sucesso vem atraves do conhecimento e da estrategia. Planeje, estude, organize suas ideias e comunique-se com clareza. A mente afiada e a capacidade de analisar as situacoes serao suas maiores aliadas. O arquétipo do " + nome + " fala de inteligencia e adaptabilidade — invista em aprendizado e em boas estrategias.";
-    else if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e uma carta de energia de " + energia + ", e este e um sinal muito positivo para resultados concretos! O sucesso vem com trabalho dedicado, paciencia e persistencia. Cada passo dado com cuidado e esforco constroi uma base solida para o futuro. O arquétipo do " + nome + " indica que voce esta no caminho certo — continue construindo com paciencia que os frutos serao duradouros e reais.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " com sua energia de " + energia + " indica que o sucesso esta ao seu alcance. Confie no processo e mantenha o foco no que realmente importa.";
+  // ----- SUCESSO / RESULTADOS (carreira, dinheiro, projeto, leilao, site) -----
+  else if (P.match(/sucesso|suceder|vou conseguir|vai dar certo|resultado|futuro|prosperar|dar certo|crescimento|leilao|site|negocio|loja|projeto|empreendimento/i)) {
+    if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, e isso e um sim positivo para o sucesso! O Fogo indica que voce tem forca de vontade e determinacao para alcancar seus objetivos. No entanto, o Fogo tambem alerta para o excesso de pressa — evite queimard etapas. O sucesso vem quando voce canaliza essa energia com foco e estrategia. Va em frente com confianca, mas sem atropelar o processo.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, e isso sugere que o sucesso virá pela sensibilidade e intuicao. Nem tudo precisa ser forcado — permita que as coisas fluam. Conectar-se com suas emocoes e confiar nos seus sentimentos pode abrir portas que a razao nao enxerga. O sucesso que voce busca pode chegar de forma mais natural do que voce espera, desde que voce confie no fluxo da vida.";
+    else if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, indicando que o sucesso vem atraves do conhecimento, da estrategia e da comunicacao. Planeje cada passo, pesquise, analise as variaveis e converse com pessoas que entendem do assunto. A clareza mental e a capacidade de adaptacao serao suas maiores aliadas. O sucesso nao vem do acaso, mas de uma mente bem preparada e de acoes calculadas.";
+    else if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, e este e um sinal muito positivo para resultados concretos! O sucesso vem com trabalho dedicado, paciencia e persistencia. A energia de Terra recompensa quem constroi passo a passo, sem atalhos. Cada esforco de hoje e um alicerce para o futuro. Continue firme, que os resultados serao solidos e duradouros. Voce esta no caminho certo, confie no processo.";
+    else resposta = nome + " com energia de " + energia + " indica que o sucesso esta ao seu alcance. Confie no processo e mantenha o foco.";
   }
-  else if (amor) {
-    if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " no amor traz paixao e intensidade. Os sentimentos estao a flor da pele e ha uma chamada para acao. Se esta esperando um sinal, ele chegou. O momento pede atitude e coragem para expressar o que sente.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " no amor e pura emocao. Mergulhe nos sentimentos e permita-se sentir profondamente. A conexao emocional sera o guia para as decisoes do coracao.";
-    else if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " no amor favorece o dialogo. Colocar os sentimentos em palavras fortalece a relacao. Converse abertamente sobre o que espera do outro.";
-    else if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " no amor traz estabilidade e compromisso. Construir algo solido e verdadeiro, com paciencia e dedicacao, e o caminho.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " no campo afetivo traz a energia de " + energia + ".";
+  // ----- AMOR / RELACIONAMENTO -----
+  else if (P.match(/amor|relacionamento|namoro|paixao|romance|casamento|solteiro|voltar|ex|ficante|beijar|encontro amoroso|novo amor/i)) {
+    if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, e no amor isso e intensidade pura. A resposta para sua pergunta e que os sentimentos estao a flor da pele e pedem acao. Se esta esperando um sinal para se declarar, para investir ou para dar o proximo passo, o Fogo diz que o momento e agora. O amor pede coragem — nao deixe o medo falar mais alto que o coracao.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, e no amor isso e emocao e profundidade. A resposta para sua pergunta esta nos sentimentos, nao na razao. Permita-se sentir, mergulhe nas emocoes e confie no que o coracao aponta. O amor verdadeiro nao se apressa — ele flui como a agua, encontrando seu caminho naturalmente. Paciencia e escuta sao as chaves.";
+    else if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, e no amor isso significa comunicacao. A resposta para sua pergunta passa pelo dialogo. Converse abertamente sobre seus sentimentos, suas expectativas e seus medos. O amor se fortalece quando ha transparencia e honestidade. Use as palavras para construir pontes, nao muros. O que for dito com verdade tende a encontrar acolhimento.";
+    else if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, e no amor isso e estabilidade e compromisso. A resposta para sua pergunta aponta para algo solido e duradouro. O amor de Terra nao e fogo de palha — constroi-se com paciencia, dedicacao e presenca. Se busca um relacionamento verdadeiro, invista em gestos concretos e em construir uma base segura. O que e construido com calma tende a durar.";
+    else resposta = nome + " no campo afetivo traz a energia de " + energia + ". Confie nos seus sentimentos.";
   }
-  else if (carreira) {
-    if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " na carreira indica lideranca e iniciativa. E hora de agir com confianca e mostrar seu valor. O momento pede ousadia e determinacao para alcancar seus objetivos profissionais.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " na carreira sugere usar a intuicao e a empatia. O trabalho em equipe e a capacidade de se conectar com as pessoas serao diferenciais.";
-    else if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " na carreira favorece o planejamento e a estrategia. Use a mente para analisar as opcoes e tomar a melhor decisao.";
-    else if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " na carreira indica crescimento solido e resultados concretos. O trabalho duro e a dedicacao serao recompensados.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " na carreira traz a energia de " + energia + ". Confie no seu taco e siga em frente.";
+  // ----- CARREIRA / TRABALHO -----
+  else if (P.match(/carreira|trabalho|emprego|profissao|empresa|promocao|salario|vaga|entrevista|chefe|contratar|demissao/i)) {
+    if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, e na carreira isso e lideranca e iniciativa. A resposta para sua pergunta e que voce precisa agir com confianca e mostrar seu valor. O momento pede ousadia e determinacao. Nao espere oportunidades baterem a sua porta — crie-as. O Fogo impulsiona quem tem coragem de dar o primeiro passo.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, e na carreira isso sugere que a intuicao sera sua maior aliada. A resposta para sua pergunta passa por confiar no seu tato profissional e na sua capacidade de ler as situacoes. O trabalho em equipe e a empatia farao diferenca. Nem tudo precisa ser decidido no impulso — a agua ensina que a fluidez tambem e uma forma de forca.";
+    else if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, e na carreira isso e planejamento e estrategia. A resposta para sua pergunta envolve estudo e preparacao. Analise as opcoes, pesquise o mercado, converse com pessoas da area e tome decisoes baseadas em informacao. O sucesso profissional vem da mente bem preparada e da capacidade de se adaptar as mudancas.";
+    else if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, e na carreira isso e um otimo sinal! A resposta para sua pergunta aponta para crescimento solido e resultados reais. O trabalho duro, a disciplina e a perseveranca serao recompensados. Continue construindo com paciencia, que os frutos virão. Nada que e conquistado com solidez se perde facilmente.";
+    else resposta = nome + " na carreira sugere a energia de " + energia + ". Confie no seu potencial.";
   }
-  else if (dinheiro) {
-    if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e um otimo sinal para as financas! A energia de " + energia + " indica prosperidade e solidez. E um momento favoravel para investir e planejar o futuro.";
-    else if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " nas financas sugere movimento. A energia de " + energia + " indica que e hora de agir, mas com cautela para evitar gastos impulsivos.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " nas financas pede atencao as emocoes. Evite gastos emocionais e impulsivos. Respire antes de decidir.";
-    else if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " nas financas favorece o planejamento. Organize suas contas e trace metas financeiras claras.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " na area financeira indica a energia de " + energia + ".";
+  // ----- DINHEIRO / FINANCAS -----
+  else if (P.match(/dinheiro|financa|investimento|divida|economia|receita|lucro|comprar|vender|gastar|fatura|cartao|credito/i)) {
+    if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, e isso e um dos melhores sinais para as financas! A resposta para sua pergunta e favoravel — a energia de Terra indica prosperidade, crescimento material e solidez. E um momento propicio para investir, planejar e colher os frutos do trabalho. Mantenha os pes no chao e as contas organizadas.";
+    else if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, e nas financas isso e um sinal de movimento, mas com um alerta. A resposta para sua pergunta e que e hora de agir, mas com cautela. O Fogo traz impulso para buscar novas fontes de renda, mas tambem pode levar a gastos precipitados. Antes de qualquer decisao financeira importante, respire e planeje.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, e nas financas isso pede atencao as emocoes. A resposta para sua pergunta e que voce precisa evitar decisoes financeiras baseadas em impulso emocional. O dinheiro pede racionalidade, nao coracao. Respire antes de comprar, evite gastos para preencher vazios e confie no planejamento que voce ja fez.";
+    else if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, e nas financas isso favorece o planejamento e a organizacao. A resposta para sua pergunta e que o momento pede analise e estrategia. Faca planilhas, revise seus gastos, pesquise antes de investir. A mente clara e a informacao de qualidade serao suas melhores ferramentas para o sucesso financeiro.";
+    else resposta = nome + " na area financeira indica a energia de " + energia + ". Planeje-se com sabedoria.";
   }
-  else if (saude) {
-    if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " sugere que sua saude pede equilibrio entre acao e descanso. Encontre um ritmo sustentavel.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " aponta para o cuidado com o emocional. Suas emocoes afetam diretamente seu bem-estar.";
-    else if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " indica que sua mente precisa de paz. Meditacao e respiracao podem ajudar.";
-    else if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " e um chamado para cuidar do corpo. Boa alimentacao e exercicios trazem equilibrio.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " na saude sugere atencao e cuidado com seu bem-estar.";
+  // ----- SAUDE / BEM-ESTAR -----
+  else if (P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|depressao|corpo|fisico|mental|dormir|sono|alimentacao|exercicio|emagrecer/i)) {
+    if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, e na saude isso indica que voce tem energia, mas precisa de equilibrio. A resposta para sua pergunta e que o excesso de atividade sem descanso pode levar ao esgotamento. O Fogo ensina que ate a chama mais brilhante precisa de ar para continuar. Encontre um ritmo que alterne acao e repouso.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, e na saude isso aponta para o cuidado com o emocional. A resposta para sua pergunta e que suas emocoes afetam diretamente seu bem-estar fisico. Reserve tempo para descansar, para chorar se precisar, para se conectar consigo mesmo. A cura passa pelo acolhimento dos sentimentos.";
+    else if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, e na saude isso indica que sua mente precisa de paz. A resposta para sua pergunta e que o estresse e a ansiedade podem estar afetando seu corpo. Praticar meditacao, respirar fundo e organizar os pensamentos sao passos importantes. A calma mental e o primeiro passo para a saude do corpo.";
+    else if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, e na saude isso e um chamado para cuidar do corpo fisico. A resposta para sua pergunta e que a alimentacao, o exercicio e o contato com a natureza sao fundamentais. Pequenas mudancas na rotina podem trazer grandes resultados. Cuide da base, que o resto se equilibra.";
+    else resposta = nome + " na saude sugere atencao e cuidado com seu bem-estar.";
   }
-  else if (estudo) {
-    if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " e excelente para os estudos! A energia de " + energia + " favorece o aprendizado, a concentracao e o raciocinio logico.";
-    else if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " traz motivacao para estudar. Busque o conhecimento com paixao.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " sugere aprender com calma e fluidez, no seu ritmo.";
-    else if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " pede disciplina nos estudos. A dedicacao sera recompensada.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " nos estudos canaliza a energia de " + energia + ". Momento favoravel para aprender.";
+  // ----- ESTUDO -----
+  else if (P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|professor|materia|livro|ler|estudar|nota|enem/i)) {
+    if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, e isso e excelente para os estudos! A resposta para sua pergunta e que sua mente esta afiada e pronta para aprender. A energia de Ar favorece a concentracao, o raciocinio logico e a assimilacao de conhecimento. E um momento produtivo para se dedicar aos estudos com foco e disciplina.";
+    else if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, e nos estudos isso traz motivacao e entusiasmo. A resposta para sua pergunta e que voce tem energia para aprender, mas precisa tomar cuidado para nao se dispersar. Canais o Fogo para o foco nos estudos e evite querer abracar o mundo ao mesmo tempo. Paixao pelo conhecimento e otima, mas com disciplina.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, e nos estudos isso sugere um aprendizado mais fluido e intuitivo. A resposta para sua pergunta e que voce aprende melhor quando se conecta com o conteudo de forma criativa e emocional. Estude no seu ritmo, sem pressao. A agua ensina que a constancia e mais importante que a velocidade.";
+    else if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, e nos estudos isso pede disciplina e metodos. A resposta para sua pergunta e que a dedicacao e a rotina serao suas maiores aliadas. Estude com regularidade, faca resumos, revisoes e exercicios. O conhecimento solido se constroi com paciencia e trabalho constante. Os resultados virão.";
+    else resposta = nome + " nos estudos canaliza a energia de " + energia + ". Momento favoravel para aprender.";
   }
+  // ----- FALLBACK GENERICO -----
   else {
-    // Fallback generico - mas ainda mostra a pergunta exata
-    if (energia == "Fogo") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " e uma carta de acao e iniciativa. Ela sugere que a resposta para sua pergunta envolve coragem e movimento. O arquétipo do " + nome + " fala de forca interior e determinacao — confie no seu impulso e siga em frente com o que seu coracao aponta.";
-    else if (energia == "Agua") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " e uma carta de sensibilidade e intuicao. Ela sugere que a resposta para sua pergunta vem do coracao, nao da razao. O arquétipo do " + nome + " fala de fluidez e emocao — permita-se sentir e confie nos sinais sutis que o universo apresenta.";
-    else if (energia == "Ar") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " e uma carta de pensamento e comunicacao. Ela sugere que a resposta para sua pergunta esta na clareza mental e no dialogo. O arquétipo do " + nome + " fala de inteligencia e estrategia — busque o conhecimento e organize suas ideias.";
-    else if (energia == "Terra") resposta = "Voce perguntou: " + pergunta + " O " + nome + " com energia de " + energia + " e uma carta de solidez e prosperidade. Ela sugere que a resposta para sua pergunta envolve paciencia e construcao. O arquétipo do " + nome + " fala de algo concreto e duradouro — construa passo a passo com dedicacao.";
-    else resposta = "Voce perguntou: " + pergunta + " O " + nome + " com sua energia de " + energia + " indica que a resposta para sua pergunta esta no equilibrio e na confianca no processo da vida.";
+    if (energia == "Fogo") resposta = nome + " e uma carta de energia de Fogo, indicando que a resposta para sua pergunta envolve acao e iniciativa. O Fogo sugere que e hora de agir com coragem e determinacao. Nao espere o momento perfeito — ele pode nao chegar. Confie no seu impulso e de o primeiro passo. O universo responde a quem se movimenta.";
+    else if (energia == "Agua") resposta = nome + " e uma carta de energia de Agua, sugerindo que a resposta para sua pergunta vem pela intuicao e pela escuta interior. A Agua convida a desacelerar e sentir. Nem tudo precisa ser resolvido com pressa — permita que as respostas venham naturalmente. Confie nos seus sentimentos e nos sinais sutis que o universo apresenta.";
+    else if (energia == "Ar") resposta = nome + " e uma carta de energia de Ar, apontando que a resposta para sua pergunta esta no conhecimento e na comunicacao. Busque informacao, analise as opcoes, converse com pessoas de confianca. A clareza mental e a capacidade de enxergar os fatos com objetividade serao suas aliadas. A resposta esta mais proxima do que voce pensa.";
+    else if (energia == "Terra") resposta = nome + " e uma carta de energia de Terra, indicando que a resposta para sua pergunta envolve paciencia e construcao. A Terra nao apressa suas estacoes — tudo floresce no tempo certo. Confie no processo, continue trabalhando com dedicacao e os resultados aparecerao. O que e construido com solidez nao se desfaz facilmente.";
+    else resposta = nome + " com sua energia de " + energia + " sugere que a resposta para sua pergunta esta no equilibrio e na confianca no fluxo natural da vida.";
   }
 
-  // HTML final - SEM conselho, SEM bullets, apenas o paragrafo unico
+  // Montar HTML
   var h = '<div class="fade" style="text-align:left;">';
   h += '<p class="dim" style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;">"' + pergunta + '"</p>';
   h += '<h3 style="font-family:Allura,cursive;font-size:1.4rem;color:var(--gold);margin-bottom:8px;text-align:center;">O Arquétipo do(a) ' + nome + '</h3>';
   h += '<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>' + nome + '</strong> representa <strong>' + energia + '</strong>. ' + luz + '.</p>';
   h += '<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;"><strong>⚠️ O alerta:</strong> ' + sombra + '.</p>';
   h += '<h4 style="font-family:Allura,cursive;font-size:1.2rem;color:var(--gold);margin:12px 0 6px;">🔮 Conexão com sua pergunta</h4>';
+  h += '<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:8px;">Voce perguntou: <strong>' + pergunta + '</strong>. A energia de <strong>' + nome + '</strong> (' + energia + ') atua diretamente nessa area.</p>';
   h += '<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">';
-  h += resposta;
+  h += '<strong>📿 Resposta do Tarô:</strong> ' + resposta;
   h += '</div></div>';
   return h;
 }
