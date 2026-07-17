@@ -248,7 +248,6 @@ select option{background:#1a0030;color:#e8e0f0}
   <p class="dim mt10" id="tcl">Custa <strong class="gold">3</strong> créditos</p>
   <button class="btn" id="btn-t" onclick="iniciarT()">Consultar</button>
 
-  <!-- Grid 78 cartas -->
   <div id="grid-78-container" style="display:none;">
     <p class="pl mt10">🔮 Escolha uma das 78 cartas abaixo clicando nela:</p>
     <div id="grid-78" class="grid-78"></div>
@@ -344,32 +343,92 @@ function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;docume
 
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-1carta").style.display=e==="1"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e==="lc"?"2":e)+'</strong> creditos';fecharGrid78()}
 
-function gerarLeitura1Carta(carta,pergunta){
-  var nome=carta.nm;
-  var arqu=carta.arq||(carta.energia?"Carta de "+carta.energia:"Arcano");
-  var luz=carta.luz||carta.sg;
-  var sombra=carta.sombra||carta.in||"Desafio";
-  var energia=carta.energia||"Universal";
-  var conselho=carta.am||carta.sg;
-  var P=pergunta.toLowerCase();
-  var ctxTema="o momento atual e as energias que o cercam";
-  if(P.match(/amor|relacionamento|casamento|namoro|paixao/)) ctxTema="sua vida afetiva e os sentimentos envolvidos";
-  else if(P.match(/carreira|trabalho|emprego|profissao|negocio/)){ctxTema="sua jornada profissional";conselho=carta.ca||carta.sg}
-  else if(P.match(/dinheiro|financas|investimento|divida|economia/)) ctxTema="suas financas e a abundancia";
-  else if(P.match(/saude|doenca|tratamento|cura|bem-estar/)) ctxTema="seu equilibrio fisico e mental";
-  else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola/)) ctxTema="seu caminho de aprendizado";
-  var h='<div class="fade" style="text-align:left;">';
-  h+='<p class="dim" style="font-size:0.8rem;font-style:italic;margin-bottom:12px;">"'+pergunta+'"</p>';
-  h+='<h3 style="font-family:Allura,cursive;font-size:1.4rem;color:var(--gold);margin-bottom:8px;text-align:center;">O Arquétipo do(a) '+nome+'</h3>';
-  h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>'+nome+'</strong> representa <strong>'+arqu+'</strong>. '+luz+'.</p>';
-  h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;"><strong>⚠️ O alerta:</strong> '+sombra+'.</p>';
-  h+='<h4 style="font-family:Allura,cursive;font-size:1.2rem;color:var(--gold);margin:12px 0 6px;">🔮 Conexão com sua pergunta</h4>';
-  h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:8px;">A energia de <strong>'+nome+'</strong> atua diretamente em '+ctxTema+'. Esta carta sugere:</p>';
-  h+='<ul style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin:8px 0 12px 20px;">';
-  h+='<li><strong>Ação imediata:</strong> '+(carta.sg?carta.sg.split(".")[0]:"Confie no momento")+'.</li>';
-  h+='<li><strong>Energia em jogo:</strong> A força de '+energia+' atua como motor para as transformações.</li>';
-  h+='<li><strong>Inovação e caminho:</strong> Um novo ciclo se anuncia com oportunidades de crescimento.</li></ul>';
-  h+='<p style="border-top:1px solid var(--gdd);padding-top:12px;font-family:Open Sans,sans-serif;font-size:0.9rem;"><strong>💡 Conselho:</strong> '+conselho+'.</p></div>';
+// ===== FUNÇÃO ATUALIZADA - conecta a carta com a pergunta =====
+function gerarLeitura1Carta(carta, pergunta){
+  var nome = carta.nm;
+  var arqu = carta.arq || (carta.energia ? "Carta de " + carta.energia : "Arcano");
+  var luz = carta.luz || carta.sg;
+  var sombra = carta.sombra || carta.in || "Desafio de aprendizado";
+  var energia = carta.energia || "Universal";
+  var conselho = carta.am || carta.sg;
+  var fraseLuz = carta.sg || "";
+
+  var P = pergunta.toLowerCase();
+  var resposta = "";
+  var contexto = "";
+
+  if (P.match(/bom dia|hoje|como vai ser|o dia|minha rotina|como sera|amanha|vou ter um bom dia|como será meu dia/)) {
+    contexto = "sobre como será o seu dia";
+    if (energia == "Fogo") resposta = "Sim, tende a ser um dia de acao e entusiasmo! O " + nome + " traz energia de " + energia + ", indicando movimento, coragem e iniciativa. Voce pode esperar um dia produtivo e cheio de vitalidade. Aproveite para comecar algo novo e confiar no seu impeto.";
+    else if (energia == "Agua") resposta = "O " + nome + " sugere um dia de intuicao e sensibilidade. A energia de " + energia + " convida voce a ouvir mais seus sentimentos e confiar na sua intuicao. Pode ser um dia mais calmo e reflexivo, ideal para se conectar consigo mesmo. No geral, a resposta e positiva, especialmente se voce fluir com o que sentir.";
+    else if (energia == "Ar") resposta = "O " + nome + " indica um dia de comunicacao e clareza mental. A energia de " + energia + " favorece conversas importantes, estudos e decisoes. Seu dia tende a ser bom para resolver pendencias, fazer contatos e organizar ideias. A mente estara afiada e pronta para novos aprendizados.";
+    else if (energia == "Terra") resposta = "Sim! O " + nome + " traz a energia estavel e prospera de " + energia + ". Seu dia tende a ser pratico, produtivo e com foco em resultados. E um bom dia para trabalhar com dedicacao, cuidar das financas e construir algo concreto. A estabilidade estara ao seu lado.";
+    else resposta = "O " + nome + " indica que seu dia sera marcado pela energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta e positiva, com oportunidades de crescimento e aprendizado ao longo do dia.";
+    if (carta.sg) resposta += " " + carta.sg.split(".")[0] + " sera uma tonica do seu dia.";
+  }
+  else if (P.match(/amar|amor|relacionamento|casamento|namoro|paixao|solteiro|voltar|ex|ficante|uniao|separar|termino|beijar|encontro/)) {
+    contexto = "sobre sua vida amorosa e afetiva";
+    if (carta.am) resposta = carta.am;
+    else resposta = "O " + nome + " no campo afetivo traz a energia de " + energia + ". " + fraseLuz;
+    resposta += " A resposta para sua pergunta no amor esta conectada com a mensagem desta carta: " + (carta.am || "confie no fluxo natural dos sentimentos.");
+    conselho = carta.am || conselho;
+  }
+  else if (P.match(/carreira|trabalho|emprego|profissao|negocio|empresa|promocao|demissao|salario|entrevista|cliente|chefe|projeto/)) {
+    contexto = "sobre sua vida profissional";
+    if (carta.ca) resposta = carta.ca;
+    else resposta = "O " + nome + " na carreira sugere a energia de " + energia + ". " + fraseLuz;
+    resposta += " A resposta para sua pergunta profissional reflete o arquétipo desta carta: " + (carta.ca || "busque estabilidade e crescimento.");
+    conselho = carta.ca || conselho;
+  }
+  else if (P.match(/dinheiro|financa|financas|investimento|divida|comprar|vender|economia|gastar|receita|lucro|prejuizo|emprestimo|cartao/)) {
+    contexto = "sobre suas financas";
+    resposta = "O " + nome + " na area financeira indica a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre dinheiro e: " + (carta.sg || "equilibrio e planejamento sao a chave.");
+  }
+  else if (P.match(/saude|doenca|tratamento|cura|bem-estar|bem estar|ansiedade|depressao|corpo|fisico|mental|emagrecer|dormir|sono/)) {
+    contexto = "sobre sua saude e bem-estar";
+    resposta = "O " + nome + " na saude sugere a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre saude indica que " + (carta.sg ? carta.sg.split(".")[0].toLowerCase() : "cuidado e atencao") + " sao necessarios.";
+    if (energia == "Fogo") resposta += " Equilibre sua energia fisica com momentos de descanso.";
+    else if (energia == "Agua") resposta += " Cuide das emocoes e da hidratacao.";
+    else if (energia == "Ar") resposta += " Acalme a mente e respire fundo.";
+    else if (energia == "Terra") resposta += " Fortaleca o corpo com boa alimentacao.";
+  }
+  else if (P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|professor|materia|livro|ler|estudar|nota|enem/)) {
+    contexto = "sobre seus estudos";
+    resposta = "O " + nome + " nos estudos canaliza a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre aprendizado indica que " + (carta.sg ? carta.sg.split(".")[0].toLowerCase() : "conhecimento esta chegando") + ". E um momento favoravel para se dedicar.";
+  }
+  else if (P.match(/familia|filho|pai|mae|irmao|parente|casa|lar|morar|mudanca/)) {
+    contexto = "sobre sua familia e lar";
+    resposta = "O " + nome + " no contexto familiar traz a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre familia sugere harmonia e compreensao mutua.";
+  }
+  else if (P.match(/amizade|amigo|amiga/)) {
+    contexto = "sobre suas amizades";
+    resposta = "O " + nome + " nas amizades indica a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre amizades e positiva, com lacos se fortalecendo.";
+  }
+  else if (P.match(/viagem|viajar|ferias|passear|passeio|fugir|role|sair/)) {
+    contexto = "sobre viagens e passeios";
+    resposta = "O " + nome + " para viagens traz a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta indica que " + (carta.sg ? carta.sg.split(".")[0].toLowerCase() : "movimento") + " esta favorecido. Pode ser um bom momento para planejar.";
+  }
+  else {
+    contexto = "sobre sua pergunta";
+    resposta = "O " + nome + " com sua energia de " + energia + " responde diretamente: " + fraseLuz + ". A conexao com sua pergunta esta na mensagem central desta carta: " + (carta.sg || "confie no processo.");
+    if (carta.sg) resposta += " O arquétipo sugere que " + carta.sg.split(".")[0].toLowerCase() + " esta presente como resposta.";
+  }
+
+  var h = '<div class="fade" style="text-align:left;">';
+  h += '<p class="dim" style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;">"' + pergunta + '"</p>';
+  h += '<h3 style="font-family:Allura,cursive;font-size:1.4rem;color:var(--gold);margin-bottom:8px;text-align:center;">O Arquétipo do(a) ' + nome + '</h3>';
+  h += '<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>' + nome + '</strong> representa <strong>' + arqu + '</strong>. ' + luz + '.</p>';
+  h += '<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;"><strong>⚠️ O alerta:</strong> ' + sombra + '.</p>';
+  h += '<h4 style="font-family:Allura,cursive;font-size:1.2rem;color:var(--gold);margin:12px 0 6px;">🔮 Conexão com sua pergunta</h4>';
+  h += '<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:8px;">Voce perguntou <strong>' + contexto + '</strong>. A energia de <strong>' + nome + '</strong> (' + energia + ') atua diretamente nessa area.</p>';
+  h += '<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;">';
+  h += '<strong>📿 Resposta do Tarô:</strong> ' + resposta;
+  h += '</div>';
+  h += '<ul style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin:8px 0 12px 20px;">';
+  h += '<li><strong>Acao imediata:</strong> ' + (carta.sg ? carta.sg.split(".")[0] : "Confie no momento") + '.</li>';
+  h += '<li><strong>Energia em jogo:</strong> A forca de ' + energia + ' atua como motor para as transformacoes.</li>';
+  h += '<li><strong>Inovacao e caminho:</strong> Um novo ciclo se anuncia com oportunidades de crescimento.</li></ul>';
+  h += '<p style="border-top:1px solid var(--gdd);padding-top:12px;font-family:Open Sans,sans-serif;font-size:0.9rem;"><strong>💡 Conselho:</strong> ' + conselho + '.</p></div>';
   return h;
 }
 
@@ -410,7 +469,7 @@ function fecharGrid78() {
   cartaEscolhida = null;
 }
 
-// ===== FUNÇÃO PRINCIPAL iniciarT =====
+// ===== FUNCAO PRINCIPAL iniciarT =====
 function iniciarT(){
   var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;
   if(!p) return to("Digite sua pergunta.");
