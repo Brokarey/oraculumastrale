@@ -287,12 +287,11 @@ function gMn(){
 var MN=gMn();
 var DK=[].concat(M,MN);
 
-var SN=[
-{id:"aries",nm:"Aries",ic:"Aries",am:"Iniciativa.",ca:"Lideranca.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"Touro",am:"Estabilidade.",ca:"Financas.",sa:"Natureza."},{id:"gemeos",nm:"Gemeos",ic:"Gemeos",am:"Comunicacao.",ca:"Networking.",sa:"Menos telas."},{id:"cancer",nm:"Cancer",ic:"Cancer",am:"Familia.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leao",nm:"Leao",ic:"Leao",am:"Brilho.",ca:"Reconhecimento.",sa:"Exercicios."},{id:"virgem",nm:"Virgem",ic:"Virgem",am:"Sinta.",ca:"Organizacao.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"Libra",am:"Equilibrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpiao",nm:"Escorpiao",ic:"Escorpiao",am:"Intensidade.",ca:"Intuicao.",sa:"Hidratacao."},{id:"sagitario",nm:"Sagitario",ic:"Sagitario",am:"Aventura.",ca:"Expansao.",sa:"Ar livre."},{id:"capricornio",nm:"Capricornio",ic:"Capricornio",am:"Lealdade.",ca:"Dedicacao.",sa:"Cuidado."},{id:"aquario",nm:"Aquario",ic:"Aquario",am:"Liberdade.",ca:"Inovacao.",sa:"Meditacao."},{id:"peixes",nm:"Peixes",ic:"Peixes",am:"Romantismo.",ca:"Intuicao.",sa:"Descanso."}
-];
-var SO={agua:"Suas emocoes.",cobra:"Transformacao.",dente:"Ansiedade.",bebe:"Novos comecos.",morte:"Fim de ciclo.",voar:"Liberdade.",casa:"Mundo interior.",cachorro:"Lealdade.",gato:"Independencia.",ponte:"Transicao.",chuva:"Renovacao.",dinheiro:"Autoestima.",fogo:"Paixao.",mar:"Subconsciente.",escada:"Progresso.",casamento:"Uniao.",gravidez:"Projeto.",sangue:"Vitalidade.",escola:"Aprendizado.",hospital:"Cura.",luz:"Clareza.",escuro:"Medo.",arvore:"Crescimento.",fuga:"Evitando.",comida:"Nutricao.",crianca:"Crianca interior.",lua:"Intuicao.",sol:"Sucesso.",estrela:"Esperanca.",floresta:"Exploracao.",montanha:"Superacao.",rio:"Fluxo."};
-var FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio.","Sua intuicao e a voz da sua alma.","Confie no tempo do universo.","Sua energia cria sua realidade."];
+var SN=[{id:"aries",nm:"Aries",ic:"Aries",am:"Iniciativa.",ca:"Lideranca.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"Touro",am:"Estabilidade.",ca:"Financas.",sa:"Natureza."},{id:"gemeos",nm:"Gemeos",ic:"Gemeos",am:"Comunicacao.",ca:"Networking.",sa:"Menos telas."},{id:"cancer",nm:"Cancer",ic:"Cancer",am:"Familia.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leao",nm:"Leao",ic:"Leao",am:"Brilho.",ca:"Reconhecimento.",sa:"Exercicios."},{id:"virgem",nm:"Virgem",ic:"Virgem",am:"Sinta.",ca:"Organizacao.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"Libra",am:"Equilibrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpiao",nm:"Escorpiao",ic:"Escorpiao",am:"Intensidade.",ca:"Intuicao.",sa:"Hidratacao."},{id:"sagitario",nm:"Sagitario",ic:"Sagitario",am:"Aventura.",ca:"Expansao.",sa:"Ar livre."},{id:"capricornio",nm:"Capricornio",ic:"Capricornio",am:"Lealdade.",ca:"Dedicacao.",sa:"Cuidado."},{id:"aquario",nm:"Aquario",ic:"Aquario",am:"Liberdade.",ca:"Inovacao.",sa:"Meditacao."},{id:"peixes",nm:"Peixes",ic:"Peixes",am:"Romantismo.",ca:"Intuicao.",sa:"Descanso."}];
+var SO={agua:"Suas emocoes.",cobra:"Transformacao.",dente:"Ansiedade.",bebe:"Novos comecos.",morte:"Fim de ciclo.",voar:"Liberdade."};
+var FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio.","Sua intuicao e a voz da sua alma."];
 var user=null,tf=[],mt=false;
+var cartaEscolhida=null;
 
 function ir(id){document.querySelectorAll(".scr").forEach(function(t){t.classList.remove("ativa")});var e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
 function ds(){document.querySelectorAll(".sb-i").forEach(function(i){i.classList.remove("ativo")});document.querySelector(".sb-i").classList.add("ativo")}
@@ -303,21 +302,18 @@ function fM(i){var m=document.getElementById(i);if(m){m.style.display="none";doc
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.querySelectorAll(".modal").forEach(function(m){if(m.style.display==="flex"){m.style.display="none";document.body.classList.remove("no-scroll")}});fecharGrid78()}});
 document.addEventListener("click",function(e){if(e.target.classList.contains("modal")){e.target.style.display="none";document.body.classList.remove("no-scroll");fecharGrid78()}});
 function sl(i,v){var b=document.getElementById(i);if(!b)return;if(v){b.dataset.o=b.innerText;b.innerText="Aguarde...";b.disabled=true}else{b.innerText=b.dataset.o||b.innerText;b.disabled=false}}
-
 function cadastrar(){var n=document.getElementById("cn").value.trim(),e=document.getElementById("ce").value.trim(),p=document.getElementById("cs").value,x=document.getElementById("csc").value;if(!n||!e||p.length<6||p!==x)return to("Preencha corretamente.");var u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("E-mail existe.");u.push({nome:n,email:e,senha:p,creditos:5,streak:1,ult:new Date().toISOString().split("T")[0]});localStorage.setItem("oa_u",JSON.stringify(u));to("Conta criada! +5 creditos.");ir("login")}
 function logar(){var e=document.getElementById("le").value.trim(),p=document.getElementById("ls").value;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return to("Email ou senha incorretos.");user=s;atS();cD();ir("main");to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
 function sair(){user=null;ir("welcome")}
 function sU(){if(!user)return;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("cu2").innerText=user.creditos;document.getElementById("su2").innerText=user.streak}
 function gas(q){if(!user)return to("Faca login."),0;if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Creditos insuficientes.");return 0}
 function atS(){var h=new Date().toISOString().split("T")[0];if(user.ult!==h){user.streak=1;user.ult=h;sU()}}
-
 function cD(){var n=user.nome.split(" ")[0],h=new Date().getHours();var s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("st").innerText=s+", "+n+"!";document.getElementById("fd").innerText=FR[Math.floor(Math.random()*FR.length)];sU();var g=document.getElementById("gs2");g.innerHTML="";SN.forEach(function(sn){var b=document.createElement("div");b.className="sb2";b.innerHTML='<span class="si">'+sn.ic+'</span><span class="sn">'+sn.nm+'</span>';b.onclick=function(){mH(sn.id)};g.appendChild(b)});var a=document.getElementById("cs1"),b2=document.getElementById("cs2");a.innerHTML='<option value="">Seu Signo</option>';b2.innerHTML='<option value="">Outro Signo</option>';SN.forEach(function(sn){a.innerHTML+='<option value="'+sn.id+'">'+sn.nm+" "+sn.ic+"</option>";b2.innerHTML+='<option value="'+sn.id+'">'+sn.nm+" "+sn.ic+"</option>"})}
 function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p class="dim mt20">Ja consultou hoje.</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3>'+c.nm+'</h3><p>"'+c.sg+'"</p></div>';to("Carta revelada!")}
 function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
-
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-1carta").style.display=e==="1"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e==="lc"?"2":e)+'</strong> creditos';fecharGrid78()}
 
-function gerarLeitura1Carta(carta, pergunta){
+function gerarLeitura1Carta(carta,pergunta){
   var nome=carta.nm,energia=carta.energia||"Universal",luz=carta.luz||carta.sg,sombra=carta.sombra||carta.in||"Alerta",conselho=carta.am||carta.sg;
   var P=pergunta.toLowerCase(),resposta="",contexto="";
   var encontro=P.match(/encontrar|encontra|ver |visitar|ir ate/);
@@ -326,7 +322,7 @@ function gerarLeitura1Carta(carta, pergunta){
     contexto="sobre encontrar alguem";
     if(energia=="Fogo") resposta="Sim! O "+nome+" traz energia de "+energia+", indicando entusiasmo e paixao. Sua iniciativa sera bem recebida.";
     else if(energia=="Agua") resposta="O "+nome+" sugere um encontro guiado pela emocao. Confie na sua intuicao.";
-    else if(energia=="Ar") resposta="O "+nome+" indica boas conversas e comunicacao clara. Vá de mente aberta.";
+    else if(energia=="Ar") resposta="O "+nome+" indica boas conversas e comunicacao clara.";
     else if(energia=="Terra") resposta="Sim, o "+nome+" aponta para um encontro estavel e significativo.";
     else resposta="O "+nome+" indica que esse encontro pode trazer surpresas positivas.";
     resposta+=" Confie na energia do momento.";
@@ -335,8 +331,8 @@ function gerarLeitura1Carta(carta, pergunta){
   else if(P.match(/amor|relacionamento|namoro|paixao|romance|encontro/)){contexto="sobre o amor";resposta=carta.am||("O "+nome+" no amor traz energia de "+energia+".");conselho=carta.am||conselho}
   else if(P.match(/carreira|trabalho|emprego|profissao|negocio/)){contexto="sobre a carreira";resposta=carta.ca||("O "+nome+" na carreira sugere energia de "+energia+".");conselho=carta.ca||conselho}
   else if(P.match(/dinheiro|financa|investimento|economia/)){contexto="sobre financas";resposta="O "+nome+" nas financas indica energia de "+energia+". Equilibrio e a chave."}
-  else if(P.match(/saude|bem-estar|ansiedade|emocional/)){contexto="sobre saude";resposta="O "+nome+" na saude sugere energia de "+energia+".";if(energia=="Fogo")resposta+=" Equilibre energia com descanso.";else if(energia=="Agua")resposta+=" Cuide das emocoes.";else if(energia=="Ar")resposta+=" Acalme a mente.";else if(energia=="Terra")resposta+=" Fortaleca o corpo."}
-  else if(P.match(/estudo|faculdade|curso|aprender|prova/)){contexto="sobre estudos";resposta="O "+nome+" nos estudos canaliza energia de "+energia+". Momento favoravel para aprender."}
+  else if(P.match(/saude|bem-estar|ansiedade/)){contexto="sobre saude";resposta="O "+nome+" na saude sugere energia de "+energia+".";if(energia=="Fogo")resposta+=" Equilibre energia com descanso.";else if(energia=="Agua")resposta+=" Cuide das emocoes.";else if(energia=="Ar")resposta+=" Acalme a mente.";else if(energia=="Terra")resposta+=" Fortaleca o corpo."}
+  else if(P.match(/estudo|faculdade|curso|aprender/)){contexto="sobre estudos";resposta="O "+nome+" nos estudos canaliza energia de "+energia+". Momento favoravel."}
   else{contexto="sobre sua pergunta";resposta="O "+nome+" responde: "+(carta.sg||"confie no processo.")}
 
   var h='<div class="fade" style="text-align:left;">';
@@ -347,13 +343,11 @@ function gerarLeitura1Carta(carta, pergunta){
   h+='<h4 style="font-family:Allura,cursive;font-size:1.2rem;color:var(--gold);margin:12px 0 6px;">🔮 Conexão com sua pergunta</h4>';
   h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:8px;">Voce perguntou <strong>'+contexto+'</strong>. A energia de <strong>'+nome+'</strong> ('+energia+') atua nessa area.</p>';
   h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);">';
-  h+='<strong>📿 Resposta:</strong> '+resposta;
-  h+='</div>';
+  h+='<strong>📿 Resposta:</strong> '+resposta+'</div>';
   h+='<p style="border-top:1px solid var(--gdd);padding-top:12px;font-family:Open Sans,sans-serif;font-size:0.9rem;"><strong>💡 Conselho:</strong> '+conselho+'.</p></div>';
   return h;
 }
 
-var cartaEscolhida=null;
 function montarGrid78(cartas,pergunta){
   var g=document.getElementById("grid-78");g.innerHTML="";
   for(var i=0;i<cartas.length;i++){
@@ -375,13 +369,21 @@ function montarGrid78(cartas,pergunta){
   }
   document.getElementById("grid-78-container").style.display="block";document.getElementById("tr").innerHTML="";
 }
-function fecharGrid78(){document.getElementById("grid-78-container").style.display="none";cartaEscolhida=null}
+
+function fecharGrid78(){
+  document.getElementById("grid-78-container").style.display="none";
+  cartaEscolhida=null;
+}
 
 function iniciarT(){
   var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;
   if(!p) return to("Digite sua pergunta.");
-  fecharGrid78();
+
+  cartaEscolhida=null;
+  document.getElementById("grid-78-container").style.display="none";
+  document.getElementById("grid-78").innerHTML="";
   document.getElementById("tr").innerHTML="";
+
   if(t==="lc"){
     if(!gas(2)) return;
     document.getElementById("lca").style.display="block";
@@ -393,8 +395,12 @@ function iniciarT(){
   if(!gas(q)) return;
   sl("btn-t",1);
   setTimeout(function(){
-    if(q===1){var d=[].concat(DK).sort(function(){return Math.random()-0.5});montarGrid78(d,p);sl("btn-t",0);to("Escolha uma carta!");}
-    else if(q===3){
+    if(q===1){
+      var d=[].concat(DK).sort(function(){return Math.random()-0.5});
+      montarGrid78(d,p);
+      sl("btn-t",0);
+      to("Escolha uma carta!");
+    } else if(q===3){
       var d=[].concat(DK).sort(function(){return Math.random()-0.5}),cartas=d.slice(0,q);
       var pos=["Passado","Presente","Futuro"];var h='<p class="dim">"'+p+'"</p><div class="gt">';
       cartas.forEach(function(c,i){h+='<div class="ti2"><span class="tn" style="font-size:0.7rem;color:var(--td);">'+pos[i]+'</span><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;
@@ -412,9 +418,8 @@ var lM=null,lm=null,la=false;
 function selM(n){if(lM||la)return;lM=M.find(function(c){return c.n===n});document.querySelectorAll("#lgm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lm-"+n);if(el){el.style.opacity="1";el.classList.add("revelada")}document.getElementById("lc2").style.display="block";var e=[].concat(MN).sort(function(){return Math.random()-0.5}),g=document.getElementById("lgmm");g.innerHTML="";e.forEach(function(c){var d=document.createElement("div");d.className="cf";d.id="lmm-"+c.id;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🂠</span><span class="vs-label">Menor</span></div><div class="cf-frente"><span class="cn">'+c.nm+'</span></div></div>';d.onclick=function(){selm(c.id)};g.appendChild(d)});to("Escolha um Arcano Menor.")}
 function selm(id){if(lm||la)return;lm=MN.find(function(c){return c.id===id});document.querySelectorAll("#lgmm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lmm-"+id);if(el){el.style.opacity="1";el.classList.add("revelada")}la=true;var ma=lM,mi=lm;if(!ma||!mi)return;var h='<div class="fade"><div class="li"><h4>🔮 '+ma.nm+'</h4><p><strong>🌟 Luz:</strong> '+ma.luz+'</p><p><strong>⚠️ Sombra:</strong> '+ma.sombra+'</p></div><div class="li"><h4>📜 '+mi.nm+'</h4><p><strong>📖 Significado:</strong> '+mi.sg+'</p></div><p style="margin-top:15px;font-style:italic;">O '+ma.nm+' mostra o proposito maior. O '+mi.nm+' revela o cotidiano.</p></div>';document.getElementById("lcr").innerHTML=h;document.getElementById("lcr").style.display="block";to("Leitura Combinada concluida!");}
 function resLC(){document.getElementById("lca").style.display="none";document.getElementById("lcr").style.display="none";document.getElementById("lcr").innerHTML="";lM=null;lm=null;la=false}
-
 function calN(){var d=document.getElementById("nd").value;if(!d||!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"Lider",2:"Diplomata",3:"Comunicador",4:"Construtor",5:"Viajante",6:"Protetor",7:"Sabio",8:"Executivo",9:"Humanitario",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3>Caminho de Vida</h3><p>'+(de[s]||"Especial")+"</p></div>";sl("btn-n",0);to("Numero revelado!")},600)}
-function conI(){var p=document.getElementById("ip").value.trim();if(!p||!gas(2))return;sl("btn-i",1);setTimeout(function(){var hx=[{n:1,nm:"O Criativo",s:"Qian",d:"Forca criativa."},{n:2,nm:"O Receptivo",s:"Kun",d:"Poder da terra."}];var h=hx[Math.floor(Math.random()*hx.length)];document.getElementById("ir").innerHTML='<div class="fade"><h3>Hexagrama '+h.n+': '+h.nm+'</h3><p>'+h.d+'</p></div>';sl("btn-i",0);to("I Ching respondeu!")},700)}
+function conI(){var p=document.getElementById("ip").value.trim();if(!p||!gas(2))return;sl("btn-i",1);setTimeout(function(){var hx=[{n:1,nm:"O Criativo",s:"Qian",d:"Forca criativa."}];var h=hx[0];document.getElementById("ir").innerHTML='<div class="fade"><h3>Hexagrama '+h.n+': '+h.nm+'</h3><p>'+h.d+'</p></div>';sl("btn-i",0);to("I Ching respondeu!")},700)}
 function conSN(){var p=document.getElementById("snp").value.trim();if(!p||!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Nao","Talvez","Com certeza","Nao e momento","As estrelas dizem sim"];document.getElementById("snr").innerHTML='<span class="fade">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
 function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>"}}}
 function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b||a===b)return to("Selecione signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m=p>=85?"Almas gemeas!":p>=70?"Grande afinidade!":p>=50?"Atracao de opostos.":"Energias distintas.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
