@@ -7,9 +7,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Allura&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#d4a853;--gdd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0;--gl:rgba(255,255,255,0.05);--gb:rgba(255,255,255,0.1)}
+:root{--gold:#d4a853;--gdd:rgba(212,168,83,0.2);--tx:#e8e0f0;--td:#a090b0}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Allura','Inter',cursive;color:var(--tx);min-height:100vh;overflow-x:hidden;line-height:1.6;background:#080212}
+body{font-family:'Inter',sans-serif;color:var(--tx);min-height:100vh;overflow-x:hidden;line-height:1.6;background:#080212}
 body.no-scroll{overflow:hidden}
 h1,h2,h3{font-family:'Allura',cursive;color:var(--gold);font-weight:400}
 a{color:var(--gold);text-decoration:none}
@@ -77,7 +77,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .cf{perspective:800px;min-height:100px}
 .cf-inner{position:relative;width:100%;height:100px;transition:transform 0.6s;transform-style:preserve-3d;cursor:pointer}
 .cf.revelada .cf-inner{transform:rotateY(180deg)}
-.cf-frente,.cf-verso{position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px}
+.cf-frente,.cf-verso{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px}
 .cf-frente{background:linear-gradient(135deg,#2a1040,#1a0030);border:2px solid var(--gdd);transform:rotateY(180deg)}
 .cf-frente .cn{color:var(--gold);font-weight:600;font-size:0.75rem;display:block;font-family:'Allura',cursive}
 .cf-frente .cs{font-size:0.6rem;color:var(--td);display:block;margin-top:3px;font-family:'Open Sans',sans-serif}
@@ -313,37 +313,112 @@ function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=l
 function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-1carta").style.display=e==="1"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e==="lc"?"2":e)+'</strong> creditos';fecharGrid78()}
 
-function gerarLeitura1Carta(carta,pergunta){
+// ===== FUNÇÃO CORRIGIDA - respostas descritivas conectando carta com pergunta =====
+function gerarLeitura1Carta(carta, pergunta){
   var nome=carta.nm,energia=carta.energia||"Universal",luz=carta.luz||carta.sg,sombra=carta.sombra||carta.in||"Alerta",conselho=carta.am||carta.sg;
   var P=pergunta.toLowerCase(),resposta="",contexto="";
-  var encontro=P.match(/encontrar|encontra|ver |visitar|ir ate/);
-  var pessoa=P.match(/talita|maria|joao|ana|carlos|pedro|ela|ele|alguem/);
+
+  // --- ENCONTRO COM ALGUÉM (prioritário) ---
+  var encontro=P.match(/encontrar|encontra|ver |visitar|ir ate|encontro com/);
+  var pessoa=P.match(/talita|maria|joao|ana|carlos|pedro|jose|paulo|ela|ele|alguem/);
   if(encontro&&pessoa){
-    contexto="sobre encontrar alguem";
-    if(energia=="Fogo") resposta="Sim! O "+nome+" traz energia de "+energia+", indicando entusiasmo e paixao. Sua iniciativa sera bem recebida.";
-    else if(energia=="Agua") resposta="O "+nome+" sugere um encontro guiado pela emocao. Confie na sua intuicao.";
-    else if(energia=="Ar") resposta="O "+nome+" indica boas conversas e comunicacao clara.";
-    else if(energia=="Terra") resposta="Sim, o "+nome+" aponta para um encontro estavel e significativo.";
-    else resposta="O "+nome+" indica que esse encontro pode trazer surpresas positivas.";
-    resposta+=" Confie na energia do momento.";
-    conselho="Siga sua intuicao e esteja presente.";
+    contexto="sobre encontrar alguem especial";
+    if(energia=="Fogo") resposta="Sim! O "+nome+" traz energia de "+energia+", indicando que o encontro tende a ser cheio de entusiasmo e paixao. Ha uma faisca de novidade no ar, e sua iniciativa sera bem recebida. A pessoa com quem voce deseja se encontrar provavelmente estara receptiva a sua energia vibrante.";
+    else if(energia=="Agua") resposta="O "+nome+" sugere que esse encontro sera guiado pela emocao e pela intuicao. A energia de "+energia+" convida voce a ouvir seus sentimentos. Pode ser um reencontro significativo, onde as palavras nao ditas encontrarao seu caminho. Confie no que seu coracao diz e permita-se sentir.";
+    else if(energia=="Ar") resposta="O "+nome+" indica que o encontro sera marcado por boas conversas e trocas intelectuais. A energia de "+energia+" favorece a comunicacao clara e sincera. Sera um bom momento para alinhar expectativas e colocar o papo em dia.";
+    else if(energia=="Terra") resposta="Sim, o "+nome+" aponta para um encontro estavel e significativo. A energia de "+energia+" sugere que essa reuniao pode trazer seguranca, conforto e a sensacao de estar no lugar certo. E um encontro para construir ou fortalecer lacos.";
+    else resposta="O "+nome+" indica que esse encontro pode trazer surpresas e aprendizados importantes. O universo esta preparando o terreno para uma troca significativa.";
+    resposta+=" Confie na energia do momento e permita que o encontro flua naturalmente.";
+    conselho="Siga sua intuicao e esteja presente. O encontro pode revelar mais do que voce espera.";
   }
-  else if(P.match(/amor|relacionamento|namoro|paixao|romance|encontro/)){contexto="sobre o amor";resposta=carta.am||("O "+nome+" no amor traz energia de "+energia+".");conselho=carta.am||conselho}
-  else if(P.match(/carreira|trabalho|emprego|profissao|negocio/)){contexto="sobre a carreira";resposta=carta.ca||("O "+nome+" na carreira sugere energia de "+energia+".");conselho=carta.ca||conselho}
-  else if(P.match(/dinheiro|financa|investimento|economia/)){contexto="sobre financas";resposta="O "+nome+" nas financas indica energia de "+energia+". Equilibrio e a chave."}
-  else if(P.match(/saude|bem-estar|ansiedade/)){contexto="sobre saude";resposta="O "+nome+" na saude sugere energia de "+energia+".";if(energia=="Fogo")resposta+=" Equilibre energia com descanso.";else if(energia=="Agua")resposta+=" Cuide das emocoes.";else if(energia=="Ar")resposta+=" Acalme a mente.";else if(energia=="Terra")resposta+=" Fortaleca o corpo."}
-  else if(P.match(/estudo|faculdade|curso|aprender/)){contexto="sobre estudos";resposta="O "+nome+" nos estudos canaliza energia de "+energia+". Momento favoravel."}
-  else{contexto="sobre sua pergunta";resposta="O "+nome+" responde: "+(carta.sg||"confie no processo.")}
+  // --- SUCESSO / RESULTADOS ---
+  else if(P.match(/sucesso|suceder|vou conseguir|vai dar certo|resultado|futuro|prosperar|bem sucedido|site de taro|site de tarô/)){
+    contexto="sobre sucesso e resultados";
+    if(energia=="Fogo") resposta="Sim, o "+nome+" com energia de "+energia+" indica que o sucesso vem pela acao e iniciativa. Ha motivacao e forca de vontade para alcancar seus objetivos. O fogo interior esta aceso e pronto para transformar desafios em conquistas. Acredite no seu potencial e siga em frente com determinacao.";
+    else if(energia=="Agua") resposta="O "+nome+" sugere que o sucesso vem pela sensibilidade e intuicao. A energia de "+energia+" indica que conectar-se com suas emocoes e confiar nos seus sentimentos sera o caminho para o resultado que voce busca. Nem tudo precisa ser forcado — permita que as coisas fluam naturalmente.";
+    else if(energia=="Ar") resposta="O "+nome+" com energia de "+energia+" aponta que o sucesso vem atraves do conhecimento e da comunicacao. Planeje, estude, converse e compartilhe suas ideias. A clareza mental sera sua maior aliada para alcancar bons resultados.";
+    else if(energia=="Terra") resposta="Sim! O "+nome+" com energia de "+energia+" e um otimo sinal para resultados concretos. O sucesso vem com trabalho dedicado, paciencia e persistencia. Construa passo a passo, que os resultados serao solidos e duradouros.";
+    else resposta="O "+nome+" com energia de "+energia+" indica que o sucesso esta ao seu alcance. Confie no processo e mantenha o foco.";
+    conselho="Mantenha o foco e a determinacao. O sucesso e uma jornada, nao um destino.";
+  }
+  // --- DIA / HOJE ---
+  else if(P.match(/bom dia|hoje|como vai ser|o dia|minha rotina|como sera|amanha|vou ter um bom dia/)){
+    contexto="sobre como sera o seu dia";
+    if(energia=="Fogo") resposta="Sim, tende a ser um dia de acao e entusiasmo! O "+nome+" traz energia de "+energia+", indicando movimento, coragem e iniciativa. Voce pode esperar um dia produtivo.";
+    else if(energia=="Agua") resposta="O "+nome+" sugere um dia de intuicao e sensibilidade. A energia de "+energia+" convida voce a ouvir seus sentimentos. Pode ser um dia mais calmo e reflexivo.";
+    else if(energia=="Ar") resposta="O "+nome+" indica um dia de comunicacao e clareza mental. A energia de "+energia+" favorece conversas importantes e decisoes.";
+    else if(energia=="Terra") resposta="Sim! O "+nome+" traz a energia estavel e prospera de "+energia+". Seu dia tende a ser pratico, produtivo e com foco em resultados.";
+    else resposta="O "+nome+" indica que seu dia sera marcado pela energia de "+energia+". A resposta e positiva.";
+  }
+  // --- AMOR ---
+  else if(P.match(/amor|relacionamento|namoro|paixao|romance|solteiro/)){
+    contexto="sobre sua vida amorosa";
+    if(carta.am) resposta=carta.am;
+    else if(energia=="Fogo") resposta="O "+nome+" no amor traz paixao e intensidade. A energia de "+energia+" indica que os sentimentos estao a flor da pele.";
+    else if(energia=="Agua") resposta="O "+nome+" no amor e pura emocao. A energia de "+energia+" convida a mergulhar nos sentimentos.";
+    else if(energia=="Ar") resposta="O "+nome+" no amor favorece o dialogo. A energia de "+energia+" ajuda a colocar os sentimentos em palavras.";
+    else if(energia=="Terra") resposta="O "+nome+" no amor traz estabilidade. A energia de "+energia+" sugere um relacionamento solido e verdadeiro.";
+    else resposta="O "+nome+" no campo afetivo traz a energia de "+energia+".";
+    conselho=carta.am||conselho;
+  }
+  // --- CARREIRA ---
+  else if(P.match(/carreira|trabalho|emprego|profissao|negocio|empresa|promocao|salario|site|projeto/)){
+    contexto="sobre sua vida profissional";
+    if(carta.ca) resposta=carta.ca;
+    else if(energia=="Fogo") resposta="O "+nome+" na carreira traz energia de "+energia+", indicando lideranca e iniciativa. E hora de agir com confianca.";
+    else if(energia=="Agua") resposta="O "+nome+" na carreira sugere usar a intuicao. A energia de "+energia+" favorece o trabalho em equipe e a empatia.";
+    else if(energia=="Ar") resposta="O "+nome+" na carreira favorece o planejamento. A energia de "+energia+" traz clareza para tomar decisoes.";
+    else if(energia=="Terra") resposta="O "+nome+" na carreira indica crescimento solido. A energia de "+energia+" recompensa o trabalho duro e a dedicacao.";
+    else resposta="O "+nome+" na carreira sugere a energia de "+energia+".";
+    conselho=carta.ca||conselho;
+  }
+  // --- DINHEIRO ---
+  else if(P.match(/dinheiro|financa|investimento|divida|economia|receita|lucro/)){
+    contexto="sobre suas financas";
+    if(energia=="Terra") resposta="O "+nome+" e um bom sinal para as financas! A energia de "+energia+" indica prosperidade e crescimento material.";
+    else if(energia=="Fogo") resposta="O "+nome+" nas financas sugere movimento. A energia de "+energia+" indica que e hora de agir, mas com cautela.";
+    else if(energia=="Agua") resposta="O "+nome+" nas financas pede atencao as emocoes. A energia de "+energia+" sugere evitar gastos impulsivos.";
+    else if(energia=="Ar") resposta="O "+nome+" nas financas favorece o planejamento. A energia de "+energia+" ajuda a organizar suas contas.";
+    else resposta="O "+nome+" na area financeira indica a energia de "+energia+".";
+  }
+  // --- SAÚDE ---
+  else if(P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|depressao|corpo/)){
+    contexto="sobre sua saude e bem-estar";
+    if(energia=="Fogo") resposta="O "+nome+" na saude sugere excesso de energia. A energia de "+energia+" pede equilibrio entre acao e descanso.";
+    else if(energia=="Agua") resposta="O "+nome+" na saude aponta para o emocional. A energia de "+energia+" convida a cuidar dos sentimentos.";
+    else if(energia=="Ar") resposta="O "+nome+" na saude indica que a mente precisa de paz. A energia de "+energia+" sugere meditacao e respiracao.";
+    else if(energia=="Terra") resposta="O "+nome+" na saude e um chamado para cuidar do corpo. A energia de "+energia+" favorece alimentacao e exercicios.";
+    else resposta="O "+nome+" na saude sugere a energia de "+energia+". Cuidado e atencao sao necessarios.";
+  }
+  // --- ESTUDO ---
+  else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro/)){
+    contexto="sobre seus estudos";
+    if(energia=="Ar") resposta="O "+nome+" e excelente para os estudos! A energia de "+energia+" favorece o aprendizado, a concentracao e o raciocinio.";
+    else if(energia=="Fogo") resposta="O "+nome+" nos estudos traz motivacao. A energia de "+energia+" incentiva a buscar conhecimento com paixao.";
+    else if(energia=="Agua") resposta="O "+nome+" nos estudos sugere aprender com calma. A energia de "+energia+" favorece a absorcao natural do conhecimento.";
+    else if(energia=="Terra") resposta="O "+nome+" nos estudos pede disciplina. A energia de "+energia+" recompensa a dedicacao e a constancia.";
+    else resposta="O "+nome+" nos estudos canaliza a energia de "+energia+". Momento favoravel para aprender.";
+  }
+  // --- GENÉRICO (fallback) ---
+  else {
+    contexto="sobre sua pergunta";
+    if(energia=="Fogo") resposta="O "+nome+" com energia de "+energia+" indica que a resposta envolve acao e iniciativa. "+(carta.sg||"Confie no seu impulso.");
+    else if(energia=="Agua") resposta="O "+nome+" com energia de "+energia+" sugere que a resposta vem pela intuicao. "+(carta.sg||"Confie nos seus sentimentos.");
+    else if(energia=="Ar") resposta="O "+nome+" com energia de "+energia+" aponta para o conhecimento e a comunicacao. "+(carta.sg||"Busque clareza mental.");
+    else if(energia=="Terra") resposta="O "+nome+" com energia de "+energia+" indica algo solido e concreto. "+(carta.sg||"Construa passo a passo.");
+    else resposta="O "+nome+" responde: "+(carta.sg||"confie no processo.");
+  }
 
   var h='<div class="fade" style="text-align:left;">';
-  h+='<p class="dim" style="font-size:0.8rem;font-style:italic;margin-bottom:12px;">"'+pergunta+'"</p>';
+  h+='<p class="dim" style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;">"'+pergunta+'"</p>';
   h+='<h3 style="font-family:Allura,cursive;font-size:1.4rem;color:var(--gold);margin-bottom:8px;text-align:center;">O Arquétipo do(a) '+nome+'</h3>';
-  h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>'+nome+'</strong> representa energia de <strong>'+energia+'</strong>. '+luz+'.</p>';
+  h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>'+nome+'</strong> representa <strong>'+energia+'</strong>. '+luz+'.</p>';
   h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:10px;"><strong>⚠️ O alerta:</strong> '+sombra+'.</p>';
   h+='<h4 style="font-family:Allura,cursive;font-size:1.2rem;color:var(--gold);margin:12px 0 6px;">🔮 Conexão com sua pergunta</h4>';
-  h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:8px;">Voce perguntou <strong>'+contexto+'</strong>. A energia de <strong>'+nome+'</strong> ('+energia+') atua nessa area.</p>';
-  h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);">';
-  h+='<strong>📿 Resposta:</strong> '+resposta+'</div>';
+  h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:8px;">Voce perguntou <strong>'+contexto+'</strong>. A energia de <strong>'+nome+'</strong> ('+energia+') atua diretamente nessa area.</p>';
+  h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;">';
+  h+='<strong>📿 Resposta do Tarô:</strong> '+resposta;
+  h+='</div>';
   h+='<p style="border-top:1px solid var(--gdd);padding-top:12px;font-family:Open Sans,sans-serif;font-size:0.9rem;"><strong>💡 Conselho:</strong> '+conselho+'.</p></div>';
   return h;
 }
@@ -370,20 +445,15 @@ function montarGrid78(cartas,pergunta){
   document.getElementById("grid-78-container").style.display="block";document.getElementById("tr").innerHTML="";
 }
 
-function fecharGrid78(){
-  document.getElementById("grid-78-container").style.display="none";
-  cartaEscolhida=null;
-}
+function fecharGrid78(){document.getElementById("grid-78-container").style.display="none";cartaEscolhida=null}
 
 function iniciarT(){
   var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;
   if(!p) return to("Digite sua pergunta.");
-
   cartaEscolhida=null;
   document.getElementById("grid-78-container").style.display="none";
   document.getElementById("grid-78").innerHTML="";
   document.getElementById("tr").innerHTML="";
-
   if(t==="lc"){
     if(!gas(2)) return;
     document.getElementById("lca").style.display="block";
@@ -395,12 +465,8 @@ function iniciarT(){
   if(!gas(q)) return;
   sl("btn-t",1);
   setTimeout(function(){
-    if(q===1){
-      var d=[].concat(DK).sort(function(){return Math.random()-0.5});
-      montarGrid78(d,p);
-      sl("btn-t",0);
-      to("Escolha uma carta!");
-    } else if(q===3){
+    if(q===1){var d=[].concat(DK).sort(function(){return Math.random()-0.5});montarGrid78(d,p);sl("btn-t",0);to("Escolha uma carta!");}
+    else if(q===3){
       var d=[].concat(DK).sort(function(){return Math.random()-0.5}),cartas=d.slice(0,q);
       var pos=["Passado","Presente","Futuro"];var h='<p class="dim">"'+p+'"</p><div class="gt">';
       cartas.forEach(function(c,i){h+='<div class="ti2"><span class="tn" style="font-size:0.7rem;color:var(--td);">'+pos[i]+'</span><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;
