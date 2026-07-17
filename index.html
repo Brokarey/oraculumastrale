@@ -63,7 +63,7 @@ select option{background:#1a0030;color:#e8e0f0}
 #t{position:fixed;top:15px;right:15px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
 .ti{background:var(--gold);color:#000;padding:12px 22px;border-radius:10px;font-weight:600;max-width:330px;box-shadow:0 5px 20px rgba(0,0,0,0.5);transform:translateX(120%);animation:ent 0.4s ease forwards;pointer-events:auto;font-family:'Open Sans',sans-serif}
 @keyframes ent{to{transform:translateX(0)}}
-@keyframes sai{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
+@keyframes sai{from{transform:translateX(0);opacity:1}to{translate:120%;opacity:0}}
 .ti.saindo{animation:sai 0.4s ease forwards}
 .gs2{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
 .sb2{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:8px 4px;border-radius:8px;cursor:pointer;transition:0.2s;text-align:center}
@@ -85,7 +85,6 @@ select option{background:#1a0030;color:#e8e0f0}
 .cf-verso .vs-icone{font-size:2rem;display:block;margin-bottom:4px}
 .cf-verso .vs-label{font-size:0.65rem;color:var(--td);font-family:'Open Sans',sans-serif}
 
-/* Grid para as 78 cartas */
 .grid-78{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin:10px 0;max-height:400px;overflow-y:auto;padding:4px}
 .card-78{perspective:600px;min-height:65px;cursor:pointer}
 .card-78 .cf-inner{height:65px}
@@ -318,6 +317,7 @@ var SN=[{id:"aries",nm:"Aries",ic:"Aries",am:"Iniciativa.",ca:"Lideranca em alta
 var SO={agua:"Suas emocoes.",cobra:"Transformacao.",dente:"Ansiedade.",bebe:"Novos comecos.",morte:"Fim de ciclo.",voar:"Liberdade.",casa:"Mundo interior.",cachorro:"Lealdade.",gato:"Independencia.",ponte:"Transicao.",chuva:"Renovacao.",dinheiro:"Autoestima.",fogo:"Paixao.",mar:"Subconsciente.",escada:"Progresso.",casamento:"Uniao.",gravidez:"Projeto.",sangue:"Vitalidade.",escola:"Aprendizado.",hospital:"Cura.",luz:"Clareza.",escuro:"Medo.",arvore:"Crescimento.",fuga:"Evitando.",comida:"Nutricao.",crianca:"Crianca interior.",lua:"Intuicao.",sol:"Sucesso.",estrela:"Esperanca.",floresta:"Exploracao.",montanha:"Superacao.",rio:"Fluxo."};
 var HX=[{n:1,nm:"O Criativo",s:"Qian",d:"Forca criativa."},{n:2,nm:"O Receptivo",s:"Kun",d:"Poder da terra."},{n:3,nm:"Dificuldade Inicial",s:"Zhun",d:"Crescimento."},{n:4,nm:"Insensatez Juvenil",s:"Meng",d:"Aprendizado."},{n:5,nm:"A Espera",s:"Xu",d:"Paciencia."},{n:6,nm:"O Conflito",s:"Song",d:"Mediacao."},{n:7,nm:"O Exercito",s:"Shi",d:"Disciplina."},{n:8,nm:"A Uniao",s:"Bi",d:"Cooperacao."}];
 var FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio.","Sua intuicao e a voz da sua alma.","Confie no tempo do universo.","Sua energia cria sua realidade.","O passado e licao, o presente e dadiva.","Nao ha coincidencias, apenas sincronicidades.","Onde ha fe, ha caminho."];
+
 var user=null,tf=[],mt=false;
 
 function ir(id){document.querySelectorAll(".scr").forEach(function(t){t.classList.remove("ativa")});var e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
@@ -343,7 +343,7 @@ function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;docume
 
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-1carta").style.display=e==="1"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e==="lc"?"2":e)+'</strong> creditos';fecharGrid78()}
 
-// ===== FUNÇÃO ATUALIZADA - conecta a carta com a pergunta =====
+// ===== FUNÇÃO PRINCIPAL CORRIGIDA - conecta a carta com a pergunta =====
 function gerarLeitura1Carta(carta, pergunta){
   var nome = carta.nm;
   var arqu = carta.arq || (carta.energia ? "Carta de " + carta.energia : "Arcano");
@@ -351,67 +351,74 @@ function gerarLeitura1Carta(carta, pergunta){
   var sombra = carta.sombra || carta.in || "Desafio de aprendizado";
   var energia = carta.energia || "Universal";
   var conselho = carta.am || carta.sg;
-  var fraseLuz = carta.sg || "";
-
   var P = pergunta.toLowerCase();
+
   var resposta = "";
   var contexto = "";
 
-  if (P.match(/bom dia|hoje|como vai ser|o dia|minha rotina|como sera|amanha|vou ter um bom dia|como será meu dia/)) {
+  // --- BLOCO PRIORITÁRIO: DETECTAR ENCONTRO COM ALGUÉM ---
+  var encontro = P.match(/encontrar|encontra|ver |visitar|ir ate|ir ao encontro|encontro com/);
+  var pessoa = P.match(/talita|maria|joao|ana|carlos|pedro|jose|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|alguem|alguém|ela|ele|essa pessoa|fulano|beltrano/);
+  var amorMatch = P.match(/amor|relacionamento|casamento|namoro|paixao|solteiro|voltar|ex|ficante|uniao|separar|termino|beijar|romance/);
+
+  if (encontro && (pessoa || amorMatch)) {
+    contexto = "sobre encontrar alguém especial";
+    if (energia == "Fogo") {
+      resposta = "Sim! O " + nome + " traz energia de " + energia + ", indicando que o encontro tende a ser cheio de entusiasmo e paixão. Há uma faísca de novidade no ar, e sua iniciativa será bem recebida. O destino favorece quem age com confiança, então vá em frente com o coração aberto. A pessoa com quem você deseja se encontrar provavelmente estará receptiva à sua energia vibrante.";
+    } else if (energia == "Agua") {
+      resposta = "O " + nome + " sugere que esse encontro será guiado pela emoção e pela intuição. A energia de " + energia + " convida você a ouvir seus sentimentos. Pode ser um reencontro significativo, onde as palavras não ditas encontrarão seu caminho. Confie no que seu coração diz — a sensibilidade estará ao seu lado e a conexão pode ser mais profunda do que você imagina. Permita-se sentir.";
+    } else if (energia == "Ar") {
+      resposta = "O " + nome + " indica que o encontro será marcado por boas conversas e trocas intelectuais. A energia de " + energia + " favorece a comunicação clara e sincera. Será um bom momento para alinhar expectativas, colocar o papo em dia e entender melhor o outro. Vá com a mente aberta e esteja disposto(a) a ouvir tanto quanto a falar.";
+    } else if (energia == "Terra") {
+      resposta = "Sim, o " + nome + " aponta para um encontro estável e significativo. A energia de " + energia + " sugere que essa reunião pode trazer segurança, conforto e a sensação de estar no lugar certo. É um encontro para construir ou fortalecer laços. Aproveite cada momento com presença e autenticidade — a solidez estará ao seu lado.";
+    } else {
+      resposta = "O " + nome + " com sua energia de " + energia + " indica que esse encontro pode trazer surpresas e aprendizados importantes. O universo está preparando o terreno para uma troca significativa. Confie no momento e permita que as coisas fluam naturalmente.";
+    }
+    resposta += " Confie na energia do momento e permita que o encontro flua naturalmente.";
+    conselho = "Siga sua intuicao e esteja presente. O encontro pode revelar mais do que voce espera.";
+  }
+  else if (P.match(/bom dia|hoje|como vai ser|o dia|minha rotina|como sera|amanha|vou ter um bom dia|como será meu dia/)) {
     contexto = "sobre como será o seu dia";
     if (energia == "Fogo") resposta = "Sim, tende a ser um dia de acao e entusiasmo! O " + nome + " traz energia de " + energia + ", indicando movimento, coragem e iniciativa. Voce pode esperar um dia produtivo e cheio de vitalidade. Aproveite para comecar algo novo e confiar no seu impeto.";
     else if (energia == "Agua") resposta = "O " + nome + " sugere um dia de intuicao e sensibilidade. A energia de " + energia + " convida voce a ouvir mais seus sentimentos e confiar na sua intuicao. Pode ser um dia mais calmo e reflexivo, ideal para se conectar consigo mesmo. No geral, a resposta e positiva, especialmente se voce fluir com o que sentir.";
-    else if (energia == "Ar") resposta = "O " + nome + " indica um dia de comunicacao e clareza mental. A energia de " + energia + " favorece conversas importantes, estudos e decisoes. Seu dia tende a ser bom para resolver pendencias, fazer contatos e organizar ideias. A mente estara afiada e pronta para novos aprendizados.";
-    else if (energia == "Terra") resposta = "Sim! O " + nome + " traz a energia estavel e prospera de " + energia + ". Seu dia tende a ser pratico, produtivo e com foco em resultados. E um bom dia para trabalhar com dedicacao, cuidar das financas e construir algo concreto. A estabilidade estara ao seu lado.";
-    else resposta = "O " + nome + " indica que seu dia sera marcado pela energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta e positiva, com oportunidades de crescimento e aprendizado ao longo do dia.";
-    if (carta.sg) resposta += " " + carta.sg.split(".")[0] + " sera uma tonica do seu dia.";
+    else if (energia == "Ar") resposta = "O " + nome + " indica um dia de comunicacao e clareza mental. A energia de " + energia + " favorece conversas importantes, estudos e decisoes. Seu dia tende a ser bom para resolver pendencias, fazer contatos e organizar ideias.";
+    else if (energia == "Terra") resposta = "Sim! O " + nome + " traz a energia estavel e prospera de " + energia + ". Seu dia tende a ser pratico, produtivo e com foco em resultados. E um bom dia para trabalhar com dedicacao e construir algo concreto.";
+    else resposta = "O " + nome + " indica que seu dia sera marcado pela energia de " + energia + ". A resposta e positiva, com oportunidades de crescimento.";
   }
-  else if (P.match(/amar|amor|relacionamento|casamento|namoro|paixao|solteiro|voltar|ex|ficante|uniao|separar|termino|beijar|encontro/)) {
+  else if (P.match(/amar|amor|relacionamento|casamento|namoro|paixao|solteiro|voltar|ex|ficante|uniao|separar|termino|beijar|romance/)) {
     contexto = "sobre sua vida amorosa e afetiva";
     if (carta.am) resposta = carta.am;
-    else resposta = "O " + nome + " no campo afetivo traz a energia de " + energia + ". " + fraseLuz;
+    else resposta = "O " + nome + " no campo afetivo traz a energia de " + energia + ". ";
     resposta += " A resposta para sua pergunta no amor esta conectada com a mensagem desta carta: " + (carta.am || "confie no fluxo natural dos sentimentos.");
     conselho = carta.am || conselho;
   }
-  else if (P.match(/carreira|trabalho|emprego|profissao|negocio|empresa|promocao|demissao|salario|entrevista|cliente|chefe|projeto/)) {
+  else if (P.match(/carreira|trabalho|emprego|profissao|negocio|empresa|promocao|demissao|salario/)) {
     contexto = "sobre sua vida profissional";
     if (carta.ca) resposta = carta.ca;
-    else resposta = "O " + nome + " na carreira sugere a energia de " + energia + ". " + fraseLuz;
+    else resposta = "O " + nome + " na carreira sugere a energia de " + energia + ". ";
     resposta += " A resposta para sua pergunta profissional reflete o arquétipo desta carta: " + (carta.ca || "busque estabilidade e crescimento.");
     conselho = carta.ca || conselho;
   }
-  else if (P.match(/dinheiro|financa|financas|investimento|divida|comprar|vender|economia|gastar|receita|lucro|prejuizo|emprestimo|cartao/)) {
+  else if (P.match(/dinheiro|financa|financas|investimento|divida|economia|receita|lucro/)) {
     contexto = "sobre suas financas";
-    resposta = "O " + nome + " na area financeira indica a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre dinheiro e: " + (carta.sg || "equilibrio e planejamento sao a chave.");
+    resposta = "O " + nome + " na area financeira indica a energia de " + energia + ". A resposta e: " + (carta.sg || "equilibrio e planejamento sao a chave.");
   }
-  else if (P.match(/saude|doenca|tratamento|cura|bem-estar|bem estar|ansiedade|depressao|corpo|fisico|mental|emagrecer|dormir|sono/)) {
+  else if (P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|depressao|emocional/)) {
     contexto = "sobre sua saude e bem-estar";
-    resposta = "O " + nome + " na saude sugere a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre saude indica que " + (carta.sg ? carta.sg.split(".")[0].toLowerCase() : "cuidado e atencao") + " sao necessarios.";
-    if (energia == "Fogo") resposta += " Equilibre sua energia fisica com momentos de descanso.";
-    else if (energia == "Agua") resposta += " Cuide das emocoes e da hidratacao.";
-    else if (energia == "Ar") resposta += " Acalme a mente e respire fundo.";
-    else if (energia == "Terra") resposta += " Fortaleca o corpo com boa alimentacao.";
+    resposta = "O " + nome + " na saude sugere a energia de " + energia + ". ";
+    if (energia == "Fogo") resposta += "Equilibre sua energia fisica com momentos de descanso.";
+    else if (energia == "Agua") resposta += "Cuide das emocoes e da hidratacao.";
+    else if (energia == "Ar") resposta += "Acalme a mente e respire fundo.";
+    else if (energia == "Terra") resposta += "Fortaleca o corpo com boa alimentacao.";
+    else resposta += "A resposta indica que cuidado e atencao sao necessarios.";
   }
-  else if (P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|professor|materia|livro|ler|estudar|nota|enem/)) {
+  else if (P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso/)) {
     contexto = "sobre seus estudos";
-    resposta = "O " + nome + " nos estudos canaliza a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre aprendizado indica que " + (carta.sg ? carta.sg.split(".")[0].toLowerCase() : "conhecimento esta chegando") + ". E um momento favoravel para se dedicar.";
-  }
-  else if (P.match(/familia|filho|pai|mae|irmao|parente|casa|lar|morar|mudanca/)) {
-    contexto = "sobre sua familia e lar";
-    resposta = "O " + nome + " no contexto familiar traz a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre familia sugere harmonia e compreensao mutua.";
-  }
-  else if (P.match(/amizade|amigo|amiga/)) {
-    contexto = "sobre suas amizades";
-    resposta = "O " + nome + " nas amizades indica a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta sobre amizades e positiva, com lacos se fortalecendo.";
-  }
-  else if (P.match(/viagem|viajar|ferias|passear|passeio|fugir|role|sair/)) {
-    contexto = "sobre viagens e passeios";
-    resposta = "O " + nome + " para viagens traz a energia de " + energia + ". " + fraseLuz + " A resposta para sua pergunta indica que " + (carta.sg ? carta.sg.split(".")[0].toLowerCase() : "movimento") + " esta favorecido. Pode ser um bom momento para planejar.";
+    resposta = "O " + nome + " nos estudos canaliza a energia de " + energia + ". A resposta indica que e um momento favoravel para se dedicar e aprender.";
   }
   else {
     contexto = "sobre sua pergunta";
-    resposta = "O " + nome + " com sua energia de " + energia + " responde diretamente: " + fraseLuz + ". A conexao com sua pergunta esta na mensagem central desta carta: " + (carta.sg || "confie no processo.");
-    if (carta.sg) resposta += " O arquétipo sugere que " + carta.sg.split(".")[0].toLowerCase() + " esta presente como resposta.";
+    resposta = "O " + nome + " com sua energia de " + energia + " responde: " + (carta.sg || "confie no processo.") + " A conexao com sua pergunta esta na mensagem central desta carta.";
   }
 
   var h = '<div class="fade" style="text-align:left;">';
