@@ -100,7 +100,7 @@ select option{background:#1a0030;color:#e8e0f0}
 .li{background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0}
 .li h4{color:var(--gold);margin-bottom:5px;font-family:'Allura',cursive;font-size:1.2rem}
 .li p{font-size:0.85rem;margin:4px 0;font-family:'Open Sans',sans-serif}
-.pl{font-size:0.85rem;color:var(--td);margin-bottom:8px;font-style:italic;font-family:'Open Sans',sans-serif}
+.pl{font-size:0.85rem;color:var(--td);margin-bottom:8px;font-family:'Open Sans',sans-serif}
 .nv{font-size:3.5rem;font-weight:600;color:var(--gold);text-align:center;margin:12px 0;font-family:'Allura',cursive}
 .hr{margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px}
 .hr p{margin:6px 0;font-size:0.85rem;font-family:'Open Sans',sans-serif}
@@ -259,6 +259,8 @@ var DK=[].concat(M,MN);
 var SN=[{id:"áries",nm:"Áries",ic:"Áries",am:"Iniciativa.",ca:"Liderança.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"Touro",am:"Estabilidade.",ca:"Finanças.",sa:"Natureza."},{id:"gêmeos",nm:"Gêmeos",ic:"Gêmeos",am:"Comunicação.",ca:"Networking.",sa:"Menos telas."},{id:"câncer",nm:"Câncer",ic:"Câncer",am:"Família.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leão",nm:"Leão",ic:"Leão",am:"Brilho.",ca:"Reconhecimento.",sa:"Exercícios."},{id:"virgem",nm:"Virgem",ic:"Virgem",am:"Sinta.",ca:"Organização.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"Libra",am:"Equilíbrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpião",nm:"Escorpião",ic:"Escorpião",am:"Intensidade.",ca:"Intuição.",sa:"Hidratação."},{id:"sagitário",nm:"Sagitário",ic:"Sagitário",am:"Aventura.",ca:"Expansão.",sa:"Ar livre."},{id:"capricórnio",nm:"Capricórnio",ic:"Capricórnio",am:"Lealdade.",ca:"Dedicação.",sa:"Cuidado."},{id:"aquário",nm:"Aquário",ic:"Aquário",am:"Liberdade.",ca:"Inovação.",sa:"Meditação."},{id:"peixes",nm:"Peixes",ic:"Peixes",am:"Romantismo.",ca:"Intuição.",sa:"Descanso."}];
 var SO={água:"Suas emoções.",cobra:"Transformação.",dente:"Ansiedade.",bebê:"Novos começos.",morte:"Fim de ciclo.",voar:"Liberdade."};
 var FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio.","Sua intuição é a voz da sua alma."];
+</script>
+<script>
 var user=null,tf=[],mt=false;
 var cartaEscolhida=null;
 
@@ -282,6 +284,7 @@ function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=l
 function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-1carta").style.display=e==="1"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+(e==="lc"?"2":e)+'</strong> créditos';fecharGrid78()}
 
+// ===== FUNÇÃO PRINCIPAL - Resposta direta (Sim/Não/Talvez) + parágrafo descritivo =====
 function gerarLeitura1Carta(carta, pergunta){
   var nome = carta.nm, energia = carta.energia || "Universal", luz = carta.luz || carta.sg || "";
   var sombra = carta.sombra || carta.in || "Momento de atenção";
