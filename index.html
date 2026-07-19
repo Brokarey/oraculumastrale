@@ -179,7 +179,7 @@ select option{background:#1a0030;color:#e8e0f0}
   <p style="font-size:0.85rem;color:var(--td);margin-bottom:10px;font-family:'Open Sans',sans-serif;">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p>
 
   <div id="desc-sn" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Sim ou Não ou Talvez</p><p>Digite sua pergunta objetiva, clique em "Consultar" e escolha uma das 78 cartas.</p></div>
-  <div id="desc-2cartas" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 2 Cartas</p><p>Cada modelo conecta as cartas com sua pergunta e termina com uma orientação concreta: Sim, Não, Talvez, Com certeza, etc.</p></div>
+  <div id="desc-2cartas" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 2 Cartas</p><p>Cada modelo conecta as cartas com sua pergunta e termina com uma orientação concreta.</p></div>
   <div id="desc-3cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 3 Cartas</p><p>Posições: Passado, Presente, Futuro.</p></div>
   <div id="desc-5cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 5 Cartas</p><p>Posições: Situação, Obstáculo, Passado, Futuro, Desfecho.</p></div>
 
@@ -273,25 +273,48 @@ function atCT(){var e=document.getElementById("tt").value;document.getElementByI
 function resetarTaro(){document.getElementById("tr").innerHTML="";document.getElementById("grid-78-container").style.display="none";document.getElementById("grid-78").innerHTML="";cartaEscolhida=null;tipoSN=false;resetar2C();document.getElementById("btn-t").disabled=false;document.getElementById("btn-t").innerText="Consultar";document.getElementById("tp").value=""}
 function resetar2C(){document.getElementById("grid-2c-container").style.display="none";document.getElementById("step-2c-maior").style.display="block";document.getElementById("step-2c-menor").style.display="none";document.getElementById("grid-2c-maior").innerHTML="";document.getElementById("grid-2c-menor").innerHTML="";carta2Estado={fase:'maior',maior:null,menor:null}}
 
-// Gera resposta concreta baseada nas energias das cartas
-function gerarRespostaConcreta(c1,c2){
+// Funcao para gerar resposta objetiva final baseada nas cartas
+function gerarRespostaFinal(carta1,carta2,pergunta,temas){
   var peso=0;
-  var pos=["Fogo","Agua","Ar","Terra","Universal"];
-  var car1=c1.energia||"Universal",car2=c2.energia||"Universal";
-  if(car1=="Fogo"||car1=="Universal")peso++;
-  if(car2=="Fogo"||car2=="Universal")peso++;
-  if(car1=="Terra"||car1=="Agua")peso--;
-  if(car2=="Terra"||car2=="Agua")peso--;
+  var e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
+  var s1=carta1.sg||"",s2=carta2.sg||"";
+  var l1=carta1.luz||"",l2=carta2.luz||"";
+  if(e1=="Fogo"||e1=="Universal")peso++;
+  if(e2=="Fogo"||e2=="Universal")peso++;
+  if(e1=="Terra"||e1=="Agua")peso--;
+  if(e2=="Terra"||e2=="Agua")peso--;
   var r=Math.random();
-  if(peso>=1&&r<0.6)return["Com certeza","#2ecc71"];
-  if(peso>=1&&r<0.9)return["Sim","#2ecc71"];
-  if(peso>=1)return["Provavelmente sim","#f39c12"];
-  if(peso<=-1&&r<0.6)return["Nao","#e74c3c"];
-  if(peso<=-1&&r<0.9)return["Provavelmente nao","#e74c3c"];
-  if(peso<=-1)return["Melhor evitar","#e74c3c"];
-  if(r<0.33)return["Talvez","#f39c12"];
-  if(r<0.66)return["Sim, mas com cautela","#f39c12"];
-  return["Provavelmente sim","#f39c12"];
+  var resp="";
+  if(peso>=1&&r<0.6)resp="Com certeza";
+  else if(peso>=1&&r<0.9)resp="Sim";
+  else if(peso>=1)resp="Provavelmente sim";
+  else if(peso<=-1&&r<0.6)resp="Nao";
+  else if(peso<=-1&&r<0.9)resp="Provavelmente nao";
+  else if(peso<=-1)resp="Melhor evitar";
+  else if(r<0.33)resp="Talvez";
+  else if(r<0.66)resp="Sim, mas com cautela";
+  else resp="Provavelmente sim";
+  var cor="#f39c12";
+  if(resp=="Com certeza"||resp=="Sim")cor="#2ecc71";
+  if(resp=="Nao"||resp=="Provavelmente nao"||resp=="Melhor evitar")cor="#e74c3c";
+  var texto="";
+  var ehAmor=temas.indexOf("amor")>=0,ehCarreira=temas.indexOf("carreira")>=0;
+  var ehDinheiro=temas.indexOf("dinheiro")>=0,ehSaude=temas.indexOf("saude")>=0;
+  var ehEstudo=temas.indexOf("estudo")>=0;
+  texto="<div style='margin-top:20px;padding:18px;border-radius:12px;background:rgba(212,168,83,0.12);border:2px solid "+cor+";text-align:center;font-family:Playfair Display,serif;'>";
+  texto+="<p style='font-size:0.85rem;color:var(--td);margin-bottom:8px;font-family:Open Sans,sans-serif;'>Sintese dos Arquétipos</p>";
+  texto+="<p style='font-size:0.85rem;line-height:1.7;margin-bottom:12px;color:var(--tx);font-family:Open Sans,sans-serif;'>";
+  texto+="Analisando todas as perspectivas — <strong>"+carta1.nm+"</strong> ("+e1+") representa "+s1.toLowerCase()+" com a luz de '"+l1+"', enquanto <strong>"+carta2.nm+"</strong> ("+e2+") representa "+s2.toLowerCase()+" com a luz de '"+l2+"' — ";
+  if(ehAmor)texto+="no campo afetivo, estas energias sugerem que o coração encontrará seu caminho com clareza e verdade.";
+  else if(ehCarreira)texto+="no âmbito profissional, estas forças indicam que o momento pede estratégia e movimento calculado.";
+  else if(ehDinheiro)texto+="no plano financeiro, estas cartas mostram potencial de crescimento aliado à prudência necessária.";
+  else if(ehSaude)texto+="no campo da saúde, estas energias apontam para renovação e cuidado com o equilíbrio.";
+  else if(ehEstudo)texto+="nos estudos, estas cartas favorecem o aprendizado com dedicação e método.";
+  else texto+="estas energias se complementam para trazer clareza ao seu questionamento.";
+  texto+="</p>";
+  texto+="<div style='font-size:2.5rem;font-weight:bold;color:"+cor+";margin:8px 0;'>"+resp+"</div>";
+  texto+="</div>";
+  return texto;
 }
 
 function gerarParagrafo2C(carta1,carta2,pergunta,modelo,temas){
@@ -299,56 +322,50 @@ function gerarParagrafo2C(carta1,carta2,pergunta,modelo,temas){
   var s1=carta1.sg||"",s2=carta2.sg||"";
   var l1=carta1.luz||"",l2=carta2.luz||"";
   var sb1=carta1.sombra||"",sb2=carta2.sombra||"";
-  var tc=["amor","carreira","dinheiro","saude","estudo","geral"];
   var ehAmor=temas.indexOf("amor")>=0,ehCarreira=temas.indexOf("carreira")>=0;
   var ehDinheiro=temas.indexOf("dinheiro")>=0,ehSaude=temas.indexOf("saude")>=0;
-  var ehEstudo=temas.indexOf("estudo")>=0,ehGeral=temas.indexOf("geral")>=0;
-  var resp=gerarRespostaConcreta(carta1,carta2);
+  var ehEstudo=temas.indexOf("estudo")>=0;
   var txt="";
   if(modelo==="conselho"){
-    txt="<strong>Conselho e Advertencia:</strong> "+(m1)+" ("+e1+") e seu Conselho: "+s1.toLowerCase()+". Sua luz e '"+l1+"'. "+(m2)+" ("+e2+") e a Advertencia: "+s2.toLowerCase()+". Sua sombra e '"+sb2+"'. ";
-    if(ehAmor)txt+="No amor, o conselho sugere canalizar "+e1+" para cultivar "+l1.toLowerCase()+", enquanto a advertencia alerta para "+sb2.toLowerCase()+".";
-    else if(ehCarreira)txt+="Na carreira, siga a energia de "+e1+" ("+l1.toLowerCase()+"), mas atente ao alerta de "+sb2.toLowerCase()+".";
-    else if(ehDinheiro)txt+="Nas financas, o conselho favorece "+l1.toLowerCase()+" com "+e1+", mas a advertencia de "+e2+" pede cuidado com "+sb2.toLowerCase()+".";
-    else if(ehSaude)txt+="Na saude, o conselho e "+l1.toLowerCase()+" com "+e1+", enquanto a advertencia alerta para "+sb2.toLowerCase()+".";
-    else if(ehEstudo)txt+="Nos estudos, o conselho e "+l1.toLowerCase()+" com "+e1+", e a advertencia e "+sb2.toLowerCase()+".";
+    txt="<strong>Conselho e Advertencia:</strong> A primeira carta <strong>"+m1+"</strong> ("+e1+") e seu Conselho: "+s1.toLowerCase()+" Sua luz e '"+l1+"'. A segunda carta <strong>"+m2+"</strong> ("+e2+") e a Advertencia: "+s2.toLowerCase()+" Sua sombra e '"+sb2+"'. ";
+    if(ehAmor)txt+="No amor, o conselho sugere canalizar "+e1+" para cultivar "+l1.toLowerCase()+", enquanto a advertencia alerta para "+sb2.toLowerCase()+". Equilibrar estas duas forcas e essencial para o coracao.";
+    else if(ehCarreira)txt+="Na carreira, siga a energia de "+e1+" ("+l1.toLowerCase()+"), mas atente ao alerta de "+sb2.toLowerCase()+". O sucesso profissional vem de equilibrar estas duas forcas.";
+    else if(ehDinheiro)txt+="Nas financas, o conselho favorece "+l1.toLowerCase()+" com "+e1+", mas a advertencia de "+e2+" pede cuidado com "+sb2.toLowerCase()+". Prosperidade com prudencia.";
+    else if(ehSaude)txt+="Na saude, o conselho e "+l1.toLowerCase()+" com "+e1+", enquanto a advertencia alerta para "+sb2.toLowerCase()+". O equilibrio e a chave.";
+    else if(ehEstudo)txt+="Nos estudos, o conselho e "+l1.toLowerCase()+" com "+e1+", e a advertencia e "+sb2.toLowerCase()+". Foco e disciplina.";
     else txt+="Siga "+l1.toLowerCase()+" com "+e1+" mas evite "+sb2.toLowerCase()+" representado por "+e2+".";
-    txt+=" <strong style='color:"+resp[1]+"'>Orientacao: "+resp[0]+".</strong>";
+    txt+=" <strong style='color:"+(function(){if(e1=="Fogo"||e1=="Universal"||e2=="Fogo"||e2=="Universal")return"#2ecc71";return"#f39c12";})()+"'>Orientacao: Siga o conselho, evite a advertencia.</strong>";
   }
   else if(modelo==="situacao"){
     txt="<strong>Situacao e Informacao Adicional:</strong> "+(m1)+" ("+e1+") mostra sua Situacao Atual: "+s1.toLowerCase()+". Sua luz e '"+l1+"'. "+(m2)+" ("+e2+") traz uma Informacao Adicional: "+s2.toLowerCase()+". Sua luz e '"+l2+"'. ";
-    if(ehAmor)txt+="No amor, o cenario atual e de "+s1.toLowerCase()+" mas ha um detalhe oculto: "+s2.toLowerCase()+". Preste atencao ao que ainda nao esta claro.";
-    else if(ehCarreira)txt+="Na carreira, a situacao atual e "+s1.toLowerCase()+" e a informacao adicional revela "+s2.toLowerCase()+". Este detalhe pode mudar sua perspectiva.";
-    else if(ehDinheiro)txt+="Nas financas, o momento e de "+s1.toLowerCase()+" e a informacao extra mostra "+s2.toLowerCase()+". Considere ambos antes de decidir.";
-    else if(ehSaude)txt+="Na saude, o cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+". Nao ignore os sinais.";
-    else if(ehEstudo)txt+="Nos estudos, a situacao atual e "+s1.toLowerCase()+" e ha uma informacao extra: "+s2.toLowerCase()+". Isso pode fazer diferenca.";
-    else txt+="O cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+". Ambos sao importantes para sua decisao.";
-    txt+=" <strong style='color:"+resp[1]+"'>Orientacao: "+resp[0]+".</strong>";
+    if(ehAmor)txt+="No amor, o cenario atual e de "+s1.toLowerCase()+" mas ha um detalhe oculto: "+s2.toLowerCase()+". Preste atencao ao que ainda nao esta claro — pode transformar sua percepcao.";
+    else if(ehCarreira)txt+="Na carreira, a situacao atual e "+s1.toLowerCase()+" e a informacao adicional revela "+s2.toLowerCase()+". Este detalhe pode mudar sua perspectiva profissional.";
+    else if(ehDinheiro)txt+="Nas financas, o momento e de "+s1.toLowerCase()+" e a informacao extra mostra "+s2.toLowerCase()+". Considere ambos antes de qualquer decisao financeira.";
+    else if(ehSaude)txt+="Na saude, o cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+". Os sinais estao ai — nao os ignore.";
+    else if(ehEstudo)txt+="Nos estudos, a situacao atual e "+s1.toLowerCase()+" e ha uma informacao extra: "+s2.toLowerCase()+". Isso pode fazer toda a diferenca no seu aprendizado.";
+    else txt+="O cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+". Ambos sao pecas-chave para sua reflexao.";
   }
   else if(modelo==="caminho"){
     txt="<strong>Caminho A e Caminho B:</strong> "+(m1)+" ("+e1+") e o Caminho A: "+s1.toLowerCase()+". Sua luz e '"+l1+"' mas o alerta e "+sb1+". "+(m2)+" ("+e2+") e o Caminho B: "+s2.toLowerCase()+". Sua luz e '"+l2+"' mas o alerta e "+sb2+". ";
-    if(ehAmor)txt+="No amor, o Caminho A sugere "+l1.toLowerCase()+" e o Caminho B aponta para "+l2.toLowerCase()+". Escolha aquele que mais se alinha com seus sentimentos.";
-    else if(ehCarreira)txt+="Na carreira, o Caminho A e "+l1.toLowerCase()+" e o Caminho B e "+l2.toLowerCase()+". Analise qual faz mais sentido para seus objetivos.";
-    else if(ehDinheiro)txt+="Nas financas, o Caminho A representa "+l1.toLowerCase()+" e o Caminho B representa "+l2.toLowerCase()+". Pese os riscos de cada um.";
-    else txt+="O Caminho A convida a "+l1.toLowerCase()+" enquanto o Caminho B sugere "+l2.toLowerCase()+". Ambos tem meritos.";
-    txt+=" <strong style='color:"+resp[1]+"'>Orientacao: "+resp[0]+".</strong>";
+    if(ehAmor)txt+="No amor, o Caminho A sugere "+l1.toLowerCase()+" e o Caminho B aponta para "+l2.toLowerCase()+". A escolha que mais ressoar com seu coracao sera a certa.";
+    else if(ehCarreira)txt+="Na carreira, o Caminho A e "+l1.toLowerCase()+" e o Caminho B e "+l2.toLowerCase()+". Analise qual deles faz mais sentido para seus objetivos profissionais.";
+    else if(ehDinheiro)txt+="Nas financas, o Caminho A representa "+l1.toLowerCase()+" e o Caminho B representa "+l2.toLowerCase()+". Pese os riscos e beneficios de cada rota.";
+    else txt+="O Caminho A convida a "+l1.toLowerCase()+" enquanto o Caminho B sugere "+l2.toLowerCase()+". Ambos tem meritos — reflita sobre qual se alinha com seus valores.";
   }
   else if(modelo==="desejo"){
     txt="<strong>Desejo Real vs Situacao Atual:</strong> "+(m1)+" ("+e1+") e seu Desejo Real: "+s1.toLowerCase()+". Sua luz e '"+l1+"'. "+(m2)+" ("+e2+") e sua Situacao Atual: "+s2.toLowerCase()+". Sua luz e '"+l2+"'. ";
-    if(ehAmor)txt+="No amor, seu desejo e "+s1.toLowerCase()+" mas a realidade e "+s2.toLowerCase()+". Aproximar esses dois polos e o caminho.";
-    else if(ehCarreira)txt+="Na carreira, voce deseja "+s1.toLowerCase()+" mas o momento e de "+s2.toLowerCase()+." Use "+e1+" como inspiracao e "+e2+" como aprendizado.";
-    else if(ehDinheiro)txt+="Nas financas, seu objetivo e "+s1.toLowerCase()+" mas a situacao atual e "+s2.toLowerCase()+." Equilibre ambicao e paciencia.";
-    else if(ehSaude)txt+="Na saude, voce deseja "+s1.toLowerCase()+" mas sua realidade e "+s2.toLowerCase()+." Respeite seu tempo.";
-    else if(ehEstudo)txt+="Nos estudos, seu sonho e "+s1.toLowerCase()+" mas o momento pede "+s2.toLowerCase()+." Persistencia e a chave.";
-    else txt+="Seu desejo aponta para "+l1.toLowerCase()+" e a realidade mostra "+l2.toLowerCase()+". Reconhecer essa diferenca e o primeiro passo.";
-    txt+=" <strong style='color:"+resp[1]+"'>Orientacao: "+resp[0]+".</strong>";
+    if(ehAmor)txt+="No amor, seu desejo e "+s1.toLowerCase()+" mas a realidade e "+s2.toLowerCase()+". Aproximar estes dois polos e o caminho para a realizacao afetiva.";
+    else if(ehCarreira)txt+="Na carreira, voce deseja "+s1.toLowerCase()+" mas o momento e de "+s2.toLowerCase()+". Use "+e1+" como inspiracao e "+e2+" como aprendizado para crescer.";
+    else if(ehDinheiro)txt+="Nas financas, seu objetivo e "+s1.toLowerCase()+" mas a situacao atual e "+s2.toLowerCase()+". Equilibre ambicao com paciencia para prosperar.";
+    else if(ehSaude)txt+="Na saude, voce deseja "+s1.toLowerCase()+" mas sua realidade e "+s2.toLowerCase()+". Respeite seu tempo e seu processo de cura.";
+    else if(ehEstudo)txt+="Nos estudos, seu sonho e "+s1.toLowerCase()+" mas o momento pede "+s2.toLowerCase()+". Persistencia e constancia serao suas maiores aliadas.";
+    else txt+="Seu desejo aponta para "+l1.toLowerCase()+" e a realidade mostra "+l2.toLowerCase()+". Reconhecer esta diferenca e o primeiro passo para a transformacao.";
   }
   else if(modelo==="pessoa"){
     txt="<strong>Voce e o Outro:</strong> "+(m1)+" ("+e1+") e Voce: "+s1.toLowerCase()+". Sua luz e '"+l1+"'. "+(m2)+" ("+e2+") e o Outro: "+s2.toLowerCase()+". Sua luz e '"+l2+"'. ";
-    if(ehAmor)txt+="No amor, sua energia de "+e1+" encontra a energia de "+e2+" do outro. Voce traz "+l1.toLowerCase()+" e o outro oferece "+l2.toLowerCase()+". O equilibrio entre essas forcas define a relacao.";
-    else if(ehCarreira)txt+="Na dinamica profissional, voce representa "+s1.toLowerCase()+" e o outro lado representa "+s2.toLowerCase()+". Encontrar sintonia entre essas energias e essencial.";
-    else txt+="Voce se apresenta com energia de "+e1+" ("+l1.toLowerCase()+") e o outro com energia de "+e2+" ("+l2.toLowerCase()+"). A interacao dessas forcas define a dinamica.";
-    txt+=" <strong style='color:"+resp[1]+"'>Orientacao: "+resp[0]+".</strong>";
+    if(ehAmor)txt+="No amor, sua energia de "+e1+" encontra a energia de "+e2+" do outro. Voce traz "+l1.toLowerCase()+" e o outro oferece "+l2.toLowerCase()+". A sintonia entre estas forcas define a qualidade desta relacao.";
+    else if(ehCarreira)txt+="Na dinamica profissional, voce representa "+s1.toLowerCase()+" e o outro lado representa "+s2.toLowerCase()+". Encontrar harmonia entre estas energias e essencial.";
+    else txt+="Voce se apresenta com energia de "+e1+" ("+l1.toLowerCase()+") e o outro com energia de "+e2+" ("+l2.toLowerCase()+"). A interacao destas forcas define o rumo desta relacao.";
   }
   return txt;
 }
@@ -359,10 +376,10 @@ function gerarLeitura2Cartas(carta1,carta2,pergunta){
   var P=pergunta.toLowerCase();
   var temas=["geral"];
   if(P.match(/amor|relacionamento|namoro|paixao|romance|casamento|solteiro|voltar|ex|ficante|novo amor/i))temas.push("amor");
-  if(P.match(/carreira|trabalho|emprego|profissao|empresa|promocao|salario|vaga|entrevista/i))temas.push("carreira");
-  if(P.match(/dinheiro|financa|investimento|divida|economia|receita|lucro|comprar|vender/i))temas.push("dinheiro");
-  if(P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|depressao|corpo|fisico|mental/i))temas.push("saude");
-  if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i))temas.push("estudo");
+  if(P.match(/carreira|trabalho|emprego|profissao|empresa|promocao|salario|vaga|entrevista|negocio|projeto|loja|chefe/i))temas.push("carreira");
+  if(P.match(/dinheiro|financa|investimento|divida|economia|receita|lucro|comprar|vender|rico|pobre|gastar/i))temas.push("dinheiro");
+  if(P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|depressao|corpo|fisico|mental|doente|dormir|sono/i))temas.push("saude");
+  if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar|enem|vestibular/i))temas.push("estudo");
   var temEscolha=P.match(/escolha|decidir|opcao|caminho|qual escolher|entre|alternativa|optar|devo|ou /i)?true:false;
   var temDesejo=P.match(/desejo|quero|queria|sonho|realizar|alcancar|conseguir|objetivo|meta|ambicao|anscio|conquistar/i)?true:false;
   var temPessoa=P.match(/(talita|maria|joao|ana|carlos|pedro|jose|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguem|pessoa|parceiro|parceira|namorado|namorada|marido|esposa|noivo|noiva|amigo|inimigo|adversario|rival|chefe|socio|cliente|familia|mae|pai|filho|filha|irmao|amiga|amante|ficante|ex|sogra|sogro|primo|prima|colega|superior|lider|equipe|time|grupo)/i)?true:false;
@@ -374,7 +391,9 @@ function gerarLeitura2Cartas(carta1,carta2,pergunta){
   if(temDesejo)ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"desejo",temas));
   if(temPessoa)ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"pessoa",temas));
   h+=ps.join('</div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">');
-  h+='</div><button class="btn" onclick="resetarTaro()">Nova Consulta</button></div>';
+  h+='</div>';
+  h+=gerarRespostaFinal(carta1,carta2,pergunta,temas);
+  h+='<button class="btn" onclick="resetarTaro()">Nova Consulta</button></div>';
   document.getElementById("tr").innerHTML=h;
 }
 
