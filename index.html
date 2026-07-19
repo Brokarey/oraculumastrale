@@ -103,11 +103,6 @@ select option{background:#1a0030;color:#e8e0f0}
 .card-2c .vs-icone{font-size:1.3rem;margin-bottom:2px}
 .card-2c .vs-label{font-size:0.5rem}
 .card-2c .cf-verso{background:linear-gradient(135deg,#1a0530,#2a1040);border:1.5px solid var(--gdd)}
-.lc{margin-top:20px;border-top:2px solid var(--gold);padding-top:20px}
-.lc p{font-size:0.9rem;line-height:1.7;margin-bottom:10px;font-family:'Open Sans',sans-serif}
-.li{background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0}
-.li h4{color:var(--gold);margin-bottom:5px;font-family:'Playfair Display',serif;font-size:1.2rem}
-.li p{font-size:0.85rem;margin:4px 0;font-family:'Open Sans',sans-serif}
 .hr{margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px}
 .hr p{margin:6px 0;font-size:0.85rem;font-family:'Open Sans',sans-serif}
 .rd{width:100%;text-align:center;padding:20px;color:var(--td);font-size:0.85rem;margin-top:40px;font-family:'Playfair Display',serif}
@@ -188,7 +183,7 @@ select option{background:#1a0030;color:#e8e0f0}
   <p style="font-size:0.85rem;color:var(--td);margin-bottom:10px;font-family:'Open Sans',sans-serif;">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p>
 
   <div id="desc-sn" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">⚡ Sim ou Não ou Talvez</p><p>Digite sua pergunta objetiva, clique em "Consultar" e escolha uma das 78 cartas. A resposta será Sim, Não ou Talvez com uma explicação.</p></div>
-  <div id="desc-2cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Tiragem de 2 Cartas</p><p>O tarô de 2 cartas é um método de tiragem rápida e direta focado em resolver dilemas, analisar duas vertentes de uma situação ou trazer uma resposta objetiva. Em vez de leituras complexas com várias cartas, este formato simplifica a interpretação cruzando apenas duas energias complementares.</p><p style="margin-top:6px;">Principais modelos: <strong>Conselho e Advertência</strong> (o que fazer e o que evitar), <strong>Situação e Informação Adicional</strong> (cenário atual e detalhe oculto), <strong>Caminho A e Caminho B</strong> (prós de duas escolhas), <strong>Desejo Real vs Situação Atual</strong>, <strong>Você e o Outro</strong> (dinâmica entre duas pessoas).</p></div>
+  <div id="desc-2cartas" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Tiragem de 2 Cartas</p><p>O tarô de 2 cartas é um método de tiragem rápida e direta focado em resolver dilemas, analisar duas vertentes de uma situação ou trazer uma resposta objetiva. Em vez de leituras complexas com várias cartas, este formato simplifica a interpretação cruzando apenas duas energias complementares.</p><p style="margin-top:6px;">Principais modelos: <strong>Conselho e Advertência</strong> (o que fazer e o que evitar), <strong>Situação e Informação Adicional</strong> (cenário atual e detalhe oculto), <strong>Caminho A e Caminho B</strong> (prós de duas escolhas), <strong>Desejo Real vs Situação Atual</strong>, <strong>Você e o Outro</strong> (dinâmica entre duas pessoas).</p></div>
   <div id="desc-3cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Tiragem de 3 Cartas</p><p>Posições: Passado, Presente, Futuro.</p></div>
   <div id="desc-5cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Tiragem de 5 Cartas</p><p>Posições: Situação, Obstáculo, Passado, Futuro, Desfecho.</p></div>
 
@@ -290,56 +285,7 @@ function resetarTaro(){document.getElementById("tr").innerHTML="";document.getEl
 
 function resetar2C(){document.getElementById("grid-2c-container").style.display="none";document.getElementById("step-2c-maior").style.display="block";document.getElementById("step-2c-menor").style.display="none";document.getElementById("grid-2c-maior").innerHTML="";document.getElementById("grid-2c-menor").innerHTML="";carta2Estado={fase:'maior',maior:null,menor:null}}
 
-function gerarRespostaSN(carta, pergunta){
-  var nome=carta.nm,energia=carta.energia||"Universal",sg=carta.sg||"";
-  var respostas=["Sim","Não","Talvez"];
-  var escolha=respostas[Math.floor(Math.random()*respostas.length)];
-  var P=pergunta.toLowerCase(),paragrafo="",tema="geral";
-  if(P.match(/encontrar|encontra|visitar|ir até|encontro com/i)&&P.match(/(talita|maria|joão|ana|carlos|pedro|ela|ele|alguém)/i))tema="encontro";
-  else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|leilão|site|negócio|projeto/i))tema="sucesso";
-  else if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|novo amor/i))tema="amor";
-  else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i))tema="carreira";
-  else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender/i))tema="dinheiro";
-  else if(P.match(/saúde|doença|cura|bem-estar|ansiedade|depressão|corpo|físico|mental|dormir|sono/i))tema="saúde";
-  else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i))tema="estudo";
-  var inicio="A carta "+nome+" se refere a "+sg.toLowerCase()+" ";
-  if(tema==="encontro"){
-    if(escolha==="Sim")paragrafo=inicio+"Representando a energia de "+energia+", ela indica que esse encontro tende a ser positivo e cheio de significados. Por isso, o momento favorece esse movimento.";
-    else if(escolha==="Não")paragrafo=inicio+"Ela aponta que talvez não seja o melhor momento agora. A energia de "+energia+" sugere que você precisa de mais clareza antes de dar esse passo.";
-    else paragrafo=inicio+"Com energia de "+energia+", ela sugere que esse encontro depende de fatores que ainda não estão definidos. Vá com cautela.";}
-  else if(tema==="sucesso"){
-    if(escolha==="Sim")paragrafo=inicio+"Ela traz a energia de "+energia+", que é favorável para realizações. Sua dedicação tende a ser recompensada.";
-    else if(escolha==="Não")paragrafo=inicio+"Ela sugere que os resultados podem não vir agora. Revisar sua estratégia pode ser mais produtivo.";
-    else paragrafo=inicio+"Com energia de "+energia+", o sucesso é possível, mas depende do timing. Continue se preparando.";}
-  else if(tema==="amor"){
-    if(escolha==="Sim")paragrafo=inicio+"No campo afetivo, a energia de "+energia+" sugere abertura e conexão genuína. O amor tende a fluir positivamente.";
-    else if(escolha==="Não")paragrafo=inicio+"No amor, a energia de "+energia+" sugere que não é o melhor momento para decisões afetivas. Dê espaço ao tempo.";
-    else paragrafo=inicio+"No campo afetivo, a energia de "+energia+" indica que as coisas estão em processo. Permita que os sentimentos se esclareçam.";}
-  else if(tema==="carreira"){
-    if(escolha==="Sim")paragrafo=inicio+"Na carreira, a energia de "+energia+" aponta para crescimento. É um bom momento para investir em seus objetivos.";
-    else if(escolha==="Não")paragrafo=inicio+"Na carreira, a energia de "+energia+" sinaliza que não é o momento ideal para mudanças. Melhor aguardar.";
-    else paragrafo=inicio+"Na carreira, a energia de "+energia+" sugere que os resultados dependem de preparação. Planeje-se bem.";}
-  else if(tema==="dinheiro"){
-    if(escolha==="Sim")paragrafo=inicio+"Nas finanças, a energia de "+energia+" é positiva para prosperidade. Invista com sabedoria.";
-    else if(escolha==="Não")paragrafo=inicio+"Nas finanças, a energia de "+energia+" sugere cautela. Evite gastos desnecessários agora.";
-    else paragrafo=inicio+"Nas finanças, a energia de "+energia+" indica que o cenário está se definindo. Analise com calma.";}
-  else if(tema==="saúde"){
-    if(escolha==="Sim")paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere que corpo e mente estão se equilibrando. O momento favorece hábitos saudáveis.";
-    else if(escolha==="Não")paragrafo=inicio+"Na saúde, a energia de "+energia+" indica que você precisa de mais descanso. Priorize o autocuidado.";
-    else paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere que o equilíbrio está em construção. Faça ajustes graduais.";}
-  else if(tema==="estudo"){
-    if(escolha==="Sim")paragrafo=inicio+"Nos estudos, a energia de "+energia+" favorece o aprendizado. É um bom momento para se dedicar.";
-    else if(escolha==="Não")paragrafo=inicio+"Nos estudos, a energia de "+energia+" indica dispersão. Reorganize sua rotina antes de avançar.";
-    else paragrafo=inicio+"Nos estudos, a energia de "+energia+" sugere que o aprendizado virá no seu tempo. Persista com paciência.";}
-  else {
-    if(escolha==="Sim")paragrafo=inicio+"Com energia de "+energia+", esta carta sugere que o caminho está aberto. Siga em frente.";
-    else if(escolha==="Não")paragrafo=inicio+"Com energia de "+energia+", esta carta indica que não é o momento ideal. Aguarde e reflita.";
-    else paragrafo=inicio+"Com energia de "+energia+", esta carta sugere que a resposta ainda está se definindo. Mantenha-se aberto.";}
-  var cor="#2ecc71";if(escolha==="Não")cor="#e74c3c";if(escolha==="Talvez")cor="#f39c12";
-  return '<div class="fade" style="text-align:left;"><p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p><div style="font-size:2.8rem;font-weight:bold;font-family:Playfair Display,serif;text-align:center;margin:15px 0;color:'+cor+';">'+escolha+'</div><div style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid var(--gdd);text-align:center;margin-bottom:15px;"><span style="font-weight:bold;color:var(--gold);display:block;font-family:Playfair Display,serif;font-size:1.1rem;">'+nome+'</span><span style="font-size:0.85rem;color:var(--td);">'+energia+' — '+sg+'</span></div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:16px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;"><strong>📿 Explicação:</strong> '+paragrafo+'</div><button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button></div>';
-}
-
-// ===== FUNÇÃO CORRIGIDA - 2 CARTAS =====
+// ===== FUNÇÃO COMPLETAMENTE REFEITA - 2 CARTAS =====
 function gerarLeitura2Cartas(carta1, carta2, pergunta){
   var m1=carta1.nm,m2=carta2.nm,e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
   var s1=carta1.sg||"",s2=carta2.sg||"";
@@ -348,81 +294,34 @@ function gerarLeitura2Cartas(carta1, carta2, pergunta){
 
   // --- MODELO 1: CONSELHO E ADVERTÊNCIA (sempre ativo) ---
   var p1="";
-  p1+="No modelo <strong>Conselho e Advertência</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando o <strong>Conselho</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando a <strong>Advertência</strong>: "+s2.toLowerCase()+" ";
-  if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|ficante|novo amor/i)){
-    p1+="No campo afetivo, o conselho sugere que você "+s1.toLowerCase()+" Porém a advertência alerta: "+s2.toLowerCase()+" Siga a orientação da primeira, mas fique atento à precaução da segunda para não repetir padrões que já não funcionam.";
-  } else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|leilão|site|negócio|projeto|empreendimento|carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i)){
-    p1+="Na sua questão profissional, o conselho indica: "+s1.toLowerCase()+" Já a advertência recomenda cuidado: "+s2.toLowerCase()+" A melhor estratégia é seguir a orientação da primeira carta sem ignorar os alertas da segunda.";
-  } else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender|gastar/i)){
-    p1+="Nas finanças, o conselho aponta: "+s1.toLowerCase()+" A advertência alerta: "+s2.toLowerCase()+" Equilibre a orientação positiva com a cautela necessária.";
-  } else if(P.match(/saúde|doença|cura|bem-estar|ansiedade|depressão|corpo|físico|mental|dormir|sono/i)){
-    p1+="Na saúde, o conselho sugere: "+s1.toLowerCase()+" A advertência pede atenção: "+s2.toLowerCase()+" Ouça seu corpo e encontre o equilíbrio entre cuidado e descanso.";
-  } else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i)){
-    p1+="Nos estudos, o conselho é: "+s1.toLowerCase()+" A advertência orienta: "+s2.toLowerCase()+" Dedique-se com foco, mas evite as armadilhas apontadas pela segunda carta.";
-  } else {
-    p1+="O conselho a seguir é: "+s1.toLowerCase()+" A advertência a considerar é: "+s2.toLowerCase()+" Ambas as cartas juntas indicam que o melhor caminho envolve equilibrar a orientação da primeira com a precaução da segunda.";
-  }
+  p1+="No modelo <strong>Conselho e Advertência</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> com energia de <strong>"+e1+"</strong>. Ela representa o <strong>Conselho</strong>, ou seja, o que você deve fazer: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> com energia de <strong>"+e2+"</strong>. Ela representa a <strong>Advertência</strong>, ou seja, o que evitar: "+s2.toLowerCase()+" Sobre sua pergunta — <em>"+pergunta+"</em> — o conselho sugere que você canalize a energia de "+e1+" para encontrar o melhor caminho. Ao mesmo tempo, a advertência com "+e2+" pede cuidado para não ignorar os alertas que surgirem.";
   paragrafos.push(p1);
 
   // --- MODELO 2: SITUAÇÃO E INFORMAÇÃO ADICIONAL ---
-  if(P.match(/situação|como está|cenário|momento|atualmente|agora|hoje|andamento|status|o que está acontecendo|contexto|realidade|diagnóstico/i)){
+  if(P.match(/situação|como está|cenário|momento|atualmente|agora|hoje|andamento|status|o que está acontecendo|contexto|realidade|diagnóstico|como andam|como estão/i)){
     var p2="";
-    p2+="No modelo <strong>Situação e Informação Adicional</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), revelando a <strong>Situação atual</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), trazendo uma <strong>Informação Adicional</strong>: "+s2.toLowerCase()+" ";
-    if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento/i)){
-      p2+="No amor, o cenário atual é de "+s1.toLowerCase()+" Mas a informação adicional revela que "+s2.toLowerCase()+" Preste atenção neste detalhe oculto — ele pode mudar sua perspectiva sobre a relação.";
-    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i)){
-      p2+="Na carreira, a situação atual mostra "+s1.toLowerCase()+" A informação adicional traz "+s2.toLowerCase()+" Este detalhe que você talvez não tenha notado pode ser a chave para sua próxima decisão profissional.";
-    } else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|negócio|projeto/i)){
-      p2+="Sobre seus objetivos, o momento atual é de "+s1.toLowerCase()+" A informação adicional revela "+s2.toLowerCase()+" Considere este fator oculto ao planejar seus próximos passos.";
-    } else {
-      p2+="A situação atual é representada por "+s1.toLowerCase()+" A informação adicional mostra "+s2.toLowerCase()+" Juntas, indicam que o cenário vai além do que parece à primeira vista.";
-    }
+    p2+="No modelo <strong>Situação e Informação Adicional</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), revelando o <strong>cenário atual</strong> da sua pergunta: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), trazendo uma <strong>informação adicional</strong> que você talvez ainda não tenha considerado: "+s2.toLowerCase()+" Em relação a <em>"+pergunta+"</em>, o momento presente pede que você preste atenção ao que a primeira carta revela, mas sem ignorar o detalhe oculto que a segunda carta está trazendo à tona.";
     paragrafos.push(p2);
   }
 
   // --- MODELO 3: CAMINHO A E CAMINHO B ---
-  if(P.match(/escolha|decidir|opção|caminho|qual escolher|entre|alternativa|optar|devo|ou |qual caminho|qual decisão|prós e contras|qual é melhor/i)){
+  if(P.match(/escolha|decidir|opção|caminho|qual escolher|entre|alternativa|optar|devo|ou |qual caminho|qual decisão|prós e contras|qual é melhor|qual das|qual opção|qual escolha/i)){
     var p3="";
-    p3+="No modelo <strong>Caminho A e Caminho B</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando o <strong>Caminho A</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando o <strong>Caminho B</strong>: "+s2.toLowerCase()+" ";
-    if(P.match(/amor|relacionamento|namoro|paixão/i)){
-      p3+="No amor, o Caminho A representa "+s1.toLowerCase()+" O Caminho B aponta para "+s2.toLowerCase()+" Reflita sobre qual escolha ressoa mais com seus valores e sentimentos mais profundos.";
-    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga/i)){
-      p3+="Na carreira, o Caminho A sugere "+s1.toLowerCase()+" O Caminho B indica "+s2.toLowerCase()+" Analise os prós e contras de cada um à luz da sua situação atual.";
-    } else if(P.match(/dinheiro|finança|investimento|comprar|vender|gastar/i)){
-      p3+="Nas finanças, o Caminho A é "+s1.toLowerCase()+" O Caminho B é "+s2.toLowerCase()+" Avalie qual dos dois se alinha melhor com sua saúde financeira de longo prazo.";
-    } else {
-      p3+="O Caminho A representa "+s1.toLowerCase()+" O Caminho B representa "+s2.toLowerCase()+" Ambos têm méritos — sua escolha depende do que você prioriza neste momento.";
-    }
+    p3+="No modelo <strong>Caminho A e Caminho B</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando o <strong>Caminho A</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando o <strong>Caminho B</strong>: "+s2.toLowerCase()+" Diante da sua pergunta — <em>"+pergunta+"</em> — o Caminho A sugere "+s1.toLowerCase()+" Já o Caminho B aponta para "+s2.toLowerCase()+" A escolha ideal depende de qual dessas duas energias melhor se alinha com seus valores e com o momento que você está vivendo. Reflita sobre qual caminho ressoa mais profundamente com sua verdade interior.";
     paragrafos.push(p3);
   }
 
   // --- MODELO 4: DESEJO REAL vs SITUAÇÃO ATUAL ---
-  if(P.match(/desejo|quero|queria|sonho|realizar|realização|alcançar|conseguir|objetivo|meta|ambição|esperança|pretendo|planejo|gostaria|anseio/i)){
+  if(P.match(/desejo|quero|queria|sonho|realizar|realização|alcançar|conseguir|objetivo|meta|ambição|esperança|pretendo|planejo|gostaria|anseio|meu sonho|alcançar|conquistar/i)){
     var p4="";
-    p4+="No modelo <strong>Desejo Real vs Situação Atual</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando seu <strong>Desejo Real</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), revelando sua <strong>Situação Atual</strong>: "+s2.toLowerCase()+" ";
-    if(P.match(/amor|relacionamento|namoro|paixão/i)){
-      p4+="No amor, seu desejo real aponta para "+s1.toLowerCase()+" Porém a situação atual mostra "+s2.toLowerCase()+" A ponte entre o que você deseja e onde está agora é o que precisa ser trabalhado.";
-    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário/i)){
-      p4+="Na carreira, seu desejo é de "+s1.toLowerCase()+" Mas a realidade atual é de "+s2.toLowerCase()+" Para alcançar seu objetivo, use a energia de "+e1+" para superar os desafios apontados por "+e2+".";
-    } else if(P.match(/sucesso|conseguir|resultado|futuro|negócio|projeto|empreendimento/i)){
-      p4+="Seu desejo de sucesso é representado por "+s1.toLowerCase()+" A situação atual, no entanto, mostra "+s2.toLowerCase()+" Alinhar esses dois polos é o caminho para a realização.";
-    } else {
-      p4+="Seu desejo real é "+s1.toLowerCase()+" A situação atual indica "+s2.toLowerCase()+" A distância entre eles revela o que precisa ser trabalhado.";
-    }
+    p4+="No modelo <strong>Desejo Real vs Situação Atual</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), revelando seu <strong>desejo real</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), mostrando sua <strong>situação atual</strong>: "+s2.toLowerCase()+" Olhando para <em>"+pergunta+"</em>, fica claro que existe uma diferença entre o que você deseja e onde está agora. A energia de "+e1+" representa seu ideal, enquanto "+e2+" reflete o momento presente. O caminho para realizar seu desejo passa por reconhecer essa distância e trabalhar para encurtá-la, um passo de cada vez.";
     paragrafos.push(p4);
   }
 
   // --- MODELO 5: VOCÊ E O OUTRO ---
-  if(P.match(/(talita|maria|joão|ana|carlos|pedro|josé|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguém|pessoa|parceiro|parceira|namorado|namorada|marido|esposa|noivo|noiva|amigo|inimigo|adversário|rival|chefe|sócio|cliente|família|mãe|pai|filho|filha|irmão|amiga)/i)){
+  if(P.match(/(talita|maria|joão|ana|carlos|pedro|josé|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguém|pessoa|parceiro|parceira|namorado|namorada|marido|esposa|noivo|noiva|amigo|inimigo|adversário|rival|chefe|sócio|cliente|família|mãe|pai|filho|filha|irmão|amiga|amante|ficante|ex|sogra|sogro|primo|prima|colega|superior|líder|equipe|time|grupo)/i)){
     var p5="";
-    p5+="No modelo <strong>Você e o Outro</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando <strong>Você</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando <strong>O Outro</strong>: "+s2.toLowerCase()+" ";
-    if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|voltar|ex/i)){
-      p5+="Na dinâmica afetiva entre você e a outra pessoa, sua energia atual é de "+e1.toLowerCase()+", indicando "+s1.toLowerCase()+" A energia do outro é de "+e2.toLowerCase()+", mostrando "+s2.toLowerCase()+" Compreender como essas duas forças interagem é essencial para navegar esta relação com mais harmonia.";
-    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|chefe|sócio|cliente/i)){
-      p5+="Na dinâmica profissional, você ocupa o espaço de "+s1.toLowerCase()+" Enquanto a outra pessoa ou parte envolvida representa "+s2.toLowerCase()+" O sucesso desta interação depende de como essas energias se complementam.";
-    } else {
-      p5+="Nesta dinâmica, você é representado por "+m1+" com energia de "+e1+", indicando "+s1.toLowerCase()+" O outro lado é representado por "+m2+" com energia de "+e2+", mostrando "+s2.toLowerCase()+" A interação entre essas duas forças define o rumo desta relação.";
-    }
+    p5+="No modelo <strong>Você e o Outro</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando <strong>você</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando a <strong>outra pessoa</strong>: "+s2.toLowerCase()+" Sobre <em>"+pergunta+"</em>, sua energia atual é de "+e1+", indicando que você está em um momento de "+s1.toLowerCase()+" Já o outro lado traz a energia de "+e2+", revelando "+s2.toLowerCase()+" Compreender como essas duas forças interagem é essencial para navegar esta relação com mais harmonia e menos atrito.";
     paragrafos.push(p5);
   }
 
@@ -440,6 +339,57 @@ function gerarLeitura2Cartas(carta1, carta2, pergunta){
   h+='<button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button>';
   h+='</div>';
   return h;
+}
+
+// ===== FIM DA FUNÇÃO REFEITA =====
+
+function gerarRespostaSN(carta, pergunta){
+  var nome=carta.nm,energia=carta.energia||"Universal",sg=carta.sg||"";
+  var respostas=["Sim","Não","Talvez"];
+  var escolha=respostas[Math.floor(Math.random()*respostas.length)];
+  var P=pergunta.toLowerCase(),paragrafo="",tema="geral";
+  if(P.match(/encontrar|encontra|visitar|ir até|encontro com/i)&&P.match(/(talita|maria|joão|ana|carlos|pedro|ela|ele|alguém)/i))tema="encontro";
+  else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|leilão|site|negócio|projeto/i))tema="sucesso";
+  else if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|novo amor/i))tema="amor";
+  else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i))tema="carreira";
+  else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender/i))tema="dinheiro";
+  else if(P.match(/saúde|doença|cura|bem-estar|ansiedade|depressão|corpo|físico|mental|dormir|sono/i))tema="saúde";
+  else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i))tema="estudo";
+  var inicio="A carta "+nome+" se refere a "+sg.toLowerCase()+" ";
+  if(tema==="encontro"){
+    if(escolha==="Sim")paragrafo=inicio+"Com a energia de "+energia+", ela indica que este encontro será positivo e significativo. O momento favorece essa aproximação.";
+    else if(escolha==="Não")paragrafo=inicio+"A energia de "+energia+" sugere que este não é o melhor momento. Você precisa de mais clareza antes de dar esse passo.";
+    else paragrafo=inicio+"Com energia de "+energia+", este encontro depende de fatores que ainda estão se definindo. Vá com cautela.";}
+  else if(tema==="sucesso"){
+    if(escolha==="Sim")paragrafo=inicio+"A energia de "+energia+" favorece suas realizações. Sua dedicação será recompensada.";
+    else if(escolha==="Não")paragrafo=inicio+"A energia de "+energia+" indica que os resultados podem demorar. Revisar sua estratégia pode ajudar.";
+    else paragrafo=inicio+"Com energia de "+energia+", o sucesso é possível, mas depende do timing certo. Continue se preparando.";}
+  else if(tema==="amor"){
+    if(escolha==="Sim")paragrafo=inicio+"No amor, a energia de "+energia+" sugere abertura e conexão genuína. O coração tende a encontrar seu caminho.";
+    else if(escolha==="Não")paragrafo=inicio+"No amor, a energia de "+energia+" sugere que este não é o momento para decisões afetivas. Dê tempo ao tempo.";
+    else paragrafo=inicio+"No amor, a energia de "+energia+" indica que os sentimentos estão em processo. Permita que as coisas se esclareçam.";}
+  else if(tema==="carreira"){
+    if(escolha==="Sim")paragrafo=inicio+"Na carreira, a energia de "+energia+" aponta para crescimento. Invista em seus objetivos.";
+    else if(escolha==="Não")paragrafo=inicio+"Na carreira, a energia de "+energia+" sinaliza que não é o momento ideal para mudanças.";
+    else paragrafo=inicio+"Na carreira, a energia de "+energia+" sugere que os resultados dependem de preparação. Planeje-se.";}
+  else if(tema==="dinheiro"){
+    if(escolha==="Sim")paragrafo=inicio+"Nas finanças, a energia de "+energia+" é positiva. Invista com sabedoria.";
+    else if(escolha==="Não")paragrafo=inicio+"Nas finanças, a energia de "+energia+" pede cautela. Evite gastos desnecessários.";
+    else paragrafo=inicio+"Nas finanças, a energia de "+energia+" indica que o cenário está se definindo. Analise com calma.";}
+  else if(tema==="saúde"){
+    if(escolha==="Sim")paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere equilíbrio. Adote hábitos saudáveis.";
+    else if(escolha==="Não")paragrafo=inicio+"Na saúde, a energia de "+energia+" indica que você precisa descansar mais. Priorize o autocuidado.";
+    else paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere que o equilíbrio está em construção. Ajuste gradual.";}
+  else if(tema==="estudo"){
+    if(escolha==="Sim")paragrafo=inicio+"Nos estudos, a energia de "+energia+" favorece o aprendizado. Dedique-se com foco.";
+    else if(escolha==="Não")paragrafo=inicio+"Nos estudos, a energia de "+energia+" indica dispersão. Reorganize sua rotina.";
+    else paragrafo=inicio+"Nos estudos, a energia de "+energia+" sugere que o aprendizado virá no seu tempo. Persista.";}
+  else {
+    if(escolha==="Sim")paragrafo=inicio+"Com energia de "+energia+", o caminho está aberto. Siga em frente.";
+    else if(escolha==="Não")paragrafo=inicio+"Com energia de "+energia+", este não é o momento ideal. Aguarde e reflita.";
+    else paragrafo=inicio+"Com energia de "+energia+", a resposta ainda está se definindo. Mantenha-se aberto.";}
+  var cor="#2ecc71";if(escolha==="Não")cor="#e74c3c";if(escolha==="Talvez")cor="#f39c12";
+  return '<div class="fade" style="text-align:left;"><p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p><div style="font-size:2.8rem;font-weight:bold;font-family:Playfair Display,serif;text-align:center;margin:15px 0;color:'+cor+';">'+escolha+'</div><div style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid var(--gdd);text-align:center;margin-bottom:15px;"><span style="font-weight:bold;color:var(--gold);display:block;font-family:Playfair Display,serif;font-size:1.1rem;">'+nome+'</span><span style="font-size:0.85rem;color:var(--td);">'+energia+' — '+sg+'</span></div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:16px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;"><strong>📿 Explicação:</strong> '+paragrafo+'</div><button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button></div>';
 }
 
 function gerarLeitura1Carta(carta, pergunta){
