@@ -190,8 +190,8 @@ select option{background:#1a0030;color:#e8e0f0}
     <br><small style="color:var(--td);">Sem chave? O sistema usa resposta automática detalhada.</small>
   </div>
 
-  <div id="desc-sn" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Sim ou Não ou Talvez</p><p>Digite sua pergunta objetiva, clique em "Consultar" e escolha uma das 78 cartas. A resposta será Sim, Não ou Talvez com uma explicação.</p></div>
-  <div id="desc-2cartas" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 2 Cartas</p><p>O tarô de 2 cartas é um método rápido e direto focado em resolver dilemas. Escolha um Arcano Maior e um Arcano Menor para receber uma leitura completa.</p></div>
+  <div id="desc-sn" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Sim ou Não ou Talvez</p><p>Digite sua pergunta objetiva, clique em "Consultar" e escolha uma das 78 cartas.</p></div>
+  <div id="desc-2cartas" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 2 Cartas</p><p>Detecta automaticamente os modelos pertinentes à sua pergunta. Cada modelo conecta ambas as cartas com sua questão em parágrafos descritivos.</p></div>
   <div id="desc-3cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 3 Cartas</p><p>Posições: Passado, Presente, Futuro.</p></div>
   <div id="desc-5cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-family:'Open Sans',sans-serif;font-size:0.85rem;line-height:1.6;color:var(--tx);border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;"> Tiragem de 5 Cartas</p><p>Posições: Situação, Obstáculo, Passado, Futuro, Desfecho.</p></div>
 
@@ -222,39 +222,39 @@ select option{background:#1a0030;color:#e8e0f0}
 
 <script>
 const M=[
-{n:0,nm:"O Louco",sg:"Aventura e novos começos",am:"Início de um novo ciclo no amor",ca:"Momento de arriscar na carreira",in:"Cuidado com impulsividade",arq:"Aventureiro",luz:"Liberdade e otimismo",sombra:"Imprudência",energia:"Universal"},
-{n:1,nm:"O Mago",sg:"Poder e manifestação",am:"Você tem o poder de atrair",ca:"Use seus talentos agora",in:"Não manipule situações",arq:"Manifestador",luz:"Talento e foco",sombra:"Manipulação",energia:"Fogo"},
-{n:2,nm:"A Sacerdotisa",sg:"Intuição e mistério",am:"Confie no que você sente",ca:"Observe antes de agir",in:"Intuição bloqueada",arq:"Intuitiva",luz:"Sabedoria interior",sombra:"Segredos",energia:"Água"},
-{n:3,nm:"A Imperatriz",sg:"Feminilidade e abundância",am:"Relacionamento afetuoso",ca:"Fase criativa e próspera",in:"Dependência emocional",arq:"Nutridora",luz:"Beleza e conforto",sombra:"Estagnação",energia:"Terra"},
-{n:4,nm:"O Imperador",sg:"Autoridade e estrutura",am:"Busca por estabilidade",ca:"Liderança e solidez",in:"Rigidez excessiva",arq:"Autoridade",luz:"Poder e estabilidade",sombra:"Tirania",energia:"Fogo"},
-{n:5,nm:"O Hierofante",sg:"Tradição e ensinamento",am:"Compromisso sério",ca:"Busque um mentor",in:"Rebeldia sem causa",arq:"Sábio",luz:"Mentoria e tradição",sombra:"Dogmatismo",energia:"Terra"},
-{n:6,nm:"Os Enamorados",sg:"Amor e escolhas",am:"União profunda e verdadeira",ca:"Parceria de sucesso",in:"Indecisão atrapalha",arq:"Amor",luz:"Amor e harmonia",sombra:"Indecisão",energia:"Ar"},
-{n:7,nm:"O Carro",sg:"Vitória e determinação",am:"Supere obstáculos no amor",ca:"Progresso acelerado",in:"Falta de direção",arq:"Guerreiro",luz:"Determinação e controle",sombra:"Arrogância",energia:"Fogo"},
-{n:8,nm:"A Força",sg:"Coragem interior",am:"Domine seus impulsos",ca:"Resiliência profissional",in:"Fraqueza e dúvida",arq:"Corajosa",luz:"Força interior",sombra:"Medo",energia:"Fogo"},
-{n:9,nm:"O Eremita",sg:"Introspecção e sabedoria",am:"Tempo para refletir",ca:"Análise cuidadosa",in:"Isolamento excessivo",arq:"Solitário",luz:"Sabedoria interior",sombra:"Solidão",energia:"Terra"},
-{n:10,nm:"Roda da Fortuna",sg:"Ciclos e mudanças",am:"Mudanças no amor",ca:"Reviravolta profissional",in:"Resistência à mudança",arq:"Destino",luz:"Sorte e renovação",sombra:"Má sorte",energia:"Universal"},
-{n:11,nm:"A Justiça",sg:"Equilíbrio e verdade",am:"Equilíbrio na relação",ca:"Decisões justas",in:"Injustiça ou desonestidade",arq:"Juíza",luz:"Equidade e honestidade",sombra:"Injustiça",energia:"Ar"},
-{n:12,nm:"O Pendurado",sg:"Pausa e sacrifício",am:"Momento de espera",ca:"Nova perspectiva",in:"Estagnação",arq:"Sacrifício",luz:"Nova visão",sombra:"Paralisia",energia:"Água"},
-{n:13,nm:"A Morte",sg:"Transformação profunda",am:"Ciclo se encerrando",ca:"Mudança radical necessária",in:"Resistência ao novo",arq:"Transformadora",luz:"Renovação total",sombra:"Medo do fim",energia:"Água"},
-{n:14,nm:"A Temperança",sg:"Equilíbrio e moderação",am:"Paciência no amor",ca:"Progresso constante",in:"Excesso em algo",arq:"Moderadora",luz:"Harmonia e serenidade",sombra:"Desequilíbrio",energia:"Universal"},
-{n:15,nm:"O Diabo",sg:"Sombra e desejo",am:"Paixão intensa e viciante",ca:"Ambição desmedida",in:"Liberte-se do que prende",arq:"Sedutor",luz:"Paixão e prazer",sombra:"Vício e obsessão",energia:"Terra"},
-{n:16,nm:"A Torre",sg:"Ruptura e revelação",am:"Separação necessária",ca:"Crise construtiva",in:"Evitar o inevitável",arq:"Destruidora",luz:"Despertar e verdade",sombra:"Colapso",energia:"Fogo"},
-{n:17,nm:"A Estrela",sg:"Esperança e cura",am:"Tempo de cura",ca:"Inspiração renovada",in:"Desânimo",arq:"Curadora",luz:"Fé e esperança",sombra:"Desesperança",energia:"Água"},
-{n:18,nm:"A Lua",sg:"Ilusão e medo",am:"Incerteza no amor",ca:"Falta de clareza",in:"Busque a verdade",arq:"Ilusória",luz:"Intuição e sonhos",sombra:"Ansiedade",energia:"Água"},
-{n:19,nm:"O Sol",sg:"Alegria e sucesso",am:"Felicidade plena",ca:"Sucesso profissional",in:"Ego inflado",arq:"Radiante",luz:"Vitalidade e alegria",sombra:"Exibicionismo",energia:"Fogo"},
-{n:20,nm:"Julgamento",sg:"Renascimento",am:"Reavaliação da relação",ca:"Nova direção",in:"Negação da verdade",arq:"Renascimento",luz:"Perdão e renovação",sombra:"Culpa",energia:"Fogo"},
-{n:21,nm:"O Mundo",sg:"Conclusão e realização",am:"União completa",ca:"Sucesso internacional",in:"Atrasos no final",arq:"Completude",luz:"Plenitude e sucesso",sombra:"Estagnação final",energia:"Terra"}
+{n:0,nm:"O Louco",sg:"Aventura e novos começos.",am:"Início de um novo ciclo no amor.",ca:"Momento de arriscar na carreira.",in:"Cuidado com impulsividade.",arq:"Aventureiro",luz:"Liberdade e otimismo",sombra:"Imprudência",energia:"Universal"},
+{n:1,nm:"O Mago",sg:"Poder e manifestação.",am:"Você tem o poder de atrair.",ca:"Use seus talentos agora.",in:"Não manipule situações.",arq:"Manifestador",luz:"Talento e foco",sombra:"Manipulação",energia:"Fogo"},
+{n:2,nm:"A Sacerdotisa",sg:"Intuição e mistério.",am:"Confie no que você sente.",ca:"Observe antes de agir.",in:"Intuição bloqueada.",arq:"Intuitiva",luz:"Sabedoria interior",sombra:"Segredos",energia:"Água"},
+{n:3,nm:"A Imperatriz",sg:"Feminilidade e abundância.",am:"Relacionamento afetuoso.",ca:"Fase criativa e próspera.",in:"Dependência emocional.",arq:"Nutridora",luz:"Beleza e conforto",sombra:"Estagnação",energia:"Terra"},
+{n:4,nm:"O Imperador",sg:"Autoridade e estrutura.",am:"Busca por estabilidade.",ca:"Liderança e solidez.",in:"Rigidez excessiva.",arq:"Autoridade",luz:"Poder e estabilidade",sombra:"Tirania",energia:"Fogo"},
+{n:5,nm:"O Hierofante",sg:"Tradição e ensinamento.",am:"Compromisso sério.",ca:"Busque um mentor.",in:"Rebeldia sem causa.",arq:"Sábio",luz:"Mentoria e tradição",sombra:"Dogmatismo",energia:"Terra"},
+{n:6,nm:"Os Enamorados",sg:"Amor e escolhas.",am:"União profunda e verdadeira.",ca:"Parceria de sucesso.",in:"Indecisão atrapalha.",arq:"Amor",luz:"Amor e harmonia",sombra:"Indecisão",energia:"Ar"},
+{n:7,nm:"O Carro",sg:"Vitória e determinação.",am:"Supere obstáculos no amor.",ca:"Progresso acelerado.",in:"Falta de direção.",arq:"Guerreiro",luz:"Determinação e controle",sombra:"Arrogância",energia:"Fogo"},
+{n:8,nm:"A Força",sg:"Coragem interior.",am:"Domine seus impulsos.",ca:"Resiliência profissional.",in:"Fraqueza e dúvida.",arq:"Corajosa",luz:"Força interior",sombra:"Medo",energia:"Fogo"},
+{n:9,nm:"O Eremita",sg:"Introspecção e sabedoria.",am:"Tempo para refletir.",ca:"Análise cuidadosa.",in:"Isolamento excessivo.",arq:"Solitário",luz:"Sabedoria interior",sombra:"Solidão",energia:"Terra"},
+{n:10,nm:"Roda da Fortuna",sg:"Ciclos e mudanças.",am:"Mudanças no amor.",ca:"Reviravolta profissional.",in:"Resistência à mudança.",arq:"Destino",luz:"Sorte e renovação",sombra:"Má sorte",energia:"Universal"},
+{n:11,nm:"A Justiça",sg:"Equilíbrio e verdade.",am:"Equilíbrio na relação.",ca:"Decisões justas.",in:"Injustiça ou desonestidade.",arq:"Juíza",luz:"Equidade e honestidade",sombra:"Injustiça",energia:"Ar"},
+{n:12,nm:"O Pendurado",sg:"Pausa e sacrifício.",am:"Momento de espera.",ca:"Nova perspectiva.",in:"Estagnação.",arq:"Sacrifício",luz:"Nova visão",sombra:"Paralisia",energia:"Água"},
+{n:13,nm:"A Morte",sg:"Transformação profunda.",am:"Ciclo se encerrando.",ca:"Mudança radical necessária.",in:"Resistência ao novo.",arq:"Transformadora",luz:"Renovação total",sombra:"Medo do fim",energia:"Água"},
+{n:14,nm:"A Temperança",sg:"Equilíbrio e moderação.",am:"Paciência no amor.",ca:"Progresso constante.",in:"Excesso em algo.",arq:"Moderadora",luz:"Harmonia e serenidade",sombra:"Desequilíbrio",energia:"Universal"},
+{n:15,nm:"O Diabo",sg:"Sombra e desejo.",am:"Paixão intensa e viciante.",ca:"Ambição desmedida.",in:"Liberte-se do que prende.",arq:"Sedutor",luz:"Paixão e prazer",sombra:"Vício e obsessão",energia:"Terra"},
+{n:16,nm:"A Torre",sg:"Ruptura e revelação.",am:"Separação necessária.",ca:"Crise construtiva.",in:"Evitar o inevitável.",arq:"Destruidora",luz:"Despertar e verdade",sombra:"Colapso",energia:"Fogo"},
+{n:17,nm:"A Estrela",sg:"Esperança e cura.",am:"Tempo de cura.",ca:"Inspiração renovada.",in:"Desânimo.",arq:"Curadora",luz:"Fé e esperança",sombra:"Desesperança",energia:"Água"},
+{n:18,nm:"A Lua",sg:"Ilusão e medo.",am:"Incerteza no amor.",ca:"Falta de clareza.",in:"Busque a verdade.",arq:"Ilusória",luz:"Intuição e sonhos",sombra:"Ansiedade",energia:"Água"},
+{n:19,nm:"O Sol",sg:"Alegria e sucesso.",am:"Felicidade plena.",ca:"Sucesso profissional.",in:"Ego inflado.",arq:"Radiante",luz:"Vitalidade e alegria",sombra:"Exibicionismo",energia:"Fogo"},
+{n:20,nm:"Julgamento",sg:"Renascimento.",am:"Reavaliação da relação.",ca:"Nova direção.",in:"Negação da verdade.",arq:"Renascimento",luz:"Perdão e renovação",sombra:"Culpa",energia:"Fogo"},
+{n:21,nm:"O Mundo",sg:"Conclusão e realização.",am:"União completa.",ca:"Sucesso internacional.",in:"Atrasos no final.",arq:"Completude",luz:"Plenitude e sucesso",sombra:"Estagnação final",energia:"Terra"}
 ];
 function gMn(){
   var nipes=["Copas","Espadas","Ouros","Paus"];
-  var valores=["Ás","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"];
-  var temas={Copas:{f:"sentimentos",e:"emoção",a:" emocional",energia:"Água"},Espadas:{f:"pensamento",e:"mente",a:" mental",energia:"Ar"},Ouros:{f:"finanças",e:"matéria",a:" prático",energia:"Terra"},Paus:{f:"ação",e:"energia",a:" dinâmico",energia:"Fogo"}};
-  var sig={"Ás":["Novos começos","Oportunidade","Potencial"],"2":["Equilíbrio","Parceria","Escolha"],"3":["Crescimento","Expansão","Colaboração"],"4":["Estabilidade","Fundação","Descanso"],"5":["Desafio","Conflito","Mudança"],"6":["Harmonia","Progresso","Generosidade"],"7":["Avaliação","Estratégia","Reflexão"],"8":["Movimento","Velocidade","Ação"],"9":["Realização","Sabedoria","Independência"],"10":["Completude","Culminância","Legado"],"Valete":["Mensagem","Curiosidade","Novidade"],"Cavaleiro":["Ação","Perseguição","Movimento"],"Rainha":["Intuição","Cuidado","Poder"],"Rei":["Domínio","Autoridade","Maturidade"]};
+  var valores=["As","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"];
+  var temas={Copas:{f:"sentimentos",e:"emocao",a:" emocional",energia:"Agua"},Espadas:{f:"pensamento",e:"mente",a:" mental",energia:"Ar"},Ouros:{f:"financas",e:"materia",a:" pratico",energia:"Terra"},Paus:{f:"acao",e:"energia",a:" dinamico",energia:"Fogo"}};
+  var sig={"As":["Novos comecos","Oportunidade","Potencial"],"2":["Equilibrio","Parceria","Escolha"],"3":["Crescimento","Expansao","Colaboracao"],"4":["Estabilidade","Fundacao","Descanso"],"5":["Desafio","Conflito","Mudanca"],"6":["Harmonia","Progresso","Generosidade"],"7":["Avaliacao","Estrategia","Reflexao"],"8":["Movimento","Velocidade","Acao"],"9":["Realizacao","Sabedoria","Independencia"],"10":["Completude","Culminancia","Legado"],"Valete":["Mensagem","Curiosidade","Novidade"],"Cavaleiro":["Acao","Perseguicao","Movimento"],"Rainha":["Intuicao","Cuidado","Poder"],"Rei":["Dominio","Autoridade","Maturidade"]};
   var r=[];var id=22;
   for(var o=0;o<nipes.length;o++){
     var u=temas[nipes[o]];
     for(var n=0;n<valores.length;n++){
-      var l=sig[valores[n]]||["Energia","Potencial","Força"];
+      var l=sig[valores[n]]||["Energia","Potencial","Forca"];
       r.push({id:id++,nm:valores[n]+" de "+nipes[o],naipe:nipes[o],energia:u.energia,sg:l[0]+" em "+u.f,am:"No amor: "+l[0]+u.a,ca:"Na carreira: "+l[0],in:"Bloqueio em "+u.e,luz:l[0]+" no campo "+u.f,sombra:"Reveja sua abordagem"});
     }
   }
@@ -262,11 +262,10 @@ function gMn(){
 }
 var MN=gMn();
 var DK=[].concat(M,MN);
-var SN=[{id:"áries",nm:"Áries",ic:"Áries",am:"Iniciativa.",ca:"Liderança.",sa:"Hidrate-se."},{id:"touro",nm:"Touro",ic:"Touro",am:"Estabilidade.",ca:"Finanças.",sa:"Natureza."},{id:"gêmeos",nm:"Gêmeos",ic:"Gêmeos",am:"Comunicação.",ca:"Networking.",sa:"Menos telas."},{id:"câncer",nm:"Câncer",ic:"Câncer",am:"Família.",ca:"Empatia.",sa:"Alimentos leves."},{id:"leão",nm:"Leão",ic:"Leão",am:"Brilho.",ca:"Reconhecimento.",sa:"Exercícios."},{id:"virgem",nm:"Virgem",ic:"Virgem",am:"Sinta.",ca:"Organização.",sa:"Autocuidado."},{id:"libra",nm:"Libra",ic:"Libra",am:"Equilíbrio.",ca:"Parcerias.",sa:"Alongamento."},{id:"escorpião",nm:"Escorpião",ic:"Escorpião",am:"Intensidade.",ca:"Intuição.",sa:"Hidratação."},{id:"sagitário",nm:"Sagitário",ic:"Sagitário",am:"Aventura.",ca:"Expansão.",sa:"Ar livre."},{id:"capricórnio",nm:"Capricórnio",ic:"Capricórnio",am:"Lealdade.",ca:"Dedicação.",sa:"Cuidado."},{id:"aquário",nm:"Aquário",ic:"Aquário",am:"Liberdade.",ca:"Inovação.",sa:"Meditação."},{id:"peixes",nm:"Peixes",ic:"Peixes",am:"Romantismo.",ca:"Intuição.",sa:"Descanso."}];
-var SO={água:"Suas emoções.",cobra:"Transformação.",dente:"Ansiedade.",bebê:"Novos começos.",morte:"Fim de ciclo.",voar:"Liberdade."};
-var FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio.","Sua intuição é a voz da sua alma."];
-var user=null,tf=[],mt=false,cartaEscolhida=null,tipoSN=false;
-var carta2Estado={fase:'maior',maior:null,menor:null};
+var SN=[{id:"aries",nm:"Aries"},{id:"touro",nm:"Touro"},{id:"gemeos",nm:"Gemeos"},{id:"cancer",nm:"Cancer"},{id:"leao",nm:"Leao"},{id:"virgem",nm:"Virgem"},{id:"libra",nm:"Libra"},{id:"escorpiao",nm:"Escorpiao"},{id:"sagitario",nm:"Sagitario"},{id:"capricornio",nm:"Capricornio"},{id:"aquario",nm:"Aquario"},{id:"peixes",nm:"Peixes"}];
+var SO={agua:"Suas emocoes.",cobra:"Transformacao.",dente:"Ansiedade.",bebe:"Novos comecos.",morte:"Fim de ciclo.",voar:"Liberdade."};
+var FR=["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio.","Sua intuicao e a voz da sua alma."];
+var user=null,cartaEscolhida=null,tipoSN=false,carta2Estado={fase:'maior',maior:null,menor:null};
 var GEMINI_API_KEY=localStorage.getItem('gemini_api_key')||'';
 
 function ir(id){document.querySelectorAll(".scr").forEach(function(t){t.classList.remove("ativa")});var e=document.getElementById(id);if(e)e.classList.add("ativa");window.scrollTo(0,0)}
@@ -276,58 +275,101 @@ function abM(i){var m=document.getElementById(i);if(m){m.style.display="flex";do
 function fM(i){var m=document.getElementById(i);if(m){m.style.display="none";document.body.classList.remove("no-scroll")}}
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.querySelectorAll(".modal").forEach(function(m){if(m.style.display==="flex"){m.style.display="none";document.body.classList.remove("no-scroll")}});fecharGrid78();resetar2C()}});
 document.addEventListener("click",function(e){if(e.target.classList.contains("modal")){e.target.style.display="none";document.body.classList.remove("no-scroll");fecharGrid78();resetar2C()}});
-function cadastrar(){var n=document.getElementById("cn").value.trim(),e=document.getElementById("ce").value.trim(),p=document.getElementById("cs").value,x=document.getElementById("csc").value;if(!n||!e||p.length<6||p!==x)return to("Preencha corretamente.");var u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("E-mail já existe.");u.push({nome:n,email:e,senha:p,creditos:5,streak:1,ult:new Date().toISOString().split("T")[0]});localStorage.setItem("oa_u",JSON.stringify(u));to("Conta criada! +5 créditos.");ir("login")}
+function cadastrar(){var n=document.getElementById("cn").value.trim(),e=document.getElementById("ce").value.trim(),p=document.getElementById("cs").value,x=document.getElementById("csc").value;if(!n||!e||p.length<6||p!==x)return to("Preencha corretamente.");var u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("E-mail ja existe.");u.push({nome:n,email:e,senha:p,creditos:5,streak:1,ult:new Date().toISOString().split("T")[0]});localStorage.setItem("oa_u",JSON.stringify(u));to("Conta criada! +5 creditos.");ir("login")}
 function logar(){var e=document.getElementById("le").value.trim(),p=document.getElementById("ls").value;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return to("E-mail ou senha incorretos.");user=s;atS();cD();ir("main");to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
 function sair(){user=null;ir("welcome")}
 function sU(){if(!user)return;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("cu2").innerText=user.creditos;document.getElementById("su2").innerText=user.streak}
-function gas(q){if(!user)return to("Faça login."),0;if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Créditos insuficientes.");return 0}
+function gas(q){if(!user)return to("Faca login."),0;if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Creditos insuficientes.");return 0}
 function atS(){var h=new Date().toISOString().split("T")[0];if(user.ult!==h){user.streak=1;user.ult=h;sU()}}
-function cD(){var n=user.nome.split(" ")[0],h=new Date().getHours();var s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("st").innerText=s+", "+n+"!";document.getElementById("fd").innerText=FR[Math.floor(Math.random()*FR.length)];sU();var g=document.getElementById("gs2");g.innerHTML="";SN.forEach(function(sn){var b=document.createElement("div");b.className="sb2";b.innerHTML='<span class="si">'+sn.ic+'</span><span class="sn">'+sn.nm+'</span>';b.onclick=function(){mH(sn.id)};g.appendChild(b)});var a=document.getElementById("cs1"),b2=document.getElementById("cs2");a.innerHTML='<option value="">Seu Signo</option>';b2.innerHTML='<option value="">Outro Signo</option>';SN.forEach(function(sn){a.innerHTML+='<option value="'+sn.id+'">'+sn.nm+" "+sn.ic+"</option>";b2.innerHTML+='<option value="'+sn.id+'">'+sn.nm+" "+sn.ic+"</option>"})}
-function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p style="color:var(--td);margin-top:20px;">Já consultou hoje.</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3>'+c.nm+'</h3><p>"'+c.sg+'"</p></div>';to("Carta revelada!")}
-function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
+function cD(){var n=user.nome.split(" ")[0],h=new Date().getHours();var s="Boa noite";if(h<12)s="Bom dia";else if(h<18)s="Boa tarde";document.getElementById("st").innerText=s+", "+n+"!";document.getElementById("fd").innerText=FR[Math.floor(Math.random()*FR.length)];sU();}
+function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=localStorage.getItem(k);if(j===h){document.getElementById("cdr").innerHTML='<p style="color:var(--td);margin-top:20px;">Ja consultou hoje.</p>';return}var c=DK[Math.floor(Math.random()*DK.length)];localStorage.setItem(k,h);document.getElementById("cdr").innerHTML='<div class="fade"><h3>'+c.nm+'</h3><p>"'+c.sg+'"</p></div>';to("Carta revelada!")}
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-sn").style.display=e==="sn"?"block":"none";document.getElementById("desc-2cartas").style.display=e==="2"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";var custo=e==="sn"?1:e==="2"?2:e==="3"?3:e==="5"?5:1;document.getElementById("tcl-valor").innerText=custo}
 function resetarTaro(){document.getElementById("tr").innerHTML="";document.getElementById("grid-78-container").style.display="none";document.getElementById("grid-78").innerHTML="";cartaEscolhida=null;tipoSN=false;resetar2C();document.getElementById("btn-t").disabled=false;document.getElementById("btn-t").innerText="Consultar";document.getElementById("tp").value=""}
 function resetar2C(){document.getElementById("grid-2c-container").style.display="none";document.getElementById("step-2c-maior").style.display="block";document.getElementById("step-2c-menor").style.display="none";document.getElementById("grid-2c-maior").innerHTML="";document.getElementById("grid-2c-menor").innerHTML="";carta2Estado={fase:'maior',maior:null,menor:null}}
 function salvarChaveGemini(){var key=document.getElementById('gemini-key').value.trim();if(!key)return;GEMINI_API_KEY=key;localStorage.setItem('gemini_api_key',key);document.getElementById('key-status').innerHTML='Chave salva!';document.getElementById('api-key-bar').style.display='none'}
 function mostrarBarraChave(){var bar=document.getElementById('api-key-bar');bar.style.display='block';if(GEMINI_API_KEY){document.getElementById('gemini-key').value=GEMINI_API_KEY;document.getElementById('key-status').innerHTML='Chave configurada'}}
 
-// Função descritiva de fallback para 2 cartas
-function gerarParagrafo2C(carta1, carta2, pergunta, modelo, pos1, pos2){
+// FUNCAO INTELIGENTE - detecta tema e ativa modelos pertinentes
+function detectarTema(P){
+  var temas=[];
+  var amores=P.match(/amor|relacionamento|namoro|paixao|romance|casamento|solteiro|voltar|ex|ficante|beijar|novo amor|afetivo|sentimento|coracao|casalar|namorar|romantico|intimidade|parceiro|parceira|marido|esposa|noivo|noiva/i);
+  var carreira=P.match(/carreira|trabalho|emprego|profissao|empresa|promocao|salario|vaga|entrevista|chefe|contratar|demissao|negocio|projeto|empreendimento|loja|cliente|socio|lideranca|funcionario|colaborador|freelance|cargo|profissional/i);
+  var dinheiro=P.match(/dinheiro|financa|investimento|divida|economia|receita|lucro|comprar|vender|gastar|cartao|credito|fatura|salario|renda|preco|custo|faturamento|orcamento|poupar|guardar|dividendo|imposto/i);
+  var saude=P.match(/saude|doenca|tratamento|cura|bem-estar|ansiedade|depressao|corpo|fisico|mental|dormir|sono|alimentacao|exercicio|medico|hospital|terapia|psicologo|emagrecer|peso|dor|sintoma|cirurgia|exame/i);
+  var estudo=P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|professor|materia|livro|ler|estudar|nota|enem|vestibular|graduacao|pos|mestrado|doutorado|diploma|certificado|aluno|aula|educacao/i);
+  if(amores)temas.push("amor");
+  if(carreira)temas.push("carreira");
+  if(dinheiro)temas.push("dinheiro");
+  if(saude)temas.push("saude");
+  if(estudo)temas.push("estudo");
+  if(temas.length===0)temas.push("geral");
+  return temas;
+}
+
+function gerarParagrafoInteligente(carta1,carta2,pergunta,modelo,pos1,pos2,temas){
   var m1=carta1.nm,m2=carta2.nm,e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
   var s1=carta1.sg||"",s2=carta2.sg||"";
   var l1=carta1.luz||"",l2=carta2.luz||"";
   var sb1=carta1.sombra||"",sb2=carta2.sombra||"";
+  var isA = Array.isArray(temas); var t = isA?temas:["geral"];
+  var ehAmor = t.indexOf("amor")>=0, ehCarreira = t.indexOf("carreira")>=0;
+  var ehDinheiro = t.indexOf("dinheiro")>=0, ehSaude = t.indexOf("saude")>=0;
+  var ehEstudo = t.indexOf("estudo")>=0, ehGeral = t.indexOf("geral")>=0;
   var txt="";
   if(modelo==="conselho"){
-    txt="<strong>Conselho e Advertência:</strong> A primeira carta, <strong>"+m1+"</strong> (energia de "+e1+"), atua como seu Conselho. Ela representa "+s1.toLowerCase()+" — sua luz é '"+l1+"', indicando que você deve seguir esta direção. A segunda carta, <strong>"+m2+"</strong> (energia de "+e2+"), é a Advertência. Ela representa "+s2.toLowerCase()+" — sua sombra é '"+sb2+"', alertando sobre o que evitar. Sobre sua pergunta — <em>"+pergunta+"</em> — o conselho da primeira carta sugere que você canalize a energia de "+e1+" para encontrar o melhor caminho, enquanto a advertência da segunda pede atenção para não cair na armadilha de "+sb2.toLowerCase()+".";
+    txt="<strong>Conselho e Advertencia:</strong> A primeira carta <strong>"+m1+"</strong> (energia de "+e1+") atua como seu Conselho. Ela representa "+s1.toLowerCase()+" — sua luz e '"+l1+"', indicando o caminho a seguir. A segunda carta <strong>"+m2+"</strong> (energia de "+e2+") e a Advertencia. Ela representa "+s2.toLowerCase()+" — sua sombra e '"+sb2+"', alertando sobre o que evitar. Olhando para sua pergunta: <em>"+pergunta+"</em>, ";
+    if(ehAmor)txt+="no campo afetivo, o conselho sugere que voce canalize a energia de "+e1+" para cultivar o que e "+l1.toLowerCase()+", enquanto a advertencia pede cuidado para nao cair em "+sb2.toLowerCase()+". A primeira carta mostra o que aproxima coracoes; a segunda alerta sobre o que pode afasta-los.";
+    else if(ehCarreira)txt+="na carreira, o conselho da primeira carta e "+l1.toLowerCase()+", incentivando voce a seguir com "+e1+". Ja a advertencia da segunda carta alerta sobre "+sb2.toLowerCase()+". Juntas, indicam que o sucesso profissional vem de seguir seu talento sem ignorar os riscos.";
+    else if(ehDinheiro)txt+="nas financas, o conselho favorece "+l1.toLowerCase()+" com energia de "+e1+", enquanto a advertencia de "+e2+" recomenda cautela com "+sb2.toLowerCase()+". Equilibre audacia e prudencia para prosperar.";
+    else if(ehSaude)txt+="na saude, o conselho e de "+l1.toLowerCase()+", usando a energia de "+e1+" para fortalecer seu bem-estar. A advertencia de "+sb2.toLowerCase()+" pede atencao para nao ignorar os sinais do corpo.";
+    else if(ehEstudo)txt+="nos estudos, o conselho e "+l1.toLowerCase()+" com a forca de "+e1+". A advertencia e "+sb2.toLowerCase()+", indicando que o foco e essencial para aprender.";
+    else txt+="o conselho e seguir a energia de "+e1+" ("+l1.toLowerCase()+"), mas sem ignorar o alerta de "+e2+" sobre "+sb2.toLowerCase()+". Ambas as cartas se complementam para guiar sua decisao.";
+    txt+=" Equilibrar essas duas forcas e o caminho.";
   }
   else if(modelo==="situacao"){
-    txt="<strong>Situação e Informação Adicional:</strong> A <strong>"+m1+"</strong> ("+e1+") revela sua Situação Atual: "+s1.toLowerCase()+" — "+(l1?l1.toLowerCase():"")+". A <strong>"+m2+"</strong> ("+e2+") traz uma Informação Adicional: "+s2.toLowerCase()+" — "+(l2?l2.toLowerCase():"")+". Para <em>"+pergunta+"</em>, o cenário atual é de "+s1.toLowerCase()+" mas há um detalhe oculto que a segunda carta está revelando: "+s2.toLowerCase()+" Preste atenção neste fator que você talvez não tenha considerado.";
+    txt="<strong>Situacao e Informacao Adicional:</strong> A primeira carta <strong>"+m1+"</strong> ("+e1+") revela sua Situacao Atual: "+s1.toLowerCase()+". Ela mostra o cenario onde voce se encontra agora em relacao a <em>"+pergunta+"</em>. ";
+    if(ehAmor)txt+="No amor, a situacao atual e de "+s1.toLowerCase()+" — "+l1.toLowerCase()+". ";
+    else if(ehCarreira)txt+="Na carreira, o momento presente e de "+s1.toLowerCase()+", com energia de "+e1+" — "+l1.toLowerCase()+". ";
+    else if(ehDinheiro)txt+="Nas financas, sua situacao atual e "+s1.toLowerCase()+", indicando "+l1.toLowerCase()+". ";
+    else txt+="O cenario atual e de "+s1.toLowerCase()+", com a luz de "+l1.toLowerCase()+". ";
+    txt+="A segunda carta <strong>"+m2+"</strong> ("+e2+") traz uma Informacao Adicional: "+s2.toLowerCase()+". Ela revela "+l2.toLowerCase()+" — um detalhe oculto que voce talvez ainda nao tenha considerado sobre sua pergunta. ";
+    if(ehAmor)txt+="Nas relacoes, essa informacao adicional sugere que ha algo alem do que esta aparente, um sentimento ou intencao que precisa ser revelado para que o cenario amoroso faca mais sentido.";
+    else if(ehCarreira)txt+="No campo profissional, essa informacao adicional pode ser a chave para entender uma situacao que parecia confusa. Preste atencao aos detalhes que a segunda carta traz.";
+    else txt+="Preste atencao a este fator oculto — ele pode mudar completamente sua perspectiva sobre o momento que esta vivendo.";
   }
   else if(modelo==="caminho"){
-    txt="<strong>Caminho A e Caminho B:</strong> O <strong>"+m1+"</strong> ("+e1+") representa o Caminho A: "+s1.toLowerCase()+" — siga por esta via se busca "+l1.toLowerCase()+". O <strong>"+m2+"</strong> ("+e2+") representa o Caminho B: "+s2.toLowerCase()+" — escolha esta se seu objetivo é "+l2.toLowerCase()+". Em relação a <em>"+pergunta+"</em>, avalie qual dessas duas energias — "+e1+" ou "+e2+" — melhor se alinha com seus valores e com o momento que você está vivendo.";
+    txt="<strong>Caminho A e Caminho B:</strong> A primeira carta <strong>"+m1+"</strong> ("+e1+"') e o Caminho A: "+s1.toLowerCase()+" — sua luz e '"+l1+"', mas o alerta e "+sb1.toLowerCase()+". A segunda carta <strong>"+m2+"</strong> ("+e2+"') e o Caminho B: "+s2.toLowerCase()+" — sua luz e '"+l2+"', mas o alerta e "+sb2.toLowerCase()+". Sobre <em>"+pergunta+"</em>, ";
+    if(ehAmor)txt+="no amor, o Caminho A sugere "+l1.toLowerCase()+" e o Caminho B aponta para "+l2.toLowerCase()+". O primeiro pode trazer "+s1.toLowerCase()+" enquanto o segundo leva a "+s2.toLowerCase()+". Reflita sobre qual dessas duas abordagens melhor expressa seus sentimentos verdadeiros.";
+    else if(ehCarreira)txt+="na carreira, o Caminho A e "+l1.toLowerCase()+" e o Caminho B e "+l2.toLowerCase()+". O primeiro envolve "+s1.toLowerCase()+", o segundo traz "+s2.toLowerCase()+". Analise qual se alinha melhor com seus objetivos profissionais.";
+    else txt+="o Caminho A convida a "+l1.toLowerCase()+", enquanto o Caminho B sugere "+l2.toLowerCase()+". Ambos tem meritos — a escolha ideal depende do que voce valoriza mais neste momento.";
   }
   else if(modelo==="desejo"){
-    txt="<strong>Desejo Real vs Situação Atual:</strong> O <strong>"+m1+"</strong> ("+e1+") revela seu Desejo Real: "+s1.toLowerCase()+" — você almeja "+l1.toLowerCase()+". A <strong>"+m2+"</strong> ("+e2+") mostra sua Situação Atual: "+s2.toLowerCase()+" — neste momento, "+l2.toLowerCase()+". Para <em>"+pergunta+"</em>, existe uma diferença entre o que você deseja e a realidade presente. Reconhecer essa distância é o primeiro passo para transformá-la. Use a energia de "+e1+" para inspirar seu futuro sem ignorar as lições de "+e2+" sobre seu presente.";
+    txt="<strong>Desejo Real vs Situacao Atual:</strong> A primeira carta <strong>"+m1+"</strong> ("+e1+"') representa seu Desejo Real: "+s1.toLowerCase()+". A luz que guia seu desejo e '"+l1+"'. A segunda carta <strong>"+m2+"</strong> ("+e2+"') mostra sua Situacao Atual: "+s2.toLowerCase()+". A realidade presente pede '"+l2+"'. Sobre <em>"+pergunta+"</em>, ";
+    if(ehAmor)txt+="no amor, seu coracao deseja "+s1.toLowerCase()+" mas a situacao atual e de "+s2.toLowerCase()+". A energia de "+e1+" representa o que voce almeja, enquanto "+e2+" mostra onde voce esta agora. O caminho entre esses dois pontos e o que precisa ser trabalhado — aproximar seu desejo da realidade, um passo de cada vez.";
+    else if(ehCarreira)txt+="na carreira, seu objetivo e "+s1.toLowerCase()+" mas o momento presente e de "+s2.toLowerCase()+". Use a forca de "+e1+" para manter viva sua ambicao, sem ignorar as licoes de "+e2+" sobre o que precisa ser ajustado.";
+    else txt+="seu desejo aponta para "+s1.toLowerCase()+" enquanto a realidade mostra "+s2.toLowerCase()+". A energia de "+e1+" e seu motor, e a energia de "+e2+" e o chao que voce pisa. Reconhecer essa diferenca e o primeiro passo para a transformacao.";
   }
   else if(modelo==="pessoa"){
-    txt="<strong>Você e o Outro:</strong> A <strong>"+m1+"</strong> ("+e1+") representa Você: "+s1.toLowerCase()+" — sua energia atual é de "+e1+", sugerindo "+l1.toLowerCase()+". A <strong>"+m2+"</strong> ("+e2+") representa o Outro: "+s2.toLowerCase()+" — a energia da outra pessoa é de "+e2+", indicando "+l2.toLowerCase()+". Sobre <em>"+pergunta+"</em>, a dinâmica entre você ("+e1+") e o outro ("+e2+") pede equilíbrio. Compreender como essas forças interagem é essencial para navegar esta relação.";
+    txt="<strong>Voce e o Outro:</strong> A primeira carta <strong>"+m1+"</strong> ("+e1+"') representa Voce: "+s1.toLowerCase()+". Sua energia atual e de "+e1+", e sua luz e '"+l1+"'. A segunda carta <strong>"+m2+"</strong> ("+e2+"') representa o Outro: "+s2.toLowerCase()+". A energia do outro e de "+e2+", e sua luz e '"+l2+"'. Sobre <em>"+pergunta+"</em>, ";
+    if(ehAmor)txt+="na dinamica entre voce e essa pessoa, sua energia de "+e1+" encontra a energia de "+e2+" do outro. Voce traz "+l1.toLowerCase()+" enquanto o outro oferece "+l2.toLowerCase()+". "+(s1.toLowerCase())+" e "+(s2.toLowerCase())+" — essas duas forcas podem se complementar ou se confrontar. O equilibrio dessa relacao depende de como voce harmoniza seu jeito de ser com o jeito do outro, respeitando as diferencas e encontrando pontos em comum.";
+    else if(ehCarreira)txt+="na dinamica profissional, seu papel e de "+s1.toLowerCase()+" enquanto o outro lado representa "+s2.toLowerCase()+". Sua abordagem com "+e1+" e a do outro com "+e2+" podem gerar atritos ou sinergias. O segredo esta em encontrar o equilibrio entre essas duas energias.";
+    else txt+="voce se apresenta com energia de "+e1+" ("+l1.toLowerCase()+"), enquanto o outro traz a energia de "+e2+" ("+l2.toLowerCase()+"). A interacao entre essas duas forcas define a dinamica desta relacao.";
   }
   return txt;
 }
 
 function gerarFallback2C(carta1,carta2,pergunta){
   var P=pergunta.toLowerCase();
+  var temas=detectarTema(P);
   var ps=[];
-  ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"conselho","Conselho","Advertência"));
-  if(P.match(/situação|como está|cenário|momento|atualmente|agora|hoje|andamento|status|contexto|realidade|como andam|como estão/i))
-    ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"situacao","Situação","Info Adicional"));
-  if(P.match(/escolha|decidir|opção|caminho|qual escolher|entre|alternativa|optar|devo|ou |qual caminho|qual decisão|prós e contras/i))
-    ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"caminho","Caminho A","Caminho B"));
-  if(P.match(/desejo|quero|queria|sonho|realizar|realização|alcançar|conseguir|objetivo|meta|ambição|esperança|pretendo|planejo|gostaria|anseio|conquistar/i))
-    ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"desejo","Desejo Real","Situação Atual"));
-  if(P.match(/(talita|maria|joão|ana|carlos|pedro|josé|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguém|pessoa|parceiro|parceira|namorado|namorada|marido|esposa|noivo|noiva|amigo|inimigo|adversário|rival|chefe|sócio|cliente|família|mãe|pai|filho|filha|irmão|amiga|amante|ficante|ex|sogra|sogro|primo|prima|colega|superior|líder|equipe|time|grupo)/i))
-    ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"pessoa","Você","O Outro"));
+  ps.push(gerarParagrafoInteligente(carta1,carta2,pergunta,"conselho","Conselho","Advertencia",temas));
+  ps.push(gerarParagrafoInteligente(carta1,carta2,pergunta,"situacao","Situacao","Info Adicional",temas));
+  if(P.match(/escolha|decidir|opcao|caminho|qual escolher|entre|alternativa|optar|devo|ou |qual decisao|pros e contras|qual e melhor/i))
+    ps.push(gerarParagrafoInteligente(carta1,carta2,pergunta,"caminho","Caminho A","Caminho B",temas));
+  if(P.match(/desejo|quero|queria|sonho|realizar|realizacao|alcancar|conseguir|objetivo|meta|ambicao|esperanca|pretendo|planejo|gostaria|anseio|conquistar/i))
+    ps.push(gerarParagrafoInteligente(carta1,carta2,pergunta,"desejo","Desejo Real","Situacao Atual",temas));
+  if(P.match(/(talita|maria|joao|ana|carlos|pedro|jose|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguem|pessoa|parceiro|parceira|namorado|namorada|marido|esposa|noivo|noiva|amigo|inimigo|adversario|rival|chefe|socio|cliente|familia|mae|pai|filho|filha|irmao|amiga|amante|ficante|ex|sogra|sogro|primo|prima|colega|superior|lider|equipe|time|grupo)/i))
+    ps.push(gerarParagrafoInteligente(carta1,carta2,pergunta,"pessoa","Voce","O Outro",temas));
   return ps.join('</div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">');
 }
 
@@ -337,7 +379,7 @@ async function consultarGemini(prompt){
   var controller=new AbortController();
   var timeoutId=setTimeout(function(){controller.abort()},20000);
   try{
-    var resp=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},signal:controller.signal,body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.9,maxOutputTokens:2048}})});
+    var resp=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},signal:controller.signal,body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.9,maxOutputTokens:3072}})});
     clearTimeout(timeoutId);
     if(!resp.ok) return null;
     var data=await resp.json();
@@ -349,11 +391,19 @@ async function consultarGemini(prompt){
 async function gerarLeitura2Cartas(carta1,carta2,pergunta){
   var m1=carta1.nm,m2=carta2.nm,e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
   var s1=carta1.sg||"",s2=carta2.sg||"";
-  var h='<div class="fade" style="text-align:left;"><p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p><h3 style="font-family:Playfair Display,serif;font-size:1.3rem;color:var(--gold);margin-bottom:12px;text-align:center;">Leitura de 2 Cartas</h3><div class="gt" style="grid-template-columns:repeat(2,1fr);"><div class="ti2"><span style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">1 Carta — Arcano Maior</span><span class="tn">'+m1+'</span><span class="tt" style="display:block;margin-top:4px;">'+e1+' — '+s1+'</span></div><div class="ti2"><span style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">2 Carta — Arcano Menor</span><span class="tn">'+m2+'</span><span class="tt" style="display:block;margin-top:4px;">'+e2+' — '+s2+'</span></div></div><div id="loading2c" style="text-align:center;padding:20px;color:var(--gold);font-family:Playfair Display,serif;font-size:1.2rem;">Consultando os arquétipos...</div>';
+  var P=pergunta.toLowerCase();
+  var temas=detectarTema(P);
+  var temEscolha=P.match(/escolha|decidir|opcao|caminho|qual escolher|entre|alternativa|optar|devo|ou |qual decisao|pros e contras|qual e melhor/i)?true:false;
+  var temDesejo=P.match(/desejo|quero|queria|sonho|realizar|realizacao|alcancar|conseguir|objetivo|meta|ambicao|esperanca|pretendo|planejo|gostaria|anseio|conquistar/i)?true:false;
+  var temPessoa=P.match(/(talita|maria|joao|ana|carlos|pedro|jose|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguem|pessoa|parceiro|parceira|namorado|namorada|marido|esposa|noivo|noiva|amigo|inimigo|adversario|rival|chefe|socio|cliente|familia|mae|pai|filho|filha|irmao|amiga|amante|ficante|ex|sogra|sogro|primo|prima|colega|superior|lider|equipe|time|grupo)/i)?true:false;
+  var h='<div class="fade" style="text-align:left;"><p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p><h3 style="font-family:Playfair Display,serif;font-size:1.3rem;color:var(--gold);margin-bottom:12px;text-align:center;">Leitura de 2 Cartas</h3><div class="gt" style="grid-template-columns:repeat(2,1fr);"><div class="ti2"><span style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">1 Carta</span><span class="tn">'+m1+'</span><span class="tt" style="display:block;margin-top:4px;">'+e1+' - '+s1+'</span></div><div class="ti2"><span style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">2 Carta</span><span class="tn">'+m2+'</span><span class="tt" style="display:block;margin-top:4px;">'+e2+' - '+s2+'</span></div></div><div id="loading2c" style="text-align:center;padding:20px;color:var(--gold);font-family:Playfair Display,serif;font-size:1.2rem;">Consultando os arquétipos...</div>';
   document.getElementById("tr").innerHTML=h;
   var resposta=null;
   if(GEMINI_API_KEY){
-    var prompt='Você é um tarólogo experiente e intuitivo. Faça uma leitura de 2 cartas de Tarô.\n\nPergunta do consulente: "'+pergunta+'"\n\n1 carta (Arcano Maior): '+m1+'\nEnergia: '+e1+'\nSignificado: '+s1+'\n\n2 carta (Arcano Menor): '+m2+'\nEnergia: '+e2+'\nSignificado: '+s2+'\n\nInstruções:\n1. Escreva APENAS os parágrafos de interpretação, sem introduções ou saudações.\n2. Use português impecável, claro e espiritual.\n3. O modelo "Conselho e Advertência" é obrigatório.\n4. Inclua "Situação e Informação Adicional" apenas se a pergunta for sobre situação atual.\n5. Inclua "Caminho A e Caminho B" apenas se a pergunta for sobre escolha ou decisão.\n6. Inclua "Desejo Real vs Situação Atual" apenas se a pergunta for sobre desejo ou objetivo.\n7. Inclua "Você e o Outro" apenas se a pergunta mencionar outra pessoa.\n8. Cada parágrafo deve começar com o nome do modelo em negrito (ex: **Conselho e Advertência:**).\n9. Cada parágrafo deve conter de 3 a 5 frases, relacionando as cartas com a pergunta.\n10. Seja descritivo e específico - não use frases genéricas.\n\nExemplo de formato:\n**Conselho e Advertência:** [parágrafo detalhado]\n(Inclua outros modelos apenas se pertinentes)';
+    var prompt='Você é um tarólogo experiente e intuitivo. Faça uma leitura de 2 cartas de Tarô.\n\nPergunta do consulente: "'+pergunta+'"\n\n1ª carta (Arcano Maior): '+m1+'\nEnergia: '+e1+'\nSignificado: '+s1+'\nLuz: '+(carta1.luz||"")+'\nSombra: '+(carta1.sombra||"")+'\n\n2ª carta (Arcano Menor): '+m2+'\nEnergia: '+e2+'\nSignificado: '+s2+'\nLuz: '+(carta2.luz||"")+'\nSombra: '+(carta2.sombra||"")+'\n\nINSTRUÇÕES:\n1. Escreva APENAS os parágrafos de interpretação, sem introduções. Use português impecável.\n2. O modelo "Conselho e Advertência" é OBRIGATÓRIO — sempre inclua.\n3. O modelo "Situação e Informação Adicional" é OBRIGATÓRIO — sempre inclua.\n4. Inclua "Caminho A e Caminho B" SOMENTE se a pergunta envolver uma escolha ou decisão.\n5. Inclua "Desejo Real vs Situação Atual" SOMENTE se a pergunta mencionar um desejo, sonho ou objetivo.\n6. Inclua "Você e o Outro" SOMENTE se a pergunta mencionar outra pessoa.\n7. Cada parágrafo deve ter 3-5 frases, relacionando as DUAS cartas com a pergunta. Mostre como as cartas interagem entre si.\n8. Cada parágrafo começa com **Modelo:**\n\nFormato:\n**Conselho e Advertência:** [parágrafo descritivo conectando as cartas]\n**Situação e Informação Adicional:** [parágrafo descritivo conectando as cartas]';
+    if(temEscolha) prompt+='\n**Caminho A e Caminho B:** [parágrafo descritivo]';
+    if(temDesejo) prompt+='\n**Desejo Real vs Situação Atual:** [parágrafo descritivo]';
+    if(temPessoa) prompt+='\n**Você e o Outro:** [parágrafo descritivo]';
     resposta=await consultarGemini(prompt);
   }
   if(!resposta) resposta=gerarFallback2C(carta1,carta2,pergunta);
@@ -366,7 +416,7 @@ function montarGrid78(cartas,pergunta){
   for(var i=0;i<cartas.length;i++){(function(idx,carta){
     var d=document.createElement("div");d.className="card-78 cf";d.id="c78-"+idx;
     d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone"></span><span class="vs-label">Carta '+(idx+1)+'</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||"")+'</span></div></div>';
-    d.onclick=function(){if(cartaEscolhida!==null)return;cartaEscolhida=idx;var el=document.getElementById("c78-"+idx);el.classList.add("revelada");to("Carta revelada!");setTimeout(function(){document.getElementById("grid-78-container").style.display="none";var r;if(tipoSN){var resp=["Sim","Não","Talvez"];var esc=resp[Math.floor(Math.random()*3)];var cr=esc==="Sim"?"#2ecc71":esc==="Não"?"#e74c3c":"#f39c12";r='<div style="font-size:2.5rem;font-weight:bold;text-align:center;margin:15px 0;color:'+cr+';">'+esc+'</div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;">A carta <strong>'+carta.nm+'</strong> (energia de '+carta.energia+') representa '+carta.sg.toLowerCase()+'. Sobre "'+pergunta+'", a energia desta carta sugere '+esc.toLowerCase()+'. Confie na orientação dos arquétipos para encontrar sua resposta.</div>';}else{r='<h3 style="font-family:Playfair Display,serif;font-size:1.4rem;color:var(--gold);margin-bottom:8px;text-align:center;">O Arquetipo do(a) '+carta.nm+'</h3><p style="font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>'+carta.nm+'</strong> representa <strong>'+(carta.energia||"Universal")+'</strong>. '+(carta.luz||carta.sg||"")+'.</p><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;"><strong>Resposta do Tarô:</strong> '+(function(){var e=carta.energia||"Universal";return"Confie na energia de "+e+" para guiar sua resposta sobre \""+pergunta+"\".";})()+'</div>';}document.getElementById("tr").innerHTML=r+'<button class="btn" onclick="resetarTaro()">Nova Consulta</button>';},800)};g.appendChild(d)})(i,cartas[i]);}
+    d.onclick=function(){if(cartaEscolhida!==null)return;cartaEscolhida=idx;var el=document.getElementById("c78-"+idx);el.classList.add("revelada");to("Carta revelada!");setTimeout(function(){document.getElementById("grid-78-container").style.display="none";var r;if(tipoSN){var resp=["Sim","Nao","Talvez"];var esc=resp[Math.floor(Math.random()*3)];var cr=esc==="Sim"?"#2ecc71":esc==="Nao"?"#e74c3c":"#f39c12";r='<div style="font-size:2.5rem;font-weight:bold;text-align:center;margin:15px 0;color:'+cr+';">'+esc+'</div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;">A carta <strong>'+carta.nm+'</strong> (energia de '+(carta.energia||"Universal")+') representa '+carta.sg.toLowerCase()+'.</div>';}else{r='<h3 style="font-family:Playfair Display,serif;font-size:1.4rem;color:var(--gold);margin-bottom:8px;text-align:center;">O Arquetipo do(a) '+carta.nm+'</h3><p style="font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>'+carta.nm+'</strong> representa <strong>'+(carta.energia||"Universal")+'</strong>. '+(carta.luz||carta.sg||"")+'.</p><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;">Sobre "'+pergunta+'", confie na energia de '+(carta.energia||"Universal")+' para guiar sua reflexao.</div>';}document.getElementById("tr").innerHTML=r+'<button class="btn" onclick="resetarTaro()">Nova Consulta</button>';},800)};g.appendChild(d)})(i,cartas[i]);}
   document.getElementById("grid-78-container").style.display="block";document.getElementById("tr").innerHTML="";
 }
 
