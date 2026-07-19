@@ -269,15 +269,28 @@ function rc(){var h=new Date().toISOString().split("T")[0],k="c_"+user.email,j=l
 function mH(id){var s=SN.find(function(x){return x.id===id});if(!s)return;document.getElementById("hsn").innerHTML=s.ic+" "+s.nm;document.getElementById("ham").innerText=s.am;document.getElementById("hca").innerText=s.ca;document.getElementById("hsa").innerText=s.sa;document.getElementById("hr").style.display="block"}
 function atCT(){var e=document.getElementById("tt").value;document.getElementById("desc-sn").style.display=e==="sn"?"block":"none";document.getElementById("desc-1carta").style.display=e==="1"?"block":"none";document.getElementById("desc-3cartas").style.display=e==="3"?"block":"none";document.getElementById("desc-5cartas").style.display=e==="5"?"block":"none";var custo=e==="sn"?1:e==="1"?1:e==="3"?3:e==="5"?5:e==="lc"?2:1;document.getElementById("tcl-valor").innerText=custo;document.getElementById("tcl").innerHTML='Custa <strong class="gold">'+custo+'</strong> créditos';fecharGrid78()}
 
-// ===== NOVA FUNÇÃO - Resposta mais descritiva para Sim/Não/Talvez =====
+// Função para resetar o Tarô e fazer nova consulta
+function resetarTaro(){
+  document.getElementById("tr").innerHTML="";
+  document.getElementById("grid-78-container").style.display="none";
+  document.getElementById("grid-78").innerHTML="";
+  document.getElementById("lca").style.display="none";
+  document.getElementById("lcr").style.display="none";
+  document.getElementById("lc2").style.display="none";
+  document.getElementById("lc1").style.display="block";
+  cartaEscolhida=null;tipoSN=false;
+  lM=null;lm=null;la=false;
+  document.getElementById("btn-t").disabled=false;
+  document.getElementById("btn-t").innerText="Consultar";
+  document.getElementById("tp").value="";
+}
+
 function gerarRespostaSN(carta, pergunta){
-  var nome=carta.nm,energia=carta.energia||"Universal",sg=carta.sg||"",luz=carta.luz||"",sombra=carta.sombra||"";
+  var nome=carta.nm,energia=carta.energia||"Universal",sg=carta.sg||"";
   var respostas=["Sim","Não","Talvez"];
   var escolha=respostas[Math.floor(Math.random()*respostas.length)];
   var P=pergunta.toLowerCase();
   var paragrafo="";
-
-  // Detectar tema
   var tema="geral";
   if(P.match(/encontrar|encontra|visitar|ir até|encontro com/i)&&P.match(/(talita|maria|joão|ana|carlos|pedro|ela|ele|alguém)/i))tema="encontro";
   else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|leilão|site|negócio|projeto/i))tema="sucesso";
@@ -286,62 +299,57 @@ function gerarRespostaSN(carta, pergunta){
   else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender/i))tema="dinheiro";
   else if(P.match(/saúde|doença|cura|bem-estar|ansiedade|depressão|corpo|físico|mental|dormir|sono/i))tema="saúde";
   else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i))tema="estudo";
-
-  // Construir parágrafo baseado na carta e tema
   var inicio="A carta "+nome+" se refere a "+sg.toLowerCase()+" ";
-
   if(tema==="encontro"){
-    if(escolha==="Sim") paragrafo=inicio+"Representando a energia de "+energia+", ela indica que esse encontro tende a ser positivo e cheio de significados. A sua pergunta sobre encontrar alguém especial encontra eco nesta carta, que sugere abertura e receptividade. Por isso, o momento favorece esse movimento.";
-    else if(escolha==="Não") paragrafo=inicio+"Ela aponta que talvez não seja o melhor momento para esse encontro agora. A energia de "+energia+" sugere que você precisa de mais clareza ou preparo antes de dar esse passo. Por isso, é melhor aguardar um pouco.";
-    else paragrafo=inicio+"Com energia de "+energia+", ela sugere que esse encontro depende de fatores que ainda não estão definidos. Pode ser que aconteça, mas não exatamente como você espera. Por isso, vá com cautela e sem expectativas rígidas.";
+    if(escolha==="Sim")paragrafo=inicio+"Representando a energia de "+energia+", ela indica que esse encontro tende a ser positivo e cheio de significados. Por isso, o momento favorece esse movimento.";
+    else if(escolha==="Não")paragrafo=inicio+"Ela aponta que talvez não seja o melhor momento agora. A energia de "+energia+" sugere que você precisa de mais clareza antes de dar esse passo.";
+    else paragrafo=inicio+"Com energia de "+energia+", ela sugere que esse encontro depende de fatores que ainda não estão definidos. Vá com cautela.";
   }
   else if(tema==="sucesso"){
-    if(escolha==="Sim") paragrafo=inicio+"Ela traz a energia de "+energia+", que é favorável para realizações e conquistas. Sua pergunta sobre sucesso encontra nesta carta um sinal de que você está no caminho certo. Sua dedicação tende a ser recompensada.";
-    else if(escolha==="Não") paragrafo=inicio+"Ela sugere que os resultados podem não vir agora. A energia de "+energia+" indica que ainda há ajustes a fazer ou que o timing não é o ideal. Por isso, revisar sua estratégia pode ser mais produtivo.";
-    else paragrafo=inicio+"Com energia de "+energia+", ela indica que o sucesso é possível, mas depende de dedicação e do momento certo. Nem tudo está sob seu controle agora. Por isso, continue se preparando e fique atento às oportunidades.";
+    if(escolha==="Sim")paragrafo=inicio+"Ela traz a energia de "+energia+", que é favorável para realizações. Sua dedicação tende a ser recompensada.";
+    else if(escolha==="Não")paragrafo=inicio+"Ela sugere que os resultados podem não vir agora. Revisar sua estratégia pode ser mais produtivo.";
+    else paragrafo=inicio+"Com energia de "+energia+", o sucesso é possível, mas depende do timing. Continue se preparando.";
   }
   else if(tema==="amor"){
-    if(escolha==="Sim") paragrafo=inicio+"No campo afetivo, a energia de "+energia+" sugere um período de abertura e conexão genuína. Sua pergunta sobre o coração encontra nesta carta um incentivo para se permitir sentir. O amor tende a fluir positivamente.";
-    else if(escolha==="Não") paragrafo=inicio+"No amor, a energia de "+energia+" sugere que este não é o melhor momento para decisões afetivas importantes. Pode haver questões internas a resolver primeiro. Por isso, dê espaço ao tempo.";
-    else paragrafo=inicio+"No campo afetivo, a energia de "+energia+" indica que as coisas estão em processo de definição. O coração pede cautela e observação antes de qualquer passo definitivo. Por isso, permita que os sentimentos se esclareçam.";
+    if(escolha==="Sim")paragrafo=inicio+"No campo afetivo, a energia de "+energia+" sugere abertura e conexão genuína. O amor tende a fluir positivamente.";
+    else if(escolha==="Não")paragrafo=inicio+"No amor, a energia de "+energia+" sugere que não é o melhor momento para decisões afetivas. Dê espaço ao tempo.";
+    else paragrafo=inicio+"No campo afetivo, a energia de "+energia+" indica que as coisas estão em processo. Permita que os sentimentos se esclareçam.";
   }
   else if(tema==="carreira"){
-    if(escolha==="Sim") paragrafo=inicio+"Na carreira, a energia de "+energia+" aponta para crescimento e boas oportunidades. Sua pergunta profissional encontra respaldo nesta carta, que sugere movimento e evolução. É um bom momento para investir em seus objetivos.";
-    else if(escolha==="Não") paragrafo=inicio+"Na carreira, a energia de "+energia+" sinaliza que pode não ser o momento ideal para mudanças ou decisões importantes. Melhor aguardar e observar mais antes de agir. Por isso, mantenha o foco no presente.";
-    else paragrafo=inicio+"Na carreira, a energia de "+energia+" sugere que os resultados dependem de preparação e timing. Há potencial, mas é preciso avaliar cada passo com cuidado. Por isso, planeje-se bem antes de decidir.";
+    if(escolha==="Sim")paragrafo=inicio+"Na carreira, a energia de "+energia+" aponta para crescimento. É um bom momento para investir em seus objetivos.";
+    else if(escolha==="Não")paragrafo=inicio+"Na carreira, a energia de "+energia+" sinaliza que não é o momento ideal para mudanças. Melhor aguardar.";
+    else paragrafo=inicio+"Na carreira, a energia de "+energia+" sugere que os resultados dependem de preparação. Planeje-se bem.";
   }
   else if(tema==="dinheiro"){
-    if(escolha==="Sim") paragrafo=inicio+"Nas finanças, a energia de "+energia+" é um sinal positivo para prosperidade e segurança. Sua pergunta sobre dinheiro encontra nesta carta uma indicação de crescimento e estabilidade. É um bom momento para investir com sabedoria.";
-    else if(escolha==="Não") paragrafo=inicio+"Nas finanças, a energia de "+energia+" sugere cautela. Evite decisões impulsivas ou gastos desnecessários agora. Por isso, segure os impulsos e espere um momento mais favorável.";
-    else paragrafo=inicio+"Nas finanças, a energia de "+energia+" indica que o cenário ainda está se definindo. Há potencial, mas é preciso analisar com calma antes de comprometer recursos. Por isso, planeje e pesquise antes de agir.";
+    if(escolha==="Sim")paragrafo=inicio+"Nas finanças, a energia de "+energia+" é positiva para prosperidade. Invista com sabedoria.";
+    else if(escolha==="Não")paragrafo=inicio+"Nas finanças, a energia de "+energia+" sugere cautela. Evite gastos desnecessários agora.";
+    else paragrafo=inicio+"Nas finanças, a energia de "+energia+" indica que o cenário está se definindo. Analise com calma.";
   }
   else if(tema==="saúde"){
-    if(escolha==="Sim") paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere que seu corpo e mente estão se encaminhando para o equilíbrio. Sua pergunta sobre bem-estar encontra nesta carta um sinal de cuidado e renovação. O momento favorece hábitos saudáveis.";
-    else if(escolha==="Não") paragrafo=inicio+"Na saúde, a energia de "+energia+" indica que você precisa de mais atenção e descanso. Não ignore os sinais do seu corpo. Por isso, priorize o autocuidado antes de qualquer esforço extra.";
-    else paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere que o equilíbrio está em construção. Pequenas mudanças na rotina podem trazer melhorias. Por isso, ouça seu corpo e faça ajustes graduais.";
+    if(escolha==="Sim")paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere que corpo e mente estão se equilibrando. O momento favorece hábitos saudáveis.";
+    else if(escolha==="Não")paragrafo=inicio+"Na saúde, a energia de "+energia+" indica que você precisa de mais descanso. Priorize o autocuidado.";
+    else paragrafo=inicio+"Na saúde, a energia de "+energia+" sugere que o equilíbrio está em construção. Faça ajustes graduais.";
   }
   else if(tema==="estudo"){
-    if(escolha==="Sim") paragrafo=inicio+"Nos estudos, a energia de "+energia+" favorece a concentração e o aprendizado. Sua pergunta sobre conhecimento encontra nesta carta um estímulo para seguir em frente. É um bom momento para se dedicar.";
-    else if(escolha==="Não") paragrafo=inicio+"Nos estudos, a energia de "+energia+" indica que você pode estar disperso ou sobrecarregado. Talvez precise reorganizar sua rotina antes de avançar. Por isso, revise seu método de estudo.";
-    else paragrafo=inicio+"Nos estudos, a energia de "+energia+" sugere que o aprendizado virá, mas no seu tempo. Não se cobre tanto e mantenha a constância. Por isso, persista com paciência.";
+    if(escolha==="Sim")paragrafo=inicio+"Nos estudos, a energia de "+energia+" favorece o aprendizado. É um bom momento para se dedicar.";
+    else if(escolha==="Não")paragrafo=inicio+"Nos estudos, a energia de "+energia+" indica dispersão. Reorganize sua rotina antes de avançar.";
+    else paragrafo=inicio+"Nos estudos, a energia de "+energia+" sugere que o aprendizado virá no seu tempo. Persista com paciência.";
   }
   else {
-    if(escolha==="Sim") paragrafo=inicio+"Com energia de "+energia+", esta carta sugere que o caminho está aberto para o que você busca. O momento é de confiança e movimento. Siga em frente com determinação.";
-    else if(escolha==="Não") paragrafo=inicio+"Com energia de "+energia+", esta carta indica que talvez não seja o momento ideal para o que você pergunta. A prudência e a observação são suas aliadas agora. Por isso, aguarde e reflita.";
-    else paragrafo=inicio+"Com energia de "+energia+", esta carta sugere que a resposta ainda não está totalmente definida. O desfecho depende de fatores que estão em movimento. Por isso, mantenha-se aberto e atento aos sinais.";
+    if(escolha==="Sim")paragrafo=inicio+"Com energia de "+energia+", esta carta sugere que o caminho está aberto. Siga em frente.";
+    else if(escolha==="Não")paragrafo=inicio+"Com energia de "+energia+", esta carta indica que não é o momento ideal. Aguarde e reflita.";
+    else paragrafo=inicio+"Com energia de "+energia+", esta carta sugere que a resposta ainda está se definindo. Mantenha-se aberto.";
   }
-
-  var cor="#2ecc71";
-  if(escolha==="Não")cor="#e74c3c";
-  if(escolha==="Talvez")cor="#f39c12";
-
+  var cor="#2ecc71";if(escolha==="Não")cor="#e74c3c";if(escolha==="Talvez")cor="#f39c12";
   var h='<div class="fade" style="text-align:left;">';
   h+='<p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p>';
   h+='<div style="font-size:2.8rem;font-weight:bold;font-family:Playfair Display,serif;text-align:center;margin:15px 0;color:'+cor+';">'+escolha+'</div>';
   h+='<div style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid var(--gdd);text-align:center;margin-bottom:15px;"><span style="font-weight:bold;color:var(--gold);display:block;font-family:Playfair Display,serif;font-size:1.1rem;">'+nome+'</span><span style="font-size:0.85rem;color:var(--td);">'+energia+' — '+sg+'</span></div>';
   h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:16px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">';
   h+='<strong>📿 Explicação:</strong> '+paragrafo;
-  h+='</div></div>';
+  h+='</div>';
+  h+='<button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button>';
+  h+='</div>';
   return h;
 }
 
@@ -351,12 +359,11 @@ function gerarLeitura1Carta(carta, pergunta){
   var nomePessoa="";
   var mn=P.match(/(talita|maria|joão|ana|carlos|pedro|josé|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguém)/i);
   if(mn)nomePessoa=mn[0].charAt(0).toUpperCase()+mn[0].slice(1).toLowerCase();
-
   if(nomePessoa&&P.match(/encontrar|encontra|ver |visitar|ir até|encontro com/i)){
     if(energia=="Água")resposta="Sim, é provável que seja um encontro significativo! "+nome+" é uma carta de energia de "+energia+", indicando que encontrar "+nomePessoa+" hoje será guiado pelas emoções. Confie na sua intuição.";
     else if(energia=="Ar")resposta="Sim, tende a ser um bom encontro! "+nome+" é uma carta de energia de "+energia+", sinalizando boas conversas. Vá com a mente aberta.";
     else if(energia=="Terra")resposta="Sim, é um ótimo sinal! "+nome+" é uma carta de energia de "+energia+", indicando algo sólido e significativo.";
-    else if(energia=="Fogo")resposta="Sim, tem grandes chances! "+nome+" é uma carta de energia de "+energia+", trazendo paixão e iniciativa. Vá em frente.";
+    else if(energia=="Fogo")resposta="Sim, tem grandes chances! "+nome+" é uma carta de energia de "+energia+", trazendo paixão e iniciativa.";
     else resposta="Talvez. "+nome+" sugere que encontrar "+nomePessoa+" hoje pode trazer surpresas.";
   }
   else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|prosperar|leilão|site|negócio|loja|projeto/i)){
@@ -408,7 +415,6 @@ function gerarLeitura1Carta(carta, pergunta){
     else if(energia=="Fogo")resposta="Hora de agir! "+nome+" é "+energia+", indicando ação e iniciativa.";
     else resposta="Talvez. "+nome+" sugere equilíbrio e confiança.";
   }
-
   var h='<div class="fade" style="text-align:left;">';
   h+='<p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p>';
   h+='<h3 style="font-family:Playfair Display,serif;font-size:1.4rem;color:var(--gold);margin-bottom:8px;text-align:center;">O Arquétipo do(a) '+nome+'</h3>';
@@ -418,7 +424,9 @@ function gerarLeitura1Carta(carta, pergunta){
   h+='<p style="font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.7;margin-bottom:8px;">Você perguntou: <strong>'+pergunta+'</strong>. A energia de <strong>'+nome+'</strong> ('+energia+') atua diretamente nessa área.</p>';
   h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">';
   h+='<strong>📿 Resposta do Tarô:</strong> '+resposta;
-  h+='</div></div>';
+  h+='</div>';
+  h+='<button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button>';
+  h+='</div>';
   return h;
 }
 
@@ -451,14 +459,10 @@ function iniciarT(){
   if(!p) return to("Digite sua pergunta.");
   cartaEscolhida=null;tipoSN=(t==="sn");
   document.getElementById("grid-78-container").style.display="none";document.getElementById("grid-78").innerHTML="";document.getElementById("tr").innerHTML="";
-
   if(t==="sn"){
     if(!gas(1)) return;
     sl("btn-t",1);
-    setTimeout(function(){
-      var d=[].concat(DK).sort(function(){return Math.random()-0.5});
-      montarGrid78(d,p);sl("btn-t",0);to("Escolha uma carta!");
-    },300);
+    setTimeout(function(){var d=[].concat(DK).sort(function(){return Math.random()-0.5});montarGrid78(d,p);sl("btn-t",0);to("Escolha uma carta!");},300);
     return;
   }
   if(t==="lc"){
@@ -473,19 +477,19 @@ function iniciarT(){
   sl("btn-t",1);
   setTimeout(function(){
     if(q===1){var d=[].concat(DK).sort(function(){return Math.random()-0.5});montarGrid78(d,p);sl("btn-t",0);to("Escolha uma carta!");}
-    else if(q===3){var d=[].concat(DK).sort(function(){return Math.random()-0.5}),cartas=d.slice(0,q);var pos=["Passado","Presente","Futuro"];var h='<p style="font-style:italic;color:var(--td);margin-bottom:12px;">"'+p+'"</p><div class="gt">';cartas.forEach(function(c,i){h+='<div class="ti2"><span class="tn" style="font-size:0.7rem;color:var(--td);">'+pos[i]+'</span><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!");}
-    else {var d=[].concat(DK).sort(function(){return Math.random()-0.5}),cartas=d.slice(0,q);var pos=["Situação","Obstáculo","Passado","Futuro","Desfecho"];var h='<p style="font-style:italic;color:var(--td);margin-bottom:12px;">"'+p+'"</p><div class="gt">';cartas.forEach(function(c,i){h+='<div class="ti2"><span class="tn" style="font-size:0.7rem;color:var(--td);">'+pos[i]+'</span><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!");}
+    else if(q===3){var d=[].concat(DK).sort(function(){return Math.random()-0.5}),cartas=d.slice(0,q);var pos=["Passado","Presente","Futuro"];var h='<p style="font-style:italic;color:var(--td);margin-bottom:12px;">"'+p+'"</p><div class="gt">';cartas.forEach(function(c,i){h+='<div class="ti2"><span class="tn" style="font-size:0.7rem;color:var(--td);">'+pos[i]+'</span><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";h+='<button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button>';document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!");}
+    else {var d=[].concat(DK).sort(function(){return Math.random()-0.5}),cartas=d.slice(0,q);var pos=["Situação","Obstáculo","Passado","Futuro","Desfecho"];var h='<p style="font-style:italic;color:var(--td);margin-bottom:12px;">"'+p+'"</p><div class="gt">';cartas.forEach(function(c,i){h+='<div class="ti2"><span class="tn" style="font-size:0.7rem;color:var(--td);">'+pos[i]+'</span><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+="</div>";h+='<button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button>';document.getElementById("tr").innerHTML=h;sl("btn-t",0);to("Cartas lançadas!");}
   },300);
 }
 
 var lM=null,lm=null,la=false;
 function selM(n){if(lM||la)return;lM=M.find(function(c){return c.n===n});document.querySelectorAll("#lgm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lm-"+n);if(el){el.style.opacity="1";el.classList.add("revelada")}document.getElementById("lc2").style.display="block";var e=[].concat(MN).sort(function(){return Math.random()-0.5}),g=document.getElementById("lgmm");g.innerHTML="";e.forEach(function(c){var d=document.createElement("div");d.className="cf";d.id="lmm-"+c.id;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🂠</span><span class="vs-label">Menor</span></div><div class="cf-frente"><span class="cn">'+c.nm+'</span></div></div>';d.onclick=function(){selm(c.id)};g.appendChild(d)});to("Escolha um Arcano Menor.")}
-function selm(id){if(lm||la)return;lm=MN.find(function(c){return c.id===id});document.querySelectorAll("#lgmm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lmm-"+id);if(el){el.style.opacity="1";el.classList.add("revelada")}la=true;var ma=lM,mi=lm;if(!ma||!mi)return;var h='<div class="fade"><div class="li"><h4>🔮 '+ma.nm+'</h4><p><strong>🌟 Luz:</strong> '+ma.luz+'</p><p><strong>⚠️ Sombra:</strong> '+ma.sombra+'</p></div><div class="li"><h4>📜 '+mi.nm+'</h4><p><strong>📖 Significado:</strong> '+mi.sg+'</p></div><p style="margin-top:15px;font-style:italic;">O '+ma.nm+' mostra o propósito maior. O '+mi.nm+' revela o cotidiano.</p></div>';document.getElementById("lcr").innerHTML=h;document.getElementById("lcr").style.display="block";to("Leitura Combinada concluída!");}
+function selm(id){if(lm||la)return;lm=MN.find(function(c){return c.id===id});document.querySelectorAll("#lgmm .cf").forEach(function(c){c.style.opacity="0.4";c.style.pointerEvents="none"});var el=document.getElementById("lmm-"+id);if(el){el.style.opacity="1";el.classList.add("revelada")}la=true;var ma=lM,mi=lm;if(!ma||!mi)return;var h='<div class="fade"><div class="li" style="background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0"><h4 style="color:var(--gold);margin-bottom:5px;font-family:Playfair Display,serif;font-size:1.2rem;">🔮 '+ma.nm+'</h4><p style="font-size:0.85rem;margin:4px 0;font-family:Open Sans,sans-serif;"><strong>🌟 Luz:</strong> '+ma.luz+'</p><p style="font-size:0.85rem;margin:4px 0;font-family:Open Sans,sans-serif;"><strong>⚠️ Sombra:</strong> '+ma.sombra+'</p></div><div class="li" style="background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0"><h4 style="color:var(--gold);margin-bottom:5px;font-family:Playfair Display,serif;font-size:1.2rem;">📜 '+mi.nm+'</h4><p style="font-size:0.85rem;margin:4px 0;font-family:Open Sans,sans-serif;"><strong>📖 Significado:</strong> '+mi.sg+'</p></div><p style="margin-top:15px;font-style:italic;font-family:Open Sans,sans-serif;">O '+ma.nm+' mostra o propósito maior. O '+mi.nm+' revela o cotidiano.</p>';h+='<button class="btn" onclick="resetarTaro()" style="margin-top:15px;">🔄 Nova Consulta</button>';h+='</div>';document.getElementById("lcr").innerHTML=h;document.getElementById("lcr").style.display="block";to("Leitura Combinada concluída!");}
 function resLC(){document.getElementById("lca").style.display="none";document.getElementById("lcr").style.display="none";document.getElementById("lcr").innerHTML="";lM=null;lm=null;la=false}
 function calN(){var d=document.getElementById("nd").value;if(!d||!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"Líder",2:"Diplomata",3:"Comunicador",4:"Construtor",5:"Viajante",6:"Protetor",7:"Sábio",8:"Executivo",9:"Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3>Caminho de Vida</h3><p>'+(de[s]||"Especial")+"</p></div>";sl("btn-n",0);to("Número revelado!")},600)}
 function conI(){var p=document.getElementById("ip").value.trim();if(!p||!gas(2))return;sl("btn-i",1);setTimeout(function(){var hx=[{n:1,nm:"O Criativo",s:"Qian",d:"Força criativa."}];var h=hx[0];document.getElementById("ir").innerHTML='<div class="fade"><h3>Hexagrama '+h.n+': '+h.nm+'</h3><p>'+h.d+'</p></div>';sl("btn-i",0);to("I Ching respondeu!")},700)}
 function conSN(){var p=document.getElementById("snp").value.trim();if(!p||!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Não","Talvez","Com certeza","Não é momento","As estrelas dizem sim"];document.getElementById("snr").innerHTML='<span class="fade">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
-function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni"><span class="snp">'+p+':</span><div class="sns">'+SO[p]+"</div></div>"}}}
+function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni" style="margin-bottom:10px;border-bottom:1px solid var(--gdd);padding-bottom:8px;"><span class="snp" style="color:var(--gold);font-weight:600;font-family:Playfair Display,serif;font-size:1.2rem;">'+p+':</span><div class="sns" style="font-size:0.85rem;margin-top:2px;color:var(--td);font-family:Open Sans,sans-serif;">'+SO[p]+"</div></div>"}}}
 function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b||a===b)return to("Selecione signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m=p>=85?"Almas gêmeas!":p>=70?"Grande afinidade!":p>=50?"Atração de opostos.":"Energias distintas.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
 function comp(q){user.creditos+=q;sU();fM("mcr");to("+"+q+" créditos!")}
 window.onload=function(){atCT()};
