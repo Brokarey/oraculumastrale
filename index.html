@@ -18,14 +18,14 @@ a{color:var(--gold);text-decoration:none}
 ::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:10px}
 .scr{position:fixed;top:0;left:0;width:100%;height:100%;overflow-y:auto;opacity:0;pointer-events:none;transition:0.4s;z-index:1}
 .scr.ativa{opacity:1;pointer-events:all;z-index:2}
-#welcome{background:url('mystical_crystal_portal2.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#welcome{background:url('Generatedimage_1784437099450.png') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .wb{width:100%;max-width:300px;display:flex;flex-direction:column;gap:16px;z-index:2;align-items:center}
 .bw{background:var(--gold);color:#000;border:none;padding:15px 30px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:2px;width:100%;font-family:'Inter',sans-serif;font-size:1.1rem;box-shadow:0 4px 25px rgba(212,168,83,0.5);text-align:center}
 .bw:hover{background:#f1c40f;transform:translateY(-3px);box-shadow:0 8px 35px rgba(212,168,83,0.7)}
 .bwo{background:transparent;border:2px solid var(--gold);color:var(--gold)}
 .bwo:hover{background:rgba(212,168,83,0.15);color:#fff}
 .scr:not(#welcome){display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
-.scr:not(#welcome):not(#main){background:url('Oraculum_Astrale_Marca_Dagua_50pct_MENOS_BRANCA.png') center/cover no-repeat}
+.scr:not(#welcome):not(#main){background:url('Oraculum_Astrale_Portal_50pct.png') center/cover no-repeat}
 .card{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:30px;width:100%;max-width:450px;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
 .card h2{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:10px;color:var(--gold);text-align:center}
 .btn{background:var(--gold);color:#000;border:none;padding:12px 24px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.3s;text-transform:uppercase;letter-spacing:1px;width:100%;margin-top:10px;font-family:'Inter',sans-serif;font-size:0.9rem}
@@ -117,8 +117,8 @@ select option{background:#1a0030;color:#e8e0f0}
 <div id="login" class="scr">
   <div class="card">
     <h2>Entrar</h2>
-    <input type="email" id="le" placeholder="Seu e-mail">
-    <input type="password" id="ls" placeholder="Sua senha">
+    <input type="email" id="le" placeholder="Seu e-mail" onkeydown="if(event.key==='Enter')logar()">
+    <input type="password" id="ls" placeholder="Sua senha" onkeydown="if(event.key==='Enter')logar()">
     <button class="btn" onclick="logar()">Acessar Portal</button>
     <p style="text-align:center;margin-top:15px;color:var(--td);font-size:0.9rem;">Não tem conta? <a href="#" onclick="ir('cadastro')" style="color:var(--gold)">Cadastre-se</a></p>
     <button class="btn btn2" onclick="ir('welcome')" style="margin-top:10px;">Voltar</button>
@@ -128,11 +128,11 @@ select option{background:#1a0030;color:#e8e0f0}
   <div class="card">
     <h2>Criar Conta</h2>
     <p style="text-align:center;color:var(--gold);font-size:0.8rem;margin-bottom:12px;">Ganhe 5 créditos grátis!</p>
-    <input type="text" id="cn" placeholder="Nome Completo">
-    <input type="text" id="cc" placeholder="CPF (11 dígitos)" maxlength="11">
-    <input type="email" id="ce" placeholder="E-mail">
-    <input type="password" id="cs" placeholder="Senha (mín. 6)">
-    <input type="password" id="csc" placeholder="Confirmar Senha">
+    <input type="text" id="cn" placeholder="Nome Completo" onkeydown="if(event.key==='Enter')cadastrar()">
+    <input type="text" id="cc" placeholder="CPF (11 dígitos)" maxlength="11" onkeydown="if(event.key==='Enter')cadastrar()">
+    <input type="email" id="ce" placeholder="E-mail" onkeydown="if(event.key==='Enter')cadastrar()">
+    <input type="password" id="cs" placeholder="Senha (mín. 6)" onkeydown="if(event.key==='Enter')cadastrar()">
+    <input type="password" id="csc" placeholder="Confirmar Senha" onkeydown="if(event.key==='Enter')cadastrar()">
     <button class="btn" onclick="cadastrar()">Cadastrar</button>
   </div>
 </div>
@@ -209,6 +209,30 @@ select option{background:#1a0030;color:#e8e0f0}
 <div id="mcr" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mcr')">&times;</button><h2>Créditos</h2><div id="crr" style="text-align:center;margin-top:15px;"><p style="color:var(--td);">Em breve você poderá adquirir mais créditos.</p></div></div></div>
 
 <script>
+// ===== VALIDAÇÃO DE CPF =====
+function validarCPF(cpf){
+  cpf = cpf.replace(/\D/g, '');
+  if(cpf.length !== 11) return false;
+  if(/^(\d)\1{10}$/.test(cpf)) return false;
+  var soma = 0, resto;
+  for(var i=1;i<=9;i++) soma += parseInt(cpf.substring(i-1,i)) * (11-i);
+  resto = (soma * 10) % 11;
+  if(resto === 10) resto = 0;
+  if(resto !== parseInt(cpf.substring(9,10))) return false;
+  soma = 0;
+  for(var i=1;i<=10;i++) soma += parseInt(cpf.substring(i-1,i)) * (12-i);
+  resto = (soma * 10) % 11;
+  if(resto === 10) resto = 0;
+  if(resto !== parseInt(cpf.substring(10,11))) return false;
+  return true;
+}
+
+// ===== VALIDAÇÃO DE E-MAIL =====
+function validarEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// ===== DADOS =====
 var M=[
 {n:0,nm:"O Louco",sg:"Aventura e novos começos.",am:"Inicio de um novo ciclo no amor.",ca:"Momento de arriscar na carreira.",in:"Cuidado com impulsividade.",luz:"Liberdade e otimismo",sombra:"Imprudencia",energia:"Universal"},
 {n:1,nm:"O Mago",sg:"Poder e manifestacao.",am:"Voce tem o poder de atrair.",ca:"Use seus talentos agora.",in:"Nao manipule situacoes.",luz:"Talento e foco",sombra:"Manipulacao",energia:"Fogo"},
@@ -233,7 +257,6 @@ var M=[
 {n:20,nm:"Julgamento",sg:"Renascimento.",am:"Reavaliacao da relacao.",ca:"Nova direcao.",in:"Negacao da verdade.",luz:"Perdao e renovacao",sombra:"Culpa",energia:"Fogo"},
 {n:21,nm:"O Mundo",sg:"Conclusao e realizacao.",am:"Uniao completa.",ca:"Sucesso internacional.",in:"Atrasos no final.",luz:"Plenitude e sucesso",sombra:"Estagnacao final",energia:"Terra"}
 ];
-
 function gMn(){
   var nipes=["Copas","Espadas","Ouros","Paus"];
   var valores=["As","2","3","4","5","6","7","8","9","10","Valete","Cavaleiro","Rainha","Rei"];
@@ -261,8 +284,41 @@ function abM(i){var m=document.getElementById(i);if(m){m.style.display="flex";do
 function fM(i){var m=document.getElementById(i);if(m){m.style.display="none";document.body.classList.remove("no-scroll")}}
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.querySelectorAll(".modal").forEach(function(m){if(m.style.display==="flex"){m.style.display="none";document.body.classList.remove("no-scroll")}});fecharGrid78();resetar2C()}});
 document.addEventListener("click",function(e){if(e.target.classList.contains("modal")){e.target.style.display="none";document.body.classList.remove("no-scroll");fecharGrid78();resetar2C()}});
-function cadastrar(){var n=document.getElementById("cn").value.trim(),e=document.getElementById("ce").value.trim(),p=document.getElementById("cs").value,x=document.getElementById("csc").value;if(!n||!e||p.length<6||p!==x)return to("Preencha corretamente.");var u=JSON.parse(localStorage.getItem("oa_u")||"[]");if(u.find(function(v){return v.email===e}))return to("E-mail ja existe.");u.push({nome:n,email:e,senha:p,creditos:5,streak:1,ult:new Date().toISOString().split("T")[0]});localStorage.setItem("oa_u",JSON.stringify(u));to("Conta criada! +5 creditos.");ir("login")}
-function logar(){var e=document.getElementById("le").value.trim(),p=document.getElementById("ls").value;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),s=u.find(function(v){return v.email===e&&v.senha===p});if(!s)return to("E-mail ou senha incorretos.");user=s;atS();cD();ir("main");to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!")}
+
+// ===== CADASTRO COM VALIDAÇÃO =====
+function cadastrar(){
+  var n=document.getElementById("cn").value.trim();
+  var c=document.getElementById("cc").value.replace(/\D/g,'');
+  var e=document.getElementById("ce").value.trim();
+  var p=document.getElementById("cs").value;
+  var x=document.getElementById("csc").value;
+  if(!n) return to("Preencha seu nome.");
+  if(!c||!validarCPF(c)) return to("CPF inválido. Digite 11 números.");
+  if(!e||!validarEmail(e)) return to("E-mail inválido.");
+  if(p.length<6) return to("Senha deve ter no mínimo 6 caracteres.");
+  if(p!==x) return to("Senhas não conferem.");
+  var u=JSON.parse(localStorage.getItem("oa_u")||"[]");
+  if(u.find(function(v){return v.email===e})) return to("E-mail já cadastrado.");
+  u.push({nome:n,email:e,senha:p,cpf:c,creditos:5,streak:1,ult:new Date().toISOString().split("T")[0]});
+  localStorage.setItem("oa_u",JSON.stringify(u));
+  to("Conta criada! +5 créditos.");
+  ir("login");
+}
+
+// ===== LOGIN COM VALIDAÇÃO =====
+function logar(){
+  var e=document.getElementById("le").value.trim();
+  var p=document.getElementById("ls").value;
+  if(!e||!validarEmail(e)) return to("E-mail inválido.");
+  if(!p) return to("Digite sua senha.");
+  var u=JSON.parse(localStorage.getItem("oa_u")||"[]");
+  var s=u.find(function(v){return v.email===e&&v.senha===p});
+  if(!s) return to("E-mail ou senha incorretos.");
+  user=s;
+  atS();cD();ir("main");
+  to("Bem-vindo(a), "+s.nome.split(" ")[0]+"!");
+}
+
 function sair(){user=null;ir("welcome")}
 function sU(){if(!user)return;var u=JSON.parse(localStorage.getItem("oa_u")||"[]"),i=u.findIndex(function(v){return v.email===user.email});if(i>=0){u[i]=user;localStorage.setItem("oa_u",JSON.stringify(u))}document.getElementById("cu2").innerText=user.creditos;document.getElementById("su2").innerText=user.streak}
 function gas(q){if(!user)return to("Faca login."),0;if(user.creditos>=q){user.creditos-=q;sU();return 1}to("Creditos insuficientes.");return 0}
@@ -273,107 +329,87 @@ function atCT(){var e=document.getElementById("tt").value;document.getElementByI
 function resetarTaro(){document.getElementById("tr").innerHTML="";document.getElementById("grid-78-container").style.display="none";document.getElementById("grid-78").innerHTML="";cartaEscolhida=null;tipoSN=false;resetar2C();document.getElementById("btn-t").disabled=false;document.getElementById("btn-t").innerText="Consultar";document.getElementById("tp").value=""}
 function resetar2C(){document.getElementById("grid-2c-container").style.display="none";document.getElementById("step-2c-maior").style.display="block";document.getElementById("step-2c-menor").style.display="none";document.getElementById("grid-2c-maior").innerHTML="";document.getElementById("grid-2c-menor").innerHTML="";carta2Estado={fase:'maior',maior:null,menor:null}}
 
-// Funcao para gerar resposta objetiva final baseada nas cartas
 function gerarRespostaFinal(carta1,carta2,pergunta,temas){
-  var peso=0;
-  var e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
-  var s1=carta1.sg||"",s2=carta2.sg||"";
-  var l1=carta1.luz||"",l2=carta2.luz||"";
-  if(e1=="Fogo"||e1=="Universal")peso++;
-  if(e2=="Fogo"||e2=="Universal")peso++;
-  if(e1=="Terra"||e1=="Agua")peso--;
-  if(e2=="Terra"||e2=="Agua")peso--;
-  var r=Math.random();
-  var resp="";
-  if(peso>=1&&r<0.6)resp="Com certeza";
-  else if(peso>=1&&r<0.9)resp="Sim";
-  else if(peso>=1)resp="Provavelmente sim";
-  else if(peso<=-1&&r<0.6)resp="Nao";
-  else if(peso<=-1&&r<0.9)resp="Provavelmente nao";
-  else if(peso<=-1)resp="Melhor evitar";
-  else if(r<0.33)resp="Talvez";
-  else if(r<0.66)resp="Sim, mas com cautela";
-  else resp="Provavelmente sim";
-  var cor="#f39c12";
-  if(resp=="Com certeza"||resp=="Sim")cor="#2ecc71";
+  var peso=0;var e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
+  var s1=carta1.sg||"",s2=carta2.sg||"";var l1=carta1.luz||"",l2=carta2.luz||"";
+  if(e1=="Fogo"||e1=="Universal")peso++;if(e2=="Fogo"||e2=="Universal")peso++;
+  if(e1=="Terra"||e1=="Agua")peso--;if(e2=="Terra"||e2=="Agua")peso--;
+  var r=Math.random();var resp="";
+  if(peso>=1&&r<0.6)resp="Com certeza";else if(peso>=1&&r<0.9)resp="Sim";
+  else if(peso>=1)resp="Provavelmente sim";else if(peso<=-1&&r<0.6)resp="Nao";
+  else if(peso<=-1&&r<0.9)resp="Provavelmente nao";else if(peso<=-1)resp="Melhor evitar";
+  else if(r<0.33)resp="Talvez";else if(r<0.66)resp="Sim, mas com cautela";else resp="Provavelmente sim";
+  var cor="#f39c12";if(resp=="Com certeza"||resp=="Sim")cor="#2ecc71";
   if(resp=="Nao"||resp=="Provavelmente nao"||resp=="Melhor evitar")cor="#e74c3c";
-  var texto="";
-  var ehAmor=temas.indexOf("amor")>=0,ehCarreira=temas.indexOf("carreira")>=0;
-  var ehDinheiro=temas.indexOf("dinheiro")>=0,ehSaude=temas.indexOf("saude")>=0;
-  var ehEstudo=temas.indexOf("estudo")>=0;
+  var texto="";var ehAmor=temas.indexOf("amor")>=0,ehCarreira=temas.indexOf("carreira")>=0;
+  var ehDinheiro=temas.indexOf("dinheiro")>=0,ehSaude=temas.indexOf("saude")>=0,ehEstudo=temas.indexOf("estudo")>=0;
   texto="<div style='margin-top:20px;padding:18px;border-radius:12px;background:rgba(212,168,83,0.12);border:2px solid "+cor+";text-align:center;font-family:Playfair Display,serif;'>";
-  texto+="<p style='font-size:0.85rem;color:var(--td);margin-bottom:8px;font-family:Open Sans,sans-serif;'>Sintese dos Arquétipos</p>";
+  texto+="<p style='font-size:0.85rem;color:var(--td);margin-bottom:8px;font-family:Open Sans,sans-serif;'>Sintese dos Arquetipos</p>";
   texto+="<p style='font-size:0.85rem;line-height:1.7;margin-bottom:12px;color:var(--tx);font-family:Open Sans,sans-serif;'>";
   texto+="Analisando todas as perspectivas — <strong>"+carta1.nm+"</strong> ("+e1+") representa "+s1.toLowerCase()+" com a luz de '"+l1+"', enquanto <strong>"+carta2.nm+"</strong> ("+e2+") representa "+s2.toLowerCase()+" com a luz de '"+l2+"' — ";
-  if(ehAmor)texto+="no campo afetivo, estas energias sugerem que o coração encontrará seu caminho com clareza e verdade.";
-  else if(ehCarreira)texto+="no âmbito profissional, estas forças indicam que o momento pede estratégia e movimento calculado.";
-  else if(ehDinheiro)texto+="no plano financeiro, estas cartas mostram potencial de crescimento aliado à prudência necessária.";
-  else if(ehSaude)texto+="no campo da saúde, estas energias apontam para renovação e cuidado com o equilíbrio.";
-  else if(ehEstudo)texto+="nos estudos, estas cartas favorecem o aprendizado com dedicação e método.";
+  if(ehAmor)texto+="no campo afetivo, estas energias sugerem que o coracao encontrara seu caminho com clareza e verdade.";
+  else if(ehCarreira)texto+="no âmbito profissional, estas forcas indicam que o momento pede estrategia e movimento calculado.";
+  else if(ehDinheiro)texto+="no plano financeiro, estas cartas mostram potencial de crescimento aliado a prudencia necessaria.";
+  else if(ehSaude)texto+="no campo da saude, estas energias apontam para renovacao e cuidado com o equilibrio.";
+  else if(ehEstudo)texto+="nos estudos, estas cartas favorecem o aprendizado com dedicacao e metodo.";
   else texto+="estas energias se complementam para trazer clareza ao seu questionamento.";
-  texto+="</p>";
-  texto+="<div style='font-size:2.5rem;font-weight:bold;color:"+cor+";margin:8px 0;'>"+resp+"</div>";
-  texto+="</div>";
+  texto+="</p><div style='font-size:2.5rem;font-weight:bold;color:"+cor+";margin:8px 0;'>"+resp+"</div></div>";
   return texto;
 }
 
 function gerarParagrafo2C(carta1,carta2,pergunta,modelo,temas){
   var m1=carta1.nm,m2=carta2.nm,e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
-  var s1=carta1.sg||"",s2=carta2.sg||"";
-  var l1=carta1.luz||"",l2=carta2.luz||"";
+  var s1=carta1.sg||"",s2=carta2.sg||"";var l1=carta1.luz||"",l2=carta2.luz||"";
   var sb1=carta1.sombra||"",sb2=carta2.sombra||"";
   var ehAmor=temas.indexOf("amor")>=0,ehCarreira=temas.indexOf("carreira")>=0;
-  var ehDinheiro=temas.indexOf("dinheiro")>=0,ehSaude=temas.indexOf("saude")>=0;
-  var ehEstudo=temas.indexOf("estudo")>=0;
+  var ehDinheiro=temas.indexOf("dinheiro")>=0,ehSaude=temas.indexOf("saude")>=0,ehEstudo=temas.indexOf("estudo")>=0;
   var txt="";
   if(modelo==="conselho"){
     txt="<strong>Conselho e Advertencia:</strong> A primeira carta <strong>"+m1+"</strong> ("+e1+") e seu Conselho: "+s1.toLowerCase()+" Sua luz e '"+l1+"'. A segunda carta <strong>"+m2+"</strong> ("+e2+") e a Advertencia: "+s2.toLowerCase()+" Sua sombra e '"+sb2+"'. ";
-    if(ehAmor)txt+="No amor, o conselho sugere canalizar "+e1+" para cultivar "+l1.toLowerCase()+", enquanto a advertencia alerta para "+sb2.toLowerCase()+". Equilibrar estas duas forcas e essencial para o coracao.";
-    else if(ehCarreira)txt+="Na carreira, siga a energia de "+e1+" ("+l1.toLowerCase()+"), mas atente ao alerta de "+sb2.toLowerCase()+". O sucesso profissional vem de equilibrar estas duas forcas.";
-    else if(ehDinheiro)txt+="Nas financas, o conselho favorece "+l1.toLowerCase()+" com "+e1+", mas a advertencia de "+e2+" pede cuidado com "+sb2.toLowerCase()+". Prosperidade com prudencia.";
-    else if(ehSaude)txt+="Na saude, o conselho e "+l1.toLowerCase()+" com "+e1+", enquanto a advertencia alerta para "+sb2.toLowerCase()+". O equilibrio e a chave.";
-    else if(ehEstudo)txt+="Nos estudos, o conselho e "+l1.toLowerCase()+" com "+e1+", e a advertencia e "+sb2.toLowerCase()+". Foco e disciplina.";
+    if(ehAmor)txt+="No amor, o conselho sugere canalizar "+e1+" para cultivar "+l1.toLowerCase()+", enquanto a advertencia alerta para "+sb2.toLowerCase()+".";
+    else if(ehCarreira)txt+="Na carreira, siga a energia de "+e1+" ("+l1.toLowerCase()+"), mas atente ao alerta de "+sb2.toLowerCase()+".";
+    else if(ehDinheiro)txt+="Nas financas, o conselho favorece "+l1.toLowerCase()+" com "+e1+", mas a advertencia de "+e2+" pede cuidado com "+sb2.toLowerCase()+".";
+    else if(ehSaude)txt+="Na saude, o conselho e "+l1.toLowerCase()+" com "+e1+", enquanto a advertencia alerta para "+sb2.toLowerCase()+".";
+    else if(ehEstudo)txt+="Nos estudos, o conselho e "+l1.toLowerCase()+" com "+e1+", e a advertencia e "+sb2.toLowerCase()+".";
     else txt+="Siga "+l1.toLowerCase()+" com "+e1+" mas evite "+sb2.toLowerCase()+" representado por "+e2+".";
-    txt+=" <strong style='color:"+(function(){if(e1=="Fogo"||e1=="Universal"||e2=="Fogo"||e2=="Universal")return"#2ecc71";return"#f39c12";})()+"'>Orientacao: Siga o conselho, evite a advertencia.</strong>";
   }
   else if(modelo==="situacao"){
     txt="<strong>Situacao e Informacao Adicional:</strong> "+(m1)+" ("+e1+") mostra sua Situacao Atual: "+s1.toLowerCase()+". Sua luz e '"+l1+"'. "+(m2)+" ("+e2+") traz uma Informacao Adicional: "+s2.toLowerCase()+". Sua luz e '"+l2+"'. ";
-    if(ehAmor)txt+="No amor, o cenario atual e de "+s1.toLowerCase()+" mas ha um detalhe oculto: "+s2.toLowerCase()+". Preste atencao ao que ainda nao esta claro — pode transformar sua percepcao.";
-    else if(ehCarreira)txt+="Na carreira, a situacao atual e "+s1.toLowerCase()+" e a informacao adicional revela "+s2.toLowerCase()+". Este detalhe pode mudar sua perspectiva profissional.";
-    else if(ehDinheiro)txt+="Nas financas, o momento e de "+s1.toLowerCase()+" e a informacao extra mostra "+s2.toLowerCase()+". Considere ambos antes de qualquer decisao financeira.";
-    else if(ehSaude)txt+="Na saude, o cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+". Os sinais estao ai — nao os ignore.";
-    else if(ehEstudo)txt+="Nos estudos, a situacao atual e "+s1.toLowerCase()+" e ha uma informacao extra: "+s2.toLowerCase()+". Isso pode fazer toda a diferenca no seu aprendizado.";
-    else txt+="O cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+". Ambos sao pecas-chave para sua reflexao.";
+    if(ehAmor)txt+="No amor, o cenario atual e de "+s1.toLowerCase()+" mas ha um detalhe oculto: "+s2.toLowerCase()+".";
+    else if(ehCarreira)txt+="Na carreira, a situacao atual e "+s1.toLowerCase()+" e a informacao adicional revela "+s2.toLowerCase()+".";
+    else if(ehDinheiro)txt+="Nas financas, o momento e de "+s1.toLowerCase()+" e a informacao extra mostra "+s2.toLowerCase()+".";
+    else if(ehSaude)txt+="Na saude, o cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+".";
+    else if(ehEstudo)txt+="Nos estudos, a situacao atual e "+s1.toLowerCase()+" e ha uma informacao extra: "+s2.toLowerCase()+".";
+    else txt+="O cenario e de "+s1.toLowerCase()+" com um detalhe adicional de "+s2.toLowerCase()+".";
   }
   else if(modelo==="caminho"){
     txt="<strong>Caminho A e Caminho B:</strong> "+(m1)+" ("+e1+") e o Caminho A: "+s1.toLowerCase()+". Sua luz e '"+l1+"' mas o alerta e "+sb1+". "+(m2)+" ("+e2+") e o Caminho B: "+s2.toLowerCase()+". Sua luz e '"+l2+"' mas o alerta e "+sb2+". ";
-    if(ehAmor)txt+="No amor, o Caminho A sugere "+l1.toLowerCase()+" e o Caminho B aponta para "+l2.toLowerCase()+". A escolha que mais ressoar com seu coracao sera a certa.";
-    else if(ehCarreira)txt+="Na carreira, o Caminho A e "+l1.toLowerCase()+" e o Caminho B e "+l2.toLowerCase()+". Analise qual deles faz mais sentido para seus objetivos profissionais.";
-    else if(ehDinheiro)txt+="Nas financas, o Caminho A representa "+l1.toLowerCase()+" e o Caminho B representa "+l2.toLowerCase()+". Pese os riscos e beneficios de cada rota.";
-    else txt+="O Caminho A convida a "+l1.toLowerCase()+" enquanto o Caminho B sugere "+l2.toLowerCase()+". Ambos tem meritos — reflita sobre qual se alinha com seus valores.";
+    if(ehAmor)txt+="No amor, o Caminho A sugere "+l1.toLowerCase()+" e o Caminho B aponta para "+l2.toLowerCase()+".";
+    else if(ehCarreira)txt+="Na carreira, o Caminho A e "+l1.toLowerCase()+" e o Caminho B e "+l2.toLowerCase()+".";
+    else if(ehDinheiro)txt+="Nas financas, o Caminho A representa "+l1.toLowerCase()+" e o Caminho B representa "+l2.toLowerCase()+".";
+    else txt+="O Caminho A convida a "+l1.toLowerCase()+" enquanto o Caminho B sugere "+l2.toLowerCase()+".";
   }
   else if(modelo==="desejo"){
     txt="<strong>Desejo Real vs Situacao Atual:</strong> "+(m1)+" ("+e1+") e seu Desejo Real: "+s1.toLowerCase()+". Sua luz e '"+l1+"'. "+(m2)+" ("+e2+") e sua Situacao Atual: "+s2.toLowerCase()+". Sua luz e '"+l2+"'. ";
-    if(ehAmor)txt+="No amor, seu desejo e "+s1.toLowerCase()+" mas a realidade e "+s2.toLowerCase()+". Aproximar estes dois polos e o caminho para a realizacao afetiva.";
-    else if(ehCarreira)txt+="Na carreira, voce deseja "+s1.toLowerCase()+" mas o momento e de "+s2.toLowerCase()+". Use "+e1+" como inspiracao e "+e2+" como aprendizado para crescer.";
-    else if(ehDinheiro)txt+="Nas financas, seu objetivo e "+s1.toLowerCase()+" mas a situacao atual e "+s2.toLowerCase()+". Equilibre ambicao com paciencia para prosperar.";
-    else if(ehSaude)txt+="Na saude, voce deseja "+s1.toLowerCase()+" mas sua realidade e "+s2.toLowerCase()+". Respeite seu tempo e seu processo de cura.";
-    else if(ehEstudo)txt+="Nos estudos, seu sonho e "+s1.toLowerCase()+" mas o momento pede "+s2.toLowerCase()+". Persistencia e constancia serao suas maiores aliadas.";
-    else txt+="Seu desejo aponta para "+l1.toLowerCase()+" e a realidade mostra "+l2.toLowerCase()+". Reconhecer esta diferenca e o primeiro passo para a transformacao.";
+    if(ehAmor)txt+="No amor, seu desejo e "+s1.toLowerCase()+" mas a realidade e "+s2.toLowerCase()+".";
+    else if(ehCarreira)txt+="Na carreira, voce deseja "+s1.toLowerCase()+" mas o momento e de "+s2.toLowerCase()+".";
+    else if(ehDinheiro)txt+="Nas financas, seu objetivo e "+s1.toLowerCase()+" mas a situacao atual e "+s2.toLowerCase()+".";
+    else if(ehSaude)txt+="Na saude, voce deseja "+s1.toLowerCase()+" mas sua realidade e "+s2.toLowerCase()+".";
+    else if(ehEstudo)txt+="Nos estudos, seu sonho e "+s1.toLowerCase()+" mas o momento pede "+s2.toLowerCase()+".";
+    else txt+="Seu desejo aponta para "+l1.toLowerCase()+" e a realidade mostra "+l2.toLowerCase()+".";
   }
   else if(modelo==="pessoa"){
     txt="<strong>Voce e o Outro:</strong> "+(m1)+" ("+e1+") e Voce: "+s1.toLowerCase()+". Sua luz e '"+l1+"'. "+(m2)+" ("+e2+") e o Outro: "+s2.toLowerCase()+". Sua luz e '"+l2+"'. ";
-    if(ehAmor)txt+="No amor, sua energia de "+e1+" encontra a energia de "+e2+" do outro. Voce traz "+l1.toLowerCase()+" e o outro oferece "+l2.toLowerCase()+". A sintonia entre estas forcas define a qualidade desta relacao.";
-    else if(ehCarreira)txt+="Na dinamica profissional, voce representa "+s1.toLowerCase()+" e o outro lado representa "+s2.toLowerCase()+". Encontrar harmonia entre estas energias e essencial.";
-    else txt+="Voce se apresenta com energia de "+e1+" ("+l1.toLowerCase()+") e o outro com energia de "+e2+" ("+l2.toLowerCase()+"). A interacao destas forcas define o rumo desta relacao.";
+    if(ehAmor)txt+="No amor, sua energia de "+e1+" encontra a energia de "+e2+" do outro. Voce traz "+l1.toLowerCase()+" e o outro oferece "+l2.toLowerCase()+".";
+    else if(ehCarreira)txt+="Na dinamica profissional, voce representa "+s1.toLowerCase()+" e o outro lado representa "+s2.toLowerCase()+".";
+    else txt+="Voce se apresenta com energia de "+e1+" ("+l1.toLowerCase()+") e o outro com energia de "+e2+" ("+l2.toLowerCase()+").";
   }
   return txt;
 }
 
 function gerarLeitura2Cartas(carta1,carta2,pergunta){
   var m1=carta1.nm,m2=carta2.nm,e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
-  var s1=carta1.sg||"",s2=carta2.sg||"";
-  var P=pergunta.toLowerCase();
+  var s1=carta1.sg||"",s2=carta2.sg||"";var P=pergunta.toLowerCase();
   var temas=["geral"];
   if(P.match(/amor|relacionamento|namoro|paixao|romance|casamento|solteiro|voltar|ex|ficante|novo amor/i))temas.push("amor");
   if(P.match(/carreira|trabalho|emprego|profissao|empresa|promocao|salario|vaga|entrevista|negocio|projeto|loja|chefe/i))temas.push("carreira");
@@ -391,8 +427,7 @@ function gerarLeitura2Cartas(carta1,carta2,pergunta){
   if(temDesejo)ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"desejo",temas));
   if(temPessoa)ps.push(gerarParagrafo2C(carta1,carta2,pergunta,"pessoa",temas));
   h+=ps.join('</div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">');
-  h+='</div>';
-  h+=gerarRespostaFinal(carta1,carta2,pergunta,temas);
+  h+='</div>';h+=gerarRespostaFinal(carta1,carta2,pergunta,temas);
   h+='<button class="btn" onclick="resetarTaro()">Nova Consulta</button></div>';
   document.getElementById("tr").innerHTML=h;
 }
@@ -409,8 +444,7 @@ function montarGrid78(cartas,pergunta){
 function fecharGrid78(){document.getElementById("grid-78-container").style.display="none";cartaEscolhida=null}
 
 function montarGrid2Cmaior(pergunta){
-  var g=document.getElementById("grid-2c-maior");g.innerHTML="";
-  var maior=[].concat(M).sort(function(){return Math.random()-0.5});
+  var g=document.getElementById("grid-2c-maior");g.innerHTML="";var maior=[].concat(M).sort(function(){return Math.random()-0.5});
   for(var i=0;i<maior.length;i++){(function(idx,carta){
     var d=document.createElement("div");d.className="card-2c cf";d.id="c2m-"+idx;
     d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone"></span><span class="vs-label">Maior '+(idx+1)+'</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||"")+'</span></div></div>';
@@ -419,8 +453,7 @@ function montarGrid2Cmaior(pergunta){
 }
 
 function montarGrid2Cmenor(pergunta){
-  var g=document.getElementById("grid-2c-menor");g.innerHTML="";
-  var menor=[].concat(MN).sort(function(){return Math.random()-0.5});
+  var g=document.getElementById("grid-2c-menor");g.innerHTML="";var menor=[].concat(MN).sort(function(){return Math.random()-0.5});
   for(var i=0;i<menor.length;i++){(function(idx,carta){
     var d=document.createElement("div");d.className="card-2c cf";d.id="c2mn-"+idx;
     d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone"></span><span class="vs-label">Menor '+(idx+1)+'</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||"")+'</span></div></div>';
@@ -429,8 +462,7 @@ function montarGrid2Cmenor(pergunta){
 
 function iniciarT(){
   var p=document.getElementById("tp").value.trim(),t=document.getElementById("tt").value;
-  if(!p) return to("Digite sua pergunta.");
-  cartaEscolhida=null;tipoSN=(t==="sn");resetar2C();
+  if(!p) return to("Digite sua pergunta.");cartaEscolhida=null;tipoSN=(t==="sn");resetar2C();
   document.getElementById("grid-78-container").style.display="none";document.getElementById("grid-78").innerHTML="";document.getElementById("tr").innerHTML="";
   if(t==="sn"){if(!gas(1))return;sl("btn-t",1);setTimeout(function(){var d=[].concat(DK).sort(function(){return Math.random()-0.5});montarGrid78(d,p);sl("btn-t",0);to("Escolha uma carta!");},300);return;}
   if(t==="2"){if(!gas(2))return;document.getElementById("grid-2c-container").style.display="block";document.getElementById("step-2c-maior").style.display="block";document.getElementById("step-2c-menor").style.display="none";sl("btn-t",1);setTimeout(function(){montarGrid2Cmaior(p);sl("btn-t",0);to("Escolha um Arcano Maior!");},300);return;}
