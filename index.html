@@ -178,6 +178,16 @@
         .signos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
         .signo-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
         .signo-btn:hover { border-color: var(--gold); background: var(--gold-dim); }
+        .sn-result {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        .sn-sim { color: #2ecc71; }
+        .sn-nao { color: #e74c3c; }
+        .sn-talvez { color: #f39c12; }
         @media (max-width: 768px) {
             .signos-grid { grid-template-columns: repeat(3, 1fr); }
             header { flex-direction: column; gap: 10px; }
@@ -194,7 +204,6 @@
         <div class="stats-bar">
             <div class="stat-item" onclick="abrirModal('modal-comprar')">🔮 <span id="user-credits">0</span> créditos</div>
             <div class="stat-item">🔥 <span id="user-streak">0</span> dias</div>
-            <div class="stat-item" onclick="abrirModal('modal-indicar')">👥 Indicar</div>
             <div class="stat-item" onclick="logout()" style="color: #ff4757;">Sair</div>
         </div>
     </header>
@@ -253,26 +262,38 @@
         <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 40px;">© 2026 Oraculum Astrale</p>
     </div>
 
-    <!-- MODAL TARÔ -->
+    <!-- MODAL TARÔ (com Sim ou Não ou Talvez integrado) -->
     <div id="modal-taro" class="modal">
         <div class="modal-content" style="max-width: 800px;">
             <span class="close-modal" onclick="fecharModal('modal-taro')">&times;</span>
             <h2>🔮 Tarô</h2>
             <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 10px;">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p>
 
-            <!-- Instrução com "objetiva" -->
-            <div id="desc-1carta" style="background: rgba(0,0,0,0.2); border-radius: 10px; padding: 12px; margin: 10px 0; border-left: 3px solid var(--gold);">
-                <p style="font-weight: 600; color: var(--gold); margin-bottom: 6px;">📖 Tiragem de 1 Carta</p>
-                <p style="font-size: 0.85rem;">Digite sua pergunta objetiva, clique em "Consultar" e escolha uma das 78 cartas.</p>
+            <div id="desc-sn" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);">
+                <p style="font-weight:600;color:var(--gold);margin-bottom:6px;">⚡ Sim ou Não ou Talvez</p>
+                <p style="font-size:0.85rem;">Digite sua pergunta objetiva, clique em "Consultar" e escolha uma das 78 cartas. A resposta será Sim, Não ou Talvez com uma explicação.</p>
+            </div>
+            <div id="desc-1carta" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);">
+                <p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Tiragem de 1 Carta</p>
+                <p style="font-size:0.85rem;">Digite sua pergunta objetiva, clique em "Consultar" e escolha uma das 78 cartas.</p>
+            </div>
+            <div id="desc-3cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);">
+                <p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Tiragem de 3 Cartas</p>
+                <p style="font-size:0.85rem;">Posições: Passado, Presente, Futuro.</p>
+            </div>
+            <div id="desc-5cartas" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);">
+                <p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📖 Tiragem de 5 Cartas</p>
+                <p style="font-size:0.85rem;">Posições: Situação, Obstáculo, Passado, Futuro, Desfecho.</p>
             </div>
 
             <input type="text" id="taro-pergunta" placeholder="Sua pergunta objetiva?">
-            <select id="taro-tipo">
-                <option value="1">1 Carta — 1 crédito</option>
-                <option value="3" selected>3 Cartas — 3 créditos</option>
-                <option value="5">5 Cartas — 5 créditos</option>
+            <select id="taro-tipo" onchange="atualizarDescricaoTaro()">
+                <option value="sn">⚡ Sim ou Não ou Talvez — 1 crédito</option>
+                <option value="1">📖 1 Carta — 1 crédito</option>
+                <option value="3" selected>📖 3 Cartas — 3 créditos</option>
+                <option value="5">📖 5 Cartas — 5 créditos</option>
             </select>
-            <p style="color: var(--text-dim); font-size: 0.85rem; margin: 10px 0;">Custa <strong style="color: var(--gold);">3</strong> créditos</p>
+            <p style="color: var(--text-dim); font-size: 0.85rem; margin: 10px 0;">Custa <strong style="color: var(--gold);" id="taro-custo">3</strong> créditos</p>
             <button class="btn" id="btn-taro" onclick="iniciarTaro()">Consultar</button>
             <div id="taro-resultado" style="margin-top: 15px;"></div>
         </div>
@@ -322,7 +343,6 @@
         var MN = gMn();
         var DK = [].concat(M, MN);
         var user = null;
-        var cartasEscolhidas = [];
 
         function navegar(id){
             document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('screen-active'); });
@@ -347,14 +367,10 @@
             if(el) el.style.display = 'none';
         }
 
-        // Fechar modal ao clicar fora
         document.addEventListener('click', function(e){
-            if(e.target.classList.contains('modal')){
-                e.target.style.display = 'none';
-            }
+            if(e.target.classList.contains('modal')) e.target.style.display = 'none';
         });
 
-        // Gerar estrelas
         (function(){
             var c = document.getElementById('stars-container');
             for(var i=0;i<100;i++){
@@ -371,7 +387,6 @@
             }
         })();
 
-        // Funções de usuário
         function register(){
             var n = document.getElementById('reg-name').value.trim();
             var e = document.getElementById('reg-email').value.trim();
@@ -406,27 +421,13 @@
             navegar('screen-welcome');
         }
 
-        function atualizarUI(){
-            if(!user) return;
-            document.getElementById('user-credits').innerText = user.creditos;
-            document.getElementById('user-streak').innerText = user.streak;
-        }
-
-        function atualizarStreak(){
-            var h = new Date().toISOString().split('T')[0];
-            if(user.ult !== h){
-                user.streak = 1;
-                user.ult = h;
-                salvarUser();
-            }
-        }
-
         function salvarUser(){
             if(!user) return;
             var u = JSON.parse(localStorage.getItem('oa_u') || '[]');
             var i = u.findIndex(function(v){ return v.email === user.email; });
             if(i >= 0){ u[i] = user; localStorage.setItem('oa_u', JSON.stringify(u)); }
-            atualizarUI();
+            document.getElementById('user-credits').innerText = user.creditos;
+            document.getElementById('user-streak').innerText = user.streak;
         }
 
         function gastarCredito(q){
@@ -440,6 +441,15 @@
             return false;
         }
 
+        function atualizarStreak(){
+            var h = new Date().toISOString().split('T')[0];
+            if(user.ult !== h){
+                user.streak = 1;
+                user.ult = h;
+                salvarUser();
+            }
+        }
+
         function carregarDashboard(){
             var n = user.nome.split(' ')[0];
             var h = new Date().getHours();
@@ -449,14 +459,209 @@
             document.getElementById('greeting').innerText = s + ', ' + n + '!';
             var frases = ["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio.","Sua intuição é a voz da sua alma."];
             document.getElementById('phrase').innerText = frases[Math.floor(Math.random()*frases.length)];
-            atualizarUI();
+            salvarUser();
+        }
+
+        function atualizarDescricaoTaro(){
+            var tipo = document.getElementById('taro-tipo').value;
+            document.getElementById('desc-sn').style.display = tipo === 'sn' ? 'block' : 'none';
+            document.getElementById('desc-1carta').style.display = tipo === '1' ? 'block' : 'none';
+            document.getElementById('desc-3cartas').style.display = tipo === '3' ? 'block' : 'none';
+            document.getElementById('desc-5cartas').style.display = tipo === '5' ? 'block' : 'none';
+            var custo = tipo === 'sn' ? 1 : (tipo === '1' ? 1 : (tipo === '3' ? 3 : 5));
+            document.getElementById('taro-custo').innerText = custo;
+        }
+
+        function gerarRespostaSN(carta, pergunta){
+            var respostas = ["Sim", "Não", "Talvez"];
+            var escolha = respostas[Math.floor(Math.random() * respostas.length)];
+            var nome = carta.nm;
+            var energia = carta.energia || "Universal";
+            var luz = carta.luz || carta.sg || "";
+            var sombra = carta.sombra || carta.in || "Momento de atenção";
+            var P = pergunta.toLowerCase();
+            var paragrafo = "";
+
+            if(P.match(/encontrar|encontra|ver |visitar|ir até/i) && P.match(/(talita|maria|joão|ana|carlos|pedro|ela|ele|alguém)/i)){
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " sugere que este encontro será guiado pelas emoções. Confie na sua intuição.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " indica que o diálogo será o ponto principal. Converse abertamente.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " aponta para algo sólido e estável. Pode ser um encontro significativo.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " traz paixão e iniciativa. É um bom sinal para agir.";
+                else paragrafo = "A carta " + nome + " sugere que este encontro pode trazer surpresas.";
+            }
+            else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|leilão|site|negócio|projeto/i)){
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " sugere que o sucesso virá pela sensibilidade e intuição. Permita que as coisas fluam.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " indica que o sucesso vem através do planejamento e da comunicação. Prepare-se bem.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " é um ótimo sinal para resultados concretos. Trabalho e paciência serão recompensados.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " indica força de vontade. Tenha cuidado para não queimar etapas.";
+                else paragrafo = "A carta " + nome + " indica que o resultado dependerá da sua dedicação.";
+            }
+            else if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|ficante|novo amor/i)){
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " no amor traz profundidade emocional. Confie no que o coração diz.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " no amor indica que o diálogo será essencial. Converse abertamente.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " no amor aponta para estabilidade e compromisso. Algo sólido pode surgir.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " no amor é paixão pura. O momento pede coragem.";
+                else paragrafo = "A carta " + nome + " no campo afetivo traz a energia de " + energia + ".";
+            }
+            else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i)){
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " na carreira sugere usar a intuição como guia.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " na carreira favorece o planejamento. Analise bem as opções.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " na carreira indica crescimento sólido. Continue com dedicação.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " na carreira significa liderança. Mostre seu valor.";
+                else paragrafo = "A carta " + nome + " na carreira sugere confiar no seu potencial.";
+            }
+            else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender/i)){
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " pede cautela com gastos impulsivos.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " favorece o planejamento financeiro. Organize-se.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " é excelente para finanças. Prosperidade e solidez.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " indica movimento financeiro, mas com cautela.";
+                else paragrafo = "A carta " + nome + " na área financeira indica a energia de " + energia + ".";
+            }
+            else if(P.match(/saúde|doença|cura|bem-estar|ansiedade|depressão|corpo|físico|mental/i)){
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " sugere cuidar das emoções para melhorar o bem-estar.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " indica que a mente precisa de paz. Meditar ajuda.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " pede cuidado com o corpo. Alimentação e exercícios são fundamentais.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " indica que você precisa equilibrar ação e descanso.";
+                else paragrafo = "A carta " + nome + " sugere atenção com seu bem-estar.";
+            }
+            else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i)){
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " sugere aprender no seu ritmo, com fluidez.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " é excelente para os estudos. Mente afiada e pronta para aprender.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " pede disciplina e método. Estude com regularidade.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " traz motivação. Cuidado para não se dispersar.";
+                else paragrafo = "A carta " + nome + " nos estudos canaliza a energia de " + energia + ".";
+            }
+            else {
+                if(energia == "Água") paragrafo = "A carta " + nome + " com energia de " + energia + " sugere que a resposta está na sua intuição. Ouça seus sentimentos.";
+                else if(energia == "Ar") paragrafo = "A carta " + nome + " com energia de " + energia + " indica que a resposta vem do conhecimento. Busque informação.";
+                else if(energia == "Terra") paragrafo = "A carta " + nome + " com energia de " + energia + " aponta para construção e solidez. Tenha paciência.";
+                else if(energia == "Fogo") paragrafo = "A carta " + nome + " com energia de " + energia + " sugere ação e iniciativa. Confie no seu impulso.";
+                else paragrafo = "A carta " + nome + " sugere que a resposta está no equilíbrio.";
+            }
+
+            var classe = "sn-sim";
+            if(escolha === "Não") classe = "sn-nao";
+            if(escolha === "Talvez") classe = "sn-talvez";
+
+            var h = '<div class="fade" style="text-align:left;">';
+            h += '<p style="color: var(--text-dim); font-style: italic; margin-bottom: 15px;">"' + pergunta + '"</p>';
+            h += '<div class="' + classe + ' sn-result">' + escolha + '</div>';
+            h += '<div class="tarot-card-item" style="margin-bottom:15px;">';
+            h += '<span class="tarot-card-name">' + carta.nm + '</span>';
+            h += '<span style="font-size:0.8rem;">' + (carta.energia ? carta.energia : "") + '</span>';
+            h += '</div>';
+            h += '<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;">';
+            h += '<strong>Resposta:</strong> ' + escolha + '. ' + paragrafo;
+            h += '</div></div>';
+            return h;
+        }
+
+        function gerarLeitura1Carta(carta, pergunta){
+            var nome=carta.nm,energia=carta.energia||"Universal",luz=carta.luz||carta.sg||"",sombra=carta.sombra||carta.in||"Momento de atenção";
+            var P=pergunta.toLowerCase(),resposta="";
+            var nomePessoa="";
+            var mn=P.match(/(talita|maria|joão|ana|carlos|pedro|josé|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguém)/i);
+            if(mn)nomePessoa=mn[0].charAt(0).toUpperCase()+mn[0].slice(1).toLowerCase();
+
+            if(nomePessoa&&P.match(/encontrar|encontra|ver |visitar|ir até|encontro com/i)){
+                if(energia=="Água")resposta="Sim, é provável que seja um encontro significativo! "+nome+" é uma carta de energia de "+energia+", indicando que encontrar "+nomePessoa+" hoje será guiado pelas emoções e pela sensibilidade. Pode ser um reencontro profundo, onde olhares e gestos dirão mais que discursos. Confie na sua intuição e permita-se sentir cada instante — a conexão pode ser mais especial do que você imagina.";
+                else if(energia=="Ar")resposta="Sim, tende a ser um bom encontro! "+nome+" é uma carta de energia de "+energia+", sinalizando que encontrar "+nomePessoa+" hoje será marcado por boas conversas e trocas de ideias. O Ar favorece a comunicação clara e sincera. É um bom momento para alinhar expectativas e colocar o papo em dia. Vá com a mente aberta e esteja disposto a ouvir.";
+                else if(energia=="Terra")resposta="Sim, é um ótimo sinal! "+nome+" é uma carta de energia de "+energia+", e isso indica que encontrar "+nomePessoa+" hoje pode ser algo sólido e significativo. A energia de Terra traz estabilidade e segurança — um encontro para construir ou fortalecer laços importantes. Aproveite cada momento com presença e autenticidade.";
+                else if(energia=="Fogo")resposta="Sim, tem grandes chances de dar certo! "+nome+" é uma carta de energia de "+energia+", e isso é um sinal muito positivo. O Fogo traz paixão, iniciativa e coragem. Vá em frente com o coração aberto e deixe que sua autenticidade brilhe.";
+                else resposta="Talvez. "+nome+" sugere que encontrar "+nomePessoa+" hoje pode trazer surpresas. Confie no momento.";
+            }
+            else if(P.match(/sucesso|suceder|vou conseguir|vai dar certo|resultado|futuro|prosperar|dar certo|crescimento|leilão|site|negócio|loja|projeto|empreendimento/i)){
+                if(energia=="Água")resposta="Sim, mas de forma natural e fluida. "+nome+" é uma carta de energia de "+energia+", sugerindo que o sucesso virá pela sensibilidade e intuição. Nem tudo precisa ser forçado — permita que as coisas fluam.";
+                else if(energia=="Ar")resposta="Sim, desde que você se prepare bem. "+nome+" é uma carta de energia de "+energia+", indicando que o sucesso vem através do conhecimento, da estratégia e da comunicação. Planeje cada passo.";
+                else if(energia=="Terra")resposta="Sim, é um dos melhores sinais para resultados concretos! "+nome+" é uma carta de energia de "+energia+", e isso é muito positivo. O trabalho dedicado e a paciência serão recompensados.";
+                else if(energia=="Fogo")resposta="Sim, tem boas perspectivas! "+nome+" é uma carta de energia de "+energia+", indicando força de vontade. Mas atenção: evite queimar etapas.";
+                else resposta="Talvez. "+nome+" indica que o sucesso está ao seu alcance, mas exige dedicação.";
+            }
+            else if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|ficante|beijar|novo amor/i)){
+                if(energia=="Água")resposta="Sim, tem grandes possibilidades! "+nome+" é uma carta de energia de "+energia+", e no amor isso é emoção e profundidade. Permita-se sentir e confie no que o coração aponta.";
+                else if(energia=="Ar")resposta="Talvez, depende do diálogo. "+nome+" é uma carta de energia de "+energia+", e no amor isso significa comunicação. Converse abertamente sobre seus sentimentos.";
+                else if(energia=="Terra")resposta="Sim, e tende a ser algo sólido! "+nome+" é uma carta de energia de "+energia+", e no amor isso é estabilidade e compromisso.";
+                else if(energia=="Fogo")resposta="Sim, é intenso! "+nome+" é uma carta de energia de "+energia+", e no amor isso é paixão pura. O momento é agora — o amor pede coragem.";
+                else resposta="Talvez. "+nome+" no campo afetivo traz a energia de "+energia+". Confie nos seus sentimentos.";
+            }
+            else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista|chefe|contratar|demissão/i)){
+                if(energia=="Água")resposta="Sim, mas com sensibilidade. "+nome+" é uma carta de energia de "+energia+", e na carreira isso sugere que a intuição será sua maior aliada.";
+                else if(energia=="Ar")resposta="Sim, desde que você planeje bem. "+nome+" é uma carta de energia de "+energia+", e na carreira isso é estratégia. Analise as opções e pesquise.";
+                else if(energia=="Terra")resposta="Sim, é um ótimo sinal! "+nome+" é uma carta de energia de "+energia+", indicando crescimento sólido. Continue construindo com paciência.";
+                else if(energia=="Fogo")resposta="Sim, é um bom momento para agir! "+nome+" é uma carta de energia de "+energia+", significando liderança e iniciativa. Mostre seu valor.";
+                else resposta="Talvez. "+nome+" na carreira sugere a energia de "+energia+". Confie no seu potencial.";
+            }
+            else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender|gastar|cartão|crédito/i)){
+                if(energia=="Água")resposta="Cuidado, evite decisões impulsivas. "+nome+" é uma carta de energia de "+energia+", e nas finanças isso pede atenção às emoções. O dinheiro pede racionalidade.";
+                else if(energia=="Ar")resposta="Sim, mas organize-se primeiro. "+nome+" é uma carta de energia de "+energia+", favorecendo o planejamento. Faça planilhas e revise seus gastos.";
+                else if(energia=="Terra")resposta="Sim, é um dos melhores sinais para as finanças! "+nome+" é uma carta de energia de "+energia+", indicando prosperidade e crescimento material.";
+                else if(energia=="Fogo")resposta="Sim, mas com cautela. "+nome+" é uma carta de energia de "+energia+", indicando movimento. Busque novas fontes de renda, mas evite gastos precipitados.";
+                else resposta="Talvez. "+nome+" na área financeira indica a energia de "+energia+". Planeje-se com sabedoria.";
+            }
+            else if(P.match(/saúde|doença|tratamento|cura|bem-estar|ansiedade|depressão|corpo|físico|mental|dormir|sono|alimentação|exercício/i)){
+                if(energia=="Água")resposta="Sim, cuide mais das suas emoções. "+nome+" é uma carta de energia de "+energia+", e na saúde isso aponta para o cuidado com o emocional.";
+                else if(energia=="Ar")resposta="Sim, mas sua mente precisa de paz. "+nome+" é uma carta de energia de "+energia+", indicando que o estresse pode estar afetando seu corpo. Medite e respire.";
+                else if(energia=="Terra")resposta="Sim, é um chamado para cuidar do corpo. "+nome+" é uma carta de energia de "+energia+". Alimentação e exercício são fundamentais.";
+                else if(energia=="Fogo")resposta="Cuidado, precisa de equilíbrio. "+nome+" é uma carta de energia de "+energia+". Você tem energia, mas o excesso sem descanso leva ao esgotamento.";
+                else resposta="Talvez. "+nome+" na saúde sugere atenção com seu bem-estar.";
+            }
+            else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|professor|matéria|livro|ler|estudar|nota|enem/i)){
+                if(energia=="Água")resposta="Sim, no seu ritmo. "+nome+" é uma carta de energia de "+energia+", sugerindo um aprendizado mais fluido. Estude sem pressão.";
+                else if(energia=="Ar")resposta="Sim, é muito favorável! "+nome+" é uma carta de energia de "+energia+", excelente para os estudos. Sua mente está afiada e pronta para aprender.";
+                else if(energia=="Terra")resposta="Sim, com disciplina e método. "+nome+" é uma carta de energia de "+energia+", pedindo rotina e dedicação. Estude com regularidade.";
+                else if(energia=="Fogo")resposta="Sim, mas com disciplina. "+nome+" é uma carta de energia de "+energia+", trazendo motivação. Cuidado para não se dispersar.";
+                else resposta="Talvez. "+nome+" nos estudos canaliza a energia de "+energia+". Exige dedicação.";
+            }
+            else {
+                if(energia=="Água")resposta="Talvez, confie na sua intuição. "+nome+" é uma carta de energia de "+energia+", sugerindo que a resposta vem pela escuta interior.";
+                else if(energia=="Ar")resposta="Sim, busque conhecimento. "+nome+" é uma carta de energia de "+energia+", apontando que a resposta está na informação e na comunicação.";
+                else if(energia=="Terra")resposta="Sim, com paciência e perseverança. "+nome+" é uma carta de energia de "+energia+", indicando que a resposta envolve construção e solidez.";
+                else if(energia=="Fogo")resposta="Sim, é hora de agir! "+nome+" é uma carta de energia de "+energia+", indicando que a resposta envolve ação e iniciativa. Confie no seu impulso.";
+                else resposta="Talvez. "+nome+" com energia de "+energia+" sugere que a resposta está no equilíbrio e na confiança no fluxo natural da vida.";
+            }
+
+            var h='<div class="fade" style="text-align:left;">';
+            h+='<p style="color:var(--text-dim);font-style:italic;margin-bottom:15px;">"'+pergunta+'"</p>';
+            h+='<h3 style="font-family:Playfair Display;font-size:1.3rem;color:var(--gold);margin-bottom:10px;text-align:center;">O Arquétipo do(a) '+nome+'</h3>';
+            h+='<p style="font-size:0.9rem;line-height:1.7;margin-bottom:10px;">A carta <strong>'+nome+'</strong> representa <strong>'+energia+'</strong>. '+luz+'.</p>';
+            h+='<p style="font-size:0.9rem;line-height:1.7;margin-bottom:10px;"><strong>⚠️ O alerta:</strong> '+sombra+'.</p>';
+            h+='<h4 style="font-family:Playfair Display;font-size:1.1rem;color:var(--gold);margin:12px 0 6px;">🔮 Conexão com sua pergunta</h4>';
+            h+='<p style="font-size:0.9rem;line-height:1.7;margin-bottom:8px;">Você perguntou: <strong>'+pergunta+'</strong>. A energia de <strong>'+nome+'</strong> ('+energia+') atua diretamente nessa área.</p>';
+            h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;">';
+            h+='<strong>📿 Resposta do Tarô:</strong> '+resposta;
+            h+='</div></div>';
+            return h;
+        }
+
+        function gerarRespostaMultiplas(cartas, posicoes){
+            var h = '<div class="tarot-result-grid">';
+            for(var i=0;i<cartas.length;i++){
+                h += '<div class="tarot-card-item">';
+                if(posicoes[i]) h += '<span style="font-size:0.7rem;color:var(--text-dim);display:block;">' + posicoes[i] + '</span>';
+                h += '<span class="tarot-card-name">' + cartas[i].nm + '</span>';
+                h += '<span style="font-size:0.8rem;">' + cartas[i].sg + '</span>';
+                h += '</div>';
+            }
+            h += '</div>';
+            return h;
         }
 
         function iniciarTaro(){
             var p = document.getElementById('taro-pergunta').value.trim();
-            var t = document.getElementById('taro-tipo').value;
-            if(!p) return mostrarToast('Digite sua pergunta.');
-            var q = parseInt(t);
+            var tipo = document.getElementById('taro-tipo').value;
+            if(!p) return mostrarToast('Digite sua pergunta objetiva.');
+
+            if(tipo === 'sn'){
+                if(!gastarCredito(1)) return;
+                var d = [].concat(DK).sort(function(){ return Math.random()-0.5; });
+                var carta = d[0];
+                var h = gerarRespostaSN(carta, p);
+                document.getElementById('taro-resultado').innerHTML = h;
+                mostrarToast('Sim ou Não ou Talvez — carta revelada!');
+                return;
+            }
+
+            var q = parseInt(tipo);
             if(!gastarCredito(q)) return;
 
             var d = [].concat(DK).sort(function(){ return Math.random()-0.5; });
@@ -464,18 +669,21 @@
             var posicoes = {1:[],3:["Passado","Presente","Futuro"],5:["Situação","Obstáculo","Passado","Futuro","Desfecho"]};
             var pos = posicoes[q] || [];
 
-            var h = '<p style="color: var(--text-dim); font-style: italic; margin-bottom: 15px;">"' + p + '"</p><div class="tarot-result-grid">';
-            for(var i=0;i<cartas.length;i++){
-                h += '<div class="tarot-card-item">';
-                if(pos[i]) h += '<span style="font-size:0.7rem;color:var(--text-dim);display:block;">' + pos[i] + '</span>';
-                h += '<span class="tarot-card-name">' + cartas[i].nm + '</span>';
-                h += '<span style="font-size:0.8rem;">' + cartas[i].sg + '</span>';
-                h += '</div>';
+            if(q === 1){
+                var h = gerarLeitura1Carta(cartas[0], p);
+                document.getElementById('taro-resultado').innerHTML = h;
+            } else {
+                var h = '<p style="color: var(--text-dim); font-style: italic; margin-bottom: 15px;">"' + p + '"</p>';
+                h += gerarRespostaMultiplas(cartas, pos);
+                document.getElementById('taro-resultado').innerHTML = h;
             }
-            h += '</div>';
-            document.getElementById('taro-resultado').innerHTML = h;
             mostrarToast('Cartas lançadas!');
         }
+
+        // Inicializa descrição ao carregar
+        document.addEventListener('DOMContentLoaded', function(){
+            atualizarDescricaoTaro();
+        });
     </script>
 </body>
 </html>
