@@ -19,38 +19,176 @@
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, var(--bg-deep), var(--bg-glow)); color: var(--text-main); min-height: 100vh; overflow-x: hidden; line-height: 1.6; }
-        #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--duration) infinite ease-in-out; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-deep), var(--bg-glow));
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        #stars-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 10px; }
-        .screen { position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh; padding: 20px; opacity: 0; pointer-events: none; transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .screen-active { opacity: 1; pointer-events: all; position: relative; }
-        #screen-welcome { background: url('Tela-Inicial.png') center/cover no-repeat; }
-        .card { background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; width: 100%; max-width: 450px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; }
+        .screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; min-height: 100vh;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .screen-active {
+            opacity: 1;
+            pointer-events: all;
+            position: relative;
+        }
+        #screen-welcome, #screen-login, #screen-register, #screen-dashboard {
+            background: url('Tela-Inicial.png') center/cover no-repeat;
+        }
+        #screen-dashboard { background-attachment: fixed; }
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
         .card:hover { transform: scale(1.01); }
         h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--gold); }
-        .btn { background: var(--gold); color: #000; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-top: 10px; }
+        .btn {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            margin-top: 10px;
+        }
         .btn:hover { background: #f1c40f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 168, 83, 0.3); }
         .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff; outline: none; }
-        header { width: 100%; padding: 15px 5%; display: none; justify-content: space-between; align-items: center; background: rgba(10, 0, 21, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--gold-dim); }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+        }
+        header {
+            width: 100%;
+            padding: 15px 5%;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 0, 21, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gold-dim);
+        }
         .stats-bar { display: flex; gap: 20px; font-size: 0.9rem; }
         .stat-item { cursor: pointer; color: var(--gold); }
-        .main-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; padding: 40px 0; }
-        .section-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 15px; padding: 25px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+        .section-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
         .section-card:hover { border-color: var(--gold); background: rgba(212, 168, 83, 0.05); }
         .section-card i { font-size: 2.5rem; display: block; margin-bottom: 15px; }
-        #toast { position: fixed; top: 20px; right: 20px; background: var(--gold); color: #000; padding: 12px 25px; border-radius: 8px; font-weight: 600; transform: translateX(200%); transition: 0.5s; z-index: 1000; }
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-        .modal-content { background: var(--bg-glow); border: 1px solid var(--gold); border-radius: 20px; padding: 30px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
+        #toast {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: var(--gold);
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transform: translateX(200%);
+            transition: 0.5s;
+            z-index: 1000;
+        }
+        .typewriter { overflow: hidden; border-right: .15em solid var(--gold); white-space: nowrap; margin: 0 auto; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold); } }
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        .modal-content {
+            background: var(--bg-glow);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--gold); }
+        .tarot-result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+        .tarot-card-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid var(--gold-dim); text-align: center; }
+        .tarot-card-name { font-weight: bold; color: var(--gold); margin-bottom: 10px; display: block; }
         .signos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
         .signo-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
         .signo-btn:hover { border-color: var(--gold); background: var(--gold-dim); }
-        @media (max-width: 768px) { .signos-grid { grid-template-columns: repeat(3, 1fr); } header { flex-direction: column; gap: 10px; } }
+        @media (max-width: 768px) {
+            .signos-grid { grid-template-columns: repeat(3, 1fr); }
+            header { flex-direction: column; gap: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -113,33 +251,251 @@
     <div id="modal-indicar" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-indicar')">&times;</span><h2>👥 Indicar Amigo</h2><p style="color: var(--text-dim);">Compartilhe o link e ganhe 5 créditos por cada amigo que se cadastrar!</p><input type="text" id="indicated-email" placeholder="E-mail do amigo"><button class="btn" onclick="indicarAmigo()">Enviar Convite</button></div></div>
     <div id="modal-cartadodia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-cartadodia')">&times;</span><h2>🃏 Sua Carta do Dia</h2><div id="carta-result" style="text-align: center; margin-top: 20px;"></div></div></div>
 <script>
-const signos = [{id:"aries",nome:"Áries",icon:"♈",amor:"Iniciativa.",carreira:"Liderança.",saude:"Hidrate-se."},{id:"touro",nome:"Touro",icon:"♉",amor:"Estabilidade.",carreira:"Finanças.",saude:"Natureza."},{id:"gemeos",nome:"Gêmeos",icon:"♊",amor:"Comunicação.",carreira:"Networking.",saude:"Menos telas."},{id:"cancer",nome:"Câncer",icon:"♋",amor:"Família.",carreira:"Empatia.",saude:"Alimentos leves."},{id:"leao",nome:"Leão",icon:"♌",amor:"Brilho.",carreira:"Reconhecimento.",saude:"Exercícios."},{id:"virgem",nome:"Virgem",icon:"♍",amor:"Sinta.",carreira:"Organização.",saude:"Autocuidado."},{id:"libra",nome:"Libra",icon:"♎",amor:"Equilíbrio.",carreira:"Parcerias.",saude:"Alongamento."},{id:"escorpiao",nome:"Escorpião",icon:"♏",amor:"Intensidade.",carreira:"Intuição.",saude:"Hidratação."},{id:"sagitario",nome:"Sagitário",icon:"♐",amor:"Aventura.",carreira:"Expansão.",saude:"Ar livre."},{id:"capricornio",nome:"Capricórnio",icon:"♑",amor:"Lealdade.",carreira:"Dedicação.",saude:"Cuidado."},{id:"aquario",nome:"Aquário",icon:"♒",amor:"Liberdade.",carreira:"Inovação.",saude:"Meditação."},{id:"peixes",nome:"Peixes",icon:"♓",amor:"Romantismo.",carreira:"Intuição.",saude:"Descanso."}];
-const frases = ["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A resposta está no silêncio.","Sua intuição é a voz da sua alma."];
-const sonhos = {agua:"Suas emoções.",cobra:"Transformação.",dente:"Ansiedade.",bebe:"Novos começos.",morte:"Fim de ciclo.",voar:"Liberdade."};
+const signos = [
+    { id: "aries", nome: "Áries", icon: "♈", amor: "Iniciativa.", carreira: "Liderança.", saude: "Hidrate-se." },
+    { id: "touro", nome: "Touro", icon: "♉", amor: "Estabilidade.", carreira: "Finanças.", saude: "Natureza." },
+    { id: "gemeos", nome: "Gêmeos", icon: "♊", amor: "Comunicação.", carreira: "Networking.", saude: "Menos telas." },
+    { id: "cancer", nome: "Câncer", icon: "♋", amor: "Família.", carreira: "Empatia.", saude: "Alimentos leves." },
+    { id: "leao", nome: "Leão", icon: "♌", amor: "Brilho.", carreira: "Reconhecimento.", saude: "Exercícios." },
+    { id: "virgem", nome: "Virgem", icon: "♍", amor: "Sinta.", carreira: "Organização.", saude: "Autocuidado." },
+    { id: "libra", nome: "Libra", icon: "♎", amor: "Equilíbrio.", carreira: "Parcerias.", saude: "Alongamento." },
+    { id: "escorpiao", nome: "Escorpião", icon: "♏", amor: "Intensidade.", carreira: "Intuição.", saude: "Hidratação." },
+    { id: "sagitario", nome: "Sagitário", icon: "♐", amor: "Aventura.", carreira: "Expansão.", saude: "Ar livre." },
+    { id: "capricornio", nome: "Capricórnio", icon: "♑", amor: "Lealdade.", carreira: "Dedicação.", saude: "Cuidado." },
+    { id: "aquario", nome: "Aquário", icon: "♒", amor: "Liberdade.", carreira: "Inovação.", saude: "Meditação." },
+    { id: "peixes", nome: "Peixes", icon: "♓", amor: "Romantismo.", carreira: "Intuição.", saude: "Descanso." }
+];
+const frases = [
+    "O universo conspira a favor de quem conhece a si mesmo.",
+    "As estrelas inclinam, mas não obrigam.",
+    "O que você busca também está buscando você.",
+    "A resposta está no silêncio.",
+    "Sua intuição é a voz da sua alma."
+];
+const sonhos = {
+    agua: "Suas emoções.",
+    cobra: "Transformação.",
+    dente: "Ansiedade.",
+    bebe: "Novos começos.",
+    morte: "Fim de ciclo.",
+    voar: "Liberdade."
+};
 let user = null;
-function navegar(tela) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('screen-active')); document.getElementById(tela).classList.add('screen-active'); document.getElementById('main-header').style.display = tela === 'screen-dashboard' ? 'flex' : 'none'; }
-function toast(mensagem) { const t = document.getElementById('toast'); t.textContent = mensagem; t.style.transform = 'translateX(0)'; setTimeout(() => t.style.transform = 'translateX(200%)', 3000); }
+function navegar(tela) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('screen-active'));
+    document.getElementById(tela).classList.add('screen-active');
+    document.getElementById('main-header').style.display = tela === 'screen-dashboard' ? 'flex' : 'none';
+}
+function toast(mensagem) {
+    const t = document.getElementById('toast');
+    t.textContent = mensagem;
+    t.style.transform = 'translateX(0)';
+    setTimeout(() => t.style.transform = 'translateX(200%)', 3000);
+}
 function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
 function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); });
-document.addEventListener('click', e => { if (e.target.classList.contains('modal')) e.target.style.display = 'none'; });
-function fazerLogin() { const email = document.getElementById('login-email').value.trim(); const senha = document.getElementById('login-password').value; if (!email || !senha) return toast('Preencha todos os campos.'); const usuarios = JSON.parse(localStorage.getItem('oa_usuarios') || '[]'); const encontrado = usuarios.find(u => u.email === email && u.senha === senha); if (!encontrado) return toast('E-mail ou senha incorretos.'); user = encontrado; user.ultimoAcesso = new Date().toISOString().split('T')[0]; localStorage.setItem('oa_usuarios', JSON.stringify(usuarios)); atualizarStreak(); carregarDashboard(); navegar('screen-dashboard'); toast('Bem-vindo(a), ' + user.nome.split(' ')[0] + '!'); }
-function fazerCadastro() { const nome = document.getElementById('reg-name').value.trim(); if (nome.length < 3) return toast('Nome deve ter no mínimo 3 caracteres.'); const cpf = document.getElementById('reg-cpf').value.replace(/\D/g, ''); if (cpf.length !== 11) return toast('CPF inválido.'); const email = document.getElementById('reg-email').value.trim(); if (!email || !email.includes('@')) return toast('E-mail inválido.'); const senha = document.getElementById('reg-password').value; const confirmar = document.getElementById('reg-confirm').value; if (senha.length < 6) return toast('Senha deve ter no mínimo 6 caracteres.'); if (senha !== confirmar) return toast('Senhas não conferem.'); const usuarios = JSON.parse(localStorage.getItem('oa_usuarios') || '[]'); if (usuarios.find(u => u.email === email)) return toast('E-mail já cadastrado.'); usuarios.push({ nome, email, senha, cpf, creditos: 5, streak: 1, ultimoAcesso: new Date().toISOString().split('T')[0] }); localStorage.setItem('oa_usuarios', JSON.stringify(usuarios)); toast('Conta criada! +5 créditos.'); navegar('screen-login'); }
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+});
+document.addEventListener('click', e => {
+    if (e.target.classList.contains('modal')) e.target.style.display = 'none';
+});
+function fazerLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const senha = document.getElementById('login-password').value;
+    if (!email || !senha) return toast('Preencha todos os campos.');
+    const usuarios = JSON.parse(localStorage.getItem('oa_usuarios') || '[]');
+    const encontrado = usuarios.find(u => u.email === email && u.senha === senha);
+    if (!encontrado) return toast('E-mail ou senha incorretos.');
+    user = encontrado;
+    user.ultimoAcesso = new Date().toISOString().split('T')[0];
+    localStorage.setItem('oa_usuarios', JSON.stringify(usuarios));
+    atualizarStreak();
+    carregarDashboard();
+    navegar('screen-dashboard');
+    toast('Bem-vindo(a), ' + user.nome.split(' ')[0] + '!');
+}
+function fazerCadastro() {
+    const nome = document.getElementById('reg-name').value.trim();
+    if (nome.length < 3) return toast('Nome deve ter no mínimo 3 caracteres.');
+    const cpf = document.getElementById('reg-cpf').value.replace(/\D/g, '');
+    if (cpf.length !== 11) return toast('CPF inválido.');
+    const email = document.getElementById('reg-email').value.trim();
+    if (!email || !email.includes('@')) return toast('E-mail inválido.');
+    const senha = document.getElementById('reg-password').value;
+    const confirmar = document.getElementById('reg-confirm').value;
+    if (senha.length < 6) return toast('Senha deve ter no mínimo 6 caracteres.');
+    if (senha !== confirmar) return toast('Senhas não conferem.');
+    const usuarios = JSON.parse(localStorage.getItem('oa_usuarios') || '[]');
+    if (usuarios.find(u => u.email === email)) return toast('E-mail já cadastrado.');
+    usuarios.push({ nome, email, senha, cpf, creditos: 5, streak: 1, ultimoAcesso: new Date().toISOString().split('T')[0] });
+    localStorage.setItem('oa_usuarios', JSON.stringify(usuarios));
+    toast('Conta criada! +5 créditos.');
+    navegar('screen-login');
+}
 function logout() { user = null; navegar('screen-welcome'); }
-function atualizarStreak() { if (!user) return; const hoje = new Date().toISOString().split('T')[0]; if (user.ultimoAcesso !== hoje) user.streak = 1; document.getElementById('user-streak').textContent = user.streak; }
-function carregarDashboard() { document.getElementById('dashboard-greeting').textContent = 'Bem-vindo(a), ' + user.nome.split(' ')[0] + '!'; document.getElementById('dashboard-phrase').textContent = frases[Math.floor(Math.random() * frases.length)]; document.getElementById('user-credits').textContent = user.creditos; const secoes = [{icon:'🃏',titulo:'Carta do Dia',desc:'Grátis diária',modal:'modal-cartadodia'},{icon:'☀️',titulo:'Horóscopo',desc:'Previsões',modal:'modal-horoscopo'},{icon:'🔮',titulo:'Tarô',desc:'Respostas + Leitura',modal:'modal-tarot'},{icon:'🔢',titulo:'Numerologia',desc:'Caminho de vida',modal:'modal-numerologia'},{icon:'☯️',titulo:'I Ching',desc:'Sabedoria',modal:'modal-iching'},{icon:'⚡',titulo:'Sim/Não',desc:'Rápido',modal:'modal-simnao'},{icon:'📖',titulo:'Sonhos',desc:'Interpretação',modal:'modal-sonhos'},{icon:'💘',titulo:'Compatibilidade',desc:'Amor',modal:'modal-compatibilidade'}]; const grid = document.getElementById('dashboard-grid'); grid.innerHTML = secoes.map(s => `<div class="section-card" onclick="abrirModal('${s.modal}')"><i>${s.icon}</i><h3>${s.titulo}</h3><p style="color: var(--text-dim); font-size: 0.8rem;">${s.desc}</p></div>`).join(''); const signosGrid = document.getElementById('signos-grid'); signosGrid.innerHTML = signos.map(s => `<div class="signo-btn" onclick="mostrarHoroscopo('${s.id}')">${s.icon} ${s.nome}</div>`).join(''); ['compat-signo1','compat-signo2'].forEach(id => { const sel = document.getElementById(id); sel.innerHTML = '<option value="">Selecionar</option>' + signos.map(s => `<option value="${s.id}">${s.nome} ${s.icon}</option>`).join(''); }); }
-function mostrarHoroscopo(id) { const signo = signos.find(s => s.id === id); if (!signo) return; document.getElementById('horoscopo-result').innerHTML = `<h3>${signo.icon} ${signo.nome}</h3><p><strong>❤️ Amor:</strong> ${signo.amor}</p><p><strong>💼 Carreira:</strong> ${signo.carreira}</p><p><strong>🌿 Bem-estar:</strong> ${signo.saude}</p>`; document.getElementById('horoscopo-result').style.display = 'block'; }
-function verCompatibilidade() { const s1 = document.getElementById('compat-signo1').value; const s2 = document.getElementById('compat-signo2').value; if (!s1 || !s2 || s1 === s2) return toast('Selecione signos diferentes.'); const pct = Math.floor(Math.random() * 60) + 35; const msg = pct >= 85 ? 'Almas gêmeas!' : pct >= 70 ? 'Grande afinidade!' : pct >= 50 ? 'Atração de opostos.' : 'Energias distintas.'; document.getElementById('compat-result').innerHTML = `<div style="font-size: 2.5rem; color: var(--gold);">${pct}%</div><p>${msg}</p>`; }
-function buscarSonho() { const busca = document.getElementById('sonho-busca').value.toLowerCase().trim(); const div = document.getElementById('sonho-result'); div.innerHTML = ''; if (busca.length < 2) return; for (const [chave, valor] of Object.entries(sonhos)) { if (chave.includes(busca)) { div.innerHTML += `<div style="margin-bottom: 10px; border-bottom: 1px solid var(--gold-dim); padding-bottom: 8px;"><span style="color: var(--gold); font-weight: bold;">${chave}:</span> ${valor}</div>`; } } }
-function perguntarSimNao() { const pergunta = document.getElementById('simnao-question').value.trim(); if (!pergunta || !user || user.creditos < 1) return toast('Créditos insuficientes.'); user.creditos--; document.getElementById('user-credits').textContent = user.creditos; const respostas = ['Sim', 'Não', 'Talvez', 'Com certeza', 'Não é momento', 'As estrelas dizem sim']; document.getElementById('simnao-result').innerHTML = respostas[Math.floor(Math.random() * respostas.length)]; }
-function calcularNumerologia() { const data = document.getElementById('nascimento-data').value; if (!data || !user || user.creditos < 2) return toast('Créditos insuficientes.'); user.creditos -= 2; document.getElementById('user-credits').textContent = user.creditos; const nums = data.replace(/-/g, '').split('').map(Number); let soma = nums.reduce((a, b) => a + b, 0); while (soma > 9 && soma !== 11 && soma !== 22) { soma = String(soma).split('').map(Number).reduce((a, b) => a + b, 0); } const mapas = {1:'Líder',2:'Diplomata',3:'Comunicador',4:'Construtor',5:'Viajante',6:'Protetor',7:'Sábio',8:'Executivo',9:'Humanitário',11:'Mestre Intuitivo',22:'Mestre Construtor'}; document.getElementById('numerologia-result').innerHTML = `<div style="font-size: 3rem; color: var(--gold);">${soma}</div><h3>Caminho de Vida</h3><p>${mapas[soma] || 'Especial'}</p>`; }
-function consultarIChing() { const pergunta = document.getElementById('iching-question').value.trim(); if (!pergunta || !user || user.creditos < 2) return toast('Créditos insuficientes.'); user.creditos -= 2; document.getElementById('user-credits').textContent = user.creditos; document.getElementById('iching-result').innerHTML = '<div class="fade"><h3>Hexagrama 1: O Criativo</h3><p>Força criativa.</p></div>'; }
-function indicarAmigo() { const email = document.getElementById('indicated-email').value.trim(); if (!email) return toast('Digite um e-mail.'); toast('Convite enviado para ' + email); }
-function atualizarTarotTipo() { const tipo = document.getElementById('tarot-type').value; const custos = {sn:1,'2cartas':2,'3cartas':3,'5cartas':5}; document.getElementById('tarot-cost').textContent = custos[tipo]; }
-function iniciarTarot() { const pergunta = document.getElementById('tarot-question').value.trim(); if (!pergunta) return toast('Digite sua pergunta.'); const tipo = document.getElementById('tarot-type').value; const custos = {sn:1,'2cartas':2,'3cartas':3,'5cartas':5}; if (!user || user.creditos < custos[tipo]) return toast('Créditos insuficientes.'); user.creditos -= custos[tipo]; document.getElementById('user-credits').textContent = user.creditos; document.getElementById('tarot-result').innerHTML = '<p style="color: var(--gold);">🔮 Consultando os arquétipos...</p>'; setTimeout(() => { document.getElementById('tarot-result').innerHTML = `<div style="background: rgba(212,168,83,0.08); border-radius: 10px; padding: 14px; border-left: 3px solid var(--gold);"><p style="font-style: italic; color: var(--text-dim);">"${pergunta}"</p><p style="margin-top: 10px;">As cartas revelam que o momento pede reflexão e equilíbrio. Confie na sua intuição para encontrar a resposta.</p></div><button class="btn" onclick="document.getElementById('tarot-result').innerHTML=''" style="margin-top: 10px;">Nova Consulta</button>`; }, 1500); }
-const M = [{n:0,nm:"O Louco",sg:"Aventura e novos começos.",luz:"Liberdade e otimismo",energia:"Universal"},{n:1,nm:"O Mago",sg:"Poder e manifestação.",luz:"Talento e foco",energia:"Fogo"},{n:2,nm:"A Sacerdotisa",sg:"Intuição e mistério.",luz:"Sabedoria interior",energia:"Água"},{n:3,nm:"A Imperatriz",sg:"Feminilidade e abundância.",luz:"Beleza e conforto",energia:"Terra"},{n:4,nm:"O Imperador",sg:"Autoridade e estrutura.",luz:"Poder e estabilidade",energia:"Fogo"},{n:5,nm:"O Hierofante",sg:"Tradição e ensinamento.",luz:"Mentoria e tradição",energia:"Terra"},{n:6,nm:"Os Enamorados",sg:"Amor e escolhas.",luz:"Amor e harmonia",energia:"Ar"},{n:7,nm:"O Carro",sg:"Vitória e determinação.",luz:"Determinação e controle",energia:"Fogo"},{n:8,nm:"A Força",sg:"Coragem interior.",luz:"Força interior",energia:"Fogo"},{n:9,nm:"O Eremita",sg:"Introspecção e sabedoria.",luz:"Sabedoria interior",energia:"Terra"},{n:10,nm:"Roda da Fortuna",sg:"Ciclos e mudanças.",luz:"Sorte e renovação",energia:"Universal"},{n:11,nm:"A Justiça",sg:"Equilíbrio e verdade.",luz:"Equidade e honestidade",energia:"Ar"},{n:12,nm:"O Pendurado",sg:"Pausa e sacrifício.",luz:"Nova visão",energia:"Água"},{n:13,nm:"A Morte",sg:"Transformação profunda.",luz:"Renovação total",energia:"Água"},{n:14,nm:"A Temperança",sg:"Equilíbrio e moderação.",luz:"Harmonia e serenidade",energia:"Universal"},{n:15,nm:"O Diabo",sg:"Sombra e desejo.",luz:"Paixão e prazer",energia:"Terra"},{n:16,nm:"A Torre",sg:"Ruptura e revelação.",luz:"Despertar e verdade",energia:"Fogo"},{n:17,nm:"A Estrela",sg:"Esperança e cura.",luz:"Fé e esperança",energia:"Água"},{n:18,nm:"A Lua",sg:"Ilusão e medo.",luz:"Intuição e sonhos",energia:"Água"},{n:19,nm:"O Sol",sg:"Alegria e sucesso.",luz:"Vitalidade e alegria",energia:"Fogo"},{n:20,nm:"Julgamento",sg:"Renascimento.",luz:"Perdão e renovação",energia:"Fogo"},{n:21,nm:"O Mundo",sg:"Conclusão e realização.",luz:"Plenitude e sucesso",energia:"Terra"}];
-function gerarCarta() { const h = new Date().toISOString().split('T')[0]; const chave = 'carta_' + user.email; if (localStorage.getItem(chave) === h) { return document.getElementById('carta-result').innerHTML = '<p style="color: var(--text-dim);">Já consultou hoje. Volte amanhã!</p>'; } localStorage.setItem(chave, h); const carta = M[Math.floor(Math.random() * M.length)]; document.getElementById('carta-result').innerHTML = `<div class="fade"><h3>${carta.nm}</h3><p>"${carta.sg}"</p></div>`; }
-(() => { const container = document.getElementById('stars-container'); for (let i = 0; i < 100; i++) { const star = document.createElement('div'); star.className = 'star'; const size = Math.random() * 3 + 1; star.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--duration:${Math.random()*3+2}s;animation-delay:${Math.random()*5}s`; container.appendChild(star); } })();
+function atualizarStreak() {
+    if (!user) return;
+    const hoje = new Date().toISOString().split('T')[0];
+    if (user.ultimoAcesso !== hoje) user.streak = 1;
+    document.getElementById('user-streak').textContent = user.streak;
+}
+function carregarDashboard() {
+    document.getElementById('dashboard-greeting').textContent = 'Bem-vindo(a), ' + user.nome.split(' ')[0] + '!';
+    document.getElementById('dashboard-phrase').textContent = frases[Math.floor(Math.random() * frases.length)];
+    document.getElementById('user-credits').textContent = user.creditos;
+    const secoes = [
+        { icon: '🃏', titulo: 'Carta do Dia', desc: 'Grátis diária', modal: 'modal-cartadodia' },
+        { icon: '☀️', titulo: 'Horóscopo', desc: 'Previsões', modal: 'modal-horoscopo' },
+        { icon: '🔮', titulo: 'Tarô', desc: 'Respostas + Leitura', modal: 'modal-tarot' },
+        { icon: '🔢', titulo: 'Numerologia', desc: 'Caminho de vida', modal: 'modal-numerologia' },
+        { icon: '☯️', titulo: 'I Ching', desc: 'Sabedoria', modal: 'modal-iching' },
+        { icon: '⚡', titulo: 'Sim/Não', desc: 'Rápido', modal: 'modal-simnao' },
+        { icon: '📖', titulo: 'Sonhos', desc: 'Interpretação', modal: 'modal-sonhos' },
+        { icon: '💘', titulo: 'Compatibilidade', desc: 'Amor', modal: 'modal-compatibilidade' }
+    ];
+    const grid = document.getElementById('dashboard-grid');
+    grid.innerHTML = secoes.map(s => `
+        <div class="section-card" onclick="abrirModal('${s.modal}')">
+            <i>${s.icon}</i>
+            <h3>${s.titulo}</h3>
+            <p style="color: var(--text-dim); font-size: 0.8rem;">${s.desc}</p>
+        </div>
+    `).join('');
+    const signosGrid = document.getElementById('signos-grid');
+    signosGrid.innerHTML = signos.map(s => `
+        <div class="signo-btn" onclick="mostrarHoroscopo('${s.id}')">${s.icon} ${s.nome}</div>
+    `).join('');
+    ['compat-signo1', 'compat-signo2'].forEach(id => {
+        const sel = document.getElementById(id);
+        sel.innerHTML = '<option value="">Selecionar</option>' + signos.map(s => `<option value="${s.id}">${s.nome} ${s.icon}</option>`).join('');
+    });
+}
+function mostrarHoroscopo(id) {
+    const signo = signos.find(s => s.id === id);
+    if (!signo) return;
+    document.getElementById('horoscopo-result').innerHTML = `
+        <h3>${signo.icon} ${signo.nome}</h3>
+        <p><strong>❤️ Amor:</strong> ${signo.amor}</p>
+        <p><strong>💼 Carreira:</strong> ${signo.carreira}</p>
+        <p><strong>🌿 Bem-estar:</strong> ${signo.saude}</p>
+    `;
+    document.getElementById('horoscopo-result').style.display = 'block';
+}
+function verCompatibilidade() {
+    const s1 = document.getElementById('compat-signo1').value;
+    const s2 = document.getElementById('compat-signo2').value;
+    if (!s1 || !s2 || s1 === s2) return toast('Selecione signos diferentes.');
+    const pct = Math.floor(Math.random() * 60) + 35;
+    const msg = pct >= 85 ? 'Almas gêmeas!' : pct >= 70 ? 'Grande afinidade!' : pct >= 50 ? 'Atração de opostos.' : 'Energias distintas.';
+    document.getElementById('compat-result').innerHTML = `<div style="font-size: 2.5rem; color: var(--gold);">${pct}%</div><p>${msg}</p>`;
+}
+function buscarSonho() {
+    const busca = document.getElementById('sonho-busca').value.toLowerCase().trim();
+    const div = document.getElementById('sonho-result');
+    div.innerHTML = '';
+    if (busca.length < 2) return;
+    for (const [chave, valor] of Object.entries(sonhos)) {
+        if (chave.includes(busca)) {
+            div.innerHTML += `<div style="margin-bottom: 10px; border-bottom: 1px solid var(--gold-dim); padding-bottom: 8px;"><span style="color: var(--gold); font-weight: bold;">${chave}:</span> ${valor}</div>`;
+        }
+    }
+}
+function perguntarSimNao() {
+    const pergunta = document.getElementById('simnao-question').value.trim();
+    if (!pergunta || !user || user.creditos < 1) return toast('Créditos insuficientes.');
+    user.creditos--;
+    document.getElementById('user-credits').textContent = user.creditos;
+    const respostas = ['Sim', 'Não', 'Talvez', 'Com certeza', 'Não é momento', 'As estrelas dizem sim'];
+    document.getElementById('simnao-result').innerHTML = respostas[Math.floor(Math.random() * respostas.length)];
+}
+function calcularNumerologia() {
+    const data = document.getElementById('nascimento-data').value;
+    if (!data || !user || user.creditos < 2) return toast('Créditos insuficientes.');
+    user.creditos -= 2;
+    document.getElementById('user-credits').textContent = user.creditos;
+    const nums = data.replace(/-/g, '').split('').map(Number);
+    let soma = nums.reduce((a, b) => a + b, 0);
+    while (soma > 9 && soma !== 11 && soma !== 22) {
+        soma = String(soma).split('').map(Number).reduce((a, b) => a + b, 0);
+    }
+    const mapas = { 1: 'Líder', 2: 'Diplomata', 3: 'Comunicador', 4: 'Construtor', 5: 'Viajante', 6: 'Protetor', 7: 'Sábio', 8: 'Executivo', 9: 'Humanitário', 11: 'Mestre Intuitivo', 22: 'Mestre Construtor' };
+    document.getElementById('numerologia-result').innerHTML = `<div style="font-size: 3rem; color: var(--gold);">${soma}</div><h3>Caminho de Vida</h3><p>${mapas[soma] || 'Especial'}</p>`;
+}
+function consultarIChing() {
+    const pergunta = document.getElementById('iching-question').value.trim();
+    if (!pergunta || !user || user.creditos < 2) return toast('Créditos insuficientes.');
+    user.creditos -= 2;
+    document.getElementById('user-credits').textContent = user.creditos;
+    document.getElementById('iching-result').innerHTML = '<div class="fade"><h3>Hexagrama 1: O Criativo</h3><p>Força criativa.</p></div>';
+}
+function indicarAmigo() {
+    const email = document.getElementById('indicated-email').value.trim();
+    if (!email) return toast('Digite um e-mail.');
+    toast('Convite enviado para ' + email);
+}
+function atualizarTarotTipo() {
+    const tipo = document.getElementById('tarot-type').value;
+    const custos = { sn: 1, '2cartas': 2, '3cartas': 3, '5cartas': 5 };
+    document.getElementById('tarot-cost').textContent = custos[tipo];
+}
+function iniciarTarot() {
+    const pergunta = document.getElementById('tarot-question').value.trim();
+    if (!pergunta) return toast('Digite sua pergunta.');
+    const tipo = document.getElementById('tarot-type').value;
+    const custos = { sn: 1, '2cartas': 2, '3cartas': 3, '5cartas': 5 };
+    if (!user || user.creditos < custos[tipo]) return toast('Créditos insuficientes.');
+    user.creditos -= custos[tipo];
+    document.getElementById('user-credits').textContent = user.creditos;
+    document.getElementById('tarot-result').innerHTML = '<p style="color: var(--gold);">🔮 Consultando os arquétipos...</p>';
+    setTimeout(() => {
+        document.getElementById('tarot-result').innerHTML = `<div style="background: rgba(212,168,83,0.08); border-radius: 10px; padding: 14px; border-left: 3px solid var(--gold);"><p style="font-style: italic; color: var(--text-dim);">"${pergunta}"</p><p style="margin-top: 10px;">As cartas revelam que o momento pede reflexão e equilíbrio. Confie na sua intuição para encontrar a resposta.</p></div><button class="btn" onclick="document.getElementById('tarot-result').innerHTML=''" style="margin-top: 10px;">Nova Consulta</button>`;
+    }, 1500);
+}
+const M = [
+    { n: 0, nm: "O Louco", sg: "Aventura e novos começos.", luz: "Liberdade e otimismo", energia: "Universal" },
+    { n: 1, nm: "O Mago", sg: "Poder e manifestação.", luz: "Talento e foco", energia: "Fogo" },
+    { n: 2, nm: "A Sacerdotisa", sg: "Intuição e mistério.", luz: "Sabedoria interior", energia: "Água" },
+    { n: 3, nm: "A Imperatriz", sg: "Feminilidade e abundância.", luz: "Beleza e conforto", energia: "Terra" },
+    { n: 4, nm: "O Imperador", sg: "Autoridade e estrutura.", luz: "Poder e estabilidade", energia: "Fogo" },
+    { n: 5, nm: "O Hierofante", sg: "Tradição e ensinamento.", luz: "Mentoria e tradição", energia: "Terra" },
+    { n: 6, nm: "Os Enamorados", sg: "Amor e escolhas.", luz: "Amor e harmonia", energia: "Ar" },
+    { n: 7, nm: "O Carro", sg: "Vitória e determinação.", luz: "Determinação e controle", energia: "Fogo" },
+    { n: 8, nm: "A Força", sg: "Coragem interior.", luz: "Força interior", energia: "Fogo" },
+    { n: 9, nm: "O Eremita", sg: "Introspecção e sabedoria.", luz: "Sabedoria interior", energia: "Terra" },
+    { n: 10, nm: "Roda da Fortuna", sg: "Ciclos e mudanças.", luz: "Sorte e renovação", energia: "Universal" },
+    { n: 11, nm: "A Justiça", sg: "Equilíbrio e verdade.", luz: "Equidade e honestidade", energia: "Ar" },
+    { n: 12, nm: "O Pendurado", sg: "Pausa e sacrifício.", luz: "Nova visão", energia: "Água" },
+    { n: 13, nm: "A Morte", sg: "Transformação profunda.", luz: "Renovação total", energia: "Água" },
+    { n: 14, nm: "A Temperança", sg: "Equilíbrio e moderação.", luz: "Harmonia e serenidade", energia: "Universal" },
+    { n: 15, nm: "O Diabo", sg: "Sombra e desejo.", luz: "Paixão e prazer", energia: "Terra" },
+    { n: 16, nm: "A Torre", sg: "Ruptura e revelação.", luz: "Despertar e verdade", energia: "Fogo" },
+    { n: 17, nm: "A Estrela", sg: "Esperança e cura.", luz: "Fé e esperança", energia: "Água" },
+    { n: 18, nm: "A Lua", sg: "Ilusão e medo.", luz: "Intuição e sonhos", energia: "Água" },
+    { n: 19, nm: "O Sol", sg: "Alegria e sucesso.", luz: "Vitalidade e alegria", energia: "Fogo" },
+    { n: 20, nm: "Julgamento", sg: "Renascimento.", luz: "Perdão e renovação", energia: "Fogo" },
+    { n: 21, nm: "O Mundo", sg: "Conclusão e realização.", luz: "Plenitude e sucesso", energia: "Terra" }
+];
+function gerarCarta() {
+    const h = new Date().toISOString().split('T')[0];
+    const chave = 'carta_' + user.email;
+    if (localStorage.getItem(chave) === h) {
+        return document.getElementById('carta-result').innerHTML = '<p style="color: var(--text-dim);">Já consultou hoje. Volte amanhã!</p>';
+    }
+    localStorage.setItem(chave, h);
+    const carta = M[Math.floor(Math.random() * M.length)];
+    document.getElementById('carta-result').innerHTML = `<div class="fade"><h3>${carta.nm}</h3><p>"${carta.sg}"</p></div>`;
+}
+(() => {
+    const container = document.getElementById('stars-container');
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 3 + 1;
+        star.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--duration:${Math.random()*3+2}s;animation-delay:${Math.random()*5}s`;
+        container.appendChild(star);
+    }
+})();
 </script>
 </body>
 </html>
