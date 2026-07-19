@@ -73,10 +73,17 @@
             position: relative;
         }
 
-        #screen-welcome, #screen-login, #screen-register, #screen-dashboard {
-            background: url('Tela-Inicial.png') center/cover no-repeat;
+        #screen-welcome {
+            background: url('Generatedimage_1784437099450.png') center/cover no-repeat;
         }
-        #screen-dashboard { background-attachment: fixed; }
+
+        #screen-login, #screen-register, #screen-dashboard {
+            background: url('Tela-Outros.png') center/cover no-repeat;
+        }
+
+        #screen-dashboard {
+            background-attachment: fixed;
+        }
 
         .card {
             background: var(--glass);
@@ -234,6 +241,7 @@
         </div>
     </header>
 
+    <!-- TELA WELCOME -->
     <div id="screen-welcome" class="screen screen-active">
         <div style="font-size: 5rem; margin-bottom: 10px;">🔮</div>
         <h1 style="font-size: 3.5rem; margin-bottom: 10px;">Oraculum Astrale</h1>
@@ -244,6 +252,7 @@
         </div>
     </div>
 
+    <!-- TELA LOGIN -->
     <div id="screen-login" class="screen">
         <div class="card">
             <h2>Entrar</h2>
@@ -255,6 +264,7 @@
         </div>
     </div>
 
+    <!-- TELA CADASTRO -->
     <div id="screen-register" class="screen">
         <div class="card">
             <h2>Criar Conta</h2>
@@ -269,12 +279,14 @@
         </div>
     </div>
 
+    <!-- TELA DASHBOARD -->
     <div id="screen-dashboard" class="screen">
         <h2 id="dashboard-greeting" style="font-size: 2.2rem;">Bem-vindo(a), Viajante</h2>
         <p id="dashboard-phrase" style="color: var(--text-dim); font-style: italic; margin-bottom: 30px;"></p>
         <div class="main-grid" id="dashboard-grid"></div>
     </div>
 
+    <!-- MODAIS -->
     <div id="modal-tarot" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-tarot')">&times;</span><h2>🔮 Tarô</h2><p style="color: var(--text-dim);">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p><input type="text" id="tarot-question" placeholder="Sua pergunta objetiva?"><select id="tarot-type" onchange="atualizarTarotTipo()"><option value="sn">⚡ Sim ou Não — 1 crédito</option><option value="2cartas" selected>📖 2 Cartas — 2 créditos</option><option value="3cartas">📖 3 Cartas — 3 créditos</option><option value="5cartas">📖 5 Cartas — 5 créditos</option></select><p style="margin-top: 10px; color: var(--text-dim); font-size: 0.85rem;">Custa <strong style="color: var(--gold);" id="tarot-cost">2</strong> créditos</p><button class="btn" id="btn-tarot" onclick="iniciarTarot()">Consultar</button><div id="tarot-result" style="margin-top: 15px;"></div></div></div>
     <div id="modal-horoscopo" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-horoscopo')">&times;</span><h2>☀️ Horóscopo do Dia</h2><p style="color: var(--text-dim);">Selecione seu signo:</p><div class="signos-grid" id="signos-grid"></div><div id="horoscopo-result" style="margin-top: 20px; display: none;"></div></div></div>
     <div id="modal-numerologia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-numerologia')">&times;</span><h2>🔢 Numerologia</h2><input type="date" id="nascimento-data"><button class="btn" onclick="calcularNumerologia()">Calcular (2 créditos)</button><div id="numerologia-result" style="margin-top: 15px;"></div></div></div>
