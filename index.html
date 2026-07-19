@@ -94,9 +94,6 @@ select option{background:#1a0030;color:#e8e0f0}
 .card-78 .vs-icone{font-size:1.2rem;margin-bottom:2px}
 .card-78 .vs-label{font-size:0.45rem}
 .card-78 .cf-verso{background:linear-gradient(135deg,#1a0530,#2a1040);border:1.5px solid var(--gdd)}
-.hr{margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px}
-.hr p{margin:6px 0;font-size:0.85rem;font-family:'Open Sans',sans-serif}
-.rd{width:100%;text-align:center;padding:20px;color:var(--td);font-size:0.85rem;margin-top:40px;font-family:'Playfair Display',serif}
 .g2c{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin:10px 0;max-height:500px;overflow-y:auto;padding:4px}
 .card-2c{perspective:600px;min-height:70px;cursor:pointer}
 .card-2c .cf-inner{height:70px}
@@ -106,6 +103,14 @@ select option{background:#1a0030;color:#e8e0f0}
 .card-2c .vs-icone{font-size:1.3rem;margin-bottom:2px}
 .card-2c .vs-label{font-size:0.5rem}
 .card-2c .cf-verso{background:linear-gradient(135deg,#1a0530,#2a1040);border:1.5px solid var(--gdd)}
+.lc{margin-top:20px;border-top:2px solid var(--gold);padding-top:20px}
+.lc p{font-size:0.9rem;line-height:1.7;margin-bottom:10px;font-family:'Open Sans',sans-serif}
+.li{background:rgba(0,0,0,0.2);border-radius:10px;padding:15px;margin:10px 0}
+.li h4{color:var(--gold);margin-bottom:5px;font-family:'Playfair Display',serif;font-size:1.2rem}
+.li p{font-size:0.85rem;margin:4px 0;font-family:'Open Sans',sans-serif}
+.hr{margin-top:15px;border-top:1px solid var(--gdd);padding-top:15px}
+.hr p{margin:6px 0;font-size:0.85rem;font-family:'Open Sans',sans-serif}
+.rd{width:100%;text-align:center;padding:20px;color:var(--td);font-size:0.85rem;margin-top:40px;font-family:'Playfair Display',serif}
 @media(max-width:768px){.sb{width:180px;min-width:180px}.gs2{grid-template-columns:repeat(3,1fr)}.gs{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}.grid-78{grid-template-columns:repeat(4,1fr);max-height:300px}.g2c{grid-template-columns:repeat(4,1fr);max-height:400px}}
 @media(max-width:480px){.sb{width:100%;min-width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:5px}.sb-t,.sb-s{display:none}.sb-i{padding:6px 10px;font-size:0.7rem}.gs2{grid-template-columns:repeat(2,1fr)}.gs{grid-template-columns:1fr}.grid-78{grid-template-columns:repeat(3,1fr);max-height:260px}.g2c{grid-template-columns:repeat(3,1fr);max-height:350px}}
 </style>
@@ -177,7 +182,6 @@ select option{background:#1a0030;color:#e8e0f0}
 <div id="mc" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mc')">&times;</button><h2>Sua Carta do Dia</h2><div id="cdr" class="ct mt20"><p class="dim">Conecte-se com sua energia.</p><button class="btn" onclick="rc()">Revelar</button></div></div></div>
 <div id="mh" class="modal"><div class="modal-c"><button class="fm" onclick="fM('mh')">&times;</button><h2>Horóscopo do Dia</h2><p class="dim">Selecione seu signo:</p><div class="gs2" id="gs2"></div><div id="hr" class="hr" style="display:none;"><h3 id="hsn">Signo</h3><p><strong>❤️ Amor:</strong> <span id="ham"></span></p><p><strong>💼 Carreira:</strong> <span id="hca"></span></p><p><strong>🌿 Bem-estar:</strong> <span id="hsa"></span></p></div></div></div>
 
-<!-- MODAL TARÔ -->
 <div id="mt" class="modal"><div class="modal-c modal-l">
   <button class="fm" onclick="fM('mt');fecharGrid78();resetar2C()">&times;</button>
   <h2>🔮 Tarô</h2>
@@ -198,7 +202,7 @@ select option{background:#1a0030;color:#e8e0f0}
   <p class="dim mt10" id="tcl">Custa <strong class="gold" id="tcl-valor">2</strong> créditos</p>
   <button class="btn" id="btn-t" onclick="iniciarT()">Consultar</button>
 
-  <div id="grid-78-container" style="display:none;"><p class="pl mt10" style="font-size:0.85rem;color:var(--td);margin-bottom:8px;font-style:italic;font-family:'Open Sans',sans-serif;">🔮 Escolha uma das 78 cartas abaixo clicando nela:</p><div id="grid-78" class="grid-78"></div></div>
+  <div id="grid-78-container" style="display:none;"><p style="font-size:0.85rem;color:var(--td);margin-bottom:8px;font-style:italic;font-family:'Open Sans',sans-serif;">🔮 Escolha uma das 78 cartas abaixo clicando nela:</p><div id="grid-78" class="grid-78"></div></div>
   <div id="grid-2c-container" style="display:none;">
     <div id="step-2c-maior"><p style="font-size:0.85rem;color:var(--td);margin-bottom:8px;font-family:'Open Sans',sans-serif;">🔮 Passo 1 — Escolha 1 Arcano Maior entre 22 cartas:</p><div id="grid-2c-maior" class="g2c"></div></div>
     <div id="step-2c-menor" style="display:none;"><p style="font-size:0.85rem;color:var(--td);margin-bottom:8px;font-family:'Open Sans',sans-serif;">📜 Passo 2 — Escolha 1 Arcano Menor entre 56 cartas:</p><div id="grid-2c-menor" class="g2c"></div></div>
@@ -335,63 +339,107 @@ function gerarRespostaSN(carta, pergunta){
   return '<div class="fade" style="text-align:left;"><p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p><div style="font-size:2.8rem;font-weight:bold;font-family:Playfair Display,serif;text-align:center;margin:15px 0;color:'+cor+';">'+escolha+'</div><div style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid var(--gdd);text-align:center;margin-bottom:15px;"><span style="font-weight:bold;color:var(--gold);display:block;font-family:Playfair Display,serif;font-size:1.1rem;">'+nome+'</span><span style="font-size:0.85rem;color:var(--td);">'+energia+' — '+sg+'</span></div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:16px;margin:10px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;"><strong>📿 Explicação:</strong> '+paragrafo+'</div><button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button></div>';
 }
 
+// ===== FUNÇÃO CORRIGIDA - 2 CARTAS =====
 function gerarLeitura2Cartas(carta1, carta2, pergunta){
-  var modelos=[
-    {nome:"Conselho e Advertência",pos1:"Conselho",pos2:"Advertência"},
-    {nome:"Situação e Informação Adicional",pos1:"Situação",pos2:"Informação Adicional"},
-    {nome:"Caminho A e Caminho B",pos1:"Caminho A",pos2:"Caminho B"},
-    {nome:"Desejo Real vs Situação Atual",pos1:"Desejo Real",pos2:"Situação Atual"},
-    {nome:"Você e o Outro",pos1:"Você",pos2:"O Outro"}
-  ];
-  var modelo=modelos[Math.floor(Math.random()*modelos.length)];
   var m1=carta1.nm,m2=carta2.nm,e1=carta1.energia||"Universal",e2=carta2.energia||"Universal";
   var s1=carta1.sg||"",s2=carta2.sg||"";
-  var P=pergunta.toLowerCase(),paragrafo="";
-  var tema="geral";
-  if(P.match(/encontrar|encontra|visitar|ir até|encontro com/i)&&P.match(/(talita|maria|joão|ana|carlos|pedro|ela|ele|alguém)/i))tema="encontro";
-  else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|leilão|site|negócio|projeto/i))tema="sucesso";
-  else if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|novo amor/i))tema="amor";
-  else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i))tema="carreira";
-  else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender/i))tema="dinheiro";
-  else if(P.match(/saúde|doença|cura|bem-estar|ansiedade|depressão|corpo|físico|mental/i))tema="saúde";
-  else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i))tema="estudo";
+  var P=pergunta.toLowerCase();
+  var paragrafos=[];
 
-  paragrafo="Na leitura de <strong>"+modelo.nome+"</strong>, ";
-  if(modelo.nome==="Conselho e Advertência"){
-    paragrafo+="a primeira carta foi <strong>"+m1+"</strong> ("+e1+"), que representa o " + modelo.pos1 + ": " + s1.toLowerCase() + " Já a segunda carta foi <strong>"+m2+"</strong> ("+e2+"), que atua como " + modelo.pos2 + ": " + s2.toLowerCase() + " ";
-    if(tema==="amor")paragrafo+="No campo afetivo, este par sugere que você siga o conselho da primeira carta mas fique atento aos alertas da segunda para não se deixar levar por ilusões.";
-    else if(tema==="sucesso")paragrafo+="Para o sucesso, a primeira carta indica o caminho a seguir, enquanto a segunda aponta os riscos que você deve evitar neste momento.";
-    else if(tema==="carreira")paragrafo+="Na carreira, o conselho da primeira carta mostra seu potencial, mas a advertência da segunda pede cuidado com decisões precipitadas.";
-    else paragrafo+="Juntas, elas indicam que você deve seguir a orientação da primeira carta, mas sem ignorar os sinais de alerta trazidos pela segunda.";
+  // --- MODELO 1: CONSELHO E ADVERTÊNCIA (sempre ativo) ---
+  var p1="";
+  p1+="No modelo <strong>Conselho e Advertência</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando o <strong>Conselho</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando a <strong>Advertência</strong>: "+s2.toLowerCase()+" ";
+  if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|solteiro|voltar|ex|ficante|novo amor/i)){
+    p1+="No campo afetivo, o conselho sugere que você "+s1.toLowerCase()+" Porém a advertência alerta: "+s2.toLowerCase()+" Siga a orientação da primeira, mas fique atento à precaução da segunda para não repetir padrões que já não funcionam.";
+  } else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|leilão|site|negócio|projeto|empreendimento|carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i)){
+    p1+="Na sua questão profissional, o conselho indica: "+s1.toLowerCase()+" Já a advertência recomenda cuidado: "+s2.toLowerCase()+" A melhor estratégia é seguir a orientação da primeira carta sem ignorar os alertas da segunda.";
+  } else if(P.match(/dinheiro|finança|investimento|dívida|economia|receita|lucro|comprar|vender|gastar/i)){
+    p1+="Nas finanças, o conselho aponta: "+s1.toLowerCase()+" A advertência alerta: "+s2.toLowerCase()+" Equilibre a orientação positiva com a cautela necessária.";
+  } else if(P.match(/saúde|doença|cura|bem-estar|ansiedade|depressão|corpo|físico|mental|dormir|sono/i)){
+    p1+="Na saúde, o conselho sugere: "+s1.toLowerCase()+" A advertência pede atenção: "+s2.toLowerCase()+" Ouça seu corpo e encontre o equilíbrio entre cuidado e descanso.";
+  } else if(P.match(/estudo|faculdade|curso|aprender|conhecimento|escola|prova|concurso|livro|estudar/i)){
+    p1+="Nos estudos, o conselho é: "+s1.toLowerCase()+" A advertência orienta: "+s2.toLowerCase()+" Dedique-se com foco, mas evite as armadilhas apontadas pela segunda carta.";
+  } else {
+    p1+="O conselho a seguir é: "+s1.toLowerCase()+" A advertência a considerar é: "+s2.toLowerCase()+" Ambas as cartas juntas indicam que o melhor caminho envolve equilibrar a orientação da primeira com a precaução da segunda.";
   }
-  else if(modelo.nome==="Situação e Informação Adicional"){
-    paragrafo+="a primeira carta foi <strong>"+m1+"</strong> ("+e1+"), que revela a " + modelo.pos1 + ": " + s1.toLowerCase() + " A segunda carta foi <strong>"+m2+"</strong> ("+e2+"), que traz uma " + modelo.pos2 + ": " + s2.toLowerCase() + " ";
-    if(tema==="amor")paragrafo+="No amor, esta combinação mostra que por trás da situação aparente há informações que você ainda não considerou. Fique atento aos detalhes.";
-    else if(tema==="sucesso")paragrafo+="Para seus objetivos, o cenário atual é promissor, mas a carta adicional revela um fator oculto que pode fazer diferença no resultado final.";
-    else if(tema==="carreira")paragrafo+="Na carreira, a situação indicada pela primeira carta é clara, mas a segunda revela algo que você precisa saber para tomar a melhor decisão.";
-    else paragrafo+="Juntas, estas cartas mostram que a situação vai além do que aparenta. A informação adicional da segunda carta é crucial para sua visão do todo.";
-  }
-  else if(modelo.nome==="Caminho A e Caminho B"){
-    paragrafo+="a primeira carta foi <strong>"+m1+"</strong> ("+e1+"), representando o " + modelo.pos1 + ": " + s1.toLowerCase() + " A segunda carta foi <strong>"+m2+"</strong> ("+e2+"), representando o " + modelo.pos2 + ": " + s2.toLowerCase() + " ";
-    if(tema==="amor")paragrafo+="No amor, estas duas cartas mostram caminhos distintos. O " + modelo.pos1 + " sugere " + s1.toLowerCase() + " Enquanto o " + modelo.pos2 + " aponta para " + s2.toLowerCase() + " Reflita sobre qual ressoa mais com seu coração.";
-    else if(tema==="sucesso")paragrafo+="Para o sucesso, você tem duas abordagens possíveis. O primeiro caminho é " + s1.toLowerCase() + " O segundo caminho é " + s2.toLowerCase() + " Avalie qual se alinha melhor com seus valores.";
-    else paragrafo+="Diante de duas opções, o " + modelo.pos1 + " representa " + s1.toLowerCase() + " Já o " + modelo.pos2 + " representa " + s2.toLowerCase() + " Ambos têm méritos — a escolha depende do que você prioriza agora.";
-  }
-  else if(modelo.nome==="Desejo Real vs Situação Atual"){
-    paragrafo+="a primeira carta foi <strong>"+m1+"</strong> ("+e1+"), que representa seu " + modelo.pos1 + ": " + s1.toLowerCase() + " A segunda carta foi <strong>"+m2+"</strong> ("+e2+"), que revela sua " + modelo.pos2 + ": " + s2.toLowerCase() + " ";
-    if(tema==="amor")paragrafo+="No amor, há um contraste entre o que você deseja verdadeiramente e o que está vivendo agora. A primeira carta mostra seu ideal afetivo, enquanto a segunda revela a realidade presente. O caminho é encontrar o equilíbrio entre ambos.";
-    else if(tema==="sucesso")paragrafo+="Seu desejo é representado pela energia de " + e1 + ", mas a situação atual indicada pela segunda carta mostra " + s2.toLowerCase() + " Para alcançar o que quer, é preciso primeiro reconhecer e trabalhar a partir da realidade presente.";
-    else if(tema==="carreira")paragrafo+="Na carreira, seu desejo aponta para " + s1.toLowerCase() + " Porém a situação atual, revelada pela segunda carta, mostra " + s2.toLowerCase() + " O crescimento virá quando você alinhar suas ambições com os passos práticos necessários.";
-    else paragrafo+="Seu desejo real é " + s1.toLowerCase() + " Mas a situação atual indica " + s2.toLowerCase() + " A ponte entre esses dois pontos é o que você precisa construir agora.";
-  }
-  else if(modelo.nome==="Você e o Outro"){
-    paragrafo+="a primeira carta foi <strong>"+m1+"</strong> ("+e1+"), que representa " + modelo.pos1 + ": " + s1.toLowerCase() + " A segunda carta foi <strong>"+m2+"</strong> ("+e2+"), que representa " + modelo.pos2 + ": " + s2.toLowerCase() + " ";
-    if(tema==="amor")paragrafo+="No amor, esta dupla mostra a dinâmica entre você e a outra pessoa. Sua energia é de " + e1 + ", enquanto a do outro é de " + e2 + ". " + s1.charAt(0).toUpperCase()+s1.slice(1) + " já o outro lado traz " + s2.toLowerCase() + " A chave está em como essas energias se complementam.";
-    else if(tema==="carreira")paragrafo+="Na carreira, você ocupa o espaço de " + s1.toLowerCase() + " Enquanto a outra pessoa ou situação representa " + s2.toLowerCase() + " Compreender essa dinâmica é essencial para navegar esta relação profissional.";
-    else paragrafo+="Nesta leitura, você é representado por " + m1 + " com energia de " + e1 + ", indicando " + s1.toLowerCase() + " O outro lado é representado por " + m2 + " com energia de " + e2 + ", mostrando " + s2.toLowerCase() + " A interação entre essas duas forças define o cenário.";
+  paragrafos.push(p1);
+
+  // --- MODELO 2: SITUAÇÃO E INFORMAÇÃO ADICIONAL ---
+  if(P.match(/situação|como está|cenário|momento|atualmente|agora|hoje|andamento|status|o que está acontecendo|contexto|realidade|diagnóstico/i)){
+    var p2="";
+    p2+="No modelo <strong>Situação e Informação Adicional</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), revelando a <strong>Situação atual</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), trazendo uma <strong>Informação Adicional</strong>: "+s2.toLowerCase()+" ";
+    if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento/i)){
+      p2+="No amor, o cenário atual é de "+s1.toLowerCase()+" Mas a informação adicional revela que "+s2.toLowerCase()+" Preste atenção neste detalhe oculto — ele pode mudar sua perspectiva sobre a relação.";
+    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga|entrevista/i)){
+      p2+="Na carreira, a situação atual mostra "+s1.toLowerCase()+" A informação adicional traz "+s2.toLowerCase()+" Este detalhe que você talvez não tenha notado pode ser a chave para sua próxima decisão profissional.";
+    } else if(P.match(/sucesso|vou conseguir|vai dar certo|resultado|futuro|negócio|projeto/i)){
+      p2+="Sobre seus objetivos, o momento atual é de "+s1.toLowerCase()+" A informação adicional revela "+s2.toLowerCase()+" Considere este fator oculto ao planejar seus próximos passos.";
+    } else {
+      p2+="A situação atual é representada por "+s1.toLowerCase()+" A informação adicional mostra "+s2.toLowerCase()+" Juntas, indicam que o cenário vai além do que parece à primeira vista.";
+    }
+    paragrafos.push(p2);
   }
 
-  return '<div class="fade" style="text-align:left;"><p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p><h3 style="font-family:Playfair Display,serif;font-size:1.3rem;color:var(--gold);margin-bottom:12px;text-align:center;">📖 Leitura de 2 Cartas — '+modelo.nome+'</h3><div class="gt" style="grid-template-columns:repeat(2,1fr);"><div class="ti2"><span class="tn" style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">'+modelo.pos1+'</span><span class="tn">'+m1+'</span><span class="tt" style="display:block;margin-top:4px;">'+e1+' — '+s1+'</span></div><div class="ti2"><span class="tn" style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">'+modelo.pos2+'</span><span class="tn">'+m2+'</span><span class="tt" style="display:block;margin-top:4px;">'+e2+' — '+s2+'</span></div></div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:16px;margin:15px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">'+paragrafo+'</div><button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button></div>';
+  // --- MODELO 3: CAMINHO A E CAMINHO B ---
+  if(P.match(/escolha|decidir|opção|caminho|qual escolher|entre|alternativa|optar|devo|ou |qual caminho|qual decisão|prós e contras|qual é melhor/i)){
+    var p3="";
+    p3+="No modelo <strong>Caminho A e Caminho B</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando o <strong>Caminho A</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando o <strong>Caminho B</strong>: "+s2.toLowerCase()+" ";
+    if(P.match(/amor|relacionamento|namoro|paixão/i)){
+      p3+="No amor, o Caminho A representa "+s1.toLowerCase()+" O Caminho B aponta para "+s2.toLowerCase()+" Reflita sobre qual escolha ressoa mais com seus valores e sentimentos mais profundos.";
+    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário|vaga/i)){
+      p3+="Na carreira, o Caminho A sugere "+s1.toLowerCase()+" O Caminho B indica "+s2.toLowerCase()+" Analise os prós e contras de cada um à luz da sua situação atual.";
+    } else if(P.match(/dinheiro|finança|investimento|comprar|vender|gastar/i)){
+      p3+="Nas finanças, o Caminho A é "+s1.toLowerCase()+" O Caminho B é "+s2.toLowerCase()+" Avalie qual dos dois se alinha melhor com sua saúde financeira de longo prazo.";
+    } else {
+      p3+="O Caminho A representa "+s1.toLowerCase()+" O Caminho B representa "+s2.toLowerCase()+" Ambos têm méritos — sua escolha depende do que você prioriza neste momento.";
+    }
+    paragrafos.push(p3);
+  }
+
+  // --- MODELO 4: DESEJO REAL vs SITUAÇÃO ATUAL ---
+  if(P.match(/desejo|quero|queria|sonho|realizar|realização|alcançar|conseguir|objetivo|meta|ambição|esperança|pretendo|planejo|gostaria|anseio/i)){
+    var p4="";
+    p4+="No modelo <strong>Desejo Real vs Situação Atual</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando seu <strong>Desejo Real</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), revelando sua <strong>Situação Atual</strong>: "+s2.toLowerCase()+" ";
+    if(P.match(/amor|relacionamento|namoro|paixão/i)){
+      p4+="No amor, seu desejo real aponta para "+s1.toLowerCase()+" Porém a situação atual mostra "+s2.toLowerCase()+" A ponte entre o que você deseja e onde está agora é o que precisa ser trabalhado.";
+    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|promoção|salário/i)){
+      p4+="Na carreira, seu desejo é de "+s1.toLowerCase()+" Mas a realidade atual é de "+s2.toLowerCase()+" Para alcançar seu objetivo, use a energia de "+e1+" para superar os desafios apontados por "+e2+".";
+    } else if(P.match(/sucesso|conseguir|resultado|futuro|negócio|projeto|empreendimento/i)){
+      p4+="Seu desejo de sucesso é representado por "+s1.toLowerCase()+" A situação atual, no entanto, mostra "+s2.toLowerCase()+" Alinhar esses dois polos é o caminho para a realização.";
+    } else {
+      p4+="Seu desejo real é "+s1.toLowerCase()+" A situação atual indica "+s2.toLowerCase()+" A distância entre eles revela o que precisa ser trabalhado.";
+    }
+    paragrafos.push(p4);
+  }
+
+  // --- MODELO 5: VOCÊ E O OUTRO ---
+  if(P.match(/(talita|maria|joão|ana|carlos|pedro|josé|paulo|rafael|gabriel|lucas|fernanda|juliana|amanda|vanessa|beatriz|ela|ele|alguém|pessoa|parceiro|parceira|namorado|namorada|marido|esposa|noivo|noiva|amigo|inimigo|adversário|rival|chefe|sócio|cliente|família|mãe|pai|filho|filha|irmão|amiga)/i)){
+    var p5="";
+    p5+="No modelo <strong>Você e o Outro</strong>, a <strong>primeira carta</strong> foi <strong>"+m1+"</strong> ("+e1+"), representando <strong>Você</strong>: "+s1.toLowerCase()+" A <strong>segunda carta</strong> foi <strong>"+m2+"</strong> ("+e2+"), representando <strong>O Outro</strong>: "+s2.toLowerCase()+" ";
+    if(P.match(/amor|relacionamento|namoro|paixão|romance|casamento|voltar|ex/i)){
+      p5+="Na dinâmica afetiva entre você e a outra pessoa, sua energia atual é de "+e1.toLowerCase()+", indicando "+s1.toLowerCase()+" A energia do outro é de "+e2.toLowerCase()+", mostrando "+s2.toLowerCase()+" Compreender como essas duas forças interagem é essencial para navegar esta relação com mais harmonia.";
+    } else if(P.match(/carreira|trabalho|emprego|profissão|empresa|chefe|sócio|cliente/i)){
+      p5+="Na dinâmica profissional, você ocupa o espaço de "+s1.toLowerCase()+" Enquanto a outra pessoa ou parte envolvida representa "+s2.toLowerCase()+" O sucesso desta interação depende de como essas energias se complementam.";
+    } else {
+      p5+="Nesta dinâmica, você é representado por "+m1+" com energia de "+e1+", indicando "+s1.toLowerCase()+" O outro lado é representado por "+m2+" com energia de "+e2+", mostrando "+s2.toLowerCase()+" A interação entre essas duas forças define o rumo desta relação.";
+    }
+    paragrafos.push(p5);
+  }
+
+  // Montar HTML
+  var h='<div class="fade" style="text-align:left;">';
+  h+='<p style="font-size:0.8rem;font-style:italic;font-family:Open Sans,sans-serif;margin-bottom:12px;color:var(--td);">"'+pergunta+'"</p>';
+  h+='<h3 style="font-family:Playfair Display,serif;font-size:1.3rem;color:var(--gold);margin-bottom:12px;text-align:center;">📖 Leitura de 2 Cartas</h3>';
+  h+='<div class="gt" style="grid-template-columns:repeat(2,1fr);">';
+  h+='<div class="ti2"><span style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">🔴 1ª Carta</span><span class="tn">'+m1+'</span><span class="tt" style="display:block;margin-top:4px;">'+e1+' — '+s1+'</span></div>';
+  h+='<div class="ti2"><span style="font-size:0.75rem;color:var(--td);display:block;margin-bottom:4px;">🔵 2ª Carta</span><span class="tn">'+m2+'</span><span class="tt" style="display:block;margin-top:4px;">'+e2+' — '+s2+'</span></div>';
+  h+='</div>';
+  for(var i=0;i<paragrafos.length;i++){
+    h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-family:Open Sans,sans-serif;font-size:0.9rem;line-height:1.8;">'+paragrafos[i]+'</div>';
+  }
+  h+='<button class="btn" onclick="resetarTaro()">🔄 Nova Consulta</button>';
+  h+='</div>';
+  return h;
 }
 
 function gerarLeitura1Carta(carta, pergunta){
@@ -532,7 +580,7 @@ function iniciarT(){
 function calN(){var d=document.getElementById("nd").value;if(!d||!gas(2))return;sl("btn-n",1);setTimeout(function(){var n=d.replace(/-/g,"").split("").map(Number);var s=n.reduce(function(a,b){return a+b},0);while(s>9&&s!==11&&s!==22&&s!==33){s=String(s).split("").map(Number).reduce(function(a,b){return a+b},0)}var de={1:"Líder",2:"Diplomata",3:"Comunicador",4:"Construtor",5:"Viajante",6:"Protetor",7:"Sábio",8:"Executivo",9:"Humanitário",11:"Mestre Intuitivo",22:"Mestre Construtor",33:"Mestre Guia"};document.getElementById("nr").innerHTML='<div class="fade"><div class="nv">'+s+'</div><h3>Caminho de Vida</h3><p>'+(de[s]||"Especial")+"</p></div>";sl("btn-n",0);to("Número revelado!")},600)}
 function conI(){var p=document.getElementById("ip").value.trim();if(!p||!gas(2))return;sl("btn-i",1);setTimeout(function(){var hx=[{n:1,nm:"O Criativo",s:"Qian",d:"Força criativa."}];var h=hx[0];document.getElementById("ir").innerHTML='<div class="fade"><h3>Hexagrama '+h.n+': '+h.nm+'</h3><p>'+h.d+'</p></div>';sl("btn-i",0);to("I Ching respondeu!")},700)}
 function conSN(){var p=document.getElementById("snp").value.trim();if(!p||!gas(1))return;sl("btn-sn",1);setTimeout(function(){var r=["Sim","Não","Talvez","Com certeza","Não é momento","As estrelas dizem sim"];document.getElementById("snr").innerHTML='<span class="fade">'+r[Math.floor(Math.random()*r.length)]+"</span>";sl("btn-sn",0)},500)}
-function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div class="sni" style="margin-bottom:10px;border-bottom:1px solid var(--gdd);padding-bottom:8px;"><span class="snp" style="color:var(--gold);font-weight:600;font-family:Playfair Display,serif;font-size:1.2rem;">'+p+':</span><div class="sns" style="font-size:0.85rem;margin-top:2px;color:var(--td);font-family:Open Sans,sans-serif;">'+SO[p]+"</div></div>"}}}
+function bS(){var b=document.getElementById("sob").value.toLowerCase().trim(),l=document.getElementById("sol");l.innerHTML="";if(b.length<2)return;for(var p in SO){if(p.includes(b)){l.innerHTML+='<div style="margin-bottom:10px;border-bottom:1px solid var(--gdd);padding-bottom:8px;"><span style="color:var(--gold);font-weight:600;font-family:Playfair Display,serif;font-size:1.2rem;">'+p+':</span><div style="font-size:0.85rem;margin-top:2px;color:var(--td);font-family:Open Sans,sans-serif;">'+SO[p]+"</div></div>"}}}
 function verC(){var a=document.getElementById("cs1").value,b=document.getElementById("cs2").value;if(!a||!b||a===b)return to("Selecione signos diferentes.");var p=Math.floor(Math.random()*60)+35;var m=p>=85?"Almas gêmeas!":p>=70?"Grande afinidade!":p>=50?"Atração de opostos.":"Energias distintas.";document.getElementById("cpr").innerHTML='<div class="fade"><div class="cpct">'+p+"%</div><p>"+m+"</p></div>"}
 function comp(q){user.creditos+=q;sU();fM("mcr");to("+"+q+" créditos!")}
 window.onload=function(){atCT()};
