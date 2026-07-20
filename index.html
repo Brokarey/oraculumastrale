@@ -18,7 +18,9 @@
             --glass-border: rgba(255, 255, 255, 0.1);
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--bg-deep), var(--bg-glow));
@@ -27,12 +29,14 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
+
         #stars-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             overflow: hidden;
         }
+
         .star {
             position: absolute;
             background: white;
@@ -40,13 +44,16 @@
             opacity: 0.5;
             animation: twinkle var(--duration) infinite ease-in-out;
         }
+
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.2); }
         }
+
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 10px; }
+
         .screen {
             position: absolute;
             top: 0; left: 0; width: 100%; min-height: 100vh;
@@ -59,15 +66,13 @@
             align-items: center;
             justify-content: center;
         }
+
         .screen-active {
             opacity: 1;
             pointer-events: all;
             position: relative;
         }
-        #screen-welcome, #screen-login, #screen-register, #screen-dashboard {
-            background: url('Tela-Inicial.png') center/cover no-repeat;
-        }
-        #screen-dashboard { background-attachment: fixed; }
+
         .card {
             background: var(--glass);
             backdrop-filter: blur(12px);
@@ -80,8 +85,11 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease;
         }
+
         .card:hover { transform: scale(1.01); }
+
         h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--gold); }
+
         .btn {
             background: var(--gold);
             color: #000;
@@ -96,8 +104,10 @@
             width: 100%;
             margin-top: 10px;
         }
+
         .btn:hover { background: #f1c40f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 168, 83, 0.3); }
         .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+
         input, select {
             width: 100%;
             padding: 12px;
@@ -108,6 +118,7 @@
             color: #fff;
             outline: none;
         }
+
         header {
             width: 100%;
             padding: 15px 5%;
@@ -121,8 +132,10 @@
             z-index: 100;
             border-bottom: 1px solid var(--gold-dim);
         }
+
         .stats-bar { display: flex; gap: 20px; font-size: 0.9rem; }
         .stat-item { cursor: pointer; color: var(--gold); }
+
         .main-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -131,6 +144,7 @@
             max-width: 1200px;
             padding: 40px 0;
         }
+
         .section-card {
             background: var(--glass);
             border: 1px solid var(--glass-border);
@@ -140,8 +154,10 @@
             cursor: pointer;
             transition: 0.3s;
         }
+
         .section-card:hover { border-color: var(--gold); background: rgba(212, 168, 83, 0.05); }
         .section-card i { font-size: 2.5rem; display: block; margin-bottom: 15px; }
+
         #toast {
             position: fixed;
             top: 20px; right: 20px;
@@ -154,9 +170,11 @@
             transition: 0.5s;
             z-index: 1000;
         }
+
         .typewriter { overflow: hidden; border-right: .15em solid var(--gold); white-space: nowrap; margin: 0 auto; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold); } }
+
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -167,6 +185,7 @@
             z-index: 2000;
             padding: 20px;
         }
+
         .modal-content {
             background: var(--bg-glow);
             border: 1px solid var(--gold);
@@ -178,13 +197,17 @@
             overflow-y: auto;
             position: relative;
         }
+
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--gold); }
+
         .tarot-result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
         .tarot-card-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid var(--gold-dim); text-align: center; }
         .tarot-card-name { font-weight: bold; color: var(--gold); margin-bottom: 10px; display: block; }
+
         .signos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
         .signo-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
         .signo-btn:hover { border-color: var(--gold); background: var(--gold-dim); }
+
         @media (max-width: 768px) {
             .signos-grid { grid-template-columns: repeat(3, 1fr); }
             header { flex-direction: column; gap: 10px; }
@@ -192,8 +215,10 @@
     </style>
 </head>
 <body>
+
     <div id="stars-container"></div>
     <div id="toast">Notificação</div>
+
     <header id="main-header">
         <div style="font-family: 'Playfair Display'; font-size: 1.4rem; color: var(--gold);">🔮 Oraculum Astrale</div>
         <div class="stats-bar">
@@ -203,6 +228,7 @@
             <div class="stat-item" onclick="logout()" style="color: #ff4757;">Sair</div>
         </div>
     </header>
+
     <div id="screen-welcome" class="screen screen-active">
         <div style="font-size: 5rem; margin-bottom: 10px;">🔮</div>
         <h1 style="font-size: 3.5rem; margin-bottom: 10px;">Oraculum Astrale</h1>
@@ -212,6 +238,7 @@
             <button class="btn btn-outline" onclick="navegar('screen-register')">Cadastrar</button>
         </div>
     </div>
+
     <div id="screen-login" class="screen">
         <div class="card">
             <h2>Entrar</h2>
@@ -222,34 +249,133 @@
             <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top: 10px;">Voltar</button>
         </div>
     </div>
+
     <div id="screen-register" class="screen">
         <div class="card">
             <h2>Criar Conta</h2>
             <p style="text-align: center; color: var(--gold); font-size: 0.8rem; margin-bottom: 12px;">Ganhe 5 créditos grátis!</p>
-            <input type="text" id="reg-name" placeholder="Nome Completo (mín. 3)" onkeydown="if(event.key==='Enter')fazerCadastro()">
+            <input type="text" id="reg-name" placeholder="Nome Completo" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <input type="text" id="reg-cpf" placeholder="CPF" maxlength="11" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <input type="email" id="reg-email" placeholder="E-mail" onkeydown="if(event.key==='Enter')fazerCadastro()">
-            <input type="password" id="reg-password" placeholder="Senha (mín. 6)" onkeydown="if(event.key==='Enter')fazerCadastro()">
+            <input type="password" id="reg-password" placeholder="Senha" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <input type="password" id="reg-confirm" placeholder="Confirmar Senha" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <button class="btn" onclick="fazerCadastro()">Cadastrar</button>
             <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top: 10px;">Voltar</button>
         </div>
     </div>
+
     <div id="screen-dashboard" class="screen">
         <h2 id="dashboard-greeting" style="font-size: 2.2rem;">Bem-vindo(a), Viajante</h2>
         <p id="dashboard-phrase" style="color: var(--text-dim); font-style: italic; margin-bottom: 30px;"></p>
         <div class="main-grid" id="dashboard-grid"></div>
     </div>
-    <div id="modal-tarot" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-tarot')">&times;</span><h2>🔮 Tarô</h2><p style="color: var(--text-dim);">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p><input type="text" id="tarot-question" placeholder="Sua pergunta objetiva?"><select id="tarot-type" onchange="atualizarTarotTipo()"><option value="sn">⚡ Sim ou Não — 1 crédito</option><option value="2cartas" selected>📖 2 Cartas — 2 créditos</option><option value="3cartas">📖 3 Cartas — 3 créditos</option><option value="5cartas">📖 5 Cartas — 5 créditos</option></select><p style="margin-top: 10px; color: var(--text-dim); font-size: 0.85rem;">Custa <strong style="color: var(--gold);" id="tarot-cost">2</strong> créditos</p><button class="btn" id="btn-tarot" onclick="iniciarTarot()">Consultar</button><div id="tarot-result" style="margin-top: 15px;"></div></div></div>
-    <div id="modal-horoscopo" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-horoscopo')">&times;</span><h2>☀️ Horóscopo do Dia</h2><p style="color: var(--text-dim);">Selecione seu signo:</p><div class="signos-grid" id="signos-grid"></div><div id="horoscopo-result" style="margin-top: 20px; display: none;"></div></div></div>
-    <div id="modal-numerologia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-numerologia')">&times;</span><h2>🔢 Numerologia</h2><input type="date" id="nascimento-data"><button class="btn" onclick="calcularNumerologia()">Calcular (2 créditos)</button><div id="numerologia-result" style="margin-top: 15px;"></div></div></div>
-    <div id="modal-iching" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-iching')">&times;</span><h2>☯️ I Ching</h2><input type="text" id="iching-question" placeholder="Sua pergunta?"><button class="btn" onclick="consultarIChing()">Consultar (2 créditos)</button><div id="iching-result" style="margin-top: 15px;"></div></div></div>
-    <div id="modal-simnao" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-simnao')">&times;</span><h2>⚡ Sim ou Não</h2><input type="text" id="simnao-question" placeholder="Pergunta objetiva"><button class="btn" onclick="perguntarSimNao()">Perguntar (1 crédito)</button><div id="simnao-result" style="margin-top: 15px; text-align: center; font-size: 1.5rem; font-weight: bold; color: var(--gold);"></div></div></div>
-    <div id="modal-sonhos" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-sonhos')">&times;</span><h2>📖 Dicionário dos Sonhos</h2><input type="text" id="sonho-busca" placeholder="Ex: cobra, água..." onkeyup="buscarSonho()"><div id="sonho-result" style="margin-top: 15px; max-height: 200px; overflow-y: auto;"></div></div></div>
-    <div id="modal-compatibilidade" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-compatibilidade')">&times;</span><h2>💘 Sinergia Astral</h2><div style="display: flex; gap: 10px;"><select id="compat-signo1" style="flex: 1;"><option value="">Seu Signo</option></select><select id="compat-signo2" style="flex: 1;"><option value="">Outro Signo</option></select></div><button class="btn" onclick="verCompatibilidade()">Verificar</button><div id="compat-result" style="margin-top: 15px; text-align: center;"></div></div></div>
-    <div id="modal-comprar" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-comprar')">&times;</span><h2>💳 Créditos</h2><p style="color: var(--text-dim);">Em breve você poderá adquirir mais créditos.</p></div></div>
-    <div id="modal-indicar" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-indicar')">&times;</span><h2>👥 Indicar Amigo</h2><p style="color: var(--text-dim);">Compartilhe o link e ganhe 5 créditos por cada amigo que se cadastrar!</p><input type="text" id="indicated-email" placeholder="E-mail do amigo"><button class="btn" onclick="indicarAmigo()">Enviar Convite</button></div></div>
-    <div id="modal-cartadodia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-cartadodia')">&times;</span><h2>🃏 Sua Carta do Dia</h2><div id="carta-result" style="text-align: center; margin-top: 20px;"></div></div></div>
+
+    <div id="modal-tarot" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-tarot')">&times;</span>
+            <h2>🔮 Tarô</h2>
+            <p style="color: var(--text-dim);">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p>
+            <input type="text" id="tarot-question" placeholder="Sua pergunta objetiva?">
+            <select id="tarot-type" onchange="atualizarTarotTipo()">
+                <option value="sn">⚡ Sim ou Não — 1 crédito</option>
+                <option value="2cartas" selected>📖 2 Cartas — 2 créditos</option>
+                <option value="3cartas">📖 3 Cartas — 3 créditos</option>
+                <option value="5cartas">📖 5 Cartas — 5 créditos</option>
+            </select>
+            <p style="margin-top: 10px; color: var(--text-dim); font-size: 0.85rem;">Custa <strong style="color: var(--gold);" id="tarot-cost">2</strong> créditos</p>
+            <button class="btn" id="btn-tarot" onclick="iniciarTarot()">Consultar</button>
+            <div id="tarot-result" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <div id="modal-horoscopo" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-horoscopo')">&times;</span>
+            <h2>☀️ Horóscopo do Dia</h2>
+            <p style="color: var(--text-dim);">Selecione seu signo:</p>
+            <div class="signos-grid" id="signos-grid"></div>
+            <div id="horoscopo-result" style="margin-top: 20px; display: none;"></div>
+        </div>
+    </div>
+
+    <div id="modal-numerologia" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-numerologia')">&times;</span>
+            <h2>🔢 Numerologia</h2>
+            <input type="date" id="nascimento-data">
+            <button class="btn" onclick="calcularNumerologia()">Calcular (2 créditos)</button>
+            <div id="numerologia-result" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <div id="modal-iching" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-iching')">&times;</span>
+            <h2>☯️ I Ching</h2>
+            <input type="text" id="iching-question" placeholder="Sua pergunta?">
+            <button class="btn" onclick="consultarIChing()">Consultar (2 créditos)</button>
+            <div id="iching-result" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+
+    <div id="modal-simnao" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-simnao')">&times;</span>
+            <h2>⚡ Sim ou Não</h2>
+            <input type="text" id="simnao-question" placeholder="Pergunta objetiva">
+            <button class="btn" onclick="perguntarSimNao()">Perguntar (1 crédito)</button>
+            <div id="simnao-result" style="margin-top: 15px; text-align: center; font-size: 1.5rem; font-weight: bold; color: var(--gold);"></div>
+        </div>
+    </div>
+
+    <div id="modal-sonhos" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-sonhos')">&times;</span>
+            <h2>📖 Dicionário dos Sonhos</h2>
+            <input type="text" id="sonho-busca" placeholder="Ex: cobra, água..." onkeyup="buscarSonho()">
+            <div id="sonho-result" style="margin-top: 15px; max-height: 200px; overflow-y: auto;"></div>
+        </div>
+    </div>
+
+    <div id="modal-compatibilidade" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-compatibilidade')">&times;</span>
+            <h2>💘 Sinergia Astral</h2>
+            <div style="display: flex; gap: 10px;">
+                <select id="compat-signo1" style="flex: 1;"><option value="">Seu Signo</option></select>
+                <select id="compat-signo2" style="flex: 1;"><option value="">Outro Signo</option></select>
+            </div>
+            <button class="btn" onclick="verCompatibilidade()">Verificar</button>
+            <div id="compat-result" style="margin-top: 15px; text-align: center;"></div>
+        </div>
+    </div>
+
+    <div id="modal-comprar" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-comprar')">&times;</span>
+            <h2>💳 Créditos</h2>
+            <p style="color: var(--text-dim);">Em breve você poderá adquirir mais créditos.</p>
+        </div>
+    </div>
+
+    <div id="modal-indicar" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-indicar')">&times;</span>
+            <h2>👥 Indicar Amigo</h2>
+            <p style="color: var(--text-dim);">Compartilhe o link e ganhe 5 créditos por cada amigo que se cadastrar!</p>
+            <input type="text" id="indicated-email" placeholder="E-mail do amigo">
+            <button class="btn" onclick="indicarAmigo()">Enviar Convite</button>
+        </div>
+    </div>
+
+    <div id="modal-cartadodia" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="fecharModal('modal-cartadodia')">&times;</span>
+            <h2>🃏 Sua Carta do Dia</h2>
+            <div id="carta-result" style="text-align: center; margin-top: 20px;"></div>
+        </div>
+    </div>
+
 <script>
 const signos = [
     { id: "aries", nome: "Áries", icon: "♈", amor: "Iniciativa.", carreira: "Liderança.", saude: "Hidrate-se." },
@@ -265,6 +391,7 @@ const signos = [
     { id: "aquario", nome: "Aquário", icon: "♒", amor: "Liberdade.", carreira: "Inovação.", saude: "Meditação." },
     { id: "peixes", nome: "Peixes", icon: "♓", amor: "Romantismo.", carreira: "Intuição.", saude: "Descanso." }
 ];
+
 const frases = [
     "O universo conspira a favor de quem conhece a si mesmo.",
     "As estrelas inclinam, mas não obrigam.",
@@ -272,6 +399,7 @@ const frases = [
     "A resposta está no silêncio.",
     "Sua intuição é a voz da sua alma."
 ];
+
 const sonhos = {
     agua: "Suas emoções.",
     cobra: "Transformação.",
@@ -280,26 +408,38 @@ const sonhos = {
     morte: "Fim de ciclo.",
     voar: "Liberdade."
 };
+
 let user = null;
+
 function navegar(tela) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('screen-active'));
     document.getElementById(tela).classList.add('screen-active');
     document.getElementById('main-header').style.display = tela === 'screen-dashboard' ? 'flex' : 'none';
 }
+
 function toast(mensagem) {
     const t = document.getElementById('toast');
     t.textContent = mensagem;
     t.style.transform = 'translateX(0)';
     setTimeout(() => t.style.transform = 'translateX(200%)', 3000);
 }
-function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
-function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
+
+function abrirModal(id) {
+    document.getElementById(id).style.display = 'flex';
+}
+
+function fecharModal(id) {
+    document.getElementById(id).style.display = 'none';
+}
+
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
 });
+
 document.addEventListener('click', e => {
     if (e.target.classList.contains('modal')) e.target.style.display = 'none';
 });
+
 function fazerLogin() {
     const email = document.getElementById('login-email').value.trim();
     const senha = document.getElementById('login-password').value;
@@ -315,35 +455,46 @@ function fazerLogin() {
     navegar('screen-dashboard');
     toast('Bem-vindo(a), ' + user.nome.split(' ')[0] + '!');
 }
+
 function fazerCadastro() {
     const nome = document.getElementById('reg-name').value.trim();
-    if (nome.length < 3) return toast('Nome deve ter no mínimo 3 caracteres.');
     const cpf = document.getElementById('reg-cpf').value.replace(/\D/g, '');
-    if (cpf.length !== 11) return toast('CPF inválido.');
     const email = document.getElementById('reg-email').value.trim();
-    if (!email || !email.includes('@')) return toast('E-mail inválido.');
     const senha = document.getElementById('reg-password').value;
     const confirmar = document.getElementById('reg-confirm').value;
+
+    if (nome.length < 3) return toast('Nome deve ter no mínimo 3 caracteres.');
+    if (cpf.length !== 11) return toast('CPF inválido.');
+    if (!email || !email.includes('@')) return toast('E-mail inválido.');
     if (senha.length < 6) return toast('Senha deve ter no mínimo 6 caracteres.');
     if (senha !== confirmar) return toast('Senhas não conferem.');
+
     const usuarios = JSON.parse(localStorage.getItem('oa_usuarios') || '[]');
     if (usuarios.find(u => u.email === email)) return toast('E-mail já cadastrado.');
+
     usuarios.push({ nome, email, senha, cpf, creditos: 5, streak: 1, ultimoAcesso: new Date().toISOString().split('T')[0] });
     localStorage.setItem('oa_usuarios', JSON.stringify(usuarios));
     toast('Conta criada! +5 créditos.');
     navegar('screen-login');
 }
-function logout() { user = null; navegar('screen-welcome'); }
+
+function logout() {
+    user = null;
+    navegar('screen-welcome');
+}
+
 function atualizarStreak() {
     if (!user) return;
     const hoje = new Date().toISOString().split('T')[0];
     if (user.ultimoAcesso !== hoje) user.streak = 1;
     document.getElementById('user-streak').textContent = user.streak;
 }
+
 function carregarDashboard() {
     document.getElementById('dashboard-greeting').textContent = 'Bem-vindo(a), ' + user.nome.split(' ')[0] + '!';
     document.getElementById('dashboard-phrase').textContent = frases[Math.floor(Math.random() * frases.length)];
     document.getElementById('user-credits').textContent = user.creditos;
+
     const secoes = [
         { icon: '🃏', titulo: 'Carta do Dia', desc: 'Grátis diária', modal: 'modal-cartadodia' },
         { icon: '☀️', titulo: 'Horóscopo', desc: 'Previsões', modal: 'modal-horoscopo' },
@@ -354,6 +505,7 @@ function carregarDashboard() {
         { icon: '📖', titulo: 'Sonhos', desc: 'Interpretação', modal: 'modal-sonhos' },
         { icon: '💘', titulo: 'Compatibilidade', desc: 'Amor', modal: 'modal-compatibilidade' }
     ];
+
     const grid = document.getElementById('dashboard-grid');
     grid.innerHTML = secoes.map(s => `
         <div class="section-card" onclick="abrirModal('${s.modal}')">
@@ -362,15 +514,18 @@ function carregarDashboard() {
             <p style="color: var(--text-dim); font-size: 0.8rem;">${s.desc}</p>
         </div>
     `).join('');
+
     const signosGrid = document.getElementById('signos-grid');
     signosGrid.innerHTML = signos.map(s => `
         <div class="signo-btn" onclick="mostrarHoroscopo('${s.id}')">${s.icon} ${s.nome}</div>
     `).join('');
+
     ['compat-signo1', 'compat-signo2'].forEach(id => {
         const sel = document.getElementById(id);
         sel.innerHTML = '<option value="">Selecionar</option>' + signos.map(s => `<option value="${s.id}">${s.nome} ${s.icon}</option>`).join('');
     });
 }
+
 function mostrarHoroscopo(id) {
     const signo = signos.find(s => s.id === id);
     if (!signo) return;
@@ -382,6 +537,7 @@ function mostrarHoroscopo(id) {
     `;
     document.getElementById('horoscopo-result').style.display = 'block';
 }
+
 function verCompatibilidade() {
     const s1 = document.getElementById('compat-signo1').value;
     const s2 = document.getElementById('compat-signo2').value;
@@ -390,6 +546,7 @@ function verCompatibilidade() {
     const msg = pct >= 85 ? 'Almas gêmeas!' : pct >= 70 ? 'Grande afinidade!' : pct >= 50 ? 'Atração de opostos.' : 'Energias distintas.';
     document.getElementById('compat-result').innerHTML = `<div style="font-size: 2.5rem; color: var(--gold);">${pct}%</div><p>${msg}</p>`;
 }
+
 function buscarSonho() {
     const busca = document.getElementById('sonho-busca').value.toLowerCase().trim();
     const div = document.getElementById('sonho-result');
@@ -401,6 +558,7 @@ function buscarSonho() {
         }
     }
 }
+
 function perguntarSimNao() {
     const pergunta = document.getElementById('simnao-question').value.trim();
     if (!pergunta || !user || user.creditos < 1) return toast('Créditos insuficientes.');
@@ -409,6 +567,7 @@ function perguntarSimNao() {
     const respostas = ['Sim', 'Não', 'Talvez', 'Com certeza', 'Não é momento', 'As estrelas dizem sim'];
     document.getElementById('simnao-result').innerHTML = respostas[Math.floor(Math.random() * respostas.length)];
 }
+
 function calcularNumerologia() {
     const data = document.getElementById('nascimento-data').value;
     if (!data || !user || user.creditos < 2) return toast('Créditos insuficientes.');
@@ -422,6 +581,7 @@ function calcularNumerologia() {
     const mapas = { 1: 'Líder', 2: 'Diplomata', 3: 'Comunicador', 4: 'Construtor', 5: 'Viajante', 6: 'Protetor', 7: 'Sábio', 8: 'Executivo', 9: 'Humanitário', 11: 'Mestre Intuitivo', 22: 'Mestre Construtor' };
     document.getElementById('numerologia-result').innerHTML = `<div style="font-size: 3rem; color: var(--gold);">${soma}</div><h3>Caminho de Vida</h3><p>${mapas[soma] || 'Especial'}</p>`;
 }
+
 function consultarIChing() {
     const pergunta = document.getElementById('iching-question').value.trim();
     if (!pergunta || !user || user.creditos < 2) return toast('Créditos insuficientes.');
@@ -429,16 +589,19 @@ function consultarIChing() {
     document.getElementById('user-credits').textContent = user.creditos;
     document.getElementById('iching-result').innerHTML = '<div class="fade"><h3>Hexagrama 1: O Criativo</h3><p>Força criativa.</p></div>';
 }
+
 function indicarAmigo() {
     const email = document.getElementById('indicated-email').value.trim();
     if (!email) return toast('Digite um e-mail.');
     toast('Convite enviado para ' + email);
 }
+
 function atualizarTarotTipo() {
     const tipo = document.getElementById('tarot-type').value;
     const custos = { sn: 1, '2cartas': 2, '3cartas': 3, '5cartas': 5 };
     document.getElementById('tarot-cost').textContent = custos[tipo];
 }
+
 function iniciarTarot() {
     const pergunta = document.getElementById('tarot-question').value.trim();
     if (!pergunta) return toast('Digite sua pergunta.');
@@ -452,6 +615,7 @@ function iniciarTarot() {
         document.getElementById('tarot-result').innerHTML = `<div style="background: rgba(212,168,83,0.08); border-radius: 10px; padding: 14px; border-left: 3px solid var(--gold);"><p style="font-style: italic; color: var(--text-dim);">"${pergunta}"</p><p style="margin-top: 10px;">As cartas revelam que o momento pede reflexão e equilíbrio. Confie na sua intuição para encontrar a resposta.</p></div><button class="btn" onclick="document.getElementById('tarot-result').innerHTML=''" style="margin-top: 10px;">Nova Consulta</button>`;
     }, 1500);
 }
+
 const M = [
     { n: 0, nm: "O Louco", sg: "Aventura e novos começos.", luz: "Liberdade e otimismo", energia: "Universal" },
     { n: 1, nm: "O Mago", sg: "Poder e manifestação.", luz: "Talento e foco", energia: "Fogo" },
@@ -476,6 +640,7 @@ const M = [
     { n: 20, nm: "Julgamento", sg: "Renascimento.", luz: "Perdão e renovação", energia: "Fogo" },
     { n: 21, nm: "O Mundo", sg: "Conclusão e realização.", luz: "Plenitude e sucesso", energia: "Terra" }
 ];
+
 function gerarCarta() {
     const h = new Date().toISOString().split('T')[0];
     const chave = 'carta_' + user.email;
@@ -486,6 +651,7 @@ function gerarCarta() {
     const carta = M[Math.floor(Math.random() * M.length)];
     document.getElementById('carta-result').innerHTML = `<div class="fade"><h3>${carta.nm}</h3><p>"${carta.sg}"</p></div>`;
 }
+
 (() => {
     const container = document.getElementById('stars-container');
     for (let i = 0; i < 100; i++) {
