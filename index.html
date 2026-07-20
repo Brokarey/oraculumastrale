@@ -18,248 +18,50 @@
             --glass-border: rgba(255, 255, 255, 0.1);
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg-deep), var(--bg-glow));
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        #stars-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, var(--bg-deep), var(--bg-glow)); color: var(--text-main); min-height: 100vh; overflow-x: hidden; line-height: 1.6; }
+        #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--duration) infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 10px; }
-
-        .screen {
-            position: absolute;
-            top: 0; left: 0; width: 100%; min-height: 100vh;
-            padding: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .screen-active {
-            opacity: 1;
-            pointer-events: all;
-            position: relative;
-        }
-
-        #screen-welcome {
-            background: url('Tela-Inicial.png') center/cover no-repeat;
-        }
-
-        #screen-login, #screen-register, #screen-dashboard {
-            background: url('Tela-Outros.png') center/cover no-repeat;
-        }
-
+        .screen { position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh; padding: 20px; opacity: 0; pointer-events: none; transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .screen-active { opacity: 1; pointer-events: all; position: relative; }
+        #screen-welcome { background: url('Tela-Inicial.png') center/cover no-repeat; }
+        #screen-login, #screen-register, #screen-dashboard { background: url('Tela-Outros.png') center/cover no-repeat; }
         #screen-dashboard { background-attachment: fixed; }
-
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease;
-        }
+        .card { background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; width: 100%; max-width: 450px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; }
         .card:hover { transform: scale(1.01); }
-
         h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--gold); }
-
-        .btn {
-            background: var(--gold);
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
+        .btn { background: var(--gold); color: #000; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-top: 10px; }
         .btn:hover { background: #f1c40f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 168, 83, 0.3); }
         .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
-
-        .btn-google {
-            background: #fff;
-            color: #444;
-            border: 1px solid #ddd;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 0.9rem;
-        }
-
+        .btn-google { background: #fff; color: #444; border: 1px solid #ddd; padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; }
         .btn-google:hover { background: #f5f5f5; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 15px 0;
-            color: var(--text-dim);
-            font-size: 0.8rem;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--glass-border);
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            color: #fff;
-            outline: none;
-        }
-
-        header {
-            width: 100%;
-            padding: 15px 5%;
-            display: none;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 0, 21, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--gold-dim);
-        }
-
+        .divider { display: flex; align-items: center; gap: 15px; margin: 15px 0; color: var(--text-dim); font-size: 0.8rem; }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff; outline: none; }
+        header { width: 100%; padding: 15px 5%; display: none; justify-content: space-between; align-items: center; background: rgba(10, 0, 21, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--gold-dim); }
         .stats-bar { display: flex; gap: 20px; font-size: 0.9rem; }
         .stat-item { cursor: pointer; color: var(--gold); }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            padding: 40px 0;
-        }
-
-        .section-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
+        .main-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; padding: 40px 0; }
+        .section-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 15px; padding: 25px; text-align: center; cursor: pointer; transition: 0.3s; }
         .section-card:hover { border-color: var(--gold); background: rgba(212, 168, 83, 0.05); }
         .section-card i { font-size: 2.5rem; display: block; margin-bottom: 15px; }
-
-        #toast {
-            position: fixed;
-            top: 20px; right: 20px;
-            background: var(--gold);
-            color: #000;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: 600;
-            transform: translateX(200%);
-            transition: 0.5s;
-            z-index: 1000;
-        }
-
-        .typewriter { overflow: hidden; border-right: .15em solid var(--gold); white-space: nowrap; margin: 0 auto; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold); } }
-
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: var(--bg-glow);
-            border: 1px solid var(--gold);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
+        #toast { position: fixed; top: 20px; right: 20px; background: var(--gold); color: #000; padding: 12px 25px; border-radius: 8px; font-weight: 600; transform: translateX(200%); transition: 0.5s; z-index: 1000; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .modal-content { background: var(--bg-glow); border: 1px solid var(--gold); border-radius: 20px; padding: 30px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--gold); }
-
         .signos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
-        .signo-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
+        .signo-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem; text-align: center; }
         .signo-btn:hover { border-color: var(--gold); background: var(--gold-dim); }
-
-        @media (max-width: 768px) {
-            .signos-grid { grid-template-columns: repeat(3, 1fr); }
-            header { flex-direction: column; gap: 10px; }
-        }
+        @media (max-width: 768px) { .signos-grid { grid-template-columns: repeat(3, 1fr); } header { flex-direction: column; gap: 10px; } }
     </style>
 </head>
 <body>
-
     <div id="stars-container"></div>
     <div id="toast">Notificação</div>
-
     <header id="main-header">
         <div style="font-family: 'Playfair Display'; font-size: 1.4rem; color: var(--gold); cursor: pointer;" onclick="navegar('screen-welcome')">🔮 Oraculum Astrale</div>
         <div class="stats-bar">
@@ -270,7 +72,7 @@
         </div>
     </header>
 
-    <!-- TELA WELCOME -->
+    <!-- WELCOME -->
     <div id="screen-welcome" class="screen screen-active">
         <div style="width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px;">
             <button class="btn" onclick="navegar('screen-login')">Entrar</button>
@@ -278,27 +80,24 @@
         </div>
     </div>
 
-    <!-- TELA LOGIN -->
+    <!-- LOGIN -->
     <div id="screen-login" class="screen">
         <div class="card">
             <h2>Entrar</h2>
             <input type="email" id="login-email" placeholder="Seu e-mail" onkeydown="if(event.key==='Enter')fazerLogin()">
             <input type="password" id="login-password" placeholder="Sua senha" onkeydown="if(event.key==='Enter')fazerLogin()">
             <button class="btn" onclick="fazerLogin()">Acessar Portal</button>
-
             <div class="divider">ou</div>
-
             <button class="btn-google" onclick="entrarGoogle()">
                 <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
                 Entrar com Google
             </button>
-
             <p style="text-align: center; margin-top: 15px; color: var(--text-dim); font-size: 0.9rem;">Não tem conta? <a href="#" onclick="navegar('screen-register')" style="color: var(--gold);">Cadastre-se</a></p>
             <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top: 10px;">Voltar</button>
         </div>
     </div>
 
-    <!-- TELA CADASTRO -->
+    <!-- CADASTRO -->
     <div id="screen-register" class="screen">
         <div class="card">
             <h2>Criar Conta</h2>
@@ -335,7 +134,7 @@
 <style>
     .grid-78 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin: 10px 0; max-height: 350px; overflow-y: auto; padding: 3px; }
     .card-78 { perspective: 600px; min-height: 55px; cursor: pointer; }
-    .card-78 .cf-inner { position: relative; width: 100%; height: 55px; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+    .card-78 .cf-inner { position: relative; width: 100%; height: 55px; transition: transform 0.6s; transform-style: preserve-3d; }
     .card-78.revelada .cf-inner { transform: rotateY(180deg); }
     .card-78 .cf-frente, .card-78 .cf-verso { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1px; }
     .card-78 .cf-frente { background: linear-gradient(135deg,#2a1040,#1a0030); border: 1.5px solid var(--gold-dim); transform: rotateY(180deg); }
@@ -346,7 +145,7 @@
     .card-78 .vs-label { font-size: 0.35rem; color: var(--text-dim); }
     .g2c { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin: 10px 0; max-height: 350px; overflow-y: auto; padding: 3px; }
     .card-2c { perspective: 600px; min-height: 58px; cursor: pointer; }
-    .card-2c .cf-inner { position: relative; width: 100%; height: 58px; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+    .card-2c .cf-inner { position: relative; width: 100%; height: 58px; transition: transform 0.6s; transform-style: preserve-3d; }
     .card-2c.revelada .cf-inner { transform: rotateY(180deg); }
     .card-2c .cf-frente, .card-2c .cf-verso { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2px; }
     .card-2c .cf-frente { background: linear-gradient(135deg,#2a1040,#1a0030); border: 1.5px solid var(--gold-dim); transform: rotateY(180deg); }
@@ -400,9 +199,9 @@ function montarGrid2Cmaior(pergunta){var g=document.getElementById('grid-2c-maio
 function montarGrid2Cmenor(pergunta){var g=document.getElementById('grid-2c-menor');g.innerHTML='';var menor=[].concat(MN).sort(function(){return Math.random()-0.5});for(var i=0;i<menor.length;i++){(function(idx,carta){var d=document.createElement('div');d.className='card-2c';d.id='c2mn-'+idx;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🃏</span><span class="vs-label">Menor</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||'')+'</span></div></div>';d.onclick=function(){if(carta2Estado.fase!=='menor')return;carta2Estado.menor=carta;var el=document.getElementById('c2mn-'+idx);if(el)el.classList.add('revelada');toast('Arcano Menor selecionado!');setTimeout(function(){document.getElementById('grid-2c-container').style.display='none';document.getElementById('tr').innerHTML='';gerarLeitura2Cartas(carta2Estado.maior,carta2Estado.menor,pergunta);},600)};g.appendChild(d)})(i,menor[i]);}}
 function gerarLeitura2Cartas(c1,c2,pergunta){var m1=c1.nm,m2=c2.nm,e1=c1.energia||'Universal',e2=c2.energia||'Universal';var s1=c1.sg||'',s2=c2.sg||'';var l1=c1.luz||'',l2=c2.luz||'',sb1=c1.sombra||'',sb2=c2.sombra||'';var peso=0;if(e1=='Fogo'||e1=='Universal')peso++;if(e2=='Fogo'||e2=='Universal')peso++;if(e1=='Terra'||e1=='Água')peso--;if(e2=='Terra'||e2=='Água')peso--;var r=Math.random();var resp='';if(peso>=1&&r<0.6)resp='Com certeza';else if(peso>=1&&r<0.9)resp='Sim';else if(peso>=1)resp='Provavelmente sim';else if(peso<=-1&&r<0.6)resp='Não';else if(peso<=-1&&r<0.9)resp='Provavelmente não';else if(peso<=-1)resp='Melhor evitar';else if(r<0.33)resp='Talvez';else if(r<0.66)resp='Sim, mas com cautela';else resp='Provavelmente sim';var cor=resp=='Com certeza'||resp=='Sim'?'#2ecc71':resp=='Não'||resp=='Provavelmente não'||resp=='Melhor evitar'?'#e74c3c':'#f39c12';
 var h='<div class="fade" style="text-align:left;"><p style="font-size:0.8rem;font-style:italic;color:var(--text-dim);margin-bottom:12px;">"'+pergunta+'"</p><h3 style="font-family:Playfair Display,serif;font-size:1.3rem;color:var(--gold);margin-bottom:12px;text-align:center;">Leitura de 2 Cartas</h3><div class="gt" style="grid-template-columns:repeat(2,1fr);"><div class="ti2"><span style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:4px;">1ᵃ Carta — Arcano Maior</span><span class="tn">'+m1+'</span><span class="tt" style="display:block;margin-top:4px;">'+e1+' — '+s1+'</span></div><div class="ti2"><span style="font-size:0.75rem;color:var(--text-dim);display:block;margin-bottom:4px;">2ᵃ Carta — Arcano Menor</span><span class="tn">'+m2+'</span><span class="tt" style="display:block;margin-top:4px;">'+e2+' — '+s2+'</span></div></div>';
-h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;"><strong>Conselho e Advertência:</strong> '+m1+' ('+e1+') é seu Conselho — '+s1.toLowerCase()+' Luz: "'+l1+'". A segunda carta '+m2+' ('+e2+') é a Advertência — '+s2.toLowerCase()+' Sombra: "'+sb2+'". Siga a energia de '+e1+' mas fique atento a '+sb2.toLowerCase()+'.</div>';
-h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;"><strong>Situação e Informação Adicional:</strong> '+m1+' ('+e1+') revela sua Situação Atual — '+s1.toLowerCase()+' '+m2+' ('+e2+') traz um detalhe oculto: '+s2.toLowerCase()+'.</div>';
-h+='<div style="margin-top:20px;padding:18px;border-radius:12px;background:rgba(212,168,83,0.12);border:2px solid '+cor+';text-align:center;font-family:Playfair Display,serif;"><p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;font-family:Open Sans,sans-serif;">Síntese dos Arquétipos</p><p style="font-size:0.85rem;line-height:1.7;margin-bottom:12px;color:var(--text-main);font-family:Open Sans,sans-serif;">Analisando todas as perspectivas — '+m1+' ('+e1+') e '+m2+' ('+e2+') — estas energias se complementam para trazer clareza.</p><div style="font-size:2.5rem;font-weight:bold;color:'+cor+';margin:8px 0;">'+resp+'</div></div>';
+h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;"><strong>Conselho e Advertência:</strong> '+m1+' ('+e1+') é seu Conselho — '+s1.toLowerCase()+' Luz: "'+l1+'". A segunda carta '+m2+' ('+e2+') é a Advertência — '+s2.toLowerCase()+' Sombra: "'+sb2+'".</div>';
+h+='<div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:12px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;"><strong>Situação:</strong> '+m1+' ('+e1+') revela sua Situação Atual. '+m2+' ('+e2+') traz um detalhe oculto.</div>';
+h+='<div style="margin-top:20px;padding:18px;border-radius:12px;background:rgba(212,168,83,0.12);border:2px solid '+cor+';text-align:center;font-family:Playfair Display,serif;"><p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:8px;font-family:Open Sans,sans-serif;">Síntese</p><p style="font-size:0.85rem;line-height:1.7;margin-bottom:12px;color:var(--text-main);font-family:Open Sans,sans-serif;">'+m1+' ('+e1+') e '+m2+' ('+e2+') se complementam para trazer clareza.</p><div style="font-size:2.5rem;font-weight:bold;color:'+cor+';margin:8px 0;">'+resp+'</div></div>';
 h+='<button class="btn" onclick="resetarTaro()">Nova Consulta</button></div>';document.getElementById('tr').innerHTML=h;}
 function gerarCarta(){var h=new Date().toISOString().split('T')[0];var k='carta_'+user.email;if(localStorage.getItem(k)===h){return document.getElementById('carta-result').innerHTML='<p style="color:var(--text-dim);">Já consultou hoje. Volte amanhã!</p>'}localStorage.setItem(k,h);var c=M[Math.floor(Math.random()*M.length)];document.getElementById('carta-result').innerHTML='<div class="fade"><h3>'+c.nm+'</h3><p>"'+c.sg+'"</p></div>';}
 (function(){var c=document.getElementById('stars-container');for(var i=0;i<100;i++){var s=document.createElement('div');s.className='star';var sz=Math.random()*3+1;s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--duration:'+(Math.random()*3+2)+'s;animation-delay:'+(Math.random()*5)+'s';c.appendChild(s);}})();
