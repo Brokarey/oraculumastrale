@@ -46,6 +46,9 @@
         .section-card:hover { border-color: var(--gold); background: rgba(212, 168, 83, 0.05); }
         .section-card i { font-size: 2.5rem; display: block; margin-bottom: 15px; }
         #toast { position: fixed; top: 20px; right: 20px; background: var(--gold); color: #000; padding: 12px 25px; border-radius: 8px; font-weight: 600; transform: translateX(200%); transition: 0.5s; z-index: 1000; }
+        .typewriter { overflow: hidden; border-right: .15em solid var(--gold); white-space: nowrap; margin: 0 auto; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--gold); } }
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .modal-content { background: var(--bg-glow); border: 1px solid var(--gold); border-radius: 20px; padding: 30px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--gold); }
@@ -53,15 +56,13 @@
         .signo-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.8rem; text-align: center; }
         .signo-btn:hover { border-color: var(--gold); background: var(--gold-dim); }
         @media (max-width: 768px) { .signos-grid { grid-template-columns: repeat(3, 1fr); } header { flex-direction: column; gap: 10px; } }
-        /* API Key config panel - hidden from user but keeps working */
-        .api-config-panel { display: none !important; }
     </style>
 </head>
 <body>
     <div id="stars-container"></div>
     <div id="toast">Notificação</div>
     <header id="main-header">
-        <div style="font-family: 'Playfair Display'; font-size: 1.4rem; color: var(--gold);">🔮 Oraculum Astrale</div>
+        <div style="font-family: 'Playfair Display'; font-size: 1.4rem; color: var(--gold); cursor: pointer;" onclick="navegar('screen-welcome')">🔮 Oraculum Astrale</div>
         <div class="stats-bar">
             <div class="stat-item" onclick="abrirModal('modal-comprar')">🔮 <span id="user-credits">0</span> créditos</div>
             <div class="stat-item">🔥 <span id="user-streak">0</span> dias</div>
@@ -69,15 +70,16 @@
             <div class="stat-item" onclick="logout()" style="color: #ff4757;">Sair</div>
         </div>
     </header>
+
+    <!-- TELA WELCOME -->
     <div id="screen-welcome" class="screen screen-active">
-        <div style="font-size: 5rem; margin-bottom: 10px;">🔮</div>
-        <h1 style="font-size: 3.5rem; margin-bottom: 10px;">Oraculum Astrale</h1>
-        <p style="color: var(--text-dim); margin-bottom: 30px; font-style: italic;">Sua jornada de autoconhecimento começa aqui</p>
         <div style="width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px;">
             <button class="btn" onclick="navegar('screen-login')">Entrar</button>
             <button class="btn btn-outline" onclick="navegar('screen-register')">Cadastrar</button>
         </div>
     </div>
+
+    <!-- TELA LOGIN -->
     <div id="screen-login" class="screen">
         <div class="card">
             <h2>Entrar</h2>
@@ -88,19 +90,23 @@
             <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top: 10px;">Voltar</button>
         </div>
     </div>
+
+    <!-- TELA CADASTRO -->
     <div id="screen-register" class="screen">
         <div class="card">
             <h2>Criar Conta</h2>
             <p style="text-align: center; color: var(--gold); font-size: 0.8rem; margin-bottom: 12px;">Ganhe 5 créditos grátis!</p>
-            <input type="text" id="reg-name" placeholder="Nome Completo (mín. 3)" onkeydown="if(event.key==='Enter')fazerCadastro()">
+            <input type="text" id="reg-name" placeholder="Nome Completo" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <input type="text" id="reg-cpf" placeholder="CPF" maxlength="11" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <input type="email" id="reg-email" placeholder="E-mail" onkeydown="if(event.key==='Enter')fazerCadastro()">
-            <input type="password" id="reg-password" placeholder="Senha (mín. 6)" onkeydown="if(event.key==='Enter')fazerCadastro()">
+            <input type="password" id="reg-password" placeholder="Senha" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <input type="password" id="reg-confirm" placeholder="Confirmar Senha" onkeydown="if(event.key==='Enter')fazerCadastro()">
             <button class="btn" onclick="fazerCadastro()">Cadastrar</button>
             <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top: 10px;">Voltar</button>
         </div>
     </div>
+
+    <!-- DASHBOARD -->
     <div id="screen-dashboard" class="screen">
         <h2 id="dashboard-greeting" style="font-size: 2.2rem;">Bem-vindo(a), Viajante</h2>
         <p id="dashboard-phrase" style="color: var(--text-dim); font-style: italic; margin-bottom: 30px;"></p>
@@ -113,21 +119,6 @@
             <span class="close-modal" onclick="fecharModal('modal-tarot');resetarTaro()">&times;</span>
             <h2>🔮 Tarô</h2>
             <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 10px;">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p>
-            
-            <!-- Painel da API Gemini - OCULTO do usuário mas mantém a função -->
-            <div id="api-config-panel" class="api-config-panel">
-                <div style="background:#3d262c;border-radius:10px;padding:12px;margin:10px 0;border:1px solid var(--gold-dim);">
-                    <p style="font-weight:600;color:var(--gold);margin-bottom:6px;font-size:0.8rem;">🔑 Chave da API Gemini:</p>
-                    <div style="display:flex;gap:8px;align-items:center;">
-                        <input type="text" id="gemini-api-key" value="Gui" style="flex:1;margin:4px 0;padding:8px;background:rgba(0,0,0,0.5);border:1px solid var(--gold-dim);border-radius:6px;color:#fff;">
-                        <button onclick="salvarChaveGemini()" style="background:var(--gold);color:#000;border:none;padding:8px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.75rem;white-space:nowrap;">SALVAR</button>
-                    </div>
-                    <p style="font-size:0.7rem;color:#2ecc71;margin-top:4px;">✅ Chave configurada</p>
-                    <p style="font-size:0.65rem;color:var(--text-dim);margin-top:2px;">Crie sua chave gratuita em ai.google.dev</p>
-                    <p style="font-size:0.65rem;color:var(--text-dim);">Sem chave? O sistema usa resposta automática detalhada.</p>
-                </div>
-            </div>
-            
             <div id="desc-sn" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Sim ou Não ou Talvez</p><p>Digite sua pergunta objetiva, clique em "Consultar" e escolha UMA das 78 cartas que aparecerão viradas para baixo. A carta revelada guiará sua resposta.</p></div>
             <div id="desc-2c" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 2 Cartas</p><p>Escolha 1 Arcano Maior (22 cartas) e depois 1 Arcano Menor (56 cartas) para sua leitura personalizada.</p></div>
             <div id="desc-3c" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 3 Cartas</p><p>Posições: Passado, Presente, Futuro.</p></div>
@@ -161,7 +152,6 @@
     <div id="modal-cartadodia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-cartadodia')">&times;</span><h2>🃏 Sua Carta do Dia</h2><div id="carta-result" style="text-align: center; margin-top: 20px;"></div></div></div>
 
 <style>
-    /* Grids do Tarô - 78 cartas e 2 cartas */
     .grid-78 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin: 10px 0; max-height: 350px; overflow-y: auto; padding: 3px; }
     .card-78 { perspective: 600px; min-height: 55px; cursor: pointer; }
     .card-78 .cf-inner { position: relative; width: 100%; height: 55px; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
@@ -205,27 +195,8 @@ function abrirModal(id){document.getElementById(id).style.display='flex';}
 function fecharModal(id){document.getElementById(id).style.display='none';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.modal').forEach(function(m){m.style.display='none'});resetarTaro()}});
 document.addEventListener('click',function(e){if(e.target.classList.contains('modal')){e.target.style.display='none';resetarTaro()}});
-
-// Função para salvar a chave da API Gemini (mantida mesmo oculta)
-function salvarChaveGemini() {
-    var chave = document.getElementById('gemini-api-key').value.trim();
-    if (chave) {
-        localStorage.setItem('gemini_api_key', chave);
-        // A chave continua funcionando internamente
-    }
-}
-
-// Carregar chave salva automaticamente
-(function() {
-    var chaveSalva = localStorage.getItem('gemini_api_key');
-    if (chaveSalva) {
-        var campo = document.getElementById('gemini-api-key');
-        if (campo) campo.value = chaveSalva;
-    }
-})();
-
 function fazerLogin(){var e=document.getElementById('login-email').value.trim();var s=document.getElementById('login-password').value;if(!e||!s)return toast('Preencha todos os campos.');var u=JSON.parse(localStorage.getItem('oa_usuarios')||'[]');var x=u.find(function(v){return v.email===e&&v.senha===s});if(!x)return toast('E-mail ou senha incorretos.');user=x;user.ultimoAcesso=new Date().toISOString().split('T')[0];localStorage.setItem('oa_usuarios',JSON.stringify(u));atualizarStreak();carregarDashboard();navegar('screen-dashboard');toast('Bem-vindo(a), '+x.nome.split(' ')[0]+'!');}
-function fazerCadastro(){var n=document.getElementById('reg-name').value.trim();if(n.length<3)return toast('Nome deve ter no mínimo 3 caracteres.');var c=document.getElementById('reg-cpf').value.replace(/\D/g,'');if(c.length!==11)return toast('CPF inválido.');var e=document.getElementById('reg-email').value.trim();if(!e||!e.includes('@'))return toast('E-mail inválido.');var s=document.getElementById('reg-password').value;var x=document.getElementById('reg-confirm').value;if(s.length<6)return toast('Senha deve ter no mínimo 6 caracteres.');if(s!==x)return toast('Senhas não conferem.');var u=JSON.parse(localStorage.getItem('oa_usuarios')||'[]');if(u.find(function(v){return v.email===e}))return toast('E-mail já cadastrado.');u.push({nome:n,email:e,senha:s,cpf:c,creditos:5,streak:1,ultimoAcesso:new Date().toISOString().split('T')[0]});localStorage.setItem('oa_usuarios',JSON.stringify(u));toast('Conta criada! +5 créditos.');navegar('screen-login');}
+function fazerCadastro(){var n=document.getElementById('reg-name').value.trim();var c=document.getElementById('reg-cpf').value.replace(/\D/g,'');var e=document.getElementById('reg-email').value.trim();var s=document.getElementById('reg-password').value;var x=document.getElementById('reg-confirm').value;if(n.length<3)return toast('Nome deve ter no mínimo 3 caracteres.');if(c.length!==11)return toast('CPF inválido.');if(!e||!e.includes('@'))return toast('E-mail inválido.');if(s.length<6)return toast('Senha deve ter no mínimo 6 caracteres.');if(s!==x)return toast('Senhas não conferem.');var u=JSON.parse(localStorage.getItem('oa_usuarios')||'[]');if(u.find(function(v){return v.email===e}))return toast('E-mail já cadastrado.');u.push({nome:n,email:e,senha:s,cpf:c,creditos:5,streak:1,ultimoAcesso:new Date().toISOString().split('T')[0]});localStorage.setItem('oa_usuarios',JSON.stringify(u));toast('Conta criada! +5 créditos.');navegar('screen-login');}
 function logout(){user=null;navegar('screen-welcome');}
 function atualizarStreak(){if(!user)return;var h=new Date().toISOString().split('T')[0];if(user.ultimoAcesso!==h)user.streak=1;document.getElementById('user-streak').textContent=user.streak;}
 function carregarDashboard(){document.getElementById('dashboard-greeting').textContent='Bem-vindo(a), '+user.nome.split(' ')[0]+'!';document.getElementById('dashboard-phrase').textContent=frases[Math.floor(Math.random()*frases.length)];document.getElementById('user-credits').textContent=user.creditos;var secoes=[{icon:'🃏',titulo:'Carta do Dia',desc:'Grátis diária',modal:'modal-cartadodia'},{icon:'☀️',titulo:'Horóscopo',desc:'Previsões',modal:'modal-horoscopo'},{icon:'🔮',titulo:'Tarô',desc:'Respostas + Leitura',modal:'modal-tarot'},{icon:'🔢',titulo:'Numerologia',desc:'Caminho de vida',modal:'modal-numerologia'},{icon:'☯️',titulo:'I Ching',desc:'Sabedoria',modal:'modal-iching'},{icon:'⚡',titulo:'Sim/Não',desc:'Rápido',modal:'modal-simnao'},{icon:'📖',titulo:'Sonhos',desc:'Interpretação',modal:'modal-sonhos'},{icon:'💘',titulo:'Compatibilidade',desc:'Amor',modal:'modal-compatibilidade'}];var grid=document.getElementById('dashboard-grid');grid.innerHTML=secoes.map(function(s){return '<div class="section-card" onclick="abrirModal(\''+s.modal+'\')"><i>'+s.icon+'</i><h3>'+s.titulo+'</h3><p style="color: var(--text-dim); font-size: 0.8rem;">'+s.desc+'</p></div>'}).join('');var sg=document.getElementById('signos-grid');sg.innerHTML=signos.map(function(s){return '<div class="signo-btn" onclick="mostrarHoroscopo(\''+s.id+'\')">'+s.icon+' '+s.nome+'</div>'}).join('');['compat-signo1','compat-signo2'].forEach(function(id){var sel=document.getElementById(id);sel.innerHTML='<option value="">Selecionar</option>'+signos.map(function(s){return '<option value="'+s.id+'">'+s.nome+' '+s.icon+'</option>'}).join('');});}
@@ -242,7 +213,7 @@ function trocarTipoTarot(){var e=document.getElementById('tt').value;document.ge
 function resetarTaro(){document.getElementById('tr').innerHTML='';document.getElementById('grid-78-container').style.display='none';document.getElementById('grid-78').innerHTML='';cartaEscolhida=null;tipoSN=false;resetar2C();document.getElementById('btn-t').disabled=false;document.getElementById('btn-t').innerText='Consultar';}
 function resetar2C(){document.getElementById('grid-2c-container').style.display='none';document.getElementById('step-2c-maior').style.display='block';document.getElementById('step-2c-menor').style.display='none';document.getElementById('grid-2c-maior').innerHTML='';document.getElementById('grid-2c-menor').innerHTML='';carta2Estado={fase:'maior',maior:null,menor:null};}
 function iniciarTarot(){var p=document.getElementById('tp').value.trim();var t=document.getElementById('tt').value;if(!p)return toast('Digite sua pergunta.');cartaEscolhida=null;tipoSN=(t==='sn');resetar2C();document.getElementById('grid-78-container').style.display='none';document.getElementById('tr').innerHTML='';if(t==='sn'){if(!gas(1))return;sl('btn-t',1);setTimeout(function(){var d=[].concat(DK).sort(function(){return Math.random()-0.5});montarGrid78(d,p);sl('btn-t',0);toast('Escolha uma carta!');},300);return;}if(t==='2c'){if(!gas(2))return;document.getElementById('grid-2c-container').style.display='block';document.getElementById('step-2c-maior').style.display='block';document.getElementById('step-2c-menor').style.display='none';sl('btn-t',1);setTimeout(function(){montarGrid2Cmaior(p);sl('btn-t',0);toast('Escolha um Arcano Maior!');},300);return;}var q=parseInt(t.charAt(0));if(!gas(q))return;sl('btn-t',1);setTimeout(function(){var d=[].concat(DK).sort(function(){return Math.random()-0.5}),cartas=d.slice(0,q);var pos=q===3?['Passado','Presente','Futuro']:['Situação','Obstáculo','Passado','Futuro','Desfecho'];var h='<p style="font-style:italic;color:var(--text-dim);margin-bottom:12px;">"'+p+'"</p><div class="gt">';cartas.forEach(function(c,i){h+='<div class="ti2"><span class="tn" style="font-size:0.7rem;color:var(--text-dim);">'+pos[i]+'</span><span class="tn">'+c.nm+'</span><span class="tt">'+c.sg+'</span></div>'});h+='</div><button class="btn" onclick="resetarTaro()">Nova Consulta</button>';document.getElementById('tr').innerHTML=h;sl('btn-t',0);toast('Cartas lançadas!');},300);}
-function montarGrid78(cartas,pergunta){var g=document.getElementById('grid-78');g.innerHTML='';for(var i=0;i<cartas.length;i++){(function(idx,carta){var d=document.createElement('div');d.className='card-78';d.id='c78-'+idx;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🔮</span><span class="vs-label">Carta '+(idx+1)+'</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||'')+'</span></div></div>';d.onclick=function(){if(cartaEscolhida!==null)return;cartaEscolhida=idx;var el=document.getElementById('c78-'+idx);el.classList.add('revelada');toast('Carta revelada!');setTimeout(function(){document.getElementById('grid-78-container').style.display='none';var resp=['Sim','Não','Talvez'];var esc=resp[Math.floor(Math.random()*3)];var cr=esc==='Sim'?'#2ecc71':esc==='Não'?'#e74c3c':'#f39c12';var r='<div style="font-size:2.5rem;font-weight:bold;text-align:center;margin:15px 0;color:'+cr+';">'+esc+'</div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;">A carta <strong>'+carta.nm+'</strong> (energia de '+(carta.energia||'Universal')+') representa '+carta.sg.toLowerCase()+'. A energia sugere <strong>'+esc.toLowerCase()+'</strong>.</div>';document.getElementById('tr').innerHTML=r+'<button class="btn" onclick="resetarTaro()">Nova Consulta</button>';},800)};g.appendChild(d)})(i,cartas[i]);}document.getElementById('grid-78-container').style.display='block';document.getElementById('tr').innerHTML='';}
+function montarGrid78(cartas,pergunta){var g=document.getElementById('grid-78');g.innerHTML='';for(var i=0;i<cartas.length;i++){(function(idx,carta){var d=document.createElement('div');d.className='card-78';d.id='c78-'+idx;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🔮</span><span class="vs-label">Carta '+(idx+1)+'</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||'')+'</span></div></div>';d.onclick=function(){if(cartaEscolhida!==null)return;cartaEscolhida=idx;var el=document.getElementById('c78-'+idx);el.classList.add('revelada');toast('Carta revelada!');setTimeout(function(){document.getElementById('grid-78-container').style.display='none';var resp=['Sim','Não','Talvez'];var esc=resp[Math.floor(Math.random()*3)];var cr=esc==='Sim'?'#2ecc71':esc==='Não'?'#e74c3c':'#f39c12';var r='<div style="font-size:2.5rem;font-weight:bold;text-align:center;margin:15px 0;color:'+cr+';">'+esc+'</div><div style="background:rgba(212,168,83,0.08);border-radius:10px;padding:14px;margin:10px 0;border-left:3px solid var(--gold);font-size:0.9rem;line-height:1.8;">A carta <strong>'+carta.nm+'</strong> (energia de '+(carta.energia||'Universal')+') representa '+carta.sg.toLowerCase()+'. A energia sugere <strong>'+esc.toLowerCase()+'</strong> para sua pergunta.</div>';document.getElementById('tr').innerHTML=r+'<button class="btn" onclick="resetarTaro()">Nova Consulta</button>';},800)};g.appendChild(d)})(i,cartas[i]);}document.getElementById('grid-78-container').style.display='block';document.getElementById('tr').innerHTML='';}
 function montarGrid2Cmaior(pergunta){var g=document.getElementById('grid-2c-maior');g.innerHTML='';var maior=[].concat(M).sort(function(){return Math.random()-0.5});for(var i=0;i<maior.length;i++){(function(idx,carta){var d=document.createElement('div');d.className='card-2c';d.id='c2m-'+idx;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🃏</span><span class="vs-label">Maior</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||'')+'</span></div></div>';d.onclick=function(){if(carta2Estado.fase!=='maior')return;carta2Estado.maior=carta;carta2Estado.fase='menor';var el=document.getElementById('c2m-'+idx);if(el)el.classList.add('revelada');toast('Arcano Maior selecionado!');setTimeout(function(){document.getElementById('step-2c-maior').style.display='none';document.getElementById('step-2c-menor').style.display='block';montarGrid2Cmenor(pergunta);},600)};g.appendChild(d)})(i,maior[i]);}document.getElementById('grid-2c-container').style.display='block';}
 function montarGrid2Cmenor(pergunta){var g=document.getElementById('grid-2c-menor');g.innerHTML='';var menor=[].concat(MN).sort(function(){return Math.random()-0.5});for(var i=0;i<menor.length;i++){(function(idx,carta){var d=document.createElement('div');d.className='card-2c';d.id='c2mn-'+idx;d.innerHTML='<div class="cf-inner"><div class="cf-verso"><span class="vs-icone">🃏</span><span class="vs-label">Menor</span></div><div class="cf-frente"><span class="cn">'+carta.nm+'</span><span class="cs">'+(carta.energia||'')+'</span></div></div>';d.onclick=function(){if(carta2Estado.fase!=='menor')return;carta2Estado.menor=carta;var el=document.getElementById('c2mn-'+idx);if(el)el.classList.add('revelada');toast('Arcano Menor selecionado!');setTimeout(function(){document.getElementById('grid-2c-container').style.display='none';document.getElementById('tr').innerHTML='';gerarLeitura2Cartas(carta2Estado.maior,carta2Estado.menor,pergunta);},600)};g.appendChild(d)})(i,menor[i]);}}
 function gerarLeitura2Cartas(c1,c2,pergunta){var m1=c1.nm,m2=c2.nm,e1=c1.energia||'Universal',e2=c2.energia||'Universal';var s1=c1.sg||'',s2=c2.sg||'';var l1=c1.luz||'',l2=c2.luz||'',sb1=c1.sombra||'',sb2=c2.sombra||'';var peso=0;if(e1=='Fogo'||e1=='Universal')peso++;if(e2=='Fogo'||e2=='Universal')peso++;if(e1=='Terra'||e1=='Água')peso--;if(e2=='Terra'||e2=='Água')peso--;var r=Math.random();var resp='';if(peso>=1&&r<0.6)resp='Com certeza';else if(peso>=1&&r<0.9)resp='Sim';else if(peso>=1)resp='Provavelmente sim';else if(peso<=-1&&r<0.6)resp='Não';else if(peso<=-1&&r<0.9)resp='Provavelmente não';else if(peso<=-1)resp='Melhor evitar';else if(r<0.33)resp='Talvez';else if(r<0.66)resp='Sim, mas com cautela';else resp='Provavelmente sim';var cor=resp=='Com certeza'||resp=='Sim'?'#2ecc71':resp=='Não'||resp=='Provavelmente não'||resp=='Melhor evitar'?'#e74c3c':'#f39c12';
