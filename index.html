@@ -33,7 +33,7 @@ h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--gold); }
 .btn-google:hover { background: #f5f5f5; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .divider { display: flex; align-items: center; gap: 15px; margin: 15px 0; color: var(--text-dim); font-size: 0.8rem; }
 .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--glass-border); }
-input, select { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff; outline: none; font-family: 'Inter', sans-serif; }
+input, select { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff; outline: none; }
 header { width: 100%; padding: 15px 5%; display: none; justify-content: space-between; align-items: center; background: rgba(10,0,21,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--gold-dim); }
 .stats-bar { display: flex; gap: 20px; font-size: 0.9rem; }
 .stat-item { cursor: pointer; color: var(--gold); }
@@ -91,14 +91,12 @@ header { width: 100%; padding: 15px 5%; display: none; justify-content: space-be
 <div class="stat-item" onclick="logout()" style="color:#ff4757;">Sair</div>
 </div>
 </header>
-
 <div id="screen-welcome" class="screen screen-active">
 <div style="width:100%;max-width:300px;display:flex;flex-direction:column;gap:15px;">
 <button class="btn-welcome" onclick="navegar('screen-login')">Entrar</button>
 <button class="btn-welcome" onclick="navegar('screen-register')">Cadastrar</button>
 </div>
 </div>
-
 <div id="screen-login" class="screen">
 <div class="card">
 <h2>Entrar</h2>
@@ -114,7 +112,6 @@ Entrar com Google
 <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top:10px;">Voltar</button>
 </div>
 </div>
-
 <div id="screen-register" class="screen">
 <div class="card">
 <h2>Criar Conta</h2>
@@ -133,14 +130,12 @@ Cadastrar com Google
 <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top:10px;">Voltar</button>
 </div>
 </div>
-
 <div id="screen-dashboard" class="screen">
 <h2 id="dashboard-greeting" style="font-size:2.2rem;">Bem-vindo(a), Viajante</h2>
 <p id="dashboard-phrase" style="color:var(--text-dim);font-style:italic;margin-bottom:15px;"></p>
 <button class="btn btn-outline" onclick="navegar('screen-welcome')" style="max-width:200px;margin-bottom:20px;">Voltar</button>
 <div class="main-grid" id="dashboard-grid"></div>
 </div>
-
 <div id="modal-tarot" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-tarot');resetarTaro()">&times;</span><h2>🔮 Tarô</h2><p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:10px;">O Tarô é um oráculo milenar que utiliza 78 cartas com arquétipos universais.</p><div id="desc-sn" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Sim ou Não ou Talvez</p><p>Digite sua pergunta objetiva, clique em "Consultar" e escolha UMA das 78 cartas que aparecerão viradas para baixo. A carta revelada guiará sua resposta.</p></div><div id="desc-2c" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 2 Cartas</p><p>Escolha 1 Arcano Maior (22 cartas) e depois 1 Arcano Menor (56 cartas) para sua leitura personalizada.</p></div><div id="desc-3c" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 3 Cartas</p><p>Posições: Passado, Presente, Futuro.</p></div><div id="desc-5c" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 5 Cartas</p><p>Posições: Situação, Obstáculo, Passado, Futuro, Desfecho.</p></div><input type="text" id="tp" placeholder="Sua pergunta objetiva?"><select id="tt" onchange="trocarTipoTarot()"><option value="sn">⚡ Sim ou Não ou Talvez — 1 crédito</option><option value="2c" selected>📖 2 Cartas — 2 créditos</option><option value="3c">📖 3 Cartas — 3 créditos</option><option value="5c">📖 5 Cartas — 5 créditos</option></select><p style="margin-top:10px;color:var(--text-dim);font-size:0.85rem;">Custa <strong style="color:var(--gold);" id="tcl-valor">2</strong> créditos</p><button class="btn" id="btn-t" onclick="iniciarTarot()">Consultar</button><div id="grid-78-container" style="display:none;"><p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:6px;font-style:italic;">Escolha UMA carta clicando nela:</p><div id="grid-78" class="grid-78"></div></div><div id="grid-2c-container" style="display:none;"><div id="step-2c-maior"><p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:6px;">Passo 1 — Escolha 1 Arcano Maior entre 22 cartas:</p><div id="grid-2c-maior" class="g2c"></div></div><div id="step-2c-menor" style="display:none;"><p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:6px;">Passo 2 — Escolha 1 Arcano Menor entre 56 cartas:</p><div id="grid-2c-menor" class="g2c"></div></div></div><div id="tr" style="margin-top:15px;"></div></div></div>
 <div id="modal-horoscopo" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-horoscopo')">&times;</span><h2>☀️ Horóscopo do Dia</h2><p style="color:var(--text-dim);">Selecione seu signo:</p><div class="signos-grid" id="signos-grid"></div><div id="horoscopo-result" style="margin-top:20px;display:none;"></div></div></div>
 <div id="modal-numerologia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-numerologia')">&times;</span><h2>🔢 Numerologia</h2><input type="date" id="nascimento-data"><button class="btn" onclick="calcularNumerologia()">Calcular (2 créditos)</button><div id="numerologia-result" style="margin-top:15px;"></div></div></div>
@@ -151,7 +146,6 @@ Cadastrar com Google
 <div id="modal-comprar" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-comprar')">&times;</span><h2>💳 Créditos</h2><p style="color:var(--text-dim);">Em breve você poderá adquirir mais créditos.</p></div></div>
 <div id="modal-indicar" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-indicar')">&times;</span><h2>👥 Indicar Amigo</h2><p style="color:var(--text-dim);">Compartilhe o link e ganhe 5 créditos por cada amigo que se cadastrar!</p><input type="text" id="indicated-email" placeholder="E-mail do amigo"><button class="btn" onclick="indicarAmigo()">Enviar Convite</button></div></div>
 <div id="modal-cartadodia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-cartadodia')">&times;</span><h2>🃏 Sua Carta do Dia</h2><div id="carta-result" style="text-align:center;margin-top:20px;"></div></div></div>
-
 <script>
 const signos = [{id:"aries",nome:"Aries",icon:"♈",amor:"Iniciativa.",carreira:"Lideranca.",saude:"Hidrate-se."},{id:"touro",nome:"Touro",icon:"♉",amor:"Estabilidade.",carreira:"Financas.",saude:"Natureza."},{id:"gemeos",nome:"Gemeos",icon:"♊",amor:"Comunicacao.",carreira:"Networking.",saude:"Menos telas."},{id:"cancer",nome:"Cancer",icon:"♋",amor:"Familia.",carreira:"Empatia.",saude:"Alimentos leves."},{id:"leao",nome:"Leao",icon:"♌",amor:"Brilho.",carreira:"Reconhecimento.",saude:"Exercicios."},{id:"virgem",nome:"Virgem",icon:"♍",amor:"Sinta.",carreira:"Organizacao.",saude:"Autocuidado."},{id:"libra",nome:"Libra",icon:"♎",amor:"Equilibrio.",carreira:"Parcerias.",saude:"Alongamento."},{id:"escorpiao",nome:"Escorpiao",icon:"♏",amor:"Intensidade.",carreira:"Intuicao.",saude:"Hidratacao."},{id:"sagitario",nome:"Sagitario",icon:"♐",amor:"Aventura.",carreira:"Expansao.",saude:"Ar livre."},{id:"capricornio",nome:"Capricornio",icon:"♑",amor:"Lealdade.",carreira:"Dedicacao.",saude:"Cuidado."},{id:"aquario",nome:"Aquario",icon:"♒",amor:"Liberdade.",carreira:"Inovacao.",saude:"Meditacao."},{id:"peixes",nome:"Peixes",icon:"♓",amor:"Romantismo.",carreira:"Intuicao.",saude:"Descanso."}];
 const frases = ["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio.","Sua intuicao e a voz da sua alma."];
