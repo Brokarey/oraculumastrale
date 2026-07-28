@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oraculum Vitae | Portal Místico</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<style>
+
+
+
+
+
+Oraculum Vitae | Portal Místico
+
+
+
 :root { --bg-deep: #0a0015; --bg-glow: #1a0030; --gold: #d4a853; --gold-dim: rgba(212,168,83,0.2); --text-main: #e8e0f0; --text-dim: #a090b0; --glass: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.1); --transition: 0.4s cubic-bezier(0.4,0,0.2,1); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Open Sans', sans-serif; background: linear-gradient(135deg,var(--bg-deep),var(--bg-glow)); color: var(--text-main); min-height: 100vh; overflow-x: hidden; line-height: 1.6; }
@@ -75,73 +75,73 @@ header { width: 100%; padding: 15px 5%; display: none; justify-content: space-be
 @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 .fade { animation: fadeIn 0.5s ease; }
 @media (max-width: 768px) { .signos-grid { grid-template-columns: repeat(3,1fr); } header { flex-direction: column; gap: 10px; } }
-</style>
-</head>
-<body>
-<div id="stars-container"></div>
-<div id="toast">Notificação</div>
-<header id="main-header">
-<div style="font-family:'Playfair Display';font-size:1.4rem;color:var(--gold);cursor:pointer;" onclick="navegar('screen-welcome')">🔮 Oraculum Vitae</div>
-<div class="stats-bar">
-<div class="stat-item" onclick="abrirModal('modal-comprar')">🔮 <span id="user-credits">0</span> créditos</div>
-<div class="stat-item">🔥 <span id="user-streak">0</span> dias</div>
-<div class="stat-item" onclick="abrirModal('modal-indicar')">👥 Indicar</div>
-<div class="stat-item" onclick="logout()" style="color:#ff4757;">Sair</div>
-</div>
-</header>
-<div id="screen-welcome" class="screen screen-active">
-<div style="width:100%;max-width:320px;display:flex;flex-direction:column;gap:15px;">
-<button class="btn" onclick="navegar('screen-login')">Entrar</button>
-<button class="btn" onclick="navegar('screen-register')">Cadastrar</button>
-</div>
-</div>
-<div id="screen-login" class="screen">
-<div class="card">
-<h2>Entrar</h2>
-<input type="email" id="login-email" placeholder="Seu e-mail">
-<input type="password" id="login-password" placeholder="Sua senha">
-<button class="btn" onclick="fazerLogin()">Acessar Portal</button>
-<div class="divider">ou</div>
-<button class="btn-google" onclick="entrarGoogle()">
-<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+
+
+
+
+Notificação
+
+🔮 Oraculum Vitae
+
+🔮 0 créditos
+🔥 0 dias
+👥 Indicar
+Sair
+
+
+
+
+Entrar
+Cadastrar
+
+
+
+
+Entrar
+
+
+Acessar Portal
+ou
+
+
 Entrar com Google
-</button>
-<p style="text-align:center;margin-top:10px;color:var(--text-dim);font-size:0.9rem;">Não tem conta? <a href="#" onclick="navegar('screen-register')" style="color:var(--gold);">Cadastre-se</a></p>
-<button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top:10px;">Voltar</button>
-</div>
-</div>
-<div id="screen-register" class="screen">
-<div class="card">
-<h2>Criar Conta</h2>
-<p style="text-align:center;color:var(--gold);font-size:0.8rem;margin-bottom:12px;">Ganhe 5 créditos grátis!</p>
-<input type="text" id="reg-name" placeholder="Nome Completo">
-<input type="email" id="reg-email" placeholder="E-mail">
-<input type="password" id="reg-password" placeholder="Senha">
-<button class="btn" onclick="fazerCadastro()">Cadastrar</button>
-<div class="divider">ou</div>
-<button class="btn-google" onclick="entrarGoogle()">
-<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+
+Não tem conta? Cadastre-se
+Voltar
+
+
+
+
+Criar Conta
+Ganhe 5 créditos grátis!
+
+
+
+Cadastrar
+ou
+
+
 Cadastrar com Google
-</button>
-<button class="btn btn-outline" onclick="navegar('screen-welcome')" style="margin-top:10px;">Voltar</button>
-</div>
-</div>
-<div id="screen-dashboard" class="screen">
-<h2 id="dashboard-greeting" style="font-size:2.2rem;">Bem-vindo(a), Viajante</h2>
-<p id="dashboard-phrase" style="color:var(--text-dim);font-style:italic;margin-bottom:15px;"></p>
-<button class="btn btn-outline" onclick="navegar('screen-welcome')" style="max-width:200px;margin-bottom:20px;">Voltar</button>
-<div class="main-grid" id="dashboard-grid"></div>
-</div>
-<div id="modal-tarot" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-tarot');resetarTaro()">&times;</span><h2>🔮 Tarô</h2><p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:10px;">O tarô de Sim, Não, Talvez é um método rápido de leitura focado em autoconhecimento e direcionamento diário. Você retira apenas um dos 76 arcanos do baralho para servir como bússola para o momento. Ele foca em uma pergunta específica, revelando o conselho central, a energia do dia ou a resposta direta que você precisa. Faça uma pergunta objetiva. Essa tiragem é ideal para quem tem pressa ou para iniciantes que estão começando a compreender a simbologia e os significados dos arquétipos. Funciona de forma muito simples: escreva uma pergunta que possa ser respondida por sim, não ou talvez. Selecione uma das cartas do baralho embaralhado, concentrando-se nessa energia. Observe os sentimentos, cores e a mensagem que ela transmite. Esse formato é excelente para meditações diárias e para focar no momento presente, evitando misturar múltiplos significados de leituras com muitas cartas.</p><div id="desc-sn" style="display:block;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Sim, Não, Talvez</p><p>Digite sua pergunta objetiva, clique em "Consultar" e escolha UMA das 78 cartas que aparecerão viradas para baixo. A carta revelada guiará sua resposta.</p></div><div id="desc-2c" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 2 Cartas</p><p>Escolha 1 Arcano Maior (22 cartas) e depois 1 Arcano Menor (56 cartas) para sua leitura personalizada.</p></div><div id="desc-3c" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 3 Cartas</p><p>Posições: Passado, Presente, Futuro.</p></div><div id="desc-5c" style="display:none;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;font-size:0.85rem;line-height:1.6;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">Tiragem de 5 Cartas</p><p>Posições: Situação, Obstáculo, Passado, Futuro, Desfecho.</p></div><input type="text" id="tp" placeholder="Sua pergunta objetiva?"><select id="tt" onchange="trocarTipoTarot()"><option value="sn" selected>⚡ Sim, Não, Talvez — 1 crédito</option><option value="2c">📖 2 Cartas — 2 créditos</option><option value="3c">📖 3 Cartas — 3 créditos</option><option value="5c">📖 5 Cartas — 5 créditos</option></select><p style="margin-top:10px;color:var(--text-dim);font-size:0.85rem;">Custa <strong style="color:var(--gold);" id="tcl-valor">1</strong> crédito</p><button class="btn" id="btn-t" onclick="iniciarTarot()">Consultar</button><div id="grid-78-container" style="display:none;"><p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:6px;font-style:italic;">Escolha UMA carta clicando nela:</p><div id="grid-78" class="grid-78"></div></div><div id="grid-2c-container" style="display:none;"><div id="step-2c-maior"><p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:6px;">Passo 1 — Escolha 1 Arcano Maior entre 22 cartas:</p><div id="grid-2c-maior" class="g2c"></div></div><div id="step-2c-menor" style="display:none;"><p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:6px;">Passo 2 — Escolha 1 Arcano Menor entre 56 cartas:</p><div id="grid-2c-menor" class="g2c"></div></div></div><div id="tr" style="margin-top:15px;"></div></div></div>
-<div id="modal-horoscopo" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-horoscopo')">&times;</span><h2>☀️ Horóscopo do Dia</h2><p style="color:var(--text-dim);">Selecione seu signo:</p><div class="signos-grid" id="signos-grid"></div><div id="horoscopo-result" style="margin-top:20px;display:none;"></div></div></div>
-<div id="modal-numerologia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-numerologia')">&times;</span><h2>🔢 Numerologia</h2><input type="date" id="nascimento-data"><button class="btn" onclick="calcularNumerologia()">Calcular (2 créditos)</button><div id="numerologia-result" style="margin-top:15px;"></div></div></div>
-<div id="modal-iching" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-iching')">&times;</span><h2>☯️ I Ching</h2><input type="text" id="iching-question" placeholder="Sua pergunta?"><button class="btn" onclick="consultarIChing()">Consultar (2 créditos)</button><div id="iching-result" style="margin-top:15px;"></div></div></div>
-<div id="modal-sonhos" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-sonhos')">&times;</span><h2>📖 Dicionário dos Sonhos</h2><input type="text" id="sonho-busca" placeholder="Ex: cobra, água..." onkeyup="buscarSonho()"><div id="sonho-result" style="margin-top:15px;max-height:200px;overflow-y:auto;"></div></div></div>
-<div id="modal-compatibilidade" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-compatibilidade')">&times;</span><h2>💘 Sinergia Astral</h2><div style="display:flex;gap:10px;"><select id="compat-signo1" style="flex:1;"><option value="">Seu Signo</option></select><select id="compat-signo2" style="flex:1;"><option value="">Outro Signo</option></select></div><button class="btn" onclick="verCompatibilidade()">Verificar</button><div id="compat-result" style="margin-top:15px;text-align:center;"></div></div></div>
-<div id="modal-comprar" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-comprar')">&times;</span><h2>💳 Créditos e Planos</h2><p style="color:var(--text-dim);margin-bottom:15px;">Os créditos são acumulativos e válidos para todas as consultas do portal.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px;"><div style="background:rgba(255,255,255,0.05);border:1px solid var(--gold);border-radius:10px;padding:15px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:var(--gold);">R$ 1,00</div><div style="font-size:0.8rem;color:var(--text-main);">1 crédito</div><div style="font-size:0.65rem;color:var(--text-dim);">R$ 1,00 / crédito</div></div><div style="background:rgba(255,255,255,0.05);border:1px solid var(--gold);border-radius:10px;padding:15px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:var(--gold);">R$ 8,90</div><div style="font-size:0.8rem;color:var(--text-main);">10 créditos</div><div style="font-size:0.65rem;color:var(--text-dim);">R$ 0,89 / crédito</div></div><div style="background:rgba(255,255,255,0.05);border:1px solid var(--gold);border-radius:10px;padding:15px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:var(--gold);">R$ 17,90</div><div style="font-size:0.8rem;color:var(--text-main);">25 créditos</div><div style="font-size:0.65rem;color:var(--text-dim);">R$ 0,72 / crédito</div></div><div style="background:rgba(255,255,255,0.05);border:1px solid var(--gold);border-radius:10px;padding:15px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:var(--gold);">R$ 29,90</div><div style="font-size:0.8rem;color:var(--text-main);">50 créditos</div><div style="font-size:0.65rem;color:var(--text-dim);">R$ 0,60 / crédito</div></div></div><h3>📅 Planos de Assinatura</h3><div style="margin-bottom:15px;"><div style="background:rgba(212,168,83,0.1);border:1px solid var(--gold);border-radius:10px;padding:15px;margin-bottom:10px;"><div style="font-size:0.9rem;font-weight:600;color:var(--gold);">Aprendiz Trimestral</div><div style="font-size:1.2rem;font-weight:700;color:var(--gold);">R$ 69,90</div><div style="font-size:0.75rem;color:var(--text-main);">50 créditos/mês · Total: 150 créditos</div><div style="font-size:0.65rem;color:var(--text-dim);">R$ 0,47 / crédito</div></div><div style="background:rgba(255,215,0,0.08);border:1px solid var(--gold);border-radius:10px;padding:15px;"><div style="font-size:0.9rem;font-weight:600;color:var(--gold);">Mestre Anual</div><div style="font-size:1.2rem;font-weight:700;color:var(--gold);">R$ 169,90</div><div style="font-size:0.75rem;color:var(--text-main);">50 créditos/mês · Total: 600 créditos</div><div style="font-size:0.65rem;color:var(--text-dim);">R$ 0,28 / crédito</div></div></div><p style="color:var(--text-dim);font-size:0.8rem;">Em breve você poderá adquirir pelos canais de pagamento.</p></div></div>
-<div id="modal-indicar" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-indicar')">&times;</span><h2>👥 Indicar Amigo</h2><p style="color:var(--text-dim);">Compartilhe o link e ganhe 5 créditos por cada amigo que se cadastrar!</p><input type="text" id="indicated-email" placeholder="E-mail do amigo"><button class="btn" onclick="indicarAmigo()">Enviar Convite</button></div></div>
-<div id="modal-cartadodia" class="modal"><div class="modal-content"><span class="close-modal" onclick="fecharModal('modal-cartadodia')">&times;</span><h2>🃏 Sua Carta do Dia</h2><p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:10px;">A Carta do Dia é uma ferramenta de reflexão diária baseada na sabedoria do Tarô. Ela funciona como um conselho rápido e direcionado para as próximas 24 horas da sua jornada. Para tornar sua experiência única e dinâmica, nosso sistema realiza um duplo sorteio aleatório todos os dias: a Carta (sorteamos uma das 78 cartas do Tarô para identificar a energia que influenciará o seu dia) e o Foco (o sistema escolhe aleatoriamente uma área da sua vida como Trabalho, Relacionamentos, Dinheiro ou Família para aplicar o conselho da carta de forma ultra-específica).</p><div style="background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold);"><p style="font-weight:600;color:var(--gold);margin-bottom:6px;">📜 Regras de Uso</p><p>Uma vez por dia: Como usuário cadastrado, você tem direito a tirar uma carta gratuita a cada 24 horas. O conselho expira à meia-noite, abrindo espaço para a energia do dia seguinte. Use o conselho para antecipar desafios ou aproveitar oportunidades na área sorteada.</p></div><div id="carta-result" style="text-align:center;margin-top:20px;"><button class="btn" onclick="gerarCarta()" style="max-width:250px;">🔮 Clique para virar</button><p style="font-size:0.8rem;color:var(--text-dim);margin-top:8px;">Toque na carta para revelar sua mensagem do dia</p></div></div></div>
-<script>
+
+Voltar
+
+
+
+Bem-vindo(a), Viajante
+
+Voltar
+
+
+×🔮 TarôO tarô de Sim, Não, Talvez é um método rápido de leitura focado em autoconhecimento e direcionamento diário. Você retira apenas um dos 76 arcanos do baralho para servir como bússola para o momento. Ele foca em uma pergunta específica, revelando o conselho central, a energia do dia ou a resposta direta que você precisa. Faça uma pergunta objetiva. Essa tiragem é ideal para quem tem pressa ou para iniciantes que estão começando a compreender a simbologia e os significados dos arquétipos. Funciona de forma muito simples: escreva uma pergunta que possa ser respondida por sim, não ou talvez. Selecione uma das cartas do baralho embaralhado, concentrando-se nessa energia. Observe os sentimentos, cores e a mensagem que ela transmite. Esse formato é excelente para meditações diárias e para focar no momento presente, evitando misturar múltiplos significados de leituras com muitas cartas.Sim, Não, TalvezDigite sua pergunta objetiva, clique em "Consultar" e escolha UMA das 78 cartas que aparecerão viradas para baixo. A carta revelada guiará sua resposta.Tiragem de 2 CartasEscolha 1 Arcano Maior (22 cartas) e depois 1 Arcano Menor (56 cartas) para sua leitura personalizada.Tiragem de 3 CartasPosições: Passado, Presente, Futuro.Tiragem de 5 CartasPosições: Situação, Obstáculo, Passado, Futuro, Desfecho.⚡ Sim, Não, Talvez — 1 crédito📖 2 Cartas — 2 créditos📖 3 Cartas — 3 créditos📖 5 Cartas — 5 créditosCusta 1 créditoConsultarEscolha UMA carta clicando nela:Passo 1 — Escolha 1 Arcano Maior entre 22 cartas:Passo 2 — Escolha 1 Arcano Menor entre 56 cartas:
+×☀️ Horóscopo do DiaSelecione seu signo:
+×🔢 NumerologiaCalcular (2 créditos)
+×☯️ I ChingConsultar (2 créditos)
+×📖 Dicionário dos Sonhos
+×💘 Sinergia AstralSeu SignoOutro SignoVerificar
+×💳 Créditos e PlanosOs créditos são acumulativos e válidos para todas as consultas do portal.R$ 1,001 créditoR$ 1,00 / créditoR$ 8,9010 créditosR$ 0,89 / créditoR$ 17,9025 créditosR$ 0,72 / créditoR$ 29,9050 créditosR$ 0,60 / crédito📅 Planos de AssinaturaAprendiz TrimestralR$ 69,9050 créditos/mês · Total: 150 créditosR$ 0,47 / créditoMestre AnualR$ 169,9050 créditos/mês · Total: 600 créditosR$ 0,28 / créditoEm breve você poderá adquirir pelos canais de pagamento.
+×👥 Indicar AmigoCompartilhe o link e ganhe 5 créditos por cada amigo que se cadastrar!Enviar Convite
+×🃏 Sua Carta do DiaA Carta do Dia é uma ferramenta de reflexão diária baseada na sabedoria do Tarô. Ela funciona como um conselho rápido e direcionado para as próximas 24 horas da sua jornada. Para tornar sua experiência única e dinâmica, nosso sistema realiza um duplo sorteio aleatório todos os dias: a Carta (sorteamos uma das 78 cartas do Tarô para identificar a energia que influenciará o seu dia) e o Foco (o sistema escolhe aleatoriamente uma área da sua vida como Trabalho, Relacionamentos, Dinheiro ou Família para aplicar o conselho da carta de forma ultra-específica).📜 Regras de UsoUma vez por dia: Como usuário cadastrado, você tem direito a tirar uma carta gratuita a cada 24 horas. O conselho expira à meia-noite, abrindo espaço para a energia do dia seguinte. Use o conselho para antecipar desafios ou aproveitar oportunidades na área sorteada.🔮 Clique para virarToque na carta para revelar sua mensagem do dia
+
 var signos = [{id:"aries",nome:"Aries",icon:"♈",amor:"Iniciativa.",carreira:"Lideranca.",saude:"Hidrate-se."},{id:"touro",nome:"Touro",icon:"♉",amor:"Estabilidade.",carreira:"Financas.",saude:"Natureza."},{id:"gemeos",nome:"Gemeos",icon:"♊",amor:"Comunicacao.",carreira:"Networking.",saude:"Menos telas."},{id:"cancer",nome:"Cancer",icon:"♋",amor:"Familia.",carreira:"Empatia.",saude:"Alimentos leves."},{id:"leao",nome:"Leao",icon:"♌",amor:"Brilho.",carreira:"Reconhecimento.",saude:"Exercicios."},{id:"virgem",nome:"Virgem",icon:"♍",amor:"Sinta.",carreira:"Organizacao.",saude:"Autocuidado."},{id:"libra",nome:"Libra",icon:"♎",amor:"Equilibrio.",carreira:"Parcerias.",saude:"Alongamento."},{id:"escorpiao",nome:"Escorpiao",icon:"♏",amor:"Intensidade.",carreira:"Intuicao.",saude:"Hidratacao."},{id:"sagitario",nome:"Sagitario",icon:"♐",amor:"Aventura.",carreira:"Expansao.",saude:"Ar livre."},{id:"capricornio",nome:"Capricornio",icon:"♑",amor:"Lealdade.",carreira:"Dedicacao.",saude:"Cuidado."},{id:"aquario",nome:"Aquario",icon:"♒",amor:"Liberdade.",carreira:"Inovacao.",saude:"Meditacao."},{id:"peixes",nome:"Peixes",icon:"♓",amor:"Romantismo.",carreira:"Intuicao.",saude:"Descanso."}];
 var frases = ["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas nao obrigam.","O que voce busca tambem esta buscando voce.","A resposta esta no silencio.","Sua intuicao e a voz da sua alma."];
 var sonhos = {agua:"Suas emocoes.",cobra:"Transformacao.",dente:"Ansiedade.",bebe:"Novos comecos.",morte:"Fim de ciclo.",voar:"Liberdade."};
@@ -177,6 +177,5 @@ function montarGrid2Cmenor(pergunta){var g=document.getElementById('grid-2c-meno
 function gerarLeitura2Cartas(c1,c2,pergunta){var m1=c1.nm,m2=c2.nm,e1=c1.energia||'Universal',e2=c2.energia||'Universal';var s1=c1.sg||'',s2=c2.sg||'';var ps=0;if(e1=='Fogo'||e1=='Universal')ps++;if(e2=='Fogo'||e2=='Universal')ps++;if(e1=='Terra'||e1=='Agua')ps--;if(e2=='Terra'||e2=='Agua')ps--;var r=Math.random();var rp=ps>=1&&r<0.6?'Com certeza':ps>=1&&r<0.9?'Sim':ps>=1?'Provavelmente sim':ps<=-1&&r<0.6?'Nao':ps<=-1&&r<0.9?'Provavelmente nao':ps<=-1?'Melhor evitar':r<0.33?'Talvez':r<0.66?'Sim, mas com cautela':'Provavelmente sim';var co=rp=='Com certeza'||rp=='Sim'?'#2ecc71':rp=='Nao'||rp=='Provavelmente nao'||rp=='Melhor evitar'?'#e74c3c':'#f39c12';var h='<div class="fade"><p style="font-style:italic;color:var(--text-dim);">"'+pergunta+'"</p><h3 style="font-family:Playfair Display,serif;color:var(--gold);text-align:center;margin:12px 0;">Leitura de 2 Cartas</h3><div class="gt" style="grid-template-columns:repeat(2,1fr);"><div class="ti2"><span style="font-size:0.75rem;color:var(--text-dim);display:block;">1 Arcano Maior</span><span class="tn">'+m1+'</span><span class="tt">'+e1+': '+s1+'</span></div><div class="ti2"><span style="font-size:0.75rem;color:var(--text-dim);display:block;">2 Arcano Menor</span><span class="tn">'+m2+'</span><span class="tt">'+e2+': '+s2+'</span></div></div><div style="margin:15px 0;border-left:3px solid var(--gold);padding:10px;font-size:0.85rem;"><strong>Conselho:</strong> '+m1+' ('+e1+'). <strong>Advertencia:</strong> '+m2+' ('+e2+').</div><div style="text-align:center;padding:12px;border:2px solid '+co+';border-radius:8px;"><div style="font-size:2rem;font-weight:bold;color:'+co+';">'+rp+'</div></div><button class="btn" onclick="resetarTaro()">Nova Consulta</button></div>';document.getElementById('tr').innerHTML=h;}
 function gerarCarta(){if(!user){toast('Faca login.');return;}var h=new Date().toISOString().split('T')[0];var k='carta_'+user.email;if(localStorage.getItem(k)===h){document.getElementById('carta-result').innerHTML='<p style="color:var(--text-dim);">Ja consultou hoje. Volte amanha!</p>';return;}localStorage.setItem(k,h);var c=M[Math.floor(Math.random()*M.length)];var areas=['Trabalho','Relacionamentos','Dinheiro','Familia','Saude','Espiritualidade'];var area=areas[Math.floor(Math.random()*areas.length)];document.getElementById('carta-result').innerHTML='<div class="fade"><div style="font-size:3rem;color:var(--gold);">'+c.nm+'</div><p style="margin:10px 0;">"'+c.sg+'"</p><div style="background:rgba(212,168,83,0.1);border-left:3px solid var(--gold);padding:10px;border-radius:6px;"><strong>Foco do dia:</strong> '+area+'</div></div>';}
 (function(){var c=document.getElementById('stars-container');for(var i=0;i<100;i++){var s=document.createElement('div');s.className='star';var sz=Math.random()*3+1;s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;animation-duration:'+(Math.random()*3+2)+'s;animation-delay:'+(Math.random()*5)+'s';c.appendChild(s);}})();
-</script>
-</body>
-</html>
+
+
