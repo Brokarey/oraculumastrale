@@ -1,317 +1,537 @@
-``` e colar como `index.html`.
-
-**Resumo do que fiz:**
-
-1. ✅ **Nome corrigido** para "Oraculum Astrale"
-2. ✅ **Campo CPF** adicionado no cadastro com `maxlength="11"` e validação completa (algoritmo real de CPF)
-3. ✅ **Botões Google** com estilo correto (fundo branco, ícone SVG, borda, hover)
-4. ✅ **CPF único** — impede cadastro duplicado por CPF
-5. ✅ **Login após cadastro** — agora ao cadastrar você é **redirecionado para o login** para entrar
-
-Sobre a **imagem de fundo da tela inicial** (`Tela-Inicial.png` não aparecendo): no HTML que escrevi, usei apenas gradiente escuro como fundo. As imagens que você subiu estão na conversa mas o HTML precisa referenciar arquivos que estejam no mesmo diretório do `index.html` no servidor.
-
-Se você quiser que o fundo use a imagem `Tela-Inicial.png`, você precisa:
-1. Colocar o arquivo `Tela-Inicial.png` na **mesma pasta** do `index.html` no Vercel
-2. Copie o HTML abaixo que já inclui o background image
-
-Aqui está o HTML completo com o fundo usando a imagem e o **auto-login após cadastro**:
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oraculum Astrale | Portal Místico</title>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
-:root { --bg-deep: #0a0015; --bg-glow: #1a0030; --gold: #d4a853; --gold-hover: #f1c40f; --text: #e8e0f0; --text-dim: #a090b0; --glass: rgba(255,255,255,0.05); --border: rgba(212,168,83,0.3); }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Open Sans', sans-serif; background: linear-gradient(135deg, var(--bg-deep), var(--bg-glow)); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-#stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: linear-gradient(135deg, var(--bg-deep), var(--bg-glow)); }
-.star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--d) infinite ease-in-out; }
-@keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
-.screen { display: none; min-height: 100vh; width: 100%; padding: 20px; flex-direction: column; align-items: center; justify-content: center; }
-.screen.active { display: flex; }
-#screen-welcome { background: url('Tela-Inicial.png') center/cover no-repeat, linear-gradient(135deg, var(--bg-deep), var(--bg-glow)); }
-#screen-login, #screen-register { background: url('Tela-Outros.png') center/cover no-repeat, linear-gradient(135deg, var(--bg-deep), var(--bg-glow)); }
-#screen-dash { background: url('Tela.png') center/cover no-repeat fixed, linear-gradient(135deg, var(--bg-deep), var(--bg-glow)); justify-content: flex-start; padding-top: 100px; }
-.card { background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 20px; }
-.btn { background: var(--gold); color: #000; border: none; padding: 15px 30px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-family: 'Open Sans', sans-serif; }
-.btn:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,168,83,0.3); }
-.btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
-.btn-google { background: #fff; color: #444; border: 1px solid #ddd; padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; }
-.btn-google:hover { background: #f5f5f5; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.divider { display: flex; align-items: center; gap: 15px; margin: 15px 0; color: var(--text-dim); font-size: 0.8rem; }
-.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-input, select { width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none; font-family: 'Open Sans', sans-serif; }
-header { display: none; width: 100%; padding: 15px 5%; background: rgba(10,0,21,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); justify-content: space-between; align-items: center; position: fixed; top: 0; z-index: 100; box-sizing: border-box; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 1100px; margin-top: 80px; padding: 0 20px; box-sizing: border-box; }
-.sec-card { background: var(--glass); border: 1px solid var(--border); border-radius: 15px; padding: 25px; cursor: pointer; transition: 0.3s; text-align: center; }
-.sec-card:hover { border-color: var(--gold); background: rgba(212,168,83,0.08); transform: translateY(-5px); }
-.sec-card i { font-size: 2.5rem; display: block; margin-bottom: 10px; }
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-.modal-content { background: var(--bg-glow); border: 2px solid var(--gold); border-radius: 20px; padding: 30px; max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
-.close { position: absolute; top: 15px; right: 20px; font-size: 28px; color: var(--gold); cursor: pointer; }
-.close:hover { color: var(--gold-hover); }
-#toast { position: fixed; top: 20px; right: 20px; background: var(--gold); color: #000; padding: 15px 25px; border-radius: 8px; font-weight: 600; transform: translateX(200%); transition: 0.5s; z-index: 9999; font-family: 'Open Sans', sans-serif; }
-.tarot-deck { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 8px; margin-top: 20px; max-height: 400px; overflow-y: auto; padding: 5px; }
-.t-card { perspective: 600px; height: 95px; cursor: pointer; }
-.t-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
-.t-card.flipped .t-card-inner { transform: rotateY(180deg); }
-.t-card-front, .t-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 9px; text-align: center; padding: 3px; }
-.t-card-back { background: linear-gradient(135deg, #1a0030, #d4a853); border: 1px solid var(--border); cursor: pointer; }
-.t-card-front { background: #fff; color: #000; transform: rotateY(180deg); font-weight: 600; }
-.signos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-.signo-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; text-align: center; color: var(--text); }
-.signo-btn:hover { border-color: var(--gold); background: rgba(212,168,83,0.15); }
-.iching-lines { font-size: 2rem; letter-spacing: 5px; line-height: 2; text-align: center; margin: 20px 0; }
-@media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } .signos-grid { grid-template-columns: repeat(2, 1fr); } }
+  /* ===== RESET & BASE ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0015 0%, #1a0030 50%, #0a0015 100%);
+    color: #e8e0f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  a { color: #d4a853; text-decoration: none; }
+
+  /* ===== STARS CANVAS ===== */
+  #stars-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ===== SCREENS ===== */
+  .screen {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .screen.active { display: flex; }
+
+  /* Welcome screen */
+  #screen-welcome {
+    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"%3E%3Cdefs%3E%3CradialGradient id="g" cx="50%25" cy="50%25" r="60%25"%3E%3Cstop offset="0%25" stop-color="%232a1040" stop-opacity="0.6"/%3E%3Cstop offset="100%25" stop-color="%230a0015" stop-opacity="0"/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill="%230a0015" width="1440" height="900"/%3E%3Crect fill="url(%23g)" width="1440" height="900"/%3E%3C/svg%3E') center/cover no-repeat;
+    text-align: center;
+  }
+
+  /* Login & Register */
+  #screen-login, #screen-register {
+    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"%3E%3Cdefs%3E%3CradialGradient id="g" cx="50%25" cy="40%25" r="50%25"%3E%3Cstop offset="0%25" stop-color="%232a1040" stop-opacity="0.4"/%3E%3Cstop offset="100%25" stop-color="%230a0015" stop-opacity="0"/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill="%230a0015" width="1440" height="900"/%3E%3Crect fill="url(%23g)" width="1440" height="900"/%3E%3C/svg%3E') center/cover no-repeat;
+  }
+
+  /* Dashboard */
+  #screen-dash {
+    justify-content: flex-start;
+    padding-top: 80px;
+    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900"%3E%3Cdefs%3E%3CradialGradient id="g" cx="50%25" cy="50%25" r="60%25"%3E%3Cstop offset="0%25" stop-color="%232a1040" stop-opacity="0.5"/%3E%3Cstop offset="100%25" stop-color="%230a0015" stop-opacity="0"/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill="%230a0015" width="1440" height="900"/%3E%3Crect fill="url(%23g)" width="1440" height="900"/%3E%3C/svg%3E') center/cover fixed;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212,168,83,0.3);
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  }
+
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #d4a853;
+    margin-bottom: 20px;
+  }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.6rem; }
+
+  .welcome-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 40px rgba(212,168,83,0.3);
+  }
+  .welcome-sub {
+    color: #a090b0;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    background: #d4a853;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.95rem;
+  }
+  .btn:hover {
+    background: #f1c40f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212,168,83,0.3);
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid #d4a853;
+    color: #d4a853;
+  }
+  .btn-outline:hover {
+    background: rgba(212,168,83,0.1);
+  }
+  .btn-google {
+    background: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+  .btn-google:hover {
+    background: #f5f5f5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0;
+    color: #a090b0;
+    font-size: 0.8rem;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(212,168,83,0.3);
+  }
+
+  /* ===== INPUTS ===== */
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(212,168,83,0.3);
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+  }
+  input:focus {
+    border-color: #d4a853;
+    box-shadow: 0 0 10px rgba(212,168,83,0.2);
+  }
+  input::placeholder { color: #6a5a7a; }
+
+  /* ===== LINKS ===== */
+  .link {
+    color: #a090b0;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .link:hover { color: #d4a853; }
+  .link-highlight { color: #d4a853; }
+
+  /* ===== HEADER ===== */
+  header {
+    display: none;
+    width: 100%;
+    padding: 12px 5%;
+    background: rgba(10,0,21,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212,168,83,0.3);
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+  }
+  header .logo {
+    font-family: 'Georgia', serif;
+    color: #d4a853;
+    font-size: 1.2rem;
+  }
+  header .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.85rem;
+    color: #a090b0;
+  }
+  header .user-info span { color: #e8e0f0; }
+  header .user-info .logout {
+    color: #d4a853;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  header .user-info .logout:hover { color: #f1c40f; }
+
+  /* ===== GRID ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+  }
+
+  .sec-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212,168,83,0.2);
+    border-radius: 15px;
+    padding: 30px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+  }
+  .sec-card:hover {
+    border-color: #d4a853;
+    background: rgba(212,168,83,0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(212,168,83,0.15);
+  }
+  .sec-card .icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .sec-card h3 {
+    color: #d4a853;
+    font-family: 'Georgia', serif;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+  }
+  .sec-card p {
+    color: #a090b0;
+    font-size: 0.85rem;
+  }
+
+  /* ===== WELCOME QUOTE ===== */
+  .welcome-quote {
+    margin: 30px 0;
+    font-style: italic;
+    color: #a090b0;
+    font-size: 1rem;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+
+  /* ===== TOAST ===== */
+  #toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #d4a853;
+    color: #000;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    transform: translateX(200%);
+    transition: 0.5s;
+    z-index: 9999;
+  }
+  #toast.show { transform: translateX(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .welcome-title { font-size: 2rem; }
+    .card { padding: 25px 20px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 12px; }
+    .sec-card { padding: 20px 12px; }
+    .sec-card .icon { font-size: 1.8rem; }
+    header .user-info { gap: 8px; font-size: 0.75rem; }
+  }
 </style>
 </head>
 <body>
-<div id="stars"></div>
-<div id="toast">Notificação</div>
-<header id="main-header">
-<div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);cursor:pointer;" onclick="showScreen('screen-welcome')">🔮 Oraculum Astrale</div>
-<div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
-<span style="font-size:0.9rem;">✨ <span id="h-credits">0</span> Créditos</span>
-<span style="font-size:0.9rem;">🔥 <span id="h-streak">0</span> Dias</span>
-<button onclick="logout()" style="background:none;border:1px solid var(--gold);color:var(--gold);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.8rem;">Sair</button>
-</div>
-</header>
+
+<!-- ===== STARS CANVAS ===== -->
+<canvas id="stars-canvas"></canvas>
+
+<!-- ===== TOAST ===== -->
+<div id="toast"></div>
+
+<!-- ===== SCREEN: WELCOME ===== -->
 <div id="screen-welcome" class="screen active">
-<div style="text-align:center;max-width:600px;">
-<div style="font-size:5rem;margin-bottom:15px;">🔮</div>
-<h1 style="font-size:3.5rem;margin-bottom:10px;">Oraculum Astrale</h1>
-<p style="color:var(--text-dim);font-size:1.1rem;margin-bottom:40px;font-style:italic;">Desvende os mistérios do seu destino através das estrelas e dos arquétipos milenares.</p>
-<div style="width:100%;max-width:300px;margin:0 auto;">
-<button class="btn" onclick="showScreen('screen-login')">ENTRAR</button>
-<button class="btn" onclick="showScreen('screen-register')">CADASTRAR</button>
+  <div style="text-align:center;">
+    <h1 class="welcome-title">✦ Oraculum Astrale ✦</h1>
+    <p class="welcome-sub">PORTAL DE TARÔ E ESOTERISMO</p>
+    <p class="welcome-quote">"O universo conspira a favor<br>de quem conhece a si mesmo."</p>
+    <div style="display:flex; flex-direction:column; align-items:center; max-width:320px; margin:0 auto;">
+      <button class="btn" onclick="showScreen('screen-login')">ENTRAR</button>
+      <button class="btn btn-outline" onclick="showScreen('screen-register')">CADASTRAR</button>
+    </div>
+  </div>
 </div>
-</div>
-</div>
+
+<!-- ===== SCREEN: LOGIN ===== -->
 <div id="screen-login" class="screen">
-<div class="card">
-<h2>Acessar Portal</h2>
-<input type="email" id="l-email" placeholder="E-mail">
-<input type="password" id="l-pass" placeholder="Senha">
-<button class="btn" onclick="login()">Entrar no Oráculo</button>
-<div class="divider">ou</div>
-<button class="btn-google" onclick="toast('Google Login em breve!')">
-<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
-Entrar com Google
-</button>
-<p style="margin-top:15px;font-size:0.9rem;color:var(--text-dim);">Novo por aqui? <a href="#" onclick="showScreen('screen-register')" style="color:var(--gold);text-decoration:none;">Crie sua conta</a></p>
+  <div class="card">
+    <h2>Acessar Portal</h2>
+    <p style="color:#a090b0; margin-bottom:20px;">Entre no Oráculo</p>
+    <input type="email" id="login-email" placeholder="E-mail">
+    <input type="password" id="login-password" placeholder="Senha">
+    <button class="btn" onclick="handleLogin()">Entrar</button>
+    <div class="divider">ou</div>
+    <button class="btn-google" onclick="showToast('Google Login em breve!')">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.54 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.28-3.14.76-4.59l-7.98-6.19A23.99 23.99 0 0 0 0 24c0 3.77.87 7.35 2.56 10.56l7.98-5.97z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 5.97C6.51 42.62 14.62 48 24 48z"/></svg>
+      Entrar com Google
+    </button>
+    <p style="margin-top:20px;">
+      <span class="link" onclick="showScreen('screen-register')">Novo por aqui? <span class="link-highlight">Crie sua conta</span></span>
+    </p>
+  </div>
 </div>
-</div>
+
+<!-- ===== SCREEN: REGISTER ===== -->
 <div id="screen-register" class="screen">
-<div class="card">
-<h2>Nova Jornada</h2>
-<p style="text-align:center;color:var(--gold);font-size:0.8rem;margin-bottom:12px;">Ganhe 5 créditos grátis!</p>
-<input type="text" id="r-name" placeholder="Nome Completo">
-<input type="text" id="r-cpf" placeholder="CPF (apenas números)" maxlength="11" inputmode="numeric">
-<input type="email" id="r-email" placeholder="E-mail">
-<input type="password" id="r-pass" placeholder="Senha (mín. 6 caracteres)">
-<button class="btn" onclick="register()">Cadastrar e Entrar</button>
-<div class="divider">ou</div>
-<button class="btn-google" onclick="toast('Google Login em breve!')">
-<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
-Cadastrar com Google
-</button>
-<button class="btn btn-outline" onclick="showScreen('screen-welcome')" style="margin-top:10px;">Voltar</button>
+  <div class="card">
+    <h2>Nova Jornada</h2>
+    <p style="color:#d4a853; margin-bottom:15px;">🎉 Ganhe 5 créditos grátis!</p>
+    <input type="text" id="reg-name" placeholder="Nome">
+    <input type="email" id="reg-email" placeholder="E-mail">
+    <input type="password" id="reg-password" placeholder="Senha">
+    <button class="btn" onclick="handleRegister()">Cadastrar e Entrar</button>
+    <div class="divider">ou</div>
+    <button class="btn-google" onclick="showToast('Google Login em breve!')">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.54 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.28-3.14.76-4.59l-7.98-6.19A23.99 23.99 0 0 0 0 24c0 3.77.87 7.35 2.56 10.56l7.98-5.97z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 5.97C6.51 42.62 14.62 48 24 48z"/></svg>
+      Cadastrar com Google
+    </button>
+    <p style="margin-top:20px;">
+      <span class="link" onclick="showScreen('screen-login')">Já tem conta? <span class="link-highlight">Faça login</span></span>
+    </p>
+  </div>
 </div>
+
+<!-- ===== HEADER (Dashboard) ===== -->
+<header id="main-header">
+  <div class="logo">✦ Oraculum Astrale</div>
+  <div class="user-info">
+    <span>🔮 <span id="hdr-credits">0</span> créditos</span>
+    <span>🔥 <span id="hdr-days">0</span> dias</span>
+    <span class="logout" onclick="handleLogout()">Sair</span>
+  </div>
+</header>
+
+<!-- ===== SCREEN: DASHBOARD ===== -->
+<div id="screen-dash" class="screen">
+  <div style="text-align:center; margin-bottom:10px; width:100%; max-width:900px; padding:0 20px;">
+    <p style="color:#a090b0; font-size:0.9rem; margin-bottom:5px;">✨ A resposta está no silêncio. ✨</p>
+    <h2 style="font-size:1.6rem;">Bem-vindo(a), <span id="dash-user">Viajante</span></h2>
+  </div>
+  <div class="grid">
+    <div class="sec-card" onclick="showToast('🃏 Carta do Dia')">
+      <span class="icon">🃏</span>
+      <h3>Carta do Dia</h3>
+      <p>Grátis diária</p>
+    </div>
+    <div class="sec-card" onclick="showToast('☀️ Horóscopo')">
+      <span class="icon">☀️</span>
+      <h3>Horóscopo</h3>
+      <p>Previsões</p>
+    </div>
+    <div class="sec-card" onclick="showToast('🔮 Tarô')">
+      <span class="icon">🔮</span>
+      <h3>Tarô</h3>
+      <p>Respostas + Leitura</p>
+    </div>
+    <div class="sec-card" onclick="showToast('🔢 Numerologia')">
+      <span class="icon">🔢</span>
+      <h3>Numerologia</h3>
+      <p>Caminho de vida</p>
+    </div>
+    <div class="sec-card" onclick="showToast('☯️ I Ching')">
+      <span class="icon">☯️</span>
+      <h3>I Ching</h3>
+      <p>Sabedoria</p>
+    </div>
+    <div class="sec-card" onclick="showToast('⚡ Sim/Não')">
+      <span class="icon">⚡</span>
+      <h3>Sim/Não</h3>
+      <p>Rápido</p>
+    </div>
+  </div>
 </div>
-<div id="screen-dash" class="screen" style="justify-content:flex-start;padding-top:100px;">
-<div style="text-align:center;width:100%;padding:0 20px;">
-<h2 id="d-user" style="font-size:2rem;">Bem-vindo(a), Viajante</h2>
-<p id="d-phrase" style="font-style:italic;color:var(--text-dim);margin-bottom:30px;"></p>
-</div>
-<div class="grid">
-<div class="sec-card" onclick="openModal('modal-cartadodia')"><i>🃏</i><h3>Carta do Dia</h3><p style="color:var(--text-dim);font-size:0.85rem;">Sua energia hoje</p></div>
-<div class="sec-card" onclick="openModal('modal-horoscopo')"><i>☀️</i><h3>Horóscopo</h3><p style="color:var(--text-dim);font-size:0.85rem;">Previsões dos signos</p></div>
-<div class="sec-card" onclick="openModal('modal-tarot')"><i>🔮</i><h3>Tarô</h3><p style="color:var(--text-dim);font-size:0.85rem;">Consultar oráculo</p></div>
-<div class="sec-card" onclick="openModal('modal-numerologia')"><i>🔢</i><h3>Numerologia</h3><p style="color:var(--text-dim);font-size:0.85rem;">Caminho de vida</p></div>
-<div class="sec-card" onclick="openModal('modal-iching')"><i>☯️</i><h3>I Ching</h3><p style="color:var(--text-dim);font-size:0.85rem;">Sabedoria chinesa</p></div>
-<div class="sec-card" onclick="openModal('modal-simnao')"><i>⚡</i><h3>Sim/Não</h3><p style="color:var(--text-dim);font-size:0.85rem;">Resposta rápida</p></div>
-<div class="sec-card" onclick="openModal('modal-sonhos')"><i>📖</i><h3>Sonhos</h3><p style="color:var(--text-dim);font-size:0.85rem;">Interpretação</p></div>
-<div class="sec-card" onclick="openModal('modal-compatibilidade')"><i>💘</i><h3>Compatibilidade</h3><p style="color:var(--text-dim);font-size:0.85rem;">Sinastria amorosa</p></div>
-</div>
-</div>
-<div id="modal-cartadodia" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>🃏 Carta do Dia</h2><div id="cd-res" style="text-align:center;min-height:100px;"></div><button class="btn" onclick="tirarCartaDia()" style="margin-top:15px;">Tirar Carta do Dia</button></div></div>
-<div id="modal-horoscopo" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>☀️ Horóscopo</h2><div id="h-grid" class="signos-grid"></div><div id="h-res" style="margin-top:20px;padding:15px;background:rgba(0,0,0,0.3);border-radius:10px;display:none;"></div></div></div>
-<div id="modal-tarot" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>🔮 Consulta de Tarô</h2><input type="text" id="t-pergunta" placeholder="Faça sua pergunta..."><div style="display:flex;gap:5px;margin-bottom:15px;flex-wrap:wrap;"><button class="btn" style="font-size:11px;padding:10px;flex:1;min-width:70px;" onclick="initTarot(1)">Sim/Não</button><button class="btn" style="font-size:11px;padding:10px;flex:1;min-width:70px;" onclick="initTarot(2)">2 Cartas</button><button class="btn" style="font-size:11px;padding:10px;flex:1;min-width:70px;" onclick="initTarot(3)">3 Cartas</button><button class="btn" style="font-size:11px;padding:10px;flex:1;min-width:70px;" onclick="initTarot(5)">5 Cartas</button></div><div id="t-deck" class="tarot-deck"></div><div id="t-res" style="margin-top:20px;"></div></div></div>
-<div id="modal-numerologia" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>🔢 Numerologia</h2><input type="date" id="n-data"><button class="btn" onclick="calcNum()">Calcular</button><div id="n-res" style="margin-top:20px;"></div></div></div>
-<div id="modal-iching" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>☯️ I Ching</h2><div id="ic-res" class="iching-lines"></div><button class="btn" onclick="consultarIChing()">Consultar o I Ching</button><div id="ic-text" style="margin-top:15px;"></div></div></div>
-<div id="modal-simnao" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>⚡ Sim ou Não</h2><input type="text" id="sn-pergunta" placeholder="Sua dúvida..."><button class="btn" onclick="respSimNao()">Perguntar</button><h3 id="sn-res" style="text-align:center;margin-top:20px;min-height:40px;"></h3></div></div>
-<div id="modal-sonhos" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>📖 Dicionário de Sonhos</h2><textarea id="s-text" placeholder="Descreva seu sonho em detalhes..." style="width:100%;height:120px;background:rgba(0,0,0,0.3);color:white;border:1px solid var(--border);border-radius:10px;padding:12px;outline:none;font-family:'Open Sans',sans-serif;"></textarea><button class="btn" onclick="interpretarSonho()">Interpretar</button><div id="s-res" style="margin-top:20px;"></div></div></div>
-<div id="modal-compatibilidade" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><h2>💘 Compatibilidade</h2><input type="text" id="c-n1" placeholder="Seu nome"><input type="text" id="c-n2" placeholder="Nome dele(a)"><button class="btn" onclick="calcComp()">Ver Compatibilidade</button><div id="c-res" style="text-align:center;margin-top:20px;"></div></div></div>
 
 <script>
-var state = { user: null };
-var arcanos = ["O Louco","O Mago","A Sacerdotisa","A Imperatriz","O Imperador","O Hierofante","Os Enamorados","O Carro","A Justiça","O Eremita","A Roda da Fortuna","A Força","O Enforcado","A Morte","A Temperança","O Diabo","A Torre","A Estrela","A Lua","O Sol","O Julgamento","O Mundo"];
-var significados = { "O Louco":"Novos começos, espontaneidade, aventura.","O Mago":"Poder, habilidade, concentração.","A Sacerdotisa":"Intuição, mistério, sabedoria interior.","A Imperatriz":"Fertilidade, abundância, natureza.","O Imperador":"Autoridade, estrutura, proteção.","O Hierofante":"Tradição, ensinamento, espiritualidade.","Os Enamorados":"Amor, escolhas, alinhamento.","O Carro":"Determinação, vitória, força de vontade.","A Justiça":"Equilíbrio, verdade, consequências.","O Eremita":"Solidão, introspecção, busca interior.","A Roda da Fortuna":"Ciclos, mudança, destino.","A Força":"Coragem, determinação, poder interior.","O Enforcado":"Sacrifício, nova perspectiva, pausa.","A Morte":"Transformação, renascimento, fim de ciclo.","A Temperança":"Equilíbrio, moderação, paciência.","O Diabo":"Apego, vício, materialismo.","A Torre":"Ruína, revelação, despertar.","A Estrela":"Esperança, inspiração, serenidade.","A Lua":"Ilusão, medo, intuição.","O Sol":"Sucesso, alegria, vitalidade.","O Julgamento":"Renovação, despertar, propósito.","O Mundo":"Completude, realização, jornada." };
-var frases = ["O universo conspira a favor de quem conhece a si mesmo.","As estrelas inclinam, mas não obrigam.","O que você busca também está buscando você.","A sorte favorece a mente preparada.","O oráculo revela verdades que seu coração já conhece."];
-var signos = ["Áries","Touro","Gêmeos","Câncer","Leão","Virgem","Libra","Escorpião","Sagitário","Capricórnio","Aquário","Peixes"];
-var previsoes = { "Áries":"O dia pede ação! Use sua energia para iniciar novos projetos.","Touro":"Momento de estabilidade. Cuide das finanças.","Gêmeos":"Comunicação em alta. Ótimo para networking.","Câncer":"Sua intuição está aguçada. Confie nela.","Leão":"Brilhe! Seu carisma está radiante hoje.","Virgem":"Organização é a chave. Planeje com cuidado.","Libra":"Busque equilíbrio em todas as áreas.","Escorpião":"Transformação profunda. Deixe o que não serve.","Sagitário":"Aventure-se! Novos horizontes se abrem.","Capricórnio":"Disciplina traz resultados. Foco nos objetivos.","Aquário":"Inovação e originalidade. Inspire outros.","Peixes":"Sensibilidade e criatividade em alta." };
-var hexagramas = [{nome:"O Criativo",texto:"Sucesso absoluto. Perseverança traz vantagem."},{nome:"O Receptivo",texto:"Acolhimento e devoção. Seja paciente."},{nome:"Dificuldade Inicial",texto:"Desafios no começo, mas o crescimento virá."},{nome:"A Juventude",texto:"Busque conhecimento com humildade."},{nome:"A Espera",texto:"Paciência é a chave. Prepare-se."},{nome:"O Conflito",texto:"Evite confrontos. Busque o diálogo."},{nome:"O Exército",texto:"Liderança e estratégia. Organize-se."},{nome:"A União",texto:"Conexões e parcerias. União faz a força."},{nome:"Pequeno Acúmulo",texto:"Pequenos progressos levam a grandes feitos."},{nome:"O Cumprimento",texto:"Siga seu caminho com autenticidade."},{nome:"A Prosperidade",texto:"Harmonia e abundância. Momento favorável."},{nome:"A Estagnação",texto:"Tempos difíceis. Espere o momento certo."}];
-var interpretacoesSonhos = { "água":"Água simboliza suas emoções.","voar":"Voar representa liberdade.","cair":"Cair indica insegurança.","dente":"Sonhos com dentes refletem ansiedade.","casa":"A casa representa sua mente.","fogo":"Fogo simboliza transformação.","morte":"Morte em sonhos não é literal - é renovação.","criança":"Crianças simbolizam novos começos.","animal":"Animais representam seus instintos.","perseguição":"Você pode estar evitando algo.","escola":"Aprendizado e crescimento.","dinheiro":"Dinheiro reflete autoestima." };
+  // ===== STARS BACKGROUND =====
+  (function() {
+    const canvas = document.getElementById('stars-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
 
-function toast(m) { var t = document.getElementById('toast'); t.innerText = m; t.style.transform = 'translateX(0)'; setTimeout(function(){ t.style.transform = 'translateX(200%)'; }, 3000); }
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
-  document.getElementById(id).classList.add('active');
-  document.getElementById('main-header').style.display = (id === 'screen-dash') ? 'flex' : 'none';
-}
+    function createStars(count) {
+      stars = [];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.5 + 0.3,
+          alpha: Math.random() * 0.7 + 0.3,
+          speed: Math.random() * 0.02 + 0.005
+        });
+      }
+    }
+    createStars(200);
 
-function validarCPF(cpf) {
-  cpf = cpf.replace(/\D/g, '');
-  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-  var s = 0, r;
-  for (var i = 1; i <= 9; i++) s += parseInt(cpf.substring(i-1,i)) * (11-i);
-  r = (s*10)%11; if (r===10||r===11) r=0; if (r!==parseInt(cpf.substring(9,10))) return false;
-  s = 0;
-  for (var i = 1; i <= 10; i++) s += parseInt(cpf.substring(i-1,i)) * (12-i);
-  r = (s*10)%11; if (r===10||r===11) r=0; return r===parseInt(cpf.substring(10,11));
-}
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += Math.sin(Date.now() * s.speed) * 0.005;
+        s.alpha = Math.max(0.2, Math.min(1, s.alpha));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
 
-function register() {
-  var n = document.getElementById('r-name').value.trim();
-  var c = document.getElementById('r-cpf').value.replace(/\D/g, '');
-  var e = document.getElementById('r-email').value.trim();
-  var p = document.getElementById('r-pass').value;
-  if (n.length < 3) { toast('Nome deve ter no mínimo 3 caracteres.'); return; }
-  if (!validarCPF(c)) { toast('CPF inválido. Digite 11 números.'); return; }
-  if (!e || e.indexOf('@') < 0) { toast('E-mail inválido.'); return; }
-  if (p.length < 6) { toast('Senha deve ter no mínimo 6 caracteres.'); return; }
-  var users = JSON.parse(localStorage.getItem('oa_users') || '[]');
-  if (users.find(function(u){ return u.email === e; })) { toast('E-mail já cadastrado.'); return; }
-  if (users.find(function(u){ return u.cpf === c; })) { toast('CPF já cadastrado.'); return; }
-  var novo = { nome: n, email: e, senha: p, cpf: c, creditos: 5, streak: 1, ultimoAcesso: new Date().toDateString() };
-  users.push(novo);
-  localStorage.setItem('oa_users', JSON.stringify(users));
-  toast('Conta criada! Bem-vindo(a)!');
-  state.user = novo;
-  atualizarDashboard();
-  showScreen('screen-dash');
-}
+    window.addEventListener('resize', () => {
+      resize();
+      createStars(200);
+    });
+  })();
 
-function login() {
-  var e = document.getElementById('l-email').value.trim();
-  var p = document.getElementById('l-pass').value;
-  if (!e || !p) { toast('Preencha todos os campos.'); return; }
-  var users = JSON.parse(localStorage.getItem('oa_users') || '[]');
-  var u = users.find(function(x){ return x.email === e && x.senha === p; });
-  if (!u) { toast('E-mail ou senha incorretos.'); return; }
-  state.user = u;
-  var hoje = new Date().toDateString();
-  if (u.ultimoAcesso !== hoje) {
-    var diff = (new Date(hoje).getTime() - new Date(u.ultimoAcesso).getTime()) / 86400000;
-    u.streak = (diff < 2) ? u.streak + 1 : 1;
-    u.ultimoAcesso = hoje;
-    localStorage.setItem('oa_users', JSON.stringify(users));
+  // ===== SCREEN NAVIGATION =====
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const header = document.getElementById('main-header');
+    header.style.display = (id === 'screen-dash') ? 'flex' : 'none';
   }
-  atualizarDashboard();
-  showScreen('screen-dash');
-  toast('Bem-vindo(a), ' + u.nome.split(' ')[0] + '!');
-}
 
-function atualizarDashboard() {
-  document.getElementById('d-user').innerText = 'Bem-vindo(a), ' + state.user.nome.split(' ')[0] + '!';
-  document.getElementById('d-phrase').innerText = frases[Math.floor(Math.random() * frases.length)];
-  document.getElementById('h-credits').innerText = state.user.creditos;
-  document.getElementById('h-streak').innerText = state.user.streak;
-}
-
-function logout() { state.user = null; showScreen('screen-welcome'); }
-
-function openModal(id) {
-  document.getElementById(id).style.display = 'flex';
-  if (id === 'modal-horoscopo') carregarSignos();
-  if (id === 'modal-cartadodia') document.getElementById('cd-res').innerHTML = '<p style="color:var(--text-dim);">Clique no botão para tirar sua carta do dia.</p>';
-}
-
-function closeModal() { document.querySelectorAll('.modal').forEach(function(m){ m.style.display = 'none'; }); }
-
-function tirarCartaDia() {
-  var c = arcanos[Math.floor(Math.random() * 22)];
-  var sig = significados[c] || 'Momento de reflexão.';
-  document.getElementById('cd-res').innerHTML = '<div style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:15px;padding:25px;margin:10px 0;"><h3 style="font-size:1.5rem;margin-bottom:10px;">🃏 ' + c + '</h3><p style="color:var(--text);font-size:0.95rem;line-height:1.6;">' + sig + '</p></div>';
-}
-
-function carregarSignos() { document.getElementById('h-grid').innerHTML = signos.map(function(s){ return '<div class="signo-btn" onclick="verHoroscopo(\''+s+'\')">'+s+'</div>'; }).join(''); }
-
-function verHoroscopo(s) { document.getElementById('h-res').innerHTML = '<strong style="color:var(--gold);font-size:1.1rem;">'+s+'</strong><p style="margin-top:10px;line-height:1.6;">'+(previsoes[s]||'')+'</p>'; document.getElementById('h-res').style.display='block'; }
-
-function initTarot(n) {
-  if (!state.user) { toast('Faça login primeiro!'); return; }
-  if (state.user.creditos < 1) { toast('Créditos insuficientes!'); return; }
-  var deck = document.getElementById('t-deck'); deck.innerHTML = '';
-  for (var i = 0; i < 20; i++) {
-    var div = document.createElement('div'); div.className = 't-card';
-    div.innerHTML = '<div class="t-card-inner"><div class="t-card-back">🔮</div><div class="t-card-front"></div></div>';
-    div.onclick = function() { virarCarta(this, n); }; deck.appendChild(div);
+  // ===== TOAST =====
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
   }
-  document.getElementById('t-res').innerHTML = '<p style="color:var(--gold);">Escolha ' + n + ' carta(s).</p>';
-}
 
-function virarCarta(el, max) {
-  if (el.classList.contains('flipped')) return;
-  var viradas = document.querySelectorAll('.t-card.flipped').length;
-  if (viradas >= max) return; el.classList.add('flipped');
-  var carta = arcanos[Math.floor(Math.random() * 22)];
-  el.querySelector('.t-card-front').innerText = carta;
-  if (viradas + 1 === max) {
-    state.user.creditos--;
-    var users = JSON.parse(localStorage.getItem('oa_users') || '[]');
-    var idx = users.findIndex(function(u){ return u.email === state.user.email; });
-    if (idx >= 0) { users[idx].creditos = state.user.creditos; localStorage.setItem('oa_users', JSON.stringify(users)); }
-    atualizarDashboard();
-    document.getElementById('t-res').innerHTML = '<div style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:15px;padding:20px;margin-top:10px;"><strong style="color:var(--gold);">✨ Interpretação:</strong><p style="margin-top:8px;line-height:1.6;">As cartas revelam que o momento é de introspecção. Confie no processo.</p></div>';
+  // ===== SIMPLE STATE =====
+  const state = {
+    user: null,
+    credits: 0,
+    days: 0
+  };
+
+  // ===== LOGIN =====
+  function handleLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+    if (!email || !password) {
+      showToast('Preencha e-mail e senha.');
+      return;
+    }
+    // Simulated login
+    state.user = email.split('@')[0] || 'Viajante';
+    state.credits = 5;
+    state.days = 1;
+    enterDashboard();
   }
-}
 
-function calcNum() {
-  var d = document.getElementById('n-data').value; if (!d) { toast('Selecione sua data.'); return; }
-  var n = d.replace(/-/g,'').split('').map(Number); var s = n.reduce(function(a,b){return a+b},0);
-  while (s > 9 && s !== 11 && s !== 22 && s !== 33) { s = String(s).split('').reduce(function(a,b){return a+parseInt(b)},0); }
-  var desc = {1:'Liderança',2:'Cooperação',3:'Criatividade',4:'Estabilidade',5:'Liberdade',6:'Responsabilidade',7:'Sabedoria',8:'Poder',9:'Compaixão',11:'Intuição elevada',22:'Mestre construtor',33:'Mestre da compaixão'};
-  document.getElementById('n-res').innerHTML = '<div style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:15px;padding:20px;"><h3 style="font-size:2rem;">'+s+'</h3><p style="color:var(--gold);">Caminho de Vida</p><p>'+(desc[s]||'Potencial')+'</p></div>';
-}
-
-function consultarIChing() {
-  var linhas = []; for (var i = 0; i < 6; i++) { linhas.push(Math.random() > 0.5 ? '⚊' : '⚋'); }
-  document.getElementById('ic-res').innerHTML = linhas.reverse().join('<br>');
-  var h = hexagramas[Math.floor(Math.random() * hexagramas.length)];
-  document.getElementById('ic-text').innerHTML = '<div style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:15px;padding:20px;"><strong style="color:var(--gold);">'+h.nome+'</strong><p style="margin-top:10px;">'+h.texto+'</p></div>';
-}
-
-function respSimNao() { var r = ['Sim','Não','Talvez','Certamente','Duvidoso','Com certeza!']; document.getElementById('sn-res').innerText = r[Math.floor(Math.random()*r.length)]; }
-
-function interpretarSonho() {
-  var t = document.getElementById('s-text').value.toLowerCase().trim(); if (!t) { toast('Descreva seu sonho.'); return; }
-  var res = 'Seu subconsciente está processando mudanças.';
-  for (var p in interpretacoesSonhos) { if (t.indexOf(p) >= 0) { res = interpretacoesSonhos[p]; break; } }
-  document.getElementById('s-res').innerHTML = '<div style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:15px;padding:20px;"><strong style="color:var(--gold);">🔍 Interpretação:</strong><p style="margin-top:10px;line-height:1.6;">'+res+'</p></div>';
-}
-
-function calcComp() {
-  var n1 = document.getElementById('c-n1').value.trim(), n2 = document.getElementById('c-n2').value.trim();
-  if (!n1||!n2) { toast('Preencha os nomes.'); return; }
-  var pct = Math.min((n1.length+n2.length)*7 % 101,100); if (pct<30) pct+=40;
-  var msg = pct>=90?'Conexão cósmica! ✨':pct>=75?'Grande afinidade! 💫':pct>=60?'Boa conexão! 🌟':'Compatibilidade mediana. ❤️';
-  document.getElementById('c-res').innerHTML = '<div style="background:rgba(212,168,83,0.1);border:1px solid var(--border);border-radius:15px;padding:25px;"><h2 style="font-size:3.5rem;">'+pct+'%</h2><p style="color:var(--gold);">Compatibilidade</p><p>'+msg+'</p></div>';
-}
-
-(function() {
-  var c = document.getElementById('stars');
-  for (var i = 0; i < 150; i++) {
-    var s = document.createElement('div'); s.className = 'star';
-    s.style.cssText = 'left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;--d:'+(Math.random()*3+2)+'s;width:'+(Math.random()*2.5+0.5)+'px;height:'+(Math.random()*2.5+0.5)+'px;';
-    c.appendChild(s);
+  // ===== REGISTER =====
+  function handleRegister() {
+    const name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-password').value.trim();
+    if (!name || !email || !password) {
+      showToast('Preencha todos os campos.');
+      return;
+    }
+    state.user = name;
+    state.credits = 5;
+    state.days = 0;
+    showToast('🎉 Conta criada! Ganhe 5 créditos grátis!');
+    setTimeout(() => enterDashboard(), 800);
   }
-})();
+
+  // ===== ENTER DASHBOARD =====
+  function enterDashboard() {
+    document.getElementById('dash-user').textContent = state.user;
+    document.getElementById('hdr-credits').textContent = state.credits;
+    document.getElementById('hdr-days').textContent = state.days;
+    showScreen('screen-dash');
+  }
+
+  // ===== LOGOUT =====
+  function handleLogout() {
+    state.user = null;
+    state.credits = 0;
+    state.days = 0;
+    // Clear fields
+    document.getElementById('login-email').value = '';
+    document.getElementById('login-password').value = '';
+    document.getElementById('reg-name').value = '';
+    document.getElementById('reg-email').value = '';
+    document.getElementById('reg-password').value = '';
+    showScreen('screen-welcome');
+  }
 </script>
+
 </body>
 </html>
